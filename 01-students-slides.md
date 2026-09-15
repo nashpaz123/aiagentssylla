@@ -1,8 +1,9 @@
 # מפגש 1 — מצגת סטודנטים
 ## מבוא לסוכני AI ו-Agentic Workflows
 
-> **מצגת סטודנטים** ·
-> **משך מפגש משוער:** ~2.5–3 שעות
+> מצגת קצרה להצגה בהקלטה.  
+> מספור השקופיות כאן הוא **של מצגת הסטודנטים בלבד** (1…N).  
+> בקובץ המרצה מופיע הסימון `[סטודנטים · N]` ליד הקטע שמתאים לשקופית הזו.
 
 ---
 
@@ -15,15 +16,22 @@
 
 ---
 
-## שקופית 2–3 — למה Agents?
+## שקופית 2 — למה Agents?
 
-- ChatGPT עונה · Agent **עובד בשבילנו** לקראת מטרה  
-- תשובה אחת מול תהליך עם החלטות  
+- ChatGPT עונה לנו.
+- Agent **עובד בשבילנו** לקראת מטרה.
+- ההבדל: תשובה אחת מול תהליך עם החלטות.
+
+---
+
+## שקופית 3 — תשובה מול משימה
 
 | מערכת קלאסית | Agent |
 |---|---|
 | ״ענה לי״ | ״בצע עבורי״ |
+| פעולה בודדת | סדרת פעולות |
 | קלט → פלט | מטרה → תהליך |
+| המשתמש מנהל | המערכת מנהלת חלק |
 
 ---
 
@@ -35,33 +43,46 @@
 
 ---
 
-## שקופיות 5–8 — LLM, Tools, Chat
+## שקופית 5 — מה LLM לבד עושה?
 
 ```text
 User → Prompt → LLM → Response
 ```
 
-- LLM מייצר פלט · כדי לפעול בעולם צריך **Tools**
+- LLM מייצר פלט (טקסט, קוד, JSON…).
+- כדי **לפעול בעולם** צריך Tools.
+
+---
+
+## שקופית 6 — LLM + Tools
 
 ![LLM + Tools](assets/01/04-llm-tools.png)
+
+---
+
+## שקופית 7 — Chat מול Agent
 
 ![Chat vs Agent](assets/01/02-chat-vs-agent.png)
 
 ---
 
-## שקופיות 9–12 — Workflow מול Agent
+## שקופית 8 — Workflow מול Agent
 
 ![Workflow vs Agent](assets/01/05-workflow-vs-agent.png)
 
-- **Workflow:** נתיב קבוע מראש  
-- **Agent:** בוחר צעדים לפי מה שקורה בדרך  
-- אם אפשר לתאר מראש כל צעד — זה לא Agent  
+- **Workflow:** נתיב קבוע מראש.
+- **Agent:** בוחר צעדים לפי מה שקורה בדרך.
+- אם אפשר לתאר מראש כל צעד — זה לא Agent.
 
 ---
 
-## שקופית 13 — AI Agent Spectrum
+## שקופית 9 — AI Agent Spectrum
 
 ![AI Agent Spectrum L0–L6](assets/01/06-agent-spectrum-l0-l6.png)
+
+---
+
+## שקופית 10 — הרמות בקצרה
 
 | Level | שם | בקצרה |
 |---|---|---|
@@ -73,14 +94,14 @@ User → Prompt → LLM → Response
 | L5 | Collaborative Agents | צוות Agents |
 | L6 | Autonomous Ecosystems | חזית |
 
-**הקו החשוב:** בין L3 ל־L4 — תסריטים מול agency אמיתית.
+**הקו החשוב:** בין L3 ל־L4.
 
 ---
 
-## שקופיות 14–15 — למה זה חשוב + 5 מאפיינים
+## שקופית 11 — Agent washing ו־5 מאפיינים
 
-- יש הרבה **agent washing** (שם Agent בלי יכולת)  
-- השאלה: *איזו רמה התהליך באמת דורש?*  
+- הרבה מוצרים נקראים Agent בלי יכולת אמיתית.
+- השאלה: *איזו רמה התהליך באמת דורש?*
 
 Agent אמיתי צריך את כולם:
 1. Goal-orientation  
@@ -91,34 +112,34 @@ Agent אמיתי צריך את כולם:
 
 ---
 
-## שקופיות 16–19 — L0 → L3
+## שקופית 12 — L0 עד L3
 
 - **L0** — if/then, jobs, סקריפטים  
-- **L1** — feature בתוך מוצר (הצעות, סיכום)  
-- **L2** — Custom GPT / Gem / Project (יועץ, לא מבצע)  
+- **L1** — feature בתוך מוצר  
+- **L2** — Custom GPT / Gem / Project (יועץ)  
 - **L3** — Workflow עם AI בנקודות · כאן רוב ה־washing  
 
 ---
 
-## שקופיות 20–23 — L4 → L6 + הקו
+## שקופית 13 — L4 עד L6
 
-- **L3→L4:** אם מטרה חדשה — נכשל (Workflow) או מתכנן (Agent)?  
-- **L4 Task Agent** — מתכנן, כלים, מתקן כיוון, בגבולות  
+- **L3→L4:** מטרה חדשה — נכשל (Workflow) או מתכנן (Agent)?  
+- **L4** — Task Agent: מתכנן, כלים, מתקן כיוון, בגבולות  
 - **L5** — כמה Agents + Orchestrator  
 - **L6** — אקוסיסטם תמיד־פעיל (חזית)  
 
 ---
 
-## שקופיות 24–25 — שאלות + Takeaway
+## שקופית 14 — שאלות + Takeaway
 
-שאלו: מטרה או תסריט? מי קובע צעדים? מה קורה בכישלון? מה לבד מול HITL? מה הכי גרוע שיכול לקרות?
+שאלו: מטרה או תסריט? מי קובע צעדים? מה בכישלון? מה לבד מול HITL? מה הכי גרוע שיכול לקרות?
 
 - לא הכול צריך L4+ · הרבה ערך ב־L1–L3  
 - L4+ דורש Policy, Trace, Guardrails  
 
 ---
 
-## שקופיות 26–29 — ארבעת המרכיבים
+## שקופית 15 — ארבעת המרכיבים
 
 1. **Goal**  
 2. **Decision**  
@@ -127,7 +148,7 @@ Agent אמיתי צריך את כולם:
 
 ---
 
-## שקופיות 30–32 — Agent Loop
+## שקופית 16 — Agent Loop
 
 ![Agent Loop](assets/01/03-agent-loop.png)
 
@@ -135,20 +156,19 @@ Goal → Decide → Act → Observe → Continue / Stop
 
 ---
 
-## שקופיות 33–38 — Planning
+## שקופית 17 — Planning
 
 ![Task Decomposition](assets/02/02-task-decomposition.png)
 
-- מתי צריך תוכנית / מתי לא  
 - Decomposition  
-- תוכנית = **Hypothesis**  
+- תוכנית = Hypothesis  
 - Re-planning (Local / Global)  
 
 ![Open vs Closed Loop](assets/02/03-open-vs-closed-loop.png)
 
 ---
 
-## שקופיות 39–43 — ReAct
+## שקופית 18 — ReAct
 
 ![ReAct](assets/02/04-react.png)
 
@@ -161,21 +181,25 @@ Goal → Decide → Act → Observe → Continue / Stop
 
 ---
 
-## שקופיות 44–49 — מתי Agent הוא רעיון גרוע?
+## שקופית 19 — מתי Agent הוא רעיון גרוע?
 
 - תהליך דטרמיניסטי → Workflow  
 - משימה פתוחה + כלים + אי־ודאות → Agent (L4)  
-- העדפה: **היברידי** (Workflow בשוליים הבטוחים + Agent בכיסי אי־ודאות)  
+- העדפה: **היברידי**
 
 > אם אפשר לכתוב את כל התהליך בבירור — נסו קודם Workflow.
 
 ---
 
-## שקופיות 50–52 — דוגמה DevOps
+## שקופית 20 — דוגמה DevOps
 
 מטרה: ״בדוק למה ה־API לא יציב ותן המלצה.״
 
 ![Kubernetes](assets/screens/k8s-pods-logs.png)
+
+---
+
+## שקופית 21 — DevOps · Metrics + Workbench
 
 ![Metrics](assets/screens/metrics-dashboard.png)
 
@@ -183,7 +207,7 @@ Goal → Decide → Act → Observe → Continue / Stop
 
 ---
 
-## שקופיות 53–56 — Tool Design
+## שקופית 22 — Tool Design
 
 - Tool = שם + תיאור + הרשאות  
 - תיאור משפיע על בחירה  
@@ -193,7 +217,7 @@ Goal → Decide → Act → Observe → Continue / Stop
 
 ---
 
-## שקופיות 57–59 — Human in the Loop
+## שקופית 23 — Human in the Loop
 
 ![Human Approval](assets/01/07-human-approval.png)
 
@@ -203,11 +227,15 @@ Auto · Approval · Blocked
 
 ---
 
-## שקופיות 60–63 — Guardrails, Context, Memory
+## שקופית 24 — Guardrails וכישלונות
 
 ![Guardrails](assets/01/08-guardrails.png)
 
 ![Failure Loop](assets/01/15-failure-loop.png)
+
+---
+
+## שקופית 25 — Context, Memory, Trace
 
 ![Context](assets/01/13-context.png)
 
@@ -215,11 +243,15 @@ Auto · Approval · Blocked
 
 ---
 
-## שקופיות 67–73 — הדגמה Support
+## שקופית 26 — Support Agent · מסכים
 
 ![Email](assets/screens/email-inbound.png)
 
 ![Tickets](assets/screens/ticketing-queue.png)
+
+---
+
+## שקופית 27 — Support Agent · CRM + Workbench
 
 ![CRM](assets/screens/crm-customer.png)
 
@@ -227,20 +259,20 @@ Auto · Approval · Blocked
 
 ---
 
-## שקופיות 74–84 — Architecture, Multi-Agent, Cost/Security
+## שקופית 28 — ארכיטקטורה ו־Multi-Agent
 
 ![Agent Architecture](assets/01/16-agent-architecture.png)
 
 ![Multi-Agent](assets/01/12-multi-agent.png)
 
 - Agent הוא Software System  
-- יותר אוטונומיה → יותר עלות, latency, צורך ב־Security  
+- יותר אוטונומיה → יותר עלות, latency, Security  
 
 ---
 
-## שקופית 85–86 — תרגיל 1: Agent או Workflow?
+## שקופית 29 — תרגיל 1: Agent או Workflow?
 
-**הנחיה (10–15 דק׳):** לכל תרחיש — **Agent / Workflow / לא בטוח** + נימוק אחד. ציינו גם **רמת Spectrum משוערת (L0–L6)**.
+**הנחיה (10–15 דק׳):** לכל תרחיש — **Agent / Workflow / לא בטוח** + נימוק + **רמת Spectrum (L0–L6)**.
 
 1. סיכום יומי של 50 מיילים לאותו פורמט  
 2. חקירת תקלה בפרודקשן שלא חוזרת על עצמה  
@@ -252,7 +284,7 @@ Auto · Approval · Blocked
 
 ---
 
-## שקופיות 87–96 — תרגיל 2: תכנון Agent
+## שקופית 30 — תרגיל 2: תכנון Agent
 
 **הנחיה (20–25 דק׳):** Nova Retail / ticket #8831 או משימה שלכם.
 
@@ -268,7 +300,7 @@ Auto · Approval · Blocked
 
 ---
 
-## שקופיות 97–100 — בדיקה + סיכום
+## שקופית 31 — בדיקת הבנה + סיכום
 
 1. במה Agent שונה מצ׳אטבוט?  
 2. מה הקו בין L3 ל־L4?  
@@ -280,7 +312,7 @@ Auto · Approval · Blocked
 
 ---
 
-## שקופית 101 — למפגש הבא
+## שקופית 32 — למפגש הבא
 
 **Planning ו-Execution** לעומק.
 
