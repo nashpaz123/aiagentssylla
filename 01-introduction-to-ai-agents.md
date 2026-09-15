@@ -1,7 +1,7 @@
-<div dir="rtl">
+<div dir="rtl" lang="he">
 
-# מפגש 1 — מבוא לסוכני AI ו-Agentic Workflows
-## קובץ מרצה (תסריט מלא להקלטה)
+# ‏מפגש 1 — מבוא לסוכני AI ו-Agentic Workflows
+## ‏קובץ מרצה (תסריט מלא להקלטה)
 
 > **משך מיועד:** כ־2.5–3 שעות תוכן מוקלט + עצירות, הדגמות, שאלות ותרגילים  
 > **מיקום בקורס:** מפגש 1 מתוך 10  
@@ -13,7 +13,7 @@
 > בהקלטה עברו ביניהם לפי סדר ה־Agent Loop.  
 > יצירה מחדש: `python3 scripts/gen_mock_uis.py`
 
-# הנחיות למרצה
+# ‏הנחיות למרצה
 
 בהקלטה: **מקריאים מכאן** ומציגים במקביל את [`01-students-slides.md`](01-students-slides.md).
 
@@ -33,9 +33,9 @@
 
 ---
 
-# חלק א׳ — פתיחה: למה בכלל מדברים על Agents?
+# ‏חלק א׳ — פתיחה: למה בכלל מדברים על Agents?
 
-## שקופית 1 — הכותרת
+## ‏שקופית 1 — הכותרת
 
 [סטודנטים · 1]
 
@@ -49,7 +49,7 @@
 > אדם במרכז, ולידו מערכת AI שמחוברת ל־Email, Database, CRM, Web ו־Calendar.
 
 
-## שקופית 2 — פתיחה להקראה
+## ‏שקופית 2 — פתיחה להקראה
 
 [סטודנטים · 2]
 
@@ -91,7 +91,7 @@
 
 וזה הבדל מאוד חשוב.
 
-## שקופית 3 — תשובה מול משימה
+## ‏שקופית 3 — תשובה מול משימה
 
 [סטודנטים · 3]
 
@@ -136,7 +136,7 @@
 
 Agent מנסה לעשות משהו דומה.
 
-## שקופית 4 — ארבעת הרעיונות הראשונים
+## ‏שקופית 4 — ארבעת הרעיונות הראשונים
 
 [סטודנטים · 4]
 
@@ -164,9 +164,9 @@ GOAL → DECIDE → ACT → OBSERVE → CONTINUE? → DECIDE / DONE
 
 ---
 
-# חלק ב׳ — לפני Agents: מה LLM לבד באמת עושה?
+# ‏חלק ב׳ — לפני Agents: מה LLM לבד באמת עושה?
 
-## שקופית 5 — Prompt → LLM → Response
+## ‏שקופית 5 — Prompt → LLM → Response
 
 [סטודנטים · 5]
 
@@ -207,7 +207,7 @@ JSON.
 
 אבל לפני Tools, בואו נראה את המודל הכי בסיסי.
 
-## שקופית 6 — למה LLM לבד מוגבל?
+## ‏שקופית 6 — למה LLM לבד מוגבל?
 
 נניח שאני אומר:
 
@@ -235,7 +235,7 @@ LLM שמקבל רק את המשפט הזה לא באמת יכול לדעת מי 
 
 עכשיו נוסיף כלי.
 
-## שקופית 7 — LLM + Tool
+## ‏שקופית 7 — LLM + Tool
 
 [סטודנטים · 6]
 
@@ -283,7 +283,7 @@ User ───────→│      LLM      │
 
 זה כבר הרבה יותר קרוב ל־Agent.
 
-## שקופית 8 — מה באמת עושה ה־LLM?
+## ‏שקופית 8 — מה באמת עושה ה־LLM?
 
 [סטודנטים · 7]
 
@@ -319,9 +319,9 @@ User ───────→│      LLM      │
 
 ---
 
-# חלק ג׳ — Workflow מול Agent
+# ‏חלק ג׳ — Workflow מול Agent
 
-## שקופית 9 — שתי מילים שמבלבלות
+## ‏שקופית 9 — שתי מילים שמבלבלות
 
 [סטודנטים · 8]
 
@@ -339,7 +339,7 @@ User ───────→│      LLM      │
 
 ולפעמים בכלל לא צריך Agent.
 
-## שקופית 10 — Workflow
+## ‏שקופית 10 — Workflow
 
 תחשבו על Workflow כמו מתכון.
 
@@ -370,7 +370,7 @@ User ───────→│      LLM      │
 
 אבל לא בהכרח יש כאן Agent.
 
-## שקופית 11 — Agent
+## ‏שקופית 11 — Agent
 
 עכשיו נשנה את הדרישה.
 
@@ -398,7 +398,7 @@ User ───────→│      LLM      │
 
 זה כבר הרבה יותר Agentic.
 
-## שקופית 12 — הגדרה שימושית
+## ‏שקופית 12 — הגדרה שימושית
 
 > **Agent = מערכת שמקבלת מטרה ויכולה לבחור פעולות כדי להגיע לתוצאה, תוך שימוש בהקשר, בכלים ומשוב מהעולם.**
 
@@ -414,7 +414,7 @@ Agent הוא לא GPT.
 
 **מטרה → החלטות → פעולות → תצפיות → המשך או עצירה.**
 
-# חלק ד׳ — רמות אוטונומיה (AI Agent Spectrum)
+# ‏חלק ד׳ — רמות אוטונומיה (AI Agent Spectrum)
 
 עכשיו, אחרי שהבחנו בין Workflow ל־Agent, צריך סולם משותף.
 
@@ -424,7 +424,7 @@ Agent הוא לא GPT.
 
 נשתמש בספקטרום מעשי — מ־Level 0 עד Level 6.
 
-## שקופית 13 — AI Agent Spectrum
+## ‏שקופית 13 — AI Agent Spectrum
 
 [סטודנטים · 9]
 
@@ -446,7 +446,7 @@ L4 Task Agent  →  L5 Multi-Agent  →  L6 Agent Ecosystems
 
 מעליו: מערכות שרודפות מטרה עם אוטונומיה אמיתית (מוגבלת).
 
-## שקופית 14 — למה הספקטרום חשוב?
+## ‏שקופית 14 — למה הספקטרום חשוב?
 
 [סטודנטים · 10]
 
@@ -468,7 +468,7 @@ L4 Task Agent  →  L5 Multi-Agent  →  L6 Agent Ecosystems
 
 > **איזו רמת יכולת AI התהליך שלנו באמת דורש — והאם אנחנו משקיעים בהתאם?**
 
-## שקופית 15 — חמישה מאפיינים ל־Agent אמיתי
+## ‏שקופית 15 — חמישה מאפיינים ל־Agent אמיתי
 
 [סטודנטים · 11]
 
@@ -484,7 +484,7 @@ L4 Task Agent  →  L5 Multi-Agent  →  L6 Agent Ecosystems
 
 > אם אפשר לתאר מראש **כל** צעד, כל ענף וכל החלטה — זה Workflow, לא Agent.
 
-## שקופית 16 — Level 0: Rules-Based Automation
+## ‏שקופית 16 — Level 0: Rules-Based Automation
 
 [סטודנטים · 12]
 
@@ -504,7 +504,7 @@ Scheduled jobs.
 
 רק אל תשלמו מחיר של Agent על Level 0.
 
-## שקופית 17 — Level 1: AI-Assisted Tools
+## ‏שקופית 17 — Level 1: AI-Assisted Tools
 
 AI כ־feature בתוך מוצר.
 
@@ -520,7 +520,7 @@ AI כ־feature בתוך מוצר.
 
 זה לא Agent.
 
-## שקופית 18 — Level 2: Custom AI Assistants
+## ‏שקופית 18 — Level 2: Custom AI Assistants
 
 Custom GPT / Gem / Claude Project וכו׳.
 
@@ -536,7 +536,7 @@ Custom GPT / Gem / Claude Project וכו׳.
 
 לא עובד שיוצא ומבצע.
 
-## שקופית 19 — Level 3: AI-Powered Workflows
+## ‏שקופית 19 — Level 3: AI-Powered Workflows
 
 כאן קורה רוב ה־agent washing.
 
@@ -552,7 +552,7 @@ Custom GPT / Gem / Claude Project וכו׳.
 
 Agent אמיתי היה ממציא גישה חדשה.
 
-## שקופית 20 — הקו בין L3 ל־L4
+## ‏שקופית 20 — הקו בין L3 ל־L4
 
 [סטודנטים · 13]
 
@@ -566,7 +566,7 @@ L3: נכשל / ברירת מחדל.
 
 L4+: מנסה לתכנן ולהתאים.
 
-## שקופית 21 — Level 4: Task Agents
+## ‏שקופית 21 — Level 4: Task Agents
 
 כאן מתחילה agency אמיתית.
 
@@ -586,7 +586,7 @@ L4+: מנסה לתכנן ולהתאים.
 
 Incident Agent שחוקר תקלה ב־API בתוך גבולות הרשאה.
 
-## שקופית 22 — Level 5: Collaborative Agent Systems
+## ‏שקופית 22 — Level 5: Collaborative Agent Systems
 
 כמה Agents מתמחים.
 
@@ -598,7 +598,7 @@ Handoffs.
 
 מורכבות, סיכון ו־governance עולים יחד.
 
-## שקופית 23 — Level 6: Autonomous Agent Ecosystems
+## ‏שקופית 23 — Level 6: Autonomous Agent Ecosystems
 
 אקוסיסטם תמיד־פעיל.
 
@@ -610,7 +610,7 @@ Handoffs.
 
 זו חזית — לא נקודת הפתיחה של רוב הארגונים.
 
-## שקופית 24 — שאלות לחיתוך רעש
+## ‏שקופית 24 — שאלות לחיתוך רעש
 
 [סטודנטים · 14]
 
@@ -622,19 +622,19 @@ Handoffs.
 4. אילו החלטות הוא מקבל לבד מול מה שמגיע לאישור אדם?  
 5. מה הדבר הגרוע ביותר שיכול לקרות — ומה ה־Guardrails?
 
-## שקופית 25 — Takeaway לבונים
+## ‏שקופית 25 — Takeaway לבונים
 
 - לא כל תהליך צריך L4+  
 - הרבה ערך יושב ב־L1–L3  
-- L4+ דורש Observability, Policy, HITL  
+- ‏L4+ דורש Observability, Policy, HITL  
 - בחרו רמה לפי סיכון, שונות המשימה, וערך ההחלטות  
 - בהמשך המפגש נראה Planning, Loop ו־Guardrails — הכלים שמאפשרים L4 בבטחה
 
 ---
 
-# חלק ה׳ — ארבעת מרכיבי ה-Agent
+# ‏חלק ה׳ — ארבעת מרכיבי ה-Agent
 
-## שקופית 26 — Goal
+## ‏שקופית 26 — Goal
 
 [סטודנטים · 15]
 
@@ -656,7 +656,7 @@ Agent צריך לדעת לאן הוא מנסה להגיע.
 
 Agentic systems עובדות טוב במיוחד כשאפשר להגדיר מה התוצאה הרצויה, ולא רק רשימה קשיחה של צעדים.
 
-## שקופית 27 — Decision
+## ‏שקופית 27 — Decision
 
 אחרי שיש מטרה, המערכת צריכה להחליט מה לעשות.
 
@@ -678,7 +678,7 @@ Agentic systems עובדות טוב במיוחד כשאפשר להגדיר מה 
 
 הבחירה הזאת היא לב ה־Agent.
 
-## שקופית 28 — Action
+## ‏שקופית 28 — Action
 
 בחירה בלי פעולה לא עוזרת לנו הרבה.
 
@@ -702,7 +702,7 @@ Cloud operation
 
 וזו נקודה שנחזור אליה.
 
-## שקופית 29 — Observation
+## ‏שקופית 29 — Observation
 
 זו אחת המילים הכי חשובות.
 
@@ -728,9 +728,9 @@ Agent שלח Email.
 
 ---
 
-# חלק ו׳ — ה-Agent Loop
+# ‏חלק ו׳ — ה-Agent Loop
 
-## שקופית 30 — לולאה מלאה
+## ‏שקופית 30 — לולאה מלאה
 
 [סטודנטים · 16]
 
@@ -771,7 +771,7 @@ Agent שלח Email.
 
 אבל הרעיון הזה נמצא מתחת להרבה מערכות Agentic.
 
-## שקופית 31 — דוגמה אנושית
+## ‏שקופית 31 — דוגמה אנושית
 
 בואו ניקח עובד תמיכה.
 
@@ -821,7 +821,7 @@ Observation:
 
 זאת בדיוק Agentic behavior.
 
-## שקופית 32 — אותו דבר במערכת תוכנה
+## ‏שקופית 32 — אותו דבר במערכת תוכנה
 
 ```text
 Goal:
@@ -876,9 +876,9 @@ Final response
 
 ---
 
-# חלק ז׳ — Planning
+# ‏חלק ז׳ — Planning
 
-## שקופית 33 — למה צריך Planning?
+## ‏שקופית 33 — למה צריך Planning?
 
 [סטודנטים · 17]
 
@@ -900,7 +900,7 @@ Final response
 
 היא צריכה לפרק אותה.
 
-## שקופית 34 — מתי Planning כן / לא
+## ‏שקופית 34 — מתי Planning כן / לא
 
 | בלי Planning מפורש | עם Planning |
 |---|---|
@@ -912,7 +912,7 @@ Final response
 
 אם אי אפשר לרשום במשפט אחד ״מה השלב הבא תמיד״ — כנראה צריך תוכנית.
 
-## שקופית 35 — Task Decomposition
+## ‏שקופית 35 — Task Decomposition
 
 ![Task Decomposition](assets/02/02-task-decomposition.png)
 
@@ -936,7 +936,7 @@ Main Goal
 
 לא מפרקים כדי להרשים — מפרקים כדי להתקדם ולבדוק.
 
-## שקופית 36 — תוכנית היא Hypothesis
+## ‏שקופית 36 — תוכנית היא Hypothesis
 
 תוכנית בעולם Agentic היא השערה עבודה.
 
@@ -954,7 +954,7 @@ Agent יכול להחליט מראש על מסלול שלא מתאים.
 
 אולי עכשיו בכלל צריך לחפש Emails.
 
-## שקופית 37 — Re-planning
+## ‏שקופית 37 — Re-planning
 
 ```text
 PLAN
@@ -972,7 +972,7 @@ PLAN STILL VALID?
 
 זה אחד הדברים שמבדילים מערכות Agentic מעניינות ממערכות אוטומציה פשוטות.
 
-## שקופית 38 — Local מול Global Re-plan
+## ‏שקופית 38 — Local מול Global Re-plan
 
 **Local:** מחליפים כלי / צעד, אותה מטרה.
 
@@ -982,9 +982,9 @@ PLAN STILL VALID?
 
 ---
 
-# חלק ח׳ — ReAct בצורה פשוטה
+# ‏חלק ח׳ — ReAct בצורה פשוטה
 
-## שקופית 39 — Reason → Act → Observe
+## ‏שקופית 39 — Reason → Act → Observe
 
 [סטודנטים · 18]
 
@@ -998,7 +998,7 @@ PLAN STILL VALID?
 
 אבל ללמידה שלנו, שלושת השלבים האלה מספיקים כדי להבין את הרעיון.
 
-## שקופית 40 — דוגמה קצרה
+## ‏שקופית 40 — דוגמה קצרה
 
 המשימה:
 
@@ -1016,7 +1016,7 @@ Agent:
 
 **Final answer:** מחזיר תשובה.
 
-## שקופית 41 — אותה תבנית עם כמה כלים
+## ‏שקופית 41 — אותה תבנית עם כמה כלים
 
 עכשיו משנים את המשימה:
 
@@ -1026,7 +1026,7 @@ Agent:
 
 המערכת צריכה לבחור סדר, ולא רק להריץ רשימה קשיחה.
 
-## שקופית 42 — מה נותן ה־Loop?
+## ‏שקופית 42 — מה נותן ה־Loop?
 
 ה־Loop מאפשר למערכת להגיב למה שקרה.
 
@@ -1041,7 +1041,7 @@ Agent יכול:
 
 התוצאה של הפעולה הופכת להיות קלט להחלטה הבאה.
 
-## שקופית 43 — ReAct מול Plan-and-Execute (טעימה)
+## ‏שקופית 43 — ReAct מול Plan-and-Execute (טעימה)
 
 | ReAct | Plan-and-Execute |
 |---|---|
@@ -1053,9 +1053,9 @@ Agent יכול:
 
 ---
 
-# חלק ט׳ — מתי Agent הוא רעיון גרוע?
+# ‏חלק ט׳ — מתי Agent הוא רעיון גרוע?
 
-## שקופית 44 — לא כל בעיה צריכה Agent
+## ‏שקופית 44 — לא כל בעיה צריכה Agent
 
 [סטודנטים · 19]
 
@@ -1067,7 +1067,7 @@ Agent יכול:
 
 זו טעות — וגם צורה של agent washing פנימי בארגון.
 
-## שקופית 45 — Workflow דטרמיניסטי
+## ‏שקופית 45 — Workflow דטרמיניסטי
 
 אם יש לנו:
 
@@ -1093,7 +1093,7 @@ Send confirmation
 
 Workflow דטרמיניסטי עדיף (בערך Level 0–3 בספקטרום).
 
-## שקופית 46 — מתי כן Agent?
+## ‏שקופית 46 — מתי כן Agent?
 
 Agent מתאים יותר כאשר:
 
@@ -1106,7 +1106,7 @@ Agent מתאים יותר כאשר:
 
 זה בערך האזור של **Level 4+**.
 
-## שקופית 47 — מתי לא / מתי זה יקר מדי
+## ‏שקופית 47 — מתי לא / מתי זה יקר מדי
 
 הוא פחות מתאים כאשר:
 
@@ -1116,17 +1116,17 @@ Agent מתאים יותר כאשר:
 - הסיכון גבוה בלי HITL  
 - התקציב (tokens / זמן) לא סביר ללולאות  
 
-## שקופית 48 — גישה היברידית
+## ‏שקופית 48 — גישה היברידית
 
 הרבה מערכות טובות הן **שילוב**:
 
-- Workflow קשיח בשוליים הבטוחים  
-- Agent רק בכיסי אי־ודאות  
-- Approval על פעולות רגישות  
+- ‏Workflow קשיח בשוליים הבטוחים  
+- ‏Agent רק בכיסי אי־ודאות  
+- ‏Approval על פעולות רגישות  
 
 לא ״הכול Agent״ ולא ״אסור Agent״.
 
-## שקופית 49 — כלל אצבע
+## ‏שקופית 49 — כלל אצבע
 
 > **אם אפשר לכתוב את כל התהליך בצורה ברורה, נסו קודם Workflow.**
 >
@@ -1135,9 +1135,9 @@ Agent מתאים יותר כאשר:
 ---
 
 
-# חלק י׳ — דוגמת DevOps
+# ‏חלק י׳ — דוגמת DevOps
 
-## שקופית 50 — Agent ל־Troubleshooting
+## ‏שקופית 50 — Agent ל־Troubleshooting
 
 [סטודנטים · 20]
 
@@ -1153,8 +1153,8 @@ Agent מתאים יותר כאשר:
 
 Workflow רגיל יכול לעשות:
 
-1. Query ל־Prometheus.
-2. Query ל־Logs.
+1. ‏Query ל־Prometheus.
+2. ‏Query ל־Logs.
 3. בדיקת CPU.
 4. בדיקת Memory.
 5. שליחת דוח.
@@ -1163,7 +1163,7 @@ Workflow רגיל יכול לעשות:
 
 > ״חקור למה ה־API איטי ותביא לי אבחון.״
 
-## שקופית 51 — מה Agent יכול לעשות?
+## ‏שקופית 51 — מה Agent יכול לעשות?
 
 [סטודנטים · 21]
 
@@ -1193,7 +1193,7 @@ Workflow רגיל יכול לעשות:
 
 כלומר, התהליך נבנה תוך כדי.
 
-## שקופית 52 — הבעיה האמיתית
+## ‏שקופית 52 — הבעיה האמיתית
 
 אם Agent יכול להריץ פקודות, מה הוא יכול לעשות?
 
@@ -1227,9 +1227,9 @@ terraform apply
 
 ---
 
-# חלק יא׳ — Tool Design
+# ‏חלק יא׳ — Tool Design
 
-## שקופית 53 — Tools הם הכוח של ה־Agent
+## ‏שקופית 53 — Tools הם הכוח של ה־Agent
 
 [סטודנטים · 22]
 
@@ -1251,7 +1251,7 @@ read_file()
 write_file()
 ```
 
-## שקופית 54 — Tool הוא API עם משמעות
+## ‏שקופית 54 — Tool הוא API עם משמעות
 
 מבחינת Agent, Tool הוא בערך פעולה עם:
 
@@ -1274,7 +1274,7 @@ write_file()
 
 ה־LLM יכול לבחור את הכלי ולמלא את הפרמטר.
 
-## שקופית 55 — למה Description חשוב?
+## ‏שקופית 55 — למה Description חשוב?
 
 כי המודל בוחר לפי התיאור.
 
@@ -1300,7 +1300,7 @@ get_kubernetes_logs(
 
 תיאור Tool הוא חלק מהממשק בין העולם שלנו לבין ה־LLM.
 
-## שקופית 56 — Tool רחב מדי
+## ‏שקופית 56 — Tool רחב מדי
 
 נניח שאנחנו נותנים Agent Tool כזה:
 
@@ -1327,9 +1327,9 @@ scale_deployment()
 
 ---
 
-# חלק יב׳ — Human in the Loop
+# ‏חלק יב׳ — Human in the Loop
 
-## שקופית 57 — האם Agent חייב לעבוד לבד?
+## ‏שקופית 57 — האם Agent חייב לעבוד לבד?
 
 [סטודנטים · 23]
 
@@ -1347,21 +1347,21 @@ Agent יכול לבצע עבודה רבה לבד.
 
 > ״מצאתי את הבעיה. אני מוכן לבצע פעולה שמשפיעה על Production. לאשר?״
 
-## שקופית 58 — שלוש רמות פעולה
+## ‏שקופית 58 — שלוש רמות פעולה
 
-### פעולה בטוחה
+### ‏פעולה בטוחה
 
 קריאת Metrics.
 
 אפשר אוטומטית.
 
-### פעולה בינונית
+### ‏פעולה בינונית
 
 פתיחת Ticket.
 
 אפשר אולי אוטומטית לפי Policy.
 
-### פעולה מסוכנת
+### ‏פעולה מסוכנת
 
 שינוי Production.
 
@@ -1371,7 +1371,7 @@ Agent יכול לבצע עבודה רבה לבד.
 
 > **לא כל פעולה צריכה אותה רמת אוטונומיה.**
 
-## שקופית 59 — Approval Flow
+## ‏שקופית 59 — Approval Flow
 
 ![Human Approval Flow](assets/01/07-human-approval.png)
 
@@ -1379,9 +1379,9 @@ Agent יכול לבצע עבודה רבה לבד.
 
 ---
 
-# חלק יג׳ — Failure Modes ו־Guardrails
+# ‏חלק יג׳ — Failure Modes ו־Guardrails
 
-## שקופית 60 — Agents יכולים לטעות
+## ‏שקופית 60 — Agents יכולים לטעות
 
 Agent יכול להיות משכנע מאוד ועדיין לטעות.
 
@@ -1395,7 +1395,7 @@ Agent יכול להיות משכנע מאוד ועדיין לטעות.
 - להמציא מידע שלא קיים.
 - לחשוב שהמשימה הושלמה כשהיא לא.
 
-## שקופית 61 — לולאה אינסופית
+## ‏שקופית 61 — לולאה אינסופית
 
 דוגמה:
 
@@ -1423,7 +1423,7 @@ Agent:
 
 לכן צריך Guards.
 
-## שקופית 62 — Guardrails
+## ‏שקופית 62 — Guardrails
 
 [סטודנטים · 24]
 
@@ -1447,7 +1447,7 @@ HUMAN APPROVAL
 
 Agent חייב גבולות.
 
-## שקופית 63 — Stop Conditions
+## ‏שקופית 63 — Stop Conditions
 
 Agent צריך לדעת מתי לעצור.
 
@@ -1463,9 +1463,9 @@ Agent צריך לדעת מתי לעצור.
 
 ---
 
-# חלק יד׳ — Context
+# ‏חלק יד׳ — Context
 
-## שקופית 64 — מאיפה Agent יודע מה קורה?
+## ‏שקופית 64 — מאיפה Agent יודע מה קורה?
 
 [סטודנטים · 25]
 
@@ -1489,7 +1489,7 @@ Memory
 
 זה מה שהופך את המערכת ליותר מסתם Prompt אחד.
 
-## שקופית 65 — Context הוא משאב
+## ‏שקופית 65 — Context הוא משאב
 
 יש לנו מגבלות.
 
@@ -1507,9 +1507,9 @@ Memory
 
 ---
 
-# חלק טו׳ — Memory בקצרה
+# ‏חלק טו׳ — Memory בקצרה
 
-## שקופית 66 — זיכרון הוא לא דבר אחד
+## ‏שקופית 66 — זיכרון הוא לא דבר אחד
 
 המילה Memory יכולה לבלבל.
 
@@ -1527,9 +1527,9 @@ Memory
 
 ---
 
-# חלק טז׳ — Demo רעיוני
+# ‏חלק טז׳ — Demo רעיוני
 
-## שקופית 67 — נבנה Agent קטן
+## ‏שקופית 67 — נבנה Agent קטן
 
 [הדגמה]
 
@@ -1557,7 +1557,7 @@ get_logs()
 get_events()
 ```
 
-## שקופית 68 — User Request
+## ‏שקופית 68 — User Request
 
 ```text
 Check the current state of the API service
@@ -1568,7 +1568,7 @@ and tell me if anything looks wrong.
 
 היא מקבלת מטרה.
 
-## שקופית 69 — Agent Decision
+## ‏שקופית 69 — Agent Decision
 
 ה־Agent עשוי להחליט:
 
@@ -1582,7 +1582,7 @@ I need deployment status first.
 get_deployments("api")
 ```
 
-## שקופית 70 — Observation
+## ‏שקופית 70 — Observation
 
 התוצאה:
 
@@ -1600,7 +1600,7 @@ available: 3
 
 > ״Deployment looks healthy. I should check recent logs.״
 
-## שקופית 71 — Tool Call נוסף
+## ‏שקופית 71 — Tool Call נוסף
 
 ```text
 get_logs(
@@ -1617,7 +1617,7 @@ timeout connecting to database
 
 עכשיו המסקנה משתנה.
 
-## שקופית 72 — Reasoning
+## ‏שקופית 72 — Reasoning
 
 ה־Agent יכול להחליט:
 
@@ -1628,7 +1628,7 @@ timeout connecting to database
 
 זו בדיוק הלולאה.
 
-## שקופית 73 — מה ראינו?
+## ‏שקופית 73 — מה ראינו?
 
 ```text
 Goal
@@ -1654,9 +1654,9 @@ Conclusion
 
 ---
 
-# חלק יז׳ — למה Agents מעניינים?
+# ‏חלק יז׳ — למה Agents מעניינים?
 
-## שקופית 74 — מעבר מ־Chat ל־Systems
+## ‏שקופית 74 — מעבר מ־Chat ל־Systems
 
 פעם שאלנו בעיקר:
 
@@ -1672,7 +1672,7 @@ Conclusion
 
 אנחנו הולכים לדבר על Architecture, Tools, State, Memory, Multi-Agent, Testing, Security ו־Observability.
 
-## שקופית 75 — Agent Architecture
+## ‏שקופית 75 — Agent Architecture
 
 [סטודנטים · 28]
 
@@ -1682,7 +1682,7 @@ Conclusion
 USER → AGENT RUNTIME → LLM → TOOLS / STATE / MEMORY / POLICY
 ```
 
-## שקופית 76 — Agent הוא לא Magic
+## ‏שקופית 76 — Agent הוא לא Magic
 
 כשנותנים למודל הרבה כלים, קל להסתכל עליו ולחשוב:
 
@@ -1712,7 +1712,7 @@ USER → AGENT RUNTIME → LLM → TOOLS / STATE / MEMORY / POLICY
 
 זו נקודת מבט מאוד חשובה למפתחים.
 
-## שקופית 77 — Agent הוא Software System
+## ‏שקופית 77 — Agent הוא Software System
 
 על המסך:
 
@@ -1728,9 +1728,9 @@ USER → AGENT RUNTIME → LLM → TOOLS / STATE / MEMORY / POLICY
 
 ---
 
-# חלק יח׳ — Multi-Agent בקצרה
+# ‏חלק יח׳ — Multi-Agent בקצרה
 
-## שקופית 78 — האם Agent אחד מספיק?
+## ‏שקופית 78 — האם Agent אחד מספיק?
 
 ![Multi-Agent](assets/01/12-multi-agent.png)
 
@@ -1752,7 +1752,7 @@ USER → AGENT RUNTIME → LLM → TOOLS / STATE / MEMORY / POLICY
 
 במפגש על CrewAI ניכנס לזה הרבה יותר לעומק.
 
-## שקופית 79 — למה לפצל?
+## ‏שקופית 79 — למה לפצל?
 
 לפעמים בגלל:
 
@@ -1766,7 +1766,7 @@ USER → AGENT RUNTIME → LLM → TOOLS / STATE / MEMORY / POLICY
 
 לפעמים הוא רק הופך Agent אחד מסובך לשלושה Agents מסובכים.
 
-## שקופית 80 — דוגמה
+## ‏שקופית 80 — דוגמה
 
 משימה:
 
@@ -1790,9 +1790,9 @@ Agents:
 
 ---
 
-# חלק יט׳ — Cost, Latency ו־Security
+# ‏חלק יט׳ — Cost, Latency ו־Security
 
-## שקופית 81 — Agent יכול להיות יקר
+## ‏שקופית 81 — Agent יכול להיות יקר
 
 Workflow קבוע יכול לבצע חמש פעולות.
 
@@ -1804,13 +1804,13 @@ Agent יכול לבצע שלוש, חמש, עשר או עשרים איטרציו�
 
 לכן צריך לחשוב על:
 
-- Token usage.
-- Number of iterations.
-- Tool costs.
-- Latency.
-- Model selection.
+- ‏Token usage.
+- ‏Number of iterations.
+- ‏Tool costs.
+- ‏Latency.
+- ‏Model selection.
 
-## שקופית 82 — Latency
+## ‏שקופית 82 — Latency
 
 Workflow:
 
@@ -1848,7 +1848,7 @@ Response
 
 > האם הערך של האוטונומיה מצדיק את המחיר בזמן?
 
-## שקופית 83 — Security
+## ‏שקופית 83 — Security
 
 נניח שיש Agent שיכול:
 
@@ -1864,16 +1864,16 @@ delete_resource
 
 ולכן צריך לחשוב על:
 
-- Least privilege.
-- Identity.
-- Secrets.
-- Authentication.
-- Authorization.
-- Audit.
-- Allowlist.
-- Approval.
+- ‏Least privilege.
+- ‏Identity.
+- ‏Secrets.
+- ‏Authentication.
+- ‏Authorization.
+- ‏Audit.
+- ‏Allowlist.
+- ‏Approval.
 
-## שקופית 84 — Agent לא צריך הרשאות Admin
+## ‏שקופית 84 — Agent לא צריך הרשאות Admin
 
 ![Tool Permissions](assets/01/14-tool-permissions.png)
 
@@ -1891,9 +1891,9 @@ delete_resource
 
 ---
 
-# חלק כ׳ — תרגיל ראשון
+# ‏חלק כ׳ — תרגיל ראשון
 
-## שקופית 85 — Agent או Workflow?
+## ‏שקופית 85 — Agent או Workflow?
 
 [סטודנטים · 29]
 
@@ -1903,23 +1903,23 @@ delete_resource
 
 **Workflow / Agent / שילוב** — וגם **רמה משוערת בספקטרום (L0–L6)**
 
-### 1
+### ‏1
 
 כל Email עם חשבונית נשמר אוטומטית ב־S3.
 
-### 2
+### ‏2
 
 המערכת קוראת Email ומחליטה האם הוא דורש טיפול של צוות Support.
 
-### 3
+### ‏3
 
 כל יום ב־08:00 מערכת מריצה דוח קבוע.
 
-### 4
+### ‏4
 
 מערכת חוקרת Alert ומנסה למצוא את מקור התקלה.
 
-### 5
+### ‏5
 
 מערכת מקבלת מסמך ומחליטה אילו מערכות צריכות להתעדכן.
 
@@ -1939,7 +1939,7 @@ delete_resource
 
 **באיזו רמת Spectrum זה יושב — ולמה לא גבוה יותר?**
 
-## שקופית 86 — פתרון לדיון
+## ‏שקופית 86 — פתרון לדיון
 
 1. חשבונית → בדרך כלל Workflow · ~L0  
 2. סיווג פנייה → יכול להיות LLM/Agent קטן · ~L2–L3  
@@ -1953,9 +1953,9 @@ delete_resource
 
 ---
 
-# חלק כא׳ — תכנון Agent בצורה נכונה
+# ‏חלק כא׳ — תכנון Agent בצורה נכונה
 
-## שקופית 87 — חמש שאלות
+## ‏שקופית 87 — חמש שאלות
 
 לפני שבונים Agent, שאלו:
 
@@ -1967,7 +1967,7 @@ delete_resource
 
 אם אין לנו תשובות טובות לחמש השאלות האלה, כנראה שאנחנו עדיין לא מוכנים לבנות את המערכת.
 
-## שקופית 88 — מתחילים מהמשימה, לא מהמודל
+## ‏שקופית 88 — מתחילים מהמשימה, לא מהמודל
 
 טעות נפוצה:
 
@@ -1983,9 +1983,9 @@ delete_resource
 
 ---
 
-# חלק כב׳ — דוגמה עסקית מלאה
+# ‏חלק כב׳ — דוגמה עסקית מלאה
 
-## שקופית 89 — Support Agent
+## ‏שקופית 89 — Support Agent
 
 [סטודנטים · 26]
 
@@ -2022,7 +2022,7 @@ send_email()
 escalate_to_human()
 ```
 
-## שקופית 90 — מה יכול לקרות?
+## ‏שקופית 90 — מה יכול לקרות?
 
 [סטודנטים · 27]
 
@@ -2044,9 +2044,9 @@ Agent:
 
 ---
 
-# חלק כג׳ — Observability
+# ‏חלק כג׳ — Observability
 
-## שקופית 91 — למה Logs לא מספיקים?
+## ‏שקופית 91 — למה Logs לא מספיקים?
 
 במערכת רגילה יכול להיות:
 
@@ -2069,15 +2069,15 @@ INFO response sent
 - למה התהליך נעצר?
 - איזה Context היה זמין?
 
-## שקופית 92 — Agent Trace
+## ‏שקופית 92 — Agent Trace
 
 ![Agent Trace](assets/01/09-agent-trace.png)
 
 ---
 
-# חלק כד׳ — Mini Design Review
+# ‏חלק כד׳ — Mini Design Review
 
-## שקופית 93 — ניתוח ארכיטקטורה
+## ‏שקופית 93 — ניתוח ארכיטקטורה
 
 הצג לקהל:
 
@@ -2095,7 +2095,7 @@ Production Kubernetes Cluster
 
 > ״מה אתם לא אוהבים כאן?״
 
-## שקופית 94 — תשובות אפשריות
+## ‏שקופית 94 — תשובות אפשריות
 
 אין כאן מספיק בקרה על Tool.
 
@@ -2115,9 +2115,9 @@ Production Kubernetes Cluster
 
 ---
 
-# חלק כה׳ — תרגיל מסכם למפגש
+# ‏חלק כה׳ — תרגיל מסכם למפגש
 
-## שקופית 95 — תכנון Agent ראשון
+## ‏שקופית 95 — תכנון Agent ראשון
 
 [סטודנטים · 30]
 
@@ -2127,45 +2127,45 @@ Production Kubernetes Cluster
 
 למשל:
 
-- DevOps.
-- Support.
-- Sales.
-- Finance.
-- Security.
-- HR.
-- Development.
+- ‏DevOps.
+- ‏Support.
+- ‏Sales.
+- ‏Finance.
+- ‏Security.
+- ‏HR.
+- ‏Development.
 
 וענו על השאלות:
 
-### 1. מה המטרה?
+### ‏1. מה המטרה?
 
 לא ״איזה Tool״.
 
 מטרה.
 
-### 2. אילו כלים צריך?
+### ‏2. אילו כלים צריך?
 
 מה Agent צריך להיות מסוגל לעשות?
 
-### 3. איפה הוא צריך לקבל החלטה?
+### ‏3. איפה הוא צריך לקבל החלטה?
 
 מה לא ניתן להגדיר מראש?
 
-### 4. מה הוא צריך לראות?
+### ‏4. מה הוא צריך לראות?
 
 איזה Context?
 
-### 5. מה מסוכן?
+### ‏5. מה מסוכן?
 
 איפה חייבים Guardrail?
 
-## שקופית 96 — דוגמה לתשובה
+## ‏שקופית 96 — דוגמה לתשובה
 
-### Goal
+### ‏Goal
 
 ״חקור Production Alert והכן אבחון.״
 
-### Tools
+### ‏Tools
 
 ```text
 get_metrics()
@@ -2175,15 +2175,15 @@ get_recent_deployments()
 search_incidents()
 ```
 
-### Decisions
+### ‏Decisions
 
 Agent מחליט מה לבדוק קודם ומה לבדוק אחר כך.
 
-### Context
+### ‏Context
 
 Alert, namespace, service, recent events.
 
-### Guardrails
+### ‏Guardrails
 
 Agent יכול לקרוא נתונים.
 
@@ -2193,9 +2193,9 @@ Agent לא משנה Production.
 
 ---
 
-# חלק כו׳ — שאלות שהקהל צריך לדעת לענות עליהן
+# ‏חלק כו׳ — שאלות שהקהל צריך לדעת לענות עליהן
 
-## שקופית 97 — בדיקת הבנה
+## ‏שקופית 97 — בדיקת הבנה
 
 [סטודנטים · 31]
 
@@ -2221,9 +2221,9 @@ Agent לא משנה Production.
 
 ---
 
-# חלק כז׳ — סיכום המפגש
+# ‏חלק כז׳ — סיכום המפגש
 
-## שקופית 98 — מה למדנו?
+## ‏שקופית 98 — מה למדנו?
 
 עברנו מ־Chat פשוט אל מערכת שיכולה לעבוד בתוך תהליך.
 
@@ -2247,7 +2247,7 @@ Agent לא משנה Production.
 
 **Human in the Loop** — אדם בנקודות שבהן צריך אישור או שיקול דעת.
 
-## שקופית 99 — המשפט שחשוב לזכור
+## ‏שקופית 99 — המשפט שחשוב לזכור
 
 [מצלמה: פריים קרוב.]
 
@@ -2271,7 +2271,7 @@ Agent לא משנה Production.
 
 ולפעמים יש בני אדם באמצע.
 
-## שקופית 100 — ארבע המילים
+## ‏שקופית 100 — ארבע המילים
 
 על המסך, בגדול:
 
@@ -2289,9 +2289,9 @@ Agent לא משנה Production.
 
 ---
 
-# חלק כח׳ — מעבר למפגש הבא
+# ‏חלק כח׳ — מעבר למפגש הבא
 
-## שקופית 101 — מה השאלה הבאה?
+## ‏שקופית 101 — מה השאלה הבאה?
 
 [סטודנטים · 32]
 
@@ -2305,13 +2305,13 @@ Agent לא משנה Production.
 
 זה מוביל אותנו למפגש הבא:
 
-# Agent Architecture — Planning ו־Execution
+# ‏Agent Architecture — Planning ו־Execution
 
 נעמיק ב־Task Decomposition, Planning, Re-planning, ReAct, Plan-and-Execute, Retry, Failure Handling ו־Execution Loops.
 
 ---
 
-# נספח א׳ — מאגר ויזואלים למפגש
+# ‏נספח א׳ — מאגר ויזואלים למפגש
 
 הקבצים המוכנים נמצאים תחת `assets/01/`:
 
@@ -2341,54 +2341,54 @@ Agent לא משנה Production.
 
 מומלץ להכין למצגת בערך 20–30 ויזואלים, גם אם לא מציגים את כולם ברצף.
 
-### ויזואל 1 — Human vs Agent
+### ‏ויזואל 1 — Human vs Agent
 אדם שמנהל תהליך ידני לעומת Agent שמנהל תהליך דרך מספר מערכות.
 
-### ויזואל 2 — Chat vs Agent
+### ‏ויזואל 2 — Chat vs Agent
 צד שמאל: Prompt → Answer. צד ימין: Goal → Decide → Act → Observe → Result.
 
-### ויזואל 3 — Agent Loop
+### ‏ויזואל 3 — Agent Loop
 לולאה מלאה.
 
-### ויזואל 4 — LLM + Tools
+### ‏ויזואל 4 — LLM + Tools
 LLM במרכז עם Database, API, Web, Email ו־Kubernetes.
 
-### ויזואל 5 — Workflow vs Agent
+### ‏ויזואל 5 — Workflow vs Agent
 Workflow קווי לעומת Agent עם החלטות ולולאות.
 
-### ויזואל 6 — Autonomy Spectrum (L0–L6)
+### ‏ויזואל 6 — Autonomy Spectrum (L0–L6)
 מ־Rules Automation עד Autonomous Ecosystems; קו agency בין L3 ל־L4.
 
-### ויזואל 7 — Human Approval
+### ‏ויזואל 7 — Human Approval
 Agent שעוצר לפני פעולה רגישה.
 
-### ויזואל 8 — Guardrails
+### ‏ויזואל 8 — Guardrails
 Agent בתוך גבולות של Policy והרשאות.
 
-### ויזואל 9 — Agent Trace
+### ‏ויזואל 9 — Agent Trace
 Timeline של Agent Run.
 
-### ויזואל 10 — DevOps Agent
+### ‏ויזואל 10 — DevOps Agent
 Agent שמחובר ל־Prometheus, Logs ו־Kubernetes.
 
-### ויזואל 11 — Support Agent
+### ‏ויזואל 11 — Support Agent
 Agent שמחובר ל־CRM, Ticketing, Knowledge Base ו־Email.
 
-### ויזואל 12 — Multi-Agent
+### ‏ויזואל 12 — Multi-Agent
 Manager עם מספר Agents מתמחים.
 
-### ויזואל 13 — Context
+### ‏ויזואל 13 — Context
 User Request + Tools + State + Memory + Policy.
 
-### ויזואל 14 — Tool Permissions
+### ‏ויזואל 14 — Tool Permissions
 אותם Tools עם רמות הרשאה שונות.
 
-### ויזואל 15 — Failure Loop
+### ‏ויזואל 15 — Failure Loop
 Tool failure → Retry → Alternate tool → Escalation.
 
 ---
 
-# נספח ב׳ — Prompts ליצירת סדרת תמונות אחידה
+# ‏נספח ב׳ — Prompts ליצירת סדרת תמונות אחידה
 
 אפשר להוסיף לכל Prompt את הבסיס הבא:
 
@@ -2412,9 +2412,9 @@ no tiny unreadable text.
 
 ---
 
-# נספח ג׳ — קטעי הדגמה מומלצים
+# ‏נספח ג׳ — קטעי הדגמה מומלצים
 
-## Demo 1 — Workflow פשוט
+## ‏Demo 1 — Workflow פשוט
 
 ```text
 Input
@@ -2430,7 +2430,7 @@ Notify
 
 להראות שאין כאן צורך ב־Agent.
 
-## Demo 2 — Agent Loop
+## ‏Demo 2 — Agent Loop
 
 ```text
 Goal
@@ -2450,7 +2450,7 @@ Result
 Answer
 ```
 
-## Demo 3 — Tool Choice
+## ‏Demo 3 — Tool Choice
 
 לתת Agent שלושה Tools:
 
@@ -2466,7 +2466,7 @@ get_customer()
 
 המטרה היא להראות שהבחירה עצמה היא חלק מהעבודה.
 
-## Demo 4 — Guardrail
+## ‏Demo 4 — Guardrail
 
 Agent עם:
 
@@ -2492,7 +2492,7 @@ Not allowed.
 
 ---
 
-# נספח ד׳ — מילון מונחים
+# ‏נספח ד׳ — מילון מונחים
 
 | מונח | משמעות |
 |---|---|
@@ -2513,7 +2513,7 @@ Not allowed.
 
 ---
 
-# נספח ה׳ — משפטי מעבר להקלטה
+# ‏נספח ה׳ — משפטי מעבר להקלטה
 
 > ״עד עכשיו דיברנו על מה Agent עושה. עכשיו בואו נראה איך הוא בכלל מגיע להחלטה.״
 
@@ -2527,7 +2527,7 @@ Not allowed.
 
 ---
 
-# נספח ו׳ — משפטי הדגשה
+# ‏נספח ו׳ — משפטי הדגשה
 
 > ״Agent לא נמדד לפי כמה הוא מדבר. הוא נמדד לפי כמה טוב הוא מתקדם לעבר מטרה.״
 

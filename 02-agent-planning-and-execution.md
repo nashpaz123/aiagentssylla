@@ -1,7 +1,7 @@
-<div dir="rtl">
+<div dir="rtl" lang="he">
 
-# מפגש 2 — Agent Architecture: Planning ו-Execution
-## קובץ מרצה (תסריט מלא להקלטה)
+# ‏מפגש 2 — Agent Architecture: Planning ו-Execution
+## ‏קובץ מרצה (תסריט מלא להקלטה)
 
 > **משך מיועד:** כ־2.5–3 שעות תוכן מוקלט + עצירות, הדגמות, תרגילים ושאלות  
 > **מיקום בקורס:** מפגש 2  
@@ -15,7 +15,7 @@
 
 ---
 
-# הנחיות למרצה
+# ‏הנחיות למרצה
 
 המסמך ממשיך את המבנה של מפגש 1.
 
@@ -35,9 +35,9 @@
 
 ---
 
-# חלק א' — פתיחה וחיבור למפגש הקודם
+# ‏חלק א' — פתיחה וחיבור למפגש הקודם
 
-## שקופית 1 — הכותרת
+## ‏שקופית 1 — הכותרת
 
 **על המסך:**
 
@@ -50,7 +50,7 @@ Agent יושב במרכז: משמאל מטרה ומשימות, מימין כלי
 
 ---
 
-## שקופית 2 — איפה עצרנו?
+## ‏שקופית 2 — איפה עצרנו?
 
 [מצלמה: פריים בינוני.]
 
@@ -84,7 +84,7 @@ Observation.
 
 ---
 
-## שקופית 3 — השאלה של היום
+## ‏שקופית 3 — השאלה של היום
 
 על המסך:
 
@@ -112,9 +112,9 @@ Planning.
 
 ---
 
-# חלק ב' — מה זה Planning?
+# ‏חלק ב' — מה זה Planning?
 
-## שקופית 4 — תוכנית היא גשר בין מטרה לפעולה
+## ‏שקופית 4 — תוכנית היא גשר בין מטרה לפעולה
 
 **על המסך:**
 
@@ -154,7 +154,7 @@ Agent צריך להתמודד עם אותו רעיון.
 
 ---
 
-## שקופית 5 — משימה פשוטה מול משימה מורכבת
+## ‏שקופית 5 — משימה פשוטה מול משימה מורכבת
 
 משימה פשוטה:
 
@@ -172,17 +172,17 @@ Agent צריך להתמודד עם אותו רעיון.
 
 ---
 
-## שקופית 6 — Planning הוא לא בהכרח רשימה
+## ‏שקופית 6 — Planning הוא לא בהכרח רשימה
 
 אפשר לחשוב על תוכנית בכמה רמות.
 
 לפעמים היא רשימה:
 
 ```text
-1. Get logs
-2. Check metrics
-3. Check deployments
-4. Analyze
+1. ‏Get logs
+2. ‏Check metrics
+3. ‏Check deployments
+4. ‏Analyze
 ```
 
 אבל לפעמים היא יותר מופשטת:
@@ -201,9 +201,9 @@ Investigate recent instability
 
 ---
 
-# חלק ג' — Task Decomposition
+# ‏חלק ג' — Task Decomposition
 
-## שקופית 7 — פירוק משימה
+## ‏שקופית 7 — פירוק משימה
 
 ![Task Decomposition](assets/02/02-task-decomposition.png)
 
@@ -215,7 +215,7 @@ Investigate recent instability
 
 ---
 
-## שקופית 8 — למה בכלל לפרק?
+## ‏שקופית 8 — למה בכלל לפרק?
 
 כי משימה גדולה היא בדרך כלל עמומה מדי לביצוע ישיר.
 
@@ -243,7 +243,7 @@ Investigate recent instability
 
 ---
 
-## שקופית 9 — Decomposition בדוגמת DevOps
+## ‏שקופית 9 — Decomposition בדוגמת DevOps
 
 המטרה:
 
@@ -252,13 +252,13 @@ Investigate recent instability
 אפשר לפרק:
 
 ```text
-1. Check when latency increased
-2. Compare with deployments
-3. Check CPU / Memory
-4. Check database latency
-5. Inspect application logs
-6. Correlate findings
-7. Identify most likely cause
+1. ‏Check when latency increased
+2. ‏Compare with deployments
+3. ‏Check CPU / Memory
+4. ‏Check database latency
+5. ‏Inspect application logs
+6. ‏Correlate findings
+7. ‏Identify most likely cause
 ```
 
 אבל שימו לב.
@@ -269,7 +269,7 @@ Investigate recent instability
 
 ---
 
-## שקופית 10 — תוכנית היא Hypothesis
+## ‏שקופית 10 — תוכנית היא Hypothesis
 
 זו נקודה חשובה.
 
@@ -287,9 +287,9 @@ Agent אומר:
 
 ---
 
-# חלק ד' — Open-Loop Planning מול Closed-Loop Planning
+# ‏חלק ד' — Open-Loop Planning מול Closed-Loop Planning
 
-## שקופית 11 — Open Loop
+## ‏שקופית 11 — Open Loop
 
 ![Open vs Closed Loop](assets/02/03-open-vs-closed-loop.png)
 
@@ -317,7 +317,7 @@ Done
 
 ---
 
-## שקופית 12 — Closed Loop
+## ‏שקופית 12 — Closed Loop
 
 עכשיו:
 
@@ -345,7 +345,7 @@ Agent מקבל מידע חדש.
 
 ---
 
-## שקופית 13 — למה Closed Loop מתאים ל-Agents?
+## ‏שקופית 13 — למה Closed Loop מתאים ל-Agents?
 
 כי העולם לא תמיד צפוי.
 
@@ -365,9 +365,9 @@ Tool יכול להחזיר משהו שלא ציפינו.
 
 ---
 
-# חלק ה' — ReAct
+# ‏חלק ה' — ReAct
 
-## שקופית 14 — ReAct
+## ‏שקופית 14 — ReAct
 
 ![ReAct](assets/02/04-react.png)
 
@@ -389,7 +389,7 @@ ReAct הוא רעיון מרכזי להבנת Agentic behavior.
 
 ---
 
-## שקופית 15 — ReAct בדוגמה
+## ‏שקופית 15 — ReAct בדוגמה
 
 משימה:
 
@@ -429,7 +429,7 @@ Connection pool כמעט מלא.
 
 ---
 
-## שקופית 16 — היתרון של ReAct
+## ‏שקופית 16 — היתרון של ReAct
 
 לא צריך להחליט את כל הדרך מראש.
 
@@ -443,7 +443,7 @@ Connection pool כמעט מלא.
 
 ---
 
-## שקופית 17 — החיסרון
+## ‏שקופית 17 — החיסרון
 
 יותר החלטות אומרות:
 
@@ -459,9 +459,9 @@ Connection pool כמעט מלא.
 
 ---
 
-# חלק ו' — Plan-and-Execute
+# ‏חלק ו' — Plan-and-Execute
 
-## שקופית 18 — Plan-and-Execute
+## ‏שקופית 18 — Plan-and-Execute
 
 ![Plan-and-Execute](assets/02/05-plan-and-execute.png)
 
@@ -493,25 +493,25 @@ Executor אומר:
 
 ---
 
-## שקופית 19 — למה להפריד?
+## ‏שקופית 19 — למה להפריד?
 
 כי לפעמים אנחנו רוצים:
 
 - תוכנית ברורה.
 - יכולת לבדוק את התוכנית לפני ביצוע.
-- Execution עקבי יותר.
-- Human approval אחרי Planning.
-- Debugging יותר קל.
+- ‏Execution עקבי יותר.
+- ‏Human approval אחרי Planning.
+- ‏Debugging יותר קל.
 
 למשל:
 
 Agent מציע:
 
 ```text
-1. Inspect deployment
-2. Inspect logs
-3. Compare release
-4. Recommend rollback
+1. ‏Inspect deployment
+2. ‏Inspect logs
+3. ‏Compare release
+4. ‏Recommend rollback
 ```
 
 אדם יכול להגיד:
@@ -522,7 +522,7 @@ Agent מציע:
 
 ---
 
-## שקופית 20 — Planner מול Executor
+## ‏שקופית 20 — Planner מול Executor
 
 **על המסך:**
 
@@ -554,9 +554,9 @@ Execution problem.
 
 ---
 
-# חלק ז' — האם תמיד צריך Planner נפרד?
+# ‏חלק ז' — האם תמיד צריך Planner נפרד?
 
-## שקופית 21 — לא בהכרח
+## ‏שקופית 21 — לא בהכרח
 
 אפשר להשתמש ב-LLM אחד שעושה הכול.
 
@@ -580,7 +580,7 @@ Next decision
 
 ---
 
-## שקופית 22 — למה זה לפעמים עדיף?
+## ‏שקופית 22 — למה זה לפעמים עדיף?
 
 כי זה פשוט יותר.
 
@@ -596,7 +596,7 @@ Next decision
 
 ---
 
-## שקופית 23 — למה לפעמים כן להפריד?
+## ‏שקופית 23 — למה לפעמים כן להפריד?
 
 כשיש לנו צורך בשליטה.
 
@@ -630,9 +630,9 @@ Execute
 
 ---
 
-# חלק ח' — Execution
+# ‏חלק ח' — Execution
 
-## שקופית 24 — Planning בלי Execution לא שווה הרבה
+## ‏שקופית 24 — Planning בלי Execution לא שווה הרבה
 
 אפשר לייצר Plan מדהים.
 
@@ -654,7 +654,7 @@ Execution הוא המקום שבו התוכנית פוגשת את העולם.
 
 ---
 
-## שקופית 25 — Execution Step
+## ‏שקופית 25 — Execution Step
 
 לכל Step אפשר לחשוב על ארבעה חלקים:
 
@@ -688,7 +688,7 @@ Validation:
 
 ---
 
-## שקופית 26 — Tool Success לא אומר Task Success
+## ‏שקופית 26 — Tool Success לא אומר Task Success
 
 זו הבחנה חשובה.
 
@@ -716,21 +716,21 @@ No logs found
 
 ---
 
-# חלק ט' — Validation
+# ‏חלק ט' — Validation
 
-## שקופית 27 — שלושה סוגי הצלחה
+## ‏שקופית 27 — שלושה סוגי הצלחה
 
 ![Three kinds of success](assets/02/10-three-success.png)
 
-### Transport Success
+### ‏Transport Success
 
 הקריאה הצליחה.
 
-### Schema Success
+### ‏Schema Success
 
 קיבלנו מבנה תקין.
 
-### Semantic Success
+### ‏Semantic Success
 
 קיבלנו משהו שבאמת עוזר למשימה.
 
@@ -738,7 +738,7 @@ No logs found
 
 ---
 
-## שקופית 28 — דוגמה
+## ‏שקופית 28 — דוגמה
 
 Tool:
 
@@ -772,9 +772,9 @@ JSON:
 
 ---
 
-# חלק י' — Failure Handling
+# ‏חלק י' — Failure Handling
 
-## שקופית 29 — Agent תמיד ייתקל בכשלונות
+## ‏שקופית 29 — Agent תמיד ייתקל בכשלונות
 
 ![Failure Handling](assets/02/06-failure-handling.png)
 
@@ -797,7 +797,7 @@ Model mistake
 
 ---
 
-## שקופית 30 — Retry
+## ‏שקופית 30 — Retry
 
 התגובה הראשונה לכשל היא לפעמים Retry.
 
@@ -813,7 +813,7 @@ Invalid customer_id
 
 ---
 
-## שקופית 31 — Retry לפי סוג שגיאה
+## ‏שקופית 31 — Retry לפי סוג שגיאה
 
 אפשר לחשוב על:
 
@@ -844,7 +844,7 @@ Dangerous operation
 
 ---
 
-## שקופית 32 — Exponential Backoff
+## ‏שקופית 32 — Exponential Backoff
 
 [הדגמה על לוח או קוד]
 
@@ -879,9 +879,9 @@ retry
 
 ---
 
-# חלק יא' — Max Iterations
+# ‏חלק יא' — Max Iterations
 
-## שקופית 33 — למה צריך Limit?
+## ‏שקופית 33 — למה צריך Limit?
 
 נניח:
 
@@ -913,7 +913,7 @@ MAX_ITERATIONS = 10
 
 ---
 
-## שקופית 34 — Iteration Budget
+## ‏שקופית 34 — Iteration Budget
 
 אני אוהב לחשוב על זה כעל תקציב.
 
@@ -930,9 +930,9 @@ Agent קיבל:
 
 ---
 
-# חלק יב' — Stop Conditions
+# ‏חלק יב' — Stop Conditions
 
-## שקופית 35 — מתי Agent אומר "סיימתי"?
+## ‏שקופית 35 — מתי Agent אומר "סיימתי"?
 
 זה נשמע פשוט.
 
@@ -951,7 +951,7 @@ Confidence threshold
 
 ---
 
-## שקופית 36 — Success Criteria
+## ‏שקופית 36 — Success Criteria
 
 נניח שהמשימה היא:
 
@@ -975,7 +975,7 @@ Agent צריך לדעת מה נחשב הצלחה.
 
 ---
 
-## שקופית 37 — Goal Completion Check
+## ‏שקופית 37 — Goal Completion Check
 
 אפשר להוסיף שלב:
 
@@ -991,17 +991,17 @@ Goal complete?
 
 ה-Evaluate יכול להיות:
 
-- Rule.
-- Validator.
-- Another LLM call.
-- Human.
+- ‏Rule.
+- ‏Validator.
+- ‏Another LLM call.
+- ‏Human.
 - שילוב שלהם.
 
 ---
 
-# חלק יג' — Planning Granularity
+# ‏חלק יג' — Planning Granularity
 
-## שקופית 38 — כמה לפרק?
+## ‏שקופית 38 — כמה לפרק?
 
 זו שאלה מעשית.
 
@@ -1037,7 +1037,7 @@ Task 2.1
 
 ---
 
-## שקופית 39 — כלל אצבע
+## ‏שקופית 39 — כלל אצבע
 
 לא לפרק לפי מספר צעדים יפה.
 
@@ -1052,9 +1052,9 @@ Task 2.1
 
 ---
 
-# חלק יד' — Dependencies בין משימות
+# ‏חלק יד' — Dependencies בין משימות
 
-## שקופית 40 — לא הכול חייב להיות סדרתי
+## ‏שקופית 40 — לא הכול חייב להיות סדרתי
 
 נניח:
 
@@ -1082,7 +1082,7 @@ Analysis
 
 ---
 
-## שקופית 41 — למה זה חשוב?
+## ‏שקופית 41 — למה זה חשוב?
 
 כי Agentic systems יכולים להיות איטיים.
 
@@ -1104,16 +1104,16 @@ C → 4 sec
 
 ---
 
-## שקופית 42 — אבל Parallelization מוסיף מורכבות
+## ‏שקופית 42 — אבל Parallelization מוסיף מורכבות
 
 צריך להתמודד עם:
 
-- Concurrency.
-- Race conditions.
-- Rate limits.
-- Partial failures.
-- Aggregation.
-- Ordering.
+- ‏Concurrency.
+- ‏Race conditions.
+- ‏Rate limits.
+- ‏Partial failures.
+- ‏Aggregation.
+- ‏Ordering.
 
 לכן לא עושים Parallelization רק כי אפשר.
 
@@ -1121,9 +1121,9 @@ C → 4 sec
 
 ---
 
-# חלק טו' — Conditional Execution
+# ‏חלק טו' — Conditional Execution
 
-## שקופית 43 — תוכנית עם Branches
+## ‏שקופית 43 — תוכנית עם Branches
 
 תוכנית לא חייבת להיות קו ישר.
 
@@ -1145,7 +1145,7 @@ approval handling
 
 ---
 
-## שקופית 44 — Agent צריך לבחור Branch
+## ‏שקופית 44 — Agent צריך לבחור Branch
 
 נניח:
 
@@ -1165,9 +1165,9 @@ if severity == "high":
 
 ---
 
-# חלק טז' — Deterministic Code מול LLM Decisions
+# ‏חלק טז' — Deterministic Code מול LLM Decisions
 
-## שקופית 45 — מה כדאי להשאיר בקוד?
+## ‏שקופית 45 — מה כדאי להשאיר בקוד?
 
 כלל שימושי:
 
@@ -1186,7 +1186,7 @@ if severity == "critical":
 
 ---
 
-## שקופית 46 — ומה להשאיר ל-LLM?
+## ‏שקופית 46 — ומה להשאיר ל-LLM?
 
 דברים כמו:
 
@@ -1207,9 +1207,9 @@ if severity == "critical":
 
 ---
 
-# חלק יז' — דוגמה מלאה: Incident Agent
+# ‏חלק יז' — דוגמה מלאה: Incident Agent
 
-## שקופית 47 — הדרישה
+## ‏שקופית 47 — הדרישה
 
 ![Incident Agent](assets/02/09-incident-agent.png)
 
@@ -1229,7 +1229,7 @@ if severity == "critical":
 
 ---
 
-## שקופית 48 — Tools
+## ‏שקופית 48 — Tools
 
 ```text
 get_metrics()
@@ -1248,18 +1248,18 @@ search_incidents()
 
 ---
 
-## שקופית 49 — Initial Plan
+## ‏שקופית 49 — Initial Plan
 
 ה-Agent יכול להתחיל:
 
 ```text
-1. Confirm latency increase
-2. Determine start time
-3. Check recent deployments
-4. Check resource metrics
-5. Check logs
-6. Search known incidents
-7. Correlate findings
+1. ‏Confirm latency increase
+2. ‏Determine start time
+3. ‏Check recent deployments
+4. ‏Check resource metrics
+5. ‏Check logs
+6. ‏Search known incidents
+7. ‏Correlate findings
 ```
 
 זה Plan התחלתי.
@@ -1268,7 +1268,7 @@ search_incidents()
 
 ---
 
-## שקופית 50 — Step 1
+## ‏שקופית 50 — Step 1
 
 Tool:
 
@@ -1291,7 +1291,7 @@ Observation:
 
 ---
 
-## שקופית 51 — Step 2
+## ‏שקופית 51 — Step 2
 
 Agent בודק Deployment History.
 
@@ -1308,7 +1308,7 @@ started 32 minutes ago
 
 ---
 
-## שקופית 52 — Step 3
+## ‏שקופית 52 — Step 3
 
 ה-Agent בודק Logs.
 
@@ -1324,25 +1324,25 @@ database connection timeout
 
 ---
 
-## שקופית 53 — Re-planning
+## ‏שקופית 53 — Re-planning
 
 במקום להמשיך בדיוק לפי התוכנית המקורית, Agent יכול לשנות אותה.
 
 תוכנית חדשה:
 
 ```text
-1. Inspect DB timeout frequency
-2. Compare before/after release
-3. Check connection pool metrics
-4. Search previous incidents
-5. Estimate confidence
+1. ‏Inspect DB timeout frequency
+2. ‏Compare before/after release
+3. ‏Check connection pool metrics
+4. ‏Search previous incidents
+5. ‏Estimate confidence
 ```
 
 זו Re-planning.
 
 ---
 
-## שקופית 54 — מה היה קורה ב-Workflow קבוע?
+## ‏שקופית 54 — מה היה קורה ב-Workflow קבוע?
 
 Workflow קבוע היה יכול לבצע:
 
@@ -1364,9 +1364,9 @@ Agent יכול לבחור לעצור מוקדם.
 
 ---
 
-# חלק יח' — Evidence ו-Hypothesis
+# ‏חלק יח' — Evidence ו-Hypothesis
 
-## שקופית 55 — Agent לא אמור להתאהב בהשערה הראשונה
+## ‏שקופית 55 — Agent לא אמור להתאהב בהשערה הראשונה
 
 נניח שראינו:
 
@@ -1386,7 +1386,7 @@ Latency עלה.
 
 ---
 
-## שקופית 56 — Hypothesis Loop
+## ‏שקופית 56 — Hypothesis Loop
 
 ```text
 Hypothesis
@@ -1406,7 +1406,7 @@ Supports?
 
 ---
 
-## שקופית 57 — Confidence
+## ‏שקופית 57 — Confidence
 
 Confidence לא חייב להיות מספר מדויק.
 
@@ -1422,9 +1422,9 @@ High
 
 ```text
 Evidence:
-- Deployment correlation
-- DB timeout increase
-- Pool saturation
+- ‏Deployment correlation
+- ‏DB timeout increase
+- ‏Pool saturation
 ```
 
 ומעל זה:
@@ -1433,9 +1433,9 @@ Evidence:
 
 ---
 
-# חלק יט' — Re-planning בצורה נכונה
+# ‏חלק יט' — Re-planning בצורה נכונה
 
-## שקופית 58 — מתי לעשות Re-plan?
+## ‏שקופית 58 — מתי לעשות Re-plan?
 
 לא בכל פעולה.
 
@@ -1444,7 +1444,7 @@ Evidence:
 אפשר לבצע Re-plan כאשר:
 
 - התגלתה עובדה חדשה.
-- Tool נכשל.
+- ‏Tool נכשל.
 - התוכנית כבר לא רלוונטית.
 - נמצאה דרך טובה יותר.
 - נוצר Branch חדש.
@@ -1452,7 +1452,7 @@ Evidence:
 
 ---
 
-## שקופית 59 — Local Re-planning
+## ‏שקופית 59 — Local Re-planning
 
 לא חייבים לבנות תוכנית חדשה לכל המשימה.
 
@@ -1468,7 +1468,7 @@ Choose alternative
 
 ---
 
-## שקופית 60 — Global Re-planning
+## ‏שקופית 60 — Global Re-planning
 
 בבעיה גדולה יותר:
 
@@ -1486,35 +1486,35 @@ Generate new plan
 
 ---
 
-# חלק כ' — Planning Errors
+# ‏חלק כ' — Planning Errors
 
-## שקופית 61 — תוכנית לא נכונה
+## ‏שקופית 61 — תוכנית לא נכונה
 
 יש כמה סוגים:
 
-### Missing step
+### ‏Missing step
 
 משהו חשוב לא נכלל.
 
-### Wrong order
+### ‏Wrong order
 
 השלבים קיימים אבל בסדר לא נכון.
 
-### Wrong assumption
+### ‏Wrong assumption
 
 התוכנית מניחה עובדה שאינה נכונה.
 
-### Overplanning
+### ‏Overplanning
 
 יש יותר מדי צעדים.
 
-### Underplanning
+### ‏Underplanning
 
 אין מספיק פירוט.
 
 ---
 
-## שקופית 62 — דוגמה ל-Wrong Assumption
+## ‏שקופית 62 — דוגמה ל-Wrong Assumption
 
 משימה:
 
@@ -1542,9 +1542,9 @@ Build
 
 ---
 
-# חלק כא' — Planning עם Constraints
+# ‏חלק כא' — Planning עם Constraints
 
-## שקופית 63 — מטרה בלי Constraints לא מספיקה
+## ‏שקופית 63 — מטרה בלי Constraints לא מספיקה
 
 אפשר להגיד:
 
@@ -1565,15 +1565,15 @@ Agent צריך להכיר את המסגרת שבתוכה הוא פועל.
 
 ---
 
-## שקופית 64 — Constraint Layer
+## ‏שקופית 64 — Constraint Layer
 
 ![Policy Gate](assets/02/07-policy-gate.png)
 
 ---
 
-# חלק כב' — Planning כמשימה בפני עצמה
+# ‏חלק כב' — Planning כמשימה בפני עצמה
 
-## שקופית 65 — Planner הוא גם Agent
+## ‏שקופית 65 — Planner הוא גם Agent
 
 שימו לב למשהו מעניין.
 
@@ -1597,33 +1597,33 @@ Plan.
 
 ---
 
-## שקופית 66 — Plan Validation
+## ‏שקופית 66 — Plan Validation
 
 אפשר לבדוק:
 
-### Completeness
+### ‏Completeness
 
 האם חסר שלב?
 
-### Validity
+### ‏Validity
 
 האם השלבים בכלל אפשריים?
 
-### Safety
+### ‏Safety
 
 האם קיימת פעולה מסוכנת?
 
-### Dependencies
+### ‏Dependencies
 
 האם הסדר הגיוני?
 
-### Cost
+### ‏Cost
 
 האם התוכנית יקרה מדי?
 
 ---
 
-## שקופית 67 — Plan Review
+## ‏שקופית 67 — Plan Review
 
 לכן ארכיטקטורה מעניינת יכולה להיות:
 
@@ -1647,9 +1647,9 @@ Executor
 
 ---
 
-# חלק כג' — Execution State
+# ‏חלק כג' — Execution State
 
-## שקופית 68 — איך זוכרים איפה נמצאים?
+## ‏שקופית 68 — איך זוכרים איפה נמצאים?
 
 ![Execution State](assets/02/08-execution-state.png)
 
@@ -1675,7 +1675,7 @@ Task 4
 
 ---
 
-## שקופית 69 — דוגמת State
+## ‏שקופית 69 — דוגמת State
 
 ```json
 {
@@ -1699,7 +1699,7 @@ Task 4
 
 ---
 
-## שקופית 70 — למה State חשוב?
+## ‏שקופית 70 — למה State חשוב?
 
 בלי State, קשה מאוד לעשות:
 
@@ -1719,9 +1719,9 @@ State הוא הבסיס שעליו Agent יכול להמשיך לעבוד.
 
 ---
 
-# חלק כד' — Human Approval בתוך Execution
+# ‏חלק כד' — Human Approval בתוך Execution
 
-## שקופית 71 — Approval באמצע תהליך
+## ‏שקופית 71 — Approval באמצע תהליך
 
 תהליך:
 
@@ -1747,9 +1747,9 @@ Execute
 
 ---
 
-# חלק כה' — Idempotency
+# ‏חלק כה' — Idempotency
 
-## שקופית 72 — בעיה מאוד חשובה
+## ‏שקופית 72 — בעיה מאוד חשובה
 
 נניח Agent ביצע:
 
@@ -1769,7 +1769,7 @@ Agent לא יודע אם זה הצליח.
 
 ---
 
-## שקופית 73 — Idempotent Actions
+## ‏שקופית 73 — Idempotent Actions
 
 אידמפוטנטיות אומרת, בפשטות:
 
@@ -1791,13 +1791,13 @@ create_ticket(idempotency_key="abc123")
 
 ---
 
-## שקופית 74 — למה Agent Systems צריכים את זה?
+## ‏שקופית 74 — למה Agent Systems צריכים את זה?
 
 כי Agent עובד בעולם שבו:
 
-- Requests יכולים להיכשל.
-- Responses יכולים להיעלם.
-- Retry קיים.
+- ‏Requests יכולים להיכשל.
+- ‏Responses יכולים להיעלם.
+- ‏Retry קיים.
 - זמן עובר.
 - התהליך יכול להיפסק.
 
@@ -1805,9 +1805,9 @@ create_ticket(idempotency_key="abc123")
 
 ---
 
-# חלק כו' — Timeouts
+# ‏חלק כו' — Timeouts
 
-## שקופית 75 — Agent לא יכול לחכות לנצח
+## ‏שקופית 75 — Agent לא יכול לחכות לנצח
 
 Tool יכול להיתקע.
 
@@ -1827,7 +1827,7 @@ Overall task timeout
 
 ---
 
-## שקופית 76 — Timeout Strategy
+## ‏שקופית 76 — Timeout Strategy
 
 למשל:
 
@@ -1848,17 +1848,17 @@ Daily batch:
 
 ---
 
-# חלק כז' — Cost-Aware Planning
+# ‏חלק כז' — Cost-Aware Planning
 
-## שקופית 77 — Plan צריך לקחת בחשבון Cost
+## ‏שקופית 77 — Plan צריך לקחת בחשבון Cost
 
 נניח שיש שתי אפשרויות.
 
-### Option A
+### ‏Option A
 
 5 Tool Calls פשוטים.
 
-### Option B
+### ‏Option B
 
 20 Tool Calls + מודל גדול + כמה Iterations.
 
@@ -1872,7 +1872,7 @@ Daily batch:
 
 ---
 
-## שקופית 78 — Quality / Cost / Time
+## ‏שקופית 78 — Quality / Cost / Time
 
 [על המסך]
 
@@ -1896,9 +1896,9 @@ Daily batch:
 
 ---
 
-# חלק כח' — Context Planning
+# ‏חלק כח' — Context Planning
 
-## שקופית 79 — גם מידע עולה כסף
+## ‏שקופית 79 — גם מידע עולה כסף
 
 Agent לא צריך לראות את כל העולם בכל צעד.
 
@@ -1920,7 +1920,7 @@ LLM
 
 ---
 
-## שקופית 80 — Tool שמחזיר יותר מדי מידע
+## ‏שקופית 80 — Tool שמחזיר יותר מדי מידע
 
 Tool גרוע:
 
@@ -1945,9 +1945,9 @@ get_logs(
 
 ---
 
-# חלק כט' — Planning מול Prompting
+# ‏חלק כט' — Planning מול Prompting
 
-## שקופית 81 — האם Prompt ארוך = Planning?
+## ‏שקופית 81 — האם Prompt ארוך = Planning?
 
 לא.
 
@@ -1961,7 +1961,7 @@ Planning אמיתי במערכת Agentic כולל אפשרות שהמערכת ת
 
 ---
 
-## שקופית 82 — System Instructions
+## ‏שקופית 82 — System Instructions
 
 אנחנו יכולים להגיד:
 
@@ -1977,9 +1977,9 @@ Planning אמיתי במערכת Agentic כולל אפשרות שהמערכת ת
 
 ---
 
-# חלק ל' — Demo Architecture
+# ‏חלק ל' — Demo Architecture
 
-## שקופית 83 — נבנה מערכת קטנה
+## ‏שקופית 83 — נבנה מערכת קטנה
 
 [הדגמה]
 
@@ -2011,7 +2011,7 @@ Tools
 
 ---
 
-## שקופית 84 — Pseudocode
+## ‏שקופית 84 — Pseudocode
 
 ```python
 goal = user_request
@@ -2037,7 +2037,7 @@ while not done:
 
 ---
 
-## שקופית 85 — מה חסר?
+## ‏שקופית 85 — מה חסר?
 
 אם זה היה Production, היינו צריכים לפחות:
 
@@ -2057,9 +2057,9 @@ Human approval
 
 ---
 
-# חלק לא' — Demo: Plan First
+# ‏חלק לא' — Demo: Plan First
 
-## שקופית 86 — Planning לפני Execution
+## ‏שקופית 86 — Planning לפני Execution
 
 ![Demo: Plan then Execute](assets/02/demo-plan-execute.png)
 
@@ -2082,9 +2082,9 @@ for step in plan:
 
 ---
 
-# חלק לב' — תרגיל
+# ‏חלק לב' — תרגיל
 
-## שקופית 87 — תרגיל: תכננו Agent
+## ‏שקופית 87 — תרגיל: תכננו Agent
 
 [תרגיל]
 
@@ -2104,7 +2104,7 @@ search_previous_failures()
 
 ---
 
-## שקופית 88 — שלב ראשון
+## ‏שקופית 88 — שלב ראשון
 
 בקשו מהקהל לכתוב:
 
@@ -2124,7 +2124,7 @@ Runner.
 
 ---
 
-## שקופית 89 — שלב שני
+## ‏שקופית 89 — שלב שני
 
 שאלו:
 
@@ -2138,7 +2138,7 @@ Agent צריך לבחור.
 
 ---
 
-## שקופית 90 — שלב שלישי
+## ‏שקופית 90 — שלב שלישי
 
 עכשיו שנו את התרחיש.
 
@@ -2162,9 +2162,9 @@ Re-plan.
 
 ---
 
-# חלק לג' — תרגיל מתקדם
+# ‏חלק לג' — תרגיל מתקדם
 
-## שקופית 91 — תרחיש
+## ‏שקופית 91 — תרחיש
 
 Agent מקבל:
 
@@ -2173,10 +2173,10 @@ Agent מקבל:
 הוא יוצר תוכנית:
 
 ```text
-1. Get latest image
-2. Deploy
-3. Check health
-4. Notify team
+1. ‏Get latest image
+2. ‏Deploy
+3. ‏Check health
+4. ‏Notify team
 ```
 
 שאלו:
@@ -2185,7 +2185,7 @@ Agent מקבל:
 
 ---
 
-## שקופית 92 — תשובות
+## ‏שקופית 92 — תשובות
 
 Security scan.
 
@@ -2209,9 +2209,9 @@ Audit.
 
 ---
 
-# חלק לד' — Anti-Patterns
+# ‏חלק לד' — Anti-Patterns
 
-## שקופית 93 — Anti-pattern #1
+## ‏שקופית 93 — Anti-pattern #1
 
 > **Plan Everything Forever**
 
@@ -2225,7 +2225,7 @@ Agent מנסה לתכנן 50 צעדים מראש.
 
 ---
 
-## שקופית 94 — Anti-pattern #2
+## ‏שקופית 94 — Anti-pattern #2
 
 > **Re-plan After Everything**
 
@@ -2243,7 +2243,7 @@ State גדל.
 
 ---
 
-## שקופית 95 — Anti-pattern #3
+## ‏שקופית 95 — Anti-pattern #3
 
 > **LLM Decides Everything**
 
@@ -2259,7 +2259,7 @@ State גדל.
 
 ---
 
-## שקופית 96 — Anti-pattern #4
+## ‏שקופית 96 — Anti-pattern #4
 
 > **No Validation**
 
@@ -2275,7 +2275,7 @@ Agent קיבל תשובה מהכלי.
 
 ---
 
-## שקופית 97 — Anti-pattern #5
+## ‏שקופית 97 — Anti-pattern #5
 
 > **No Stop Condition**
 
@@ -2289,9 +2289,9 @@ Agent שמקבל:
 
 ---
 
-# חלק לה' — תכנון Production Agent
+# ‏חלק לה' — תכנון Production Agent
 
-## שקופית 98 — Checklist
+## ‏שקופית 98 — Checklist
 
 לפני Production, שאלו:
 
@@ -2316,9 +2316,9 @@ Cost limit?
 
 ---
 
-# חלק מו' — Connection למפגשים הבאים
+# ‏חלק מו' — Connection למפגשים הבאים
 
-## שקופית 99 — עכשיו אנחנו צריכים Tools
+## ‏שקופית 99 — עכשיו אנחנו צריכים Tools
 
 במפגש הזה ראינו איך Agent מתכנן.
 
@@ -2342,7 +2342,7 @@ Cost limit?
 
 ---
 
-## שקופית 100 — ומה אחר כך?
+## ‏שקופית 100 — ומה אחר כך?
 
 אחרי שנבין Tools, נוכל לבנות Agent הרבה יותר אמיתי.
 
@@ -2366,9 +2366,9 @@ Re-planning
 
 ---
 
-# חלק מז' — סיכום המפגש
+# ‏חלק מז' — סיכום המפגש
 
-## שקופית 101 — מה צריך לזכור?
+## ‏שקופית 101 — מה צריך לזכור?
 
 Planning הוא הדרך שבה Agent מתרגם מטרה לפעולות.
 
@@ -2384,7 +2384,7 @@ Validation מוודא שלא רק ביצענו פעולה — אלא שהתקב�
 
 ---
 
-## שקופית 102 — המשפט המרכזי
+## ‏שקופית 102 — המשפט המרכזי
 
 על המסך:
 
@@ -2412,7 +2412,7 @@ Validation מוודא שלא רק ביצענו פעולה — אלא שהתקב�
 
 ---
 
-# נספח א' — דיאגרמות נוספות
+# ‏נספח א' — דיאגרמות נוספות
 
 קבצים מוכנים תחת `assets/02/`:
 
@@ -2433,7 +2433,7 @@ Validation מוודא שלא רק ביצענו פעולה — אלא שהתקב�
 חידוש דיאגרמות: `python3 scripts/gen_diagrams.py`
 
 
-## Diagram 1 — Agent Loop
+## ‏Diagram 1 — Agent Loop
 
 ```text
              ┌───────────┐
@@ -2467,7 +2467,7 @@ Validation מוודא שלא רק ביצענו פעולה — אלא שהתקב�
 
 ---
 
-## Diagram 2 — Planner / Executor
+## ‏Diagram 2 — Planner / Executor
 
 ```text
                  Goal
@@ -2495,7 +2495,7 @@ Validation מוודא שלא רק ביצענו פעולה — אלא שהתקב�
 
 ---
 
-## Diagram 3 — Parallel Execution
+## ‏Diagram 3 — Parallel Execution
 
 ```text
               Goal
@@ -2515,9 +2515,9 @@ Validation מוודא שלא רק ביצענו פעולה — אלא שהתקב�
 
 ---
 
-# נספח ב' — Prompts לתמונות
+# ‏נספח ב' — Prompts לתמונות
 
-## תמונה 1 — Agent Planning
+## ‏תמונה 1 — Agent Planning
 
 ```text
 Modern professional AI agent planning illustration.
@@ -2529,7 +2529,7 @@ illustration, dark neutral background, blue and violet accents,
 16:9, no logos, no readable tiny text.
 ```
 
-## תמונה 2 — Re-planning
+## ‏תמונה 2 — Re-planning
 
 ```text
 Educational visualization of an AI agent changing its execution plan
@@ -2539,7 +2539,7 @@ Clear arrows, clean technical architecture style, professional AI
 engineering presentation, 16:9, dark modern background, minimal.
 ```
 
-## תמונה 3 — Failure Handling
+## ‏תמונה 3 — Failure Handling
 
 ```text
 AI agent execution flow encountering a tool failure and intelligently
@@ -2548,7 +2548,7 @@ Professional software engineering diagram, modern enterprise AI style,
 clear branching paths, minimal visual clutter, 16:9.
 ```
 
-## תמונה 4 — Policy Gate
+## ‏תמונה 4 — Policy Gate
 
 ```text
 AI agent creates a candidate plan that passes through a strict
@@ -2558,7 +2558,7 @@ paths. Professional cloud and AI architecture illustration,
 modern enterprise design, 16:9, minimal text.
 ```
 
-## תמונה 5 — DevOps Investigation Agent
+## ‏תמונה 5 — DevOps Investigation Agent
 
 ```text
 AI agent investigating a production incident.
@@ -2569,7 +2569,7 @@ Professional DevOps and AI engineering presentation, modern dark
 technology aesthetic, 16:9, no logos.
 ```
 
-## תמונה 6 — State
+## ‏תמונה 6 — State
 
 ```text
 Technical visualization of an AI agent execution state.
@@ -2581,9 +2581,9 @@ dark neutral background, 16:9.
 
 ---
 
-# נספח ג' — קטעי B-ROLL
+# ‏נספח ג' — קטעי B-ROLL
 
-## B-ROLL 1
+## ‏B-ROLL 1
 
 מסך עם Workflow ליניארי.
 
@@ -2595,7 +2595,7 @@ dark neutral background, 16:9.
 
 ---
 
-## B-ROLL 2
+## ‏B-ROLL 2
 
 טרמינל עם סדרת פקודות:
 
@@ -2611,7 +2611,7 @@ kubectl logs
 
 ---
 
-## B-ROLL 3
+## ‏B-ROLL 3
 
 דיאגרמת Plan.
 
@@ -2623,137 +2623,137 @@ kubectl logs
 
 ---
 
-# נספח ד' — משפטי מעבר להקלטה
+# ‏נספח ד' — משפטי מעבר להקלטה
 
-### מעבר 1
+### ‏מעבר 1
 
 "עכשיו כשהבנו מה זה Planning, בואו נראה למה תכנון מראש לא תמיד מספיק."
 
-### מעבר 2
+### ‏מעבר 2
 
 "וזה בדיוק המקום שבו נכנסת הלולאה."
 
-### מעבר 3
+### ‏מעבר 3
 
 "עכשיו נעבור מהתכנון עצמו אל הביצוע."
 
-### מעבר 4
+### ‏מעבר 4
 
 "ופה יש הבדל קטן אבל חשוב בין פעולה שהצליחה לבין משימה שהצליחה."
 
-### מעבר 5
+### ‏מעבר 5
 
 "עד עכשיו דיברנו על Agent שמתקדם. עכשיו בואו נדבר על Agent שנתקע."
 
-### מעבר 6
+### ‏מעבר 6
 
 "וכש-Agent נתקע, אנחנו לא רוצים רק Retry. אנחנו רוצים להבין למה הוא נכשל."
 
-### מעבר 7
+### ‏מעבר 7
 
 "עכשיו נוסיף מגבלות. כי Agent חכם בלי גבולות יכול להיות מערכת בעייתית מאוד."
 
-### מעבר 8
+### ‏מעבר 8
 
 "עכשיו ניקח את כל הרעיונות האלה ונחבר אותם לדוגמה אחת."
 
 ---
 
-# נספח ה' — שאלות לקהל
+# ‏נספח ה' — שאלות לקהל
 
-## שאלה 1
+## ‏שאלה 1
 
 מתי הייתם מעדיפים Workflow קבוע על Agent?
 
-## שאלה 2
+## ‏שאלה 2
 
 מתי כדאי לתכנן הכול מראש?
 
-## שאלה 3
+## ‏שאלה 3
 
 מתי עדיף Re-planning?
 
-## שאלה 4
+## ‏שאלה 4
 
 האם Tool שקיבל HTTP 200 בהכרח הצליח?
 
-## שאלה 5
+## ‏שאלה 5
 
 למה צריך Max Iterations?
 
-## שאלה 6
+## ‏שאלה 6
 
 מה ההבדל בין Tool Failure לבין Task Failure?
 
-## שאלה 7
+## ‏שאלה 7
 
 איזה דברים עדיף להשאיר בקוד ולא למסור להחלטת LLM?
 
 ---
 
-# נספח ו' — מילון מונחים
+# ‏נספח ו' — מילון מונחים
 
-## Planning
+## ‏Planning
 
 יצירת דרך אפשרית להגיע ממטרה לתוצאה.
 
-## Task Decomposition
+## ‏Task Decomposition
 
 פירוק משימה גדולה לתת-משימות שאפשר לבצע.
 
-## Execution
+## ‏Execution
 
 ביצוע בפועל של השלבים והתפעול מול Tools ומערכות חיצוניות.
 
-## Re-planning
+## ‏Re-planning
 
 שינוי התוכנית בעקבות מידע חדש, כשל או שינוי במצב.
 
-## ReAct
+## ‏ReAct
 
 דפוס המבוסס על Reason → Act → Observe וחזרה להחלטה.
 
-## Plan-and-Execute
+## ‏Plan-and-Execute
 
 הפרדה בין יצירת תוכנית לבין ביצוע התוכנית.
 
-## Validation
+## ‏Validation
 
 בדיקה שהתוצאה שקיבלנו אכן תקינה ורלוונטית.
 
-## Stop Condition
+## ‏Stop Condition
 
 תנאי שמגדיר מתי המשימה הסתיימה, נכשלה או צריכה להיעצר.
 
-## Iteration Limit
+## ‏Iteration Limit
 
 מגבלה על מספר מחזורי Agent.
 
-## Idempotency
+## ‏Idempotency
 
 יכולת לבצע בקשה חוזרת בלי ליצור תוצאה כפולה או בלתי רצויה, כאשר אותה בקשה כבר טופלה.
 
-## Constraint
+## ‏Constraint
 
 גבול שהמערכת צריכה לעבוד בתוכו.
 
-## Policy
+## ‏Policy
 
 כלל שמגדיר מה מותר ומה אסור.
 
-## Execution State
+## ‏Execution State
 
 המידע על מצב המשימה בזמן שהיא מתבצעת.
 
-## Parallel Execution
+## ‏Parallel Execution
 
 הרצת מספר פעולות בלתי תלויות במקביל.
 
 ---
 
-# נספח ז' — שאלת Design Review לסיום
+# ‏נספח ז' — שאלת Design Review לסיום
 
-## תרחיש
+## ‏תרחיש
 
 יש Agent שמקבל:
 
@@ -2770,7 +2770,7 @@ deploy_version()
 delete_resource()
 ```
 
-### שאלות
+### ‏שאלות
 
 מה מותר לו לעשות אוטומטית?
 
@@ -2788,9 +2788,9 @@ delete_resource()
 
 ---
 
-# שקופית סיום
+# ‏שקופית סיום
 
-## שקופית 103 — Planning הוא לא לנחש את העתיד
+## ‏שקופית 103 — Planning הוא לא לנחש את העתיד
 
 על המסך:
 

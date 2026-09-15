@@ -1,14 +1,14 @@
-<div dir="rtl">
+<div dir="rtl" lang="he">
 
-# מפגש 2 — מצגת סטודנטים
-## Agent Architecture: Planning ו-Execution
+# ‏מפגש 2 — מצגת סטודנטים
+## ‏Agent Architecture: Planning ו-Execution
 
 > **לסטודנטים** · מצגת קצרה לליווי השיעור  
 > **משך מפגש משוער:** ~2.5–3 שעות
 
 ---
 
-## 1. כותרת
+## ‏1. כותרת
 
 **Agent Architecture**  
 Planning ו-Execution
@@ -17,14 +17,14 @@ Planning ו-Execution
 
 ---
 
-## 2. איפה עצרנו?
+## ‏2. איפה עצרנו?
 
-- Goal · Decide · Act · Observe
+- ‏Goal · Decide · Act · Observe
 - היום: איך הופכים מטרה לתוכנית — ואיך מבצעים אותה עם בקרה
 
 ---
 
-## 3. השאלה של היום
+## ‏3. השאלה של היום
 
 > אם אני נותן ל-Agent מטרה גדולה — איך הוא יודע מה לעשות קודם?
 
@@ -33,7 +33,7 @@ Planning ו-Execution
 
 ---
 
-## 4. Planning = גשר
+## ‏4. Planning = גשר
 
 ```text
 GOAL → PLAN → ACTIONS → RESULT
@@ -44,7 +44,7 @@ GOAL → PLAN → ACTIONS → RESULT
 
 ---
 
-## 5. Task Decomposition
+## ‏5. Task Decomposition
 
 ![Task Decomposition](assets/02/02-task-decomposition.png)
 
@@ -53,7 +53,7 @@ GOAL → PLAN → ACTIONS → RESULT
 
 ---
 
-## 6. Open Loop מול Closed Loop
+## ‏6. Open Loop מול Closed Loop
 
 ![Open vs Closed Loop](assets/02/03-open-vs-closed-loop.png)
 
@@ -64,7 +64,7 @@ GOAL → PLAN → ACTIONS → RESULT
 
 ---
 
-## 7. ReAct
+## ‏7. ReAct
 
 ![ReAct](assets/02/04-react.png)
 
@@ -74,7 +74,7 @@ GOAL → PLAN → ACTIONS → RESULT
 
 ---
 
-## 8. Plan-and-Execute
+## ‏8. Plan-and-Execute
 
 ![Plan-and-Execute](assets/02/05-plan-and-execute.png)
 
@@ -86,28 +86,28 @@ GOAL → PLAN → ACTIONS → RESULT
 
 ---
 
-## 9. Execution: הצלחה אינה דבר אחד
+## ‏9. Execution: הצלחה אינה דבר אחד
 
 ![Three kinds of success](assets/02/10-three-success.png)
 
-1. Tool success — הכלי עבד  
-2. Step success — קיבלנו מידע שימושי  
-3. Goal success — המטרה באמת הושגה  
+1. ‏Tool success — הכלי עבד  
+2. ‏Step success — קיבלנו מידע שימושי  
+3. ‏Goal success — המטרה באמת הושגה  
 
 ---
 
-## 10. Failure Handling
+## ‏10. Failure Handling
 
 ![Failure Handling](assets/02/06-failure-handling.png)
 
-- Retry (לפי סוג שגיאה) + Backoff  
+- ‏Retry (לפי סוג שגיאה) + Backoff  
 - כלי חלופי  
-- Local / Global re-plan  
-- Escalation לאדם  
+- ‏Local / Global re-plan  
+- ‏Escalation לאדם  
 
 ---
 
-## 11. Max Iterations ו-Stop Conditions
+## ‏11. Max Iterations ו-Stop Conditions
 
 - בלי תקרה — לולאות יקרות / אינסופיות
 - הגדירו: הצלחה, כישלון, ״לא יודע״, חוסר תקציב
@@ -116,15 +116,15 @@ GOAL → PLAN → ACTIONS → RESULT
 
 ---
 
-## 12. Dependencies ו-Branches
+## ‏12. Dependencies ו-Branches
 
 - לא הכול חייב להיות סדרתי
-- Parallelization עוזר — ומוסיף מורכבות
-- Conditional execution: Agent בוחר ענף לפי Observation
+- ‏Parallelization עוזר — ומוסיף מורכבות
+- ‏Conditional execution: Agent בוחר ענף לפי Observation
 
 ---
 
-## 13. קוד דטרמיניסטי מול החלטות LLM
+## ‏13. קוד דטרמיניסטי מול החלטות LLM
 
 | בקוד | במודל |
 |---|---|
@@ -133,16 +133,16 @@ GOAL → PLAN → ACTIONS → RESULT
 
 ---
 
-## 14. דוגמה מלאה: Incident Agent
+## ‏14. דוגמה מלאה: Incident Agent
 
 ![Incident Agent](assets/02/09-incident-agent.png)
 
 זרימה טיפוסית:
-1. Status / Symptoms  
-2. Metrics / Logs  
-3. Deploy history  
-4. Hypothesis + Evidence  
-5. Re-plan אם ההשערה נשברה  
+1. ‏Status / Symptoms  
+2. ‏Metrics / Logs  
+3. ‏Deploy history  
+4. ‏Hypothesis + Evidence  
+5. ‏Re-plan אם ההשערה נשברה  
 
 ![Metrics](assets/screens/metrics-dashboard.png)
 
@@ -150,7 +150,7 @@ GOAL → PLAN → ACTIONS → RESULT
 
 ---
 
-## 15. הדגמה — Plan then Execute
+## ‏15. הדגמה — Plan then Execute
 
 ![CI console](assets/screens/ci-console.png)
 
@@ -160,7 +160,7 @@ GOAL → PLAN → ACTIONS → RESULT
 
 ---
 
-## 16. Evidence, Hypothesis, Confidence
+## ‏16. Evidence, Hypothesis, Confidence
 
 - אל תתאהבו בהשערה הראשונה
 - אספו Evidence
@@ -168,7 +168,7 @@ GOAL → PLAN → ACTIONS → RESULT
 
 ---
 
-## 17. Constraints ו-Policy Gate
+## ‏17. Constraints ו-Policy Gate
 
 ![Policy Gate](assets/02/07-policy-gate.png)
 
@@ -179,7 +179,7 @@ GOAL → PLAN → ACTIONS → RESULT
 
 ---
 
-## 18. Execution State
+## ‏18. Execution State
 
 ![Execution State](assets/02/08-execution-state.png)
 
@@ -187,25 +187,25 @@ GOAL → PLAN → ACTIONS → RESULT
 
 ---
 
-## 19. Idempotency, Timeouts, Cost
+## ‏19. Idempotency, Timeouts, Cost
 
 - פעולות שחוזרות לא צריכות לשבור את העולם
-- Timeouts לכל כלי ולמשימה כולה
-- Planning צריך להיות **Cost-aware** (איכות / זמן / כסף)
+- ‏Timeouts לכל כלי ולמשימה כולה
+- ‏Planning צריך להיות **Cost-aware** (איכות / זמן / כסף)
 
 ---
 
-## 20. Anti-Patterns (קצרים)
+## ‏20. Anti-Patterns (קצרים)
 
 1. לתכנן 40 צעדים כשאפשר 5  
 2. להניח ש-Tool success = Goal success  
 3. בלי Max iterations  
 4. בלי HITL על פעולות מסוכנות  
-5. Prompt ארוך במקום State + Plan אמיתיים  
+5. ‏Prompt ארוך במקום State + Plan אמיתיים  
 
 ---
 
-## 21. תרגיל 1 — תכננו Agent ל-CI
+## ‏21. תרגיל 1 — תכננו Agent ל-CI
 
 **הנחיה (20–25 דק׳):**
 
@@ -227,7 +227,7 @@ Tools זמינים:
 
 ---
 
-## 22. תרגיל 2 — תרחיש עם Re-plan
+## ‏22. תרגיל 2 — תרחיש עם Re-plan
 
 **הנחיה (15–20 דק׳):**
 
@@ -242,7 +242,7 @@ Observation חדש: Runner תקין, אבל dependency חסר ב-`requirements.t
 
 ---
 
-## 23. תרגיל 3 (אופציונלי) — Checklist ל-Production
+## ‏23. תרגיל 3 (אופציונלי) — Checklist ל-Production
 
 סמנו ✓/✗ עבור Agent שאתם מכירים / מתכננים:
 
@@ -258,7 +258,7 @@ Observation חדש: Runner תקין, אבל dependency חסר ב-`requirements.t
 
 ---
 
-## 24. Design Review מהיר
+## ‏24. Design Review מהיר
 
 שאלה אחת לסיכום:
 
@@ -266,17 +266,17 @@ Observation חדש: Runner תקין, אבל dependency חסר ב-`requirements.t
 
 ---
 
-## 25. סיכום
+## ‏25. סיכום
 
-- Planning הוא Hypothesis, לא תסריט קשיח  
-- Closed loop + Validation + Stop conditions  
-- Tool success ≠ Goal success  
-- State, Policy ו-Budget הם חלק מהארכיטקטורה  
+- ‏Planning הוא Hypothesis, לא תסריט קשיח  
+- ‏Closed loop + Validation + Stop conditions  
+- ‏Tool success ≠ Goal success  
+- ‏State, Policy ו-Budget הם חלק מהארכיטקטורה  
 - במפגש הבא: **Tool Use ו-Function Calling**
 
 ---
 
-## 26. הכנה למפגש 3
+## ‏26. הכנה למפגש 3
 
 - הביאו רשימה של 3 Tools שהייתם נותנים ל-Agent בעבודה שלכם  
 - לכל Tool: קלט, פלט, האם מסוכן

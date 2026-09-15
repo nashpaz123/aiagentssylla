@@ -1,0 +1,21 @@
+/* Hebrew RTL preview for course markdown */
+.vscode-body, body {
+  direction: rtl;
+  text-align: right;
+}
+.vscode-body ul, .vscode-body ol,
+body ul, body ol {
+  direction: rtl;
+  text-align: right;
+}
+.vscode-body blockquote,
+body blockquote {
+  border-right: 4px solid #ccc;
+  border-left: none;
+  padding-right: 1em;
+  padding-left: 0;
+}
+.vscode-body table th, .vscode-body table td,
+body table th, body table td {
+  text-align: right;
+}
