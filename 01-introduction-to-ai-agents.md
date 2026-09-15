@@ -398,12 +398,11 @@ Agent הוא לא GPT.
 
 לא הכול באמת Agent.
 
-נשתמש בספקטרום מעשי — מ־Level 0 עד Level 6 — בסגנון המסגרת של Glen Cathey
-([The AI Agent Spectrum](https://www.linkedin.com/pulse/ai-agent-spectrum-definitive-guide-whats-real-rebranded-glen-cathey-sgtae/)).
+נשתמש בספקטרום מעשי — מ־Level 0 עד Level 6.
 
 ## שקופית 13 — AI Agent Spectrum
 
-![Autonomy Spectrum](assets/01/06-autonomy-spectrum.png)
+![AI Agent Spectrum L0–L6](assets/01/06-agent-spectrum-l0-l6.png)
 
 **על המסך:**
 
@@ -2251,7 +2250,8 @@ Agent לא משנה Production.
 | `03-agent-loop.png` | Agent Loop |
 | `04-llm-tools.png` | LLM + Tools |
 | `05-workflow-vs-agent.png` | Workflow מול Agent |
-| `06-autonomy-spectrum.png` | ספקטרום אוטונומיה |
+| `06-agent-spectrum-l0-l6.png` | ספקטרום אוטונומיה L0–L6 |
+| `06-autonomy-spectrum.png` | עותק תואם (legacy) |
 | `07-human-approval.png` | HITL / Approval |
 | `08-guardrails.png` | Guardrails |
 | `09-agent-trace.png` | Trace |
@@ -2285,7 +2285,7 @@ LLM במרכז עם Database, API, Web, Email ו־Kubernetes.
 Workflow קווי לעומת Agent עם החלטות ולולאות.
 
 ### ויזואל 6 — Autonomy Spectrum (L0–L6)
-מ־Rules Automation עד Autonomous Ecosystems; קו agency בין L3 ל־L4 (מסגרת בסגנון Cathey).
+מ־Rules Automation עד Autonomous Ecosystems; קו agency בין L3 ל־L4.
 
 ### ויזואל 7 — Human Approval
 Agent שעוצר לפני פעולה רגישה.

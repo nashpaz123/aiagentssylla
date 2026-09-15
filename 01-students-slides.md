@@ -61,9 +61,7 @@ User → Prompt → LLM → Response
 
 ## שקופית 13 — AI Agent Spectrum
 
-![Autonomy Spectrum](assets/01/06-autonomy-spectrum.png)
-
-מסגרת מעשית (Glen Cathey — [The AI Agent Spectrum](https://www.linkedin.com/pulse/ai-agent-spectrum-definitive-guide-whats-real-rebranded-glen-cathey-sgtae/)):
+![AI Agent Spectrum L0–L6](assets/01/06-agent-spectrum-l0-l6.png)
 
 | Level | שם | בקצרה |
 |---|---|---|

@@ -231,7 +231,7 @@ def v05_workflow_vs_agent():
 
 
 def v06_autonomy():
-    """Cathey-style L0–L6 spectrum."""
+    """L0–L6 AI Agent Spectrum diagram."""
     img, d = new_img()
     title = font(40, True)
     body = font(18)
@@ -257,7 +257,8 @@ def v06_autonomy():
     x_line = 60 + 4 * (box_w + gap) - gap // 2
     d.line([(x_line, y0 - 10), (x_line, y1 + 10)], fill=GREEN, width=4)
     center_text(d, (W / 2, 860), "scripts (L0–L3) | genuine agency (L4+) — higher is not always better", font(22), MUTED)
-    center_text(d, (W / 2, 920), "Adapted from Glen Cathey — The AI Agent Spectrum", font(18), MUTED)
+    center_text(d, (W / 2, 920), "Higher autonomy is not always better", font(18), MUTED)
+    save(img, "01/06-agent-spectrum-l0-l6.png")
     save(img, "01/06-autonomy-spectrum.png")
 
 
