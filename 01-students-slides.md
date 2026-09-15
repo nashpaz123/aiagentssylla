@@ -9,6 +9,8 @@
 
 ---
 
+# ‏חלק א׳ — פתיחה: למה בכלל מדברים על Agents?
+
 ## ‏1 — כותרת
 
 **AI Agents ומערכות אוטונומיות**  
@@ -45,6 +47,8 @@
 
 ---
 
+# ‏חלק ב׳ — לפני Agents: מה LLM לבד באמת עושה?
+
 ## ‏5 — מה LLM לבד עושה?
 
 ```text
@@ -68,6 +72,8 @@ User → Prompt → LLM → Response
 
 ---
 
+# ‏חלק ג׳ — Workflow מול Agent
+
 ## ‏8 — Workflow מול Agent
 
 ![Workflow vs Agent](assets/01/05-workflow-vs-agent.png)
@@ -77,6 +83,8 @@ User → Prompt → LLM → Response
 - אם אפשר לתאר מראש כל צעד — זה לא Agent.
 
 ---
+
+# ‏חלק ד׳ — רמות אוטונומיה (AI Agent Spectrum)
 
 ## ‏9 — AI Agent Spectrum
 
@@ -141,6 +149,8 @@ Agent אמיתי צריך את כולם:
 
 ---
 
+# ‏חלק ה׳ — ארבעת מרכיבי ה-Agent
+
 ## ‏15 — ארבעת המרכיבים
 
 1. ‏**Goal**  
@@ -150,6 +160,8 @@ Agent אמיתי צריך את כולם:
 
 ---
 
+# ‏חלק ו׳ — ה-Agent Loop
+
 ## ‏16 — Agent Loop
 
 ![Agent Loop](assets/01/03-agent-loop.png)
@@ -157,6 +169,8 @@ Agent אמיתי צריך את כולם:
 Goal → Decide → Act → Observe → Continue / Stop
 
 ---
+
+# ‏חלק ז׳ — Planning
 
 ## ‏17 — Planning
 
@@ -169,6 +183,8 @@ Goal → Decide → Act → Observe → Continue / Stop
 ![Open vs Closed Loop](assets/02/03-open-vs-closed-loop.png)
 
 ---
+
+# ‏חלק ח׳ — ReAct בצורה פשוטה
 
 ## ‏18 — ReAct
 
@@ -183,6 +199,8 @@ Goal → Decide → Act → Observe → Continue / Stop
 
 ---
 
+# ‏חלק ט׳ — מתי Agent הוא רעיון גרוע?
+
 ## ‏19 — מתי Agent הוא רעיון גרוע?
 
 - תהליך דטרמיניסטי → Workflow  
@@ -192,6 +210,8 @@ Goal → Decide → Act → Observe → Continue / Stop
 > אם אפשר לכתוב את כל התהליך בבירור — נסו קודם Workflow.
 
 ---
+
+# ‏חלק י׳ — דוגמת DevOps
 
 ## ‏20 — דוגמה DevOps
 
@@ -209,6 +229,8 @@ Goal → Decide → Act → Observe → Continue / Stop
 
 ---
 
+# ‏חלק יא׳ — Tool Design
+
 ## ‏22 — Tool Design
 
 - ‏Tool = שם + תיאור + הרשאות  
@@ -218,6 +240,8 @@ Goal → Decide → Act → Observe → Continue / Stop
 ![Tool Permissions](assets/01/14-tool-permissions.png)
 
 ---
+
+# ‏חלק יב׳ — Human in the Loop
 
 ## ‏23 — Human in the Loop
 
@@ -229,6 +253,8 @@ Auto · Approval · Blocked
 
 ---
 
+# ‏חלק יג׳ — Failure Modes ו־Guardrails
+
 ## ‏24 — Guardrails וכישלונות
 
 ![Guardrails](assets/01/08-guardrails.png)
@@ -237,6 +263,8 @@ Auto · Approval · Blocked
 
 ---
 
+# ‏חלק יד׳–טו׳ / כג׳ — Context, Memory ו־Observability
+
 ## ‏25 — Context, Memory, Trace
 
 ![Context](assets/01/13-context.png)
@@ -244,6 +272,8 @@ Auto · Approval · Blocked
 ![Agent Trace](assets/01/09-agent-trace.png)
 
 ---
+
+# ‏חלק כב׳ — דוגמה עסקית מלאה
 
 ## ‏26 — Support Agent · מסכים
 
@@ -261,6 +291,8 @@ Auto · Approval · Blocked
 
 ---
 
+# ‏חלק יז׳–יט׳ — ארכיטקטורה, Multi-Agent, Cost/Security
+
 ## ‏28 — ארכיטקטורה ו־Multi-Agent
 
 ![Agent Architecture](assets/01/16-agent-architecture.png)
@@ -271,6 +303,8 @@ Auto · Approval · Blocked
 - יותר אוטונומיה → יותר עלות, latency, Security  
 
 ---
+
+# ‏חלק כ׳ — תרגיל ראשון
 
 ## ‏29 — תרגיל 1: Agent או Workflow?
 
@@ -285,6 +319,8 @@ Auto · Approval · Blocked
 **הגשה:** טבלה 5 שורות.
 
 ---
+
+# ‏חלק כא׳ / כה׳ — תכנון Agent ותרגיל מסכם
 
 ## ‏30 — תרגיל 2: תכנון Agent
 
@@ -302,6 +338,8 @@ Auto · Approval · Blocked
 
 ---
 
+# ‏חלק כו׳–כז׳ — בדיקת הבנה וסיכום
+
 ## ‏31 — בדיקת הבנה + סיכום
 
 1. במה Agent שונה מצ׳אטבוט?  
@@ -313,6 +351,8 @@ Auto · Approval · Blocked
 **לזכור:** Goal → Decide → Act → Observe · הספקטרום · Tools + Guardrails  
 
 ---
+
+# ‏חלק כח׳ — מעבר למפגש הבא
 
 ## ‏32 — למפגש הבא
 
