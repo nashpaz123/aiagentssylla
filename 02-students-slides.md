@@ -1,3 +1,5 @@
+<div dir="rtl">
+
 # מפגש 2 — מצגת סטודנטים
 ## Agent Architecture: Planning ו-Execution
 
@@ -278,3 +280,5 @@ Observation חדש: Runner תקין, אבל dependency חסר ב-`requirements.t
 
 - הביאו רשימה של 3 Tools שהייתם נותנים ל-Agent בעבודה שלכם  
 - לכל Tool: קלט, פלט, האם מסוכן
+
+</div>

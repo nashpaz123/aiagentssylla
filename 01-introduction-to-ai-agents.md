@@ -1,3 +1,5 @@
+<div dir="rtl">
+
 # מפגש 1 — מבוא לסוכני AI ו-Agentic Workflows
 ## קובץ מרצה (תסריט מלא להקלטה)
 
@@ -2540,3 +2542,5 @@ Not allowed.
 > ״Observation הוא מה שמאפשר ל־Agent לדעת מה קרה ולהחליט מה לעשות אחר כך.״
 
 > ״Agent הוא Software System, לא קסם.״
+
+</div>

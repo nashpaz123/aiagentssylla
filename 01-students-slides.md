@@ -1,3 +1,5 @@
+<div dir="rtl">
+
 # מפגש 1 — מצגת סטודנטים
 ## מבוא לסוכני AI ו-Agentic Workflows
 
@@ -317,3 +319,5 @@ Auto · Approval · Blocked
 **Planning ו-Execution** לעומק.
 
 הכנה: הביאו דוגמה אחת מהעבודה שמתאימה ל-Agent (בלי לפתור עדיין).
+
+</div>

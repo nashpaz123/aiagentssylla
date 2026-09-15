@@ -1,3 +1,5 @@
+<div dir="rtl">
+
 # AI Agents — חומרי הקלטה (סילבוס)
 
 > תיקייה: `/stuff/prj/aiagentssylla/`  
@@ -31,3 +33,5 @@ python3 scripts/gen_mock_uis.py   # צילומי מסך להדגמות (CRM/K8s/
 ## מפגשים הבאים (מהסילבוס)
 
 3 Tool Use · 4 LangGraph · 5 CrewAI/Multi-Agent · 6 Memory · 7 Business · 8 Cursor · 9 Testing · 10 Capstone
+
+</div>

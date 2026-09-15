@@ -1,3 +1,5 @@
+<div dir="rtl">
+
 # מפגש 2 — Agent Architecture: Planning ו-Execution
 ## קובץ מרצה (תסריט מלא להקלטה)
 
@@ -2807,3 +2809,5 @@ delete_resource()
 שם ה-Agent מפסיק רק לחשוב על פעולות.
 
 והמערכת מאפשרת לו לבצע אותן בפועל.
+
+</div>
