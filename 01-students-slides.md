@@ -1,12 +1,12 @@
 # מפגש 1 — מצגת סטודנטים
 ## מבוא לסוכני AI ו-Agentic Workflows
 
-> **לסטודנטים** · מצגת קצרה לליווי השיעור  
+> **לסטודנטים** · מצגת קצרה לליווי השיעור (מספור שקופיות תואם לקובץ המרצה)  
 > **משך מפגש משוער:** ~2.5–3 שעות
 
 ---
 
-## 1. כותרת
+## שקופית 1 — כותרת
 
 **AI Agents ומערכות אוטונומיות**  
 מפגש 1: מהו Agent ומה הופך Workflow ל-Agentic
@@ -15,26 +15,19 @@
 
 ---
 
-## 2. מה השאלה של היום?
+## שקופית 2–3 — למה Agents?
 
-- ChatGPT עונה לנו.
-- Agent **עובד בשבילנו** לקראת מטרה.
-- ההבדל: תשובה אחת מול תהליך עם החלטות.
-
----
-
-## 3. תשובה מול משימה
+- ChatGPT עונה · Agent **עובד בשבילנו** לקראת מטרה  
+- תשובה אחת מול תהליך עם החלטות  
 
 | מערכת קלאסית | Agent |
 |---|---|
 | ״ענה לי״ | ״בצע עבורי״ |
-| פעולה בודדת | סדרת פעולות |
 | קלט → פלט | מטרה → תהליך |
-| המשתמש מנהל | המערכת מנהלת חלק |
 
 ---
 
-## 4. ארבע מילים לזכור
+## שקופית 4 — ארבע מילים לזכור
 
 **Goal → Decide → Act → Observe**
 
@@ -42,160 +35,193 @@
 
 ---
 
-## 5. Chat מול Agent
-
-![Chat vs Agent](assets/01/02-chat-vs-agent.png)
-
-- משמאל: שיחה.
-- מימין: לולאה עם כלים ותצפיות.
-
----
-
-## 6. מה LLM לבד באמת עושה?
+## שקופיות 5–8 — LLM, Tools, Chat
 
 ```text
 User → Prompt → LLM → Response
 ```
 
-- LLM מייצר פלט (טקסט, קוד, JSON…).
-- כדי **לפעול בעולם** צריך Tools.
+- LLM מייצר פלט · כדי לפעול בעולם צריך **Tools**
 
 ![LLM + Tools](assets/01/04-llm-tools.png)
 
+![Chat vs Agent](assets/01/02-chat-vs-agent.png)
+
 ---
 
-## 7. Workflow מול Agent
+## שקופיות 9–12 — Workflow מול Agent
 
 ![Workflow vs Agent](assets/01/05-workflow-vs-agent.png)
 
-- **Workflow:** נתיב קבוע מראש.
-- **Agent:** בוחר צעדים לפי מה שקורה בדרך.
-
-**כלל אצבע:** אם יודעים בדיוק את כל הצעדים מראש — אולי בכלל לא צריך Agent.
+- **Workflow:** נתיב קבוע מראש  
+- **Agent:** בוחר צעדים לפי מה שקורה בדרך  
+- אם אפשר לתאר מראש כל צעד — זה לא Agent  
 
 ---
 
-## 8. Agentic הוא ספקטרום
+## שקופית 13 — AI Agent Spectrum
 
 ![Autonomy Spectrum](assets/01/06-autonomy-spectrum.png)
 
-- יותר אוטונומיה ≠ תמיד יותר טוב.
-- יותר אוטונומיה = יותר צורך ב־Guardrails ו־Observability.
+מסגרת מעשית (Glen Cathey — [The AI Agent Spectrum](https://www.linkedin.com/pulse/ai-agent-spectrum-definitive-guide-whats-real-rebranded-glen-cathey-sgtae/)):
+
+| Level | שם | בקצרה |
+|---|---|---|
+| L0 | Rules Automation | בלי AI |
+| L1 | AI-Assisted Tools | אדם נוהג |
+| L2 | Custom Assistants | ריאקטיבי |
+| L3 | AI Workflows | תסריט + AI |
+| L4 | Task Agents | agency מוגבלת |
+| L5 | Collaborative Agents | צוות Agents |
+| L6 | Autonomous Ecosystems | חזית |
+
+**הקו החשוב:** בין L3 ל־L4 — תסריטים מול agency אמיתית.
 
 ---
 
-## 9. ארבעת מרכיבי ה-Agent
+## שקופיות 14–15 — למה זה חשוב + 5 מאפיינים
 
-1. **Goal** — לאן מנסים להגיע  
-2. **Decision** — מה לעשות עכשיו  
-3. **Action** — קריאה לכלי / פעולה  
-4. **Observation** — מה חזר, ומה זה אומר
+- יש הרבה **agent washing** (שם Agent בלי יכולת)  
+- השאלה: *איזו רמה התהליך באמת דורש?*  
 
----
-
-## 10. Planning בקצרה
-
-- מטרה גדולה → פירוק למשימות (Task Decomposition)
-- תוכנית יכולה להיות **שגויה**
-- אז עושים **Re-planning** לפי Observation
+Agent אמיתי צריך את כולם:
+1. Goal-orientation  
+2. Autonomous planning  
+3. Tool use & action  
+4. Self-evaluation & adaptation  
+5. Meaningful autonomy  
 
 ---
 
-## 11. ReAct (בצורה פשוטה)
+## שקופיות 16–19 — L0 → L3
 
-**Reason → Act → Observe** (חוזרים)
-
-- המודל חושב, בוחר כלי, רואה תוצאה, מחליט שוב.
-
----
-
-## 12. מתי Agent הוא רעיון גרוע?
-
-- תהליך דטרמיניסטי וקבוע
-- אין צורך בהחלטות באמצע
-- עלות / סיכון גבוהים בלי בקרה
+- **L0** — if/then, jobs, סקריפטים  
+- **L1** — feature בתוך מוצר (הצעות, סיכום)  
+- **L2** — Custom GPT / Gem / Project (יועץ, לא מבצע)  
+- **L3** — Workflow עם AI בנקודות · כאן רוב ה־washing  
 
 ---
 
-## 13. דוגמה: DevOps Agent
+## שקופיות 20–23 — L4 → L6 + הקו
 
-מטרה לדוגמה:  
-״בדוק למה ה־API לא יציב ותן המלצה.״
+- **L3→L4:** אם מטרה חדשה — נכשל (Workflow) או מתכנן (Agent)?  
+- **L4 Task Agent** — מתכנן, כלים, מתקן כיוון, בגבולות  
+- **L5** — כמה Agents + Orchestrator  
+- **L6** — אקוסיסטם תמיד־פעיל (חזית)  
+
+---
+
+## שקופיות 24–25 — שאלות + Takeaway
+
+שאלו: מטרה או תסריט? מי קובע צעדים? מה קורה בכישלון? מה לבד מול HITL? מה הכי גרוע שיכול לקרות?
+
+- לא הכול צריך L4+ · הרבה ערך ב־L1–L3  
+- L4+ דורש Policy, Trace, Guardrails  
+
+---
+
+## שקופיות 26–29 — ארבעת המרכיבים
+
+1. **Goal**  
+2. **Decision**  
+3. **Action**  
+4. **Observation**  
+
+---
+
+## שקופיות 30–32 — Agent Loop
+
+![Agent Loop](assets/01/03-agent-loop.png)
+
+Goal → Decide → Act → Observe → Continue / Stop
+
+---
+
+## שקופיות 33–38 — Planning
+
+![Task Decomposition](assets/02/02-task-decomposition.png)
+
+- מתי צריך תוכנית / מתי לא  
+- Decomposition  
+- תוכנית = **Hypothesis**  
+- Re-planning (Local / Global)  
+
+![Open vs Closed Loop](assets/02/03-open-vs-closed-loop.png)
+
+---
+
+## שקופיות 39–43 — ReAct
+
+![ReAct](assets/02/04-react.png)
+
+**Reason → Act → Observe** (חוזר)
+
+| ReAct | Plan-and-Execute |
+|---|---|
+| צעד־צעד גמיש | תוכנית ואז ביצוע |
+| עלול להתפזר | עלול להיתקע על תוכנית שגויה |
+
+---
+
+## שקופיות 44–49 — מתי Agent הוא רעיון גרוע?
+
+- תהליך דטרמיניסטי → Workflow  
+- משימה פתוחה + כלים + אי־ודאות → Agent (L4)  
+- העדפה: **היברידי** (Workflow בשוליים הבטוחים + Agent בכיסי אי־ודאות)  
+
+> אם אפשר לכתוב את כל התהליך בבירור — נסו קודם Workflow.
+
+---
+
+## שקופיות 50–52 — דוגמה DevOps
+
+מטרה: ״בדוק למה ה־API לא יציב ותן המלצה.״
 
 ![Kubernetes](assets/screens/k8s-pods-logs.png)
 
 ![Metrics](assets/screens/metrics-dashboard.png)
 
----
-
-## 14. הדגמה — Agent Loop על Kubernetes
-
 ![Agent Workbench DevOps](assets/screens/agent-workbench-devops.png)
 
-שימו לב לרצף: מחשבה → כלי → תצפית → מחשבה → תשובה.
-
 ---
 
-## 15. Tool Design — נקודות מפתח
+## שקופיות 53–56 — Tool Design
 
-- Tool = API עם **שם + תיאור + הרשאות**
-- תיאור טוב משפיע על בחירת הכלי
-- Tool רחב מדי → בחירות גרועות / סיכון
+- Tool = שם + תיאור + הרשאות  
+- תיאור משפיע על בחירה  
+- Tool רחב מדי = סיכון  
 
 ![Tool Permissions](assets/01/14-tool-permissions.png)
 
 ---
 
-## 16. Human in the Loop
+## שקופיות 57–59 — Human in the Loop
 
 ![Human Approval](assets/01/07-human-approval.png)
 
 ![Approval dialog](assets/screens/approval-dialog.png)
 
-שלוש רמות נפוצות:
-- **Auto** — קריאה בטוחה
-- **Approval** — כתיבה / שינוי / כסף
-- **Blocked** — פעולות מסוכנות
+Auto · Approval · Blocked
 
 ---
 
-## 17. Guardrails וכישלונות
+## שקופיות 60–63 — Guardrails, Context, Memory
 
 ![Guardrails](assets/01/08-guardrails.png)
 
 ![Failure Loop](assets/01/15-failure-loop.png)
 
-- Retry / כלי חלופי / Escalation
-- Stop conditions ו־Max iterations
-
----
-
-## 18. Context, Memory, Trace
-
 ![Context](assets/01/13-context.png)
 
 ![Agent Trace](assets/01/09-agent-trace.png)
 
-- Context הוא משאב מוגבל ויקר.
-- Trace עוזר להבין **מה Agent עשה ולמה**.
-
 ---
 
-## 19. ארכיטקטורה בגובה העיניים
-
-![Agent Architecture](assets/01/16-agent-architecture.png)
-
-**Agent הוא Software System — לא קסם.**
-
----
-
-## 20. Support Agent — הדגמה
+## שקופיות 67–73 — הדגמה Support
 
 ![Email](assets/screens/email-inbound.png)
 
 ![Tickets](assets/screens/ticketing-queue.png)
-
-![Knowledge](assets/screens/knowledge-search.png)
 
 ![CRM](assets/screens/crm-customer.png)
 
@@ -203,72 +229,61 @@ User → Prompt → LLM → Response
 
 ---
 
-## 21. Multi-Agent (טעימה)
+## שקופיות 74–84 — Architecture, Multi-Agent, Cost/Security
+
+![Agent Architecture](assets/01/16-agent-architecture.png)
 
 ![Multi-Agent](assets/01/12-multi-agent.png)
 
-נעמיק במפגש ייעודי בהמשך הקורס.
+- Agent הוא Software System  
+- יותר אוטונומיה → יותר עלות, latency, צורך ב־Security  
 
 ---
 
-## 22. תרגיל 1 — Agent או Workflow?
+## שקופית 85–86 — תרגיל 1: Agent או Workflow?
 
-**הנחיה (10–15 דק׳):**
+**הנחיה (10–15 דק׳):** לכל תרחיש — **Agent / Workflow / לא בטוח** + נימוק אחד. ציינו גם **רמת Spectrum משוערת (L0–L6)**.
 
-לכל תרחיש כתבו: **Agent / Workflow / לא בטוח** + משפט נימוק אחד.
-
-1. סיכום יומי של 50 מיילים לאותו פורמט קבוע  
+1. סיכום יומי של 50 מיילים לאותו פורמט  
 2. חקירת תקלה בפרודקשן שלא חוזרת על עצמה  
 3. שליחת חשבונית אחרי אישור אדם  
-4. מענה ללקוח עם חיפוש ב־CRM וב־Knowledge Base  
-5. העתקת קבצים מתיקייה A ל־B כל לילה
+4. מענה ללקוח עם CRM + Knowledge Base  
+5. העתקת קבצים A→B כל לילה  
 
-**מה להגיש:** טבלה קצרה (5 שורות). אפשר בזוגות.
+**הגשה:** טבלה 5 שורות.
 
 ---
 
-## 23. תרגיל 2 — תכנון Agent ראשון
+## שקופיות 87–96 — תרגיל 2: תכנון Agent
 
-**הנחיה (20–25 דק׳):**
+**הנחיה (20–25 דק׳):** Nova Retail / ticket #8831 או משימה שלכם.
 
-בחרו משימה מהדוגמאות של השיעור (Nova Retail / ticket #8831) או מהעולם שלכם.
-
-מלאו:
-
-| שדה | מה לכתוב |
+| שדה | תוכן |
 |---|---|
-| Goal | משפט מטרה אחד |
-| Tools | 3–6 כלים (שם + מה מחזירים) |
-| Decisions | 2–3 החלטות שה-Agent עושה |
-| HITL | איפה אדם חייב לאשר |
-| Stop | מתי עוצרים / נכשלים יפה |
-| Risks | סיכון אחד מרכזי |
-
-**מה להגיש:** חצי עמוד עד עמוד. לא קוד.
+| Goal | משפט אחד |
+| Spectrum level | L? ולמה |
+| Tools | 3–6 |
+| Decisions | 2–3 |
+| HITL | איפה אישור |
+| Stop | מתי עוצרים |
+| Risks | סיכון אחד |
 
 ---
 
-## 24. בדיקת הבנה (שאלות מהירות)
+## שקופיות 97–100 — בדיקה + סיכום
 
 1. במה Agent שונה מצ׳אטבוט?  
-2. מה זה Observation ולמה זה קריטי?  
-3. מתי עדיף Workflow?  
-4. מה Guardrail אחד שחובה כמעט תמיד?  
-5. למה Trace חשוב בפרודקשן?
+2. מה הקו בין L3 ל־L4?  
+3. מה Observation ולמה קריטי?  
+4. מתי עדיף Workflow?  
+5. Guardrail אחד שחובה כמעט תמיד?  
+
+**לזכור:** Goal → Decide → Act → Observe · הספקטרום · Tools + Guardrails  
 
 ---
 
-## 25. סיכום
+## שקופית 101 — למפגש הבא
 
-- Goal → Decide → Act → Observe  
-- LLM הוא רכיב בתוך Agent  
-- Tools נותנים כוח; Guardrails מגדירים גבולות  
-- יותר אוטונומיה דורשת יותר בקרה  
-- במפגש הבא: **Planning ו-Execution** לעומק
+**Planning ו-Execution** לעומק.
 
----
-
-## 26. לקריאה / הכנה למפגש 2
-
-- חזרו על ארבע המילים ועל ההבדל Workflow/Agent  
-- הביאו דוגמה אחת מהעבודה שמתאימה ל-Agent (בלי לפתור עדיין)
+הכנה: הביאו דוגמה אחת מהעבודה שמתאימה ל-Agent (בלי לפתור עדיין).

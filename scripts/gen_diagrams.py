@@ -231,26 +231,33 @@ def v05_workflow_vs_agent():
 
 
 def v06_autonomy():
+    """Cathey-style L0–L6 spectrum."""
     img, d = new_img()
-    title = font(44, True)
-    body = font(22)
-    center_text(d, (W / 2, 55), "Autonomy Spectrum", title)
+    title = font(40, True)
+    body = font(18)
+    center_text(d, (W / 2, 45), "AI Agent Spectrum (L0–L6)", title)
     levels = [
-        ("L0", "Deterministic\ncode", LINE),
-        ("L1", "LLM\nassist", MUTED),
-        ("L2", "Tool\nchoice", ACCENT),
-        ("L3", "Multi-step\nagent", ACCENT2),
-        ("L4", "Autonomous\n+ HITL", GREEN),
-        ("L5", "Multi-\nagent", ORANGE),
+        ("L0", "Rules\nAutomation", LINE),
+        ("L1", "AI-Assisted\nTools", MUTED),
+        ("L2", "Custom\nAssistants", ACCENT),
+        ("L3", "AI\nWorkflows", ORANGE),
+        ("L4", "Task\nAgents", GREEN),
+        ("L5", "Multi-\nAgent", ACCENT2),
+        ("L6", "Agent\nEcosystems", RED),
     ]
+    n = len(levels)
+    gap = 16
+    box_w = (W - 120 - gap * (n - 1)) // n
+    y0, y1 = 160, 780
     for i, (lvl, desc, color) in enumerate(levels):
-        x = 80 + i * 300
-        rounded(d, (x, 280, x + 260, 720), CARD, outline=color, radius=20)
-        center_text(d, (x + 130, 360), lvl, font(40, True), color)
-        multiline_center(d, (x + 130, 520), desc.split("\n"), body)
-        if i < len(levels) - 1:
-            arrow(d, (x + 260, 500), (x + 300, 500), MUTED, 3)
-    center_text(d, (W / 2, 860), "More autonomy → more need for guardrails & observability", font(26), MUTED)
+        x = 60 + i * (box_w + gap)
+        rounded(d, (x, y0, x + box_w, y1), CARD, outline=color, radius=16)
+        center_text(d, (x + box_w / 2, y0 + 80), lvl, font(32, True), color)
+        multiline_center(d, (x + box_w / 2, 420), desc.split("\n"), body)
+    x_line = 60 + 4 * (box_w + gap) - gap // 2
+    d.line([(x_line, y0 - 10), (x_line, y1 + 10)], fill=GREEN, width=4)
+    center_text(d, (W / 2, 860), "scripts (L0–L3) | genuine agency (L4+) — higher is not always better", font(22), MUTED)
+    center_text(d, (W / 2, 920), "Adapted from Glen Cathey — The AI Agent Spectrum", font(18), MUTED)
     save(img, "01/06-autonomy-spectrum.png")
 
 
