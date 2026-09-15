@@ -1,0 +1,4 @@
+{
+  "markdown.styles": ["assets/rtl.css"],
+  "markdown.preview.breaks": true
+}

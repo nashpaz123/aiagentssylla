@@ -72,8 +72,8 @@ User → Prompt → LLM → Response
 
 ![Workflow vs Agent](assets/01/05-workflow-vs-agent.png)
 
-- **Workflow:** נתיב קבוע מראש.
-- **Agent:** בוחר צעדים לפי מה שקורה בדרך.
+- ‏**Workflow:** נתיב קבוע מראש.
+- ‏**Agent:** בוחר צעדים לפי מה שקורה בדרך.
 - אם אפשר לתאר מראש כל צעד — זה לא Agent.
 
 ---
@@ -116,19 +116,19 @@ Agent אמיתי צריך את כולם:
 
 ## ‏12 — L0 עד L3
 
-- **L0** — if/then, jobs, סקריפטים  
-- **L1** — feature בתוך מוצר  
-- **L2** — Custom GPT / Gem / Project (יועץ)  
-- **L3** — Workflow עם AI בנקודות · כאן רוב ה־washing  
+- ‏**L0** — if/then, jobs, סקריפטים  
+- ‏**L1** — feature בתוך מוצר  
+- ‏**L2** — Custom GPT / Gem / Project (יועץ)  
+- ‏**L3** — Workflow עם AI בנקודות · כאן רוב ה־washing  
 
 ---
 
 ## ‏13 — L4 עד L6
 
-- **L3→L4:** מטרה חדשה — נכשל (Workflow) או מתכנן (Agent)?  
-- **L4** — Task Agent: מתכנן, כלים, מתקן כיוון, בגבולות  
-- **L5** — כמה Agents + Orchestrator  
-- **L6** — אקוסיסטם תמיד־פעיל (חזית)  
+- ‏**L3→L4:** מטרה חדשה — נכשל (Workflow) או מתכנן (Agent)?  
+- ‏**L4** — Task Agent: מתכנן, כלים, מתקן כיוון, בגבולות  
+- ‏**L5** — כמה Agents + Orchestrator  
+- ‏**L6** — אקוסיסטם תמיד־פעיל (חזית)  
 
 ---
 
@@ -143,10 +143,10 @@ Agent אמיתי צריך את כולם:
 
 ## ‏15 — ארבעת המרכיבים
 
-1. **Goal**  
-2. **Decision**  
-3. **Action**  
-4. **Observation**  
+1. ‏**Goal**  
+2. ‏**Decision**  
+3. ‏**Action**  
+4. ‏**Observation**  
 
 ---
 

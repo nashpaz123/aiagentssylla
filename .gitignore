@@ -8,7 +8,7 @@ venv/
 .DS_Store
 *.swp
 .idea/
-.vscode/
+# .vscode/  # keep markdown RTL preview settings
 
 # Local secrets (none expected)
 .env

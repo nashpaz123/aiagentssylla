@@ -474,11 +474,11 @@ L4 Task Agent  →  L5 Multi-Agent  →  L6 Agent Ecosystems
 
 לפי המסגרת הזו, Agent אמיתי צריך את **כולם**:
 
-1. **Goal-orientation** — רודף מטרה, לא רק תסריט  
-2. **Autonomous planning** — מחליט בעצמו על הגישה  
-3. **Tool use & action** — פועל בעולם (APIs, מערכות)  
-4. **Self-evaluation & adaptation** — מתקן כשלא עבד  
-5. **Meaningful autonomy** — מחליט בתוך גבולות, בלי אישור על כל צעד
+1. ‏**Goal-orientation** — רודף מטרה, לא רק תסריט  
+2. ‏**Autonomous planning** — מחליט בעצמו על הגישה  
+3. ‏**Tool use & action** — פועל בעולם (APIs, מערכות)  
+4. ‏**Self-evaluation & adaptation** — מתקן כשלא עבד  
+5. ‏**Meaningful autonomy** — מחליט בתוך גבולות, בלי אישור על כל צעד
 
 מבחן פשוט:
 

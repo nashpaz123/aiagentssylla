@@ -68,7 +68,7 @@ GOAL → PLAN → ACTIONS → RESULT
 
 ![ReAct](assets/02/04-react.png)
 
-- **Thought → Action → Observation** (חוזר)
+- ‏**Thought → Action → Observation** (חוזר)
 - יתרון: גמישות
 - חיסרון: יכול להיות יקר / מתפזר בלי תקציב איטרציות
 
@@ -78,8 +78,8 @@ GOAL → PLAN → ACTIONS → RESULT
 
 ![Plan-and-Execute](assets/02/05-plan-and-execute.png)
 
-- **Planner** בונה תוכנית
-- **Executor** מבצע צעדים
+- ‏**Planner** בונה תוכנית
+- ‏**Executor** מבצע צעדים
 - משוב → Re-plan כשצריך
 
 לא תמיד חייבים Planner נפרד — תלוי במורכבות.
