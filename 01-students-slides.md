@@ -1,5 +1,9 @@
 <div dir="rtl" lang="he">
 
+<p align="center">
+  <img src="assets/sprint-tech-academy-logo.png" alt="SPRINT Tech Academy" width="420" />
+</p>
+
 # ‏מפגש 1 — מצגת סטודנטים
 ## ‏מבוא לסוכני AI ו-Agentic Workflows
 
@@ -12,6 +16,10 @@
 # ‏חלק א׳ — פתיחה: למה בכלל מדברים על Agents?
 
 ## ‏1 — כותרת
+
+<p align="center">
+  <img src="assets/sprint-tech-academy-logo.png" alt="SPRINT Tech Academy" width="360" />
+</p>
 
 **AI Agents ומערכות אוטונומיות**  
 מפגש 1: מהו Agent ומה הופך Workflow ל-Agentic

@@ -1,5 +1,9 @@
 <div dir="rtl" lang="he">
 
+<p align="center">
+  <img src="assets/sprint-tech-academy-logo.png" alt="SPRINT Tech Academy" width="420" />
+</p>
+
 # ‏מפגש 1 — מבוא לסוכני AI ו-Agentic Workflows
 ## ‏קובץ מרצה (תסריט מלא להקלטה)
 
