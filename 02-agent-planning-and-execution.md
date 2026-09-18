@@ -7,165 +7,144 @@
 # ‏מפגש 2 — Agent Architecture: Planning ו-Execution
 ## ‏קובץ מרצה (תסריט מלא להקלטה)
 
-> **משך מיועד:** כ־2.5–3 שעות תוכן מוקלט + עצירות, הדגמות, תרגילים ושאלות  
-> **מיקום בקורס:** מפגש 2  
-> **מטרת המפגש:** להבין איך Agent הופך מטרה לתוכנית עבודה, איך הוא מבצע, איך מגיבים לכישלונות, מתי מתכננים מחדש, ואיך בונים Execution Loop שאפשר לשלוט ולדבג.  
+> **משך מיועד:** ~2.5–3 שעות (הוראה + Lab חי ~20 דק׳ + תרגילים ~50 דק׳)  
 > **מצגת סטודנטים:** [`02-students-slides.md`](02-students-slides.md)  
+> **Lab:** [`labs/02-aws-agent-loop/`](labs/02-aws-agent-loop/)  
 > **נכסים:** `assets/02/` · `assets/screens/`
 
-> **הערת הקלטה:** צילומי המסך להדגמות ב־`assets/screens/`.  
-> יצירה מחדש: `python3 scripts/gen_mock_uis.py` · דיאגרמות: `python3 scripts/gen_diagrams.py`
+> **הערת הקלטה:** לא מפרטים שוב את מפגש 1. מספור המרצה = מספור הסטודנטים (1…46).  
+> Lab AWS: read-only, עלות סנטים. יצירת דיאגרמות: `python3 scripts/gen_diagrams.py`
 
 ---
 
 # ‏הנחיות למרצה
 
-בהקלטה: **מקריאים מכאן** ומציגים במקביל את [`02-students-slides.md`](02-students-slides.md).
+מקריאים מכאן ומציגים את מצגת הסטודנטים במקביל.
 
-הסימון **`[סטודנטים · N]`** = עברו ל־N במצגת הסטודנטים.  
-**מספור המרצה = מספור הסטודנטים** (1…33). אין סעיפי תוכן באמצע בלי מספר סטודנטים תואם.
-
-המסמך בנוי כמו מצגת־תסריט. הטקסט שמתחת לכותרות מיועד להקראה, עם פסקאות קצרות לנשימה.
-
-- **[סטודנטים · N]** — מספר N במצגת הסטודנטים (גללו לשם לפני ההקראה).
-- **[מצלמה]** — הצעה לצילום/מעבר זווית.
-- **[תמונה]** — דיאגרמה או מסך על מצגת הסטודנטים.
-- **[הדגמה]** — מעבר למסך / קונסול.
-- **[שאלה]** — שאלה לקהל.
-- **[עצירה]** — נשימה / הדגשה.
-- **[תרגיל]** — פעילות עם שעון.
+- **`[סטודנטים · N]`** — גללו למספר N אצל הסטודנטים לפני ההקראה.
+- **`[Lab חי]`** — עברו למסוף / Claude Code לפי `labs/02-aws-agent-loop/`.
+- **`[מעבר]` / `[שאלה]` / `[תרגיל]` / `[עצירה]` / `[מצלמה]`** — סימוני הקלטה.
+- כל בלוק קוד אצל המרצה מופיע גם אצל הסטודנטים באותו מספר.
 
 ---
 
-# ‏חלק א׳ — פתיחה וחיבור למפגש הקודם
+# ‏חלק א׳ — פתיחה
 
 ## ‏1 — כותרת
 
 [סטודנטים · 1]
 
-**על המסך:** כותרת + לוגו + דיאגרמת Goal → Plan → Actions.
+**על המסך (מצגת סטודנטים):**
 
-![Planning & Execution](assets/02/01-goal-plan-actions.png)
+<p align="center">
+  <img src="assets/sprint-tech-academy-logo.png" alt="SPRINT Tech Academy" width="360" />
+</p>
 
-[מצלמה: פריים בינוני, חיוך קצר.]
+**Agent Architecture**  
+Planning ו-Execution
 
-ברוכים הבאים למפגש השני.
+![Goal → Plan → Actions](assets/02/01-goal-plan-actions.png)
 
-במפגש הקודם בנינו שפה משותפת: מהו Agent, במה הוא שונה מצ׳אט או מ-Workflow, ומה הספקטרום של אוטונומיה.
+**להקראה:**
 
-היום אנחנו יורדים קומה אחת למטה בארכיטקטורה.
+[מצלמה: פתיחה חמה.]
 
-השאלה היא לא רק "האם זה Agent".
+ברוכים הבאים למפגש 2.
 
-השאלה היא: **איך הוא מתכנן, ואיך הוא מבצע בלי לאבד שליטה.**
+היום אנחנו לא חוזרים על ההגדרות ממפגש 1.
 
-[עצירה]
+אנחנו יורדים לתוך המנוע: איך Agent מתכנן, איך הוא מבצע, ואיך לא לאבד שליטה.
+
+יהיה גם Lab חי עם Claude Code ו-AWS — קריאה בלבד, עלות של סנטים.
 
 ---
 
-## ‏2 — איפה עצרנו?
+## ‏2 — מה היום (בלי חזרה על מפגש 1)
 
 [סטודנטים · 2]
 
-[מצלמה: פריים בינוני.]
+**על המסך (מצגת סטודנטים):**
 
-במפגש הקודם דיברנו על ארבע מילים:
+| נבנה היום | לא נפרט שוב |
+|---|---|
+| Planning / Decomposition | מהו Agent מול Chat |
+| Open/Closed · ReAct · Plan-and-Execute | Spectrum L0–L6 |
+| Validation · Failure · Budget · State | HITL ברמת מבוא |
+| Lab חי: Claude Code + AWS (read-only) | |
 
-Goal.
+**להקראה:**
 
-Decide.
+שימו לב לטבלה על המסך.
 
-Act.
+משמאל — מה שבונים היום.
 
-Observe.
+מימין — מה שלא נפרט שוב.
 
-ראינו ש-Agent לא חייב לבצע מראש רשימה קשיחה של צעדים.
-
-הוא יכול לקבל מטרה, להחליט, לבצע, לראות מה קרה — ואז להחליט שוב.
-
-דיברנו גם על Spectrum: הרבה מוצרים נקראים Agent בלי agency אמיתית.
-
-והדגשנו Tools ו-Guardrails.
-
-היום אנחנו לוקחים את הלולאה הזו ומכניסים לתוכה שני מושגים מרכזיים:
-
-**Planning** — איך נולדת דרך עבודה.
-
-ו־**Execution** — איך הדרך פוגשת את העולם האמיתי, עם כישלונות, מדיניות ומצב.
-
-[עצירה]
+אם משהו ממפגש 1 לא יושב לכם — תעלו שאלה קצרה — אבל ההקלטה מתקדמת קדימה.
 
 ---
 
-## ‏3 — השאלה של היום
+## ‏3 — שאלת המפגש + תוצרים
 
 [סטודנטים · 3]
 
-על המסך:
+**על המסך (מצגת סטודנטים):**
 
-> אם אני נותן ל-Agent מטרה גדולה — איך הוא יודע מה לעשות קודם?
+> מטרה גדולה → איך בוחרים צעד ראשון, ומתי משנים תוכנית?
 
-זו השאלה שתלווה אותנו כל המפגש.
+בסוף המפגש תדעו:
+1. לפרק מטרה ל-Hypothesis Plan  
+2. להבדיל Tool / Step / Goal success  
+3. לתכנן Failure + Stop + Budget  
+4. להריץ לולאה חיה ולזהות Re-plan
 
-אפשר מיד לתת תשובה פשוטה: Planning.
+**להקראה:**
 
-אבל Planning הוא הרבה יותר מ"תרשום לי רשימה של משימות".
+השאלה שתלווה אותנו:
 
-צריך להבין:
+מטרה גדולה — איך בוחרים צעד ראשון, ומתי משנים תוכנית?
 
-מתי מתכננים?
-
-כמה מתכננים?
-
-האם מתכננים הכול מראש?
-
-מה עושים כשהתוכנית נשברת?
-
-ומה קורה כשהתוכנית עצמה היא חלק מהבעיה?
-
-[שאלה לקהל]
-
-חשבו על משימה מהעבודה שלכם שהיא גדולה מדי לביצוע בפקודה אחת.
-
-מה הצעד הראשון שהייתם עושים בעצמכם?
+ארבעה תוצרים בסוף המפגש על המסך.
 
 [עצירה]
 
 ---
 
-# ‏חלק ב׳ — מה זה Planning?
+# ‏חלק ב׳ — Planning לעומק
 
 ## ‏4 — Planning = גשר
 
 [סטודנטים · 4]
 
-**על המסך:**
+**על המסך (מצגת סטודנטים):**
+
+**הגדרה:** Planning — דרך אפשרית ממטרה לתוצאה (השערה, לא חוזה).
 
 ```text
 GOAL → PLAN → ACTIONS → RESULT
 ```
 
-כשאדם אומר "תארגן לי חופשה" — זו מטרה.
+דוגמה אנושית (קצר):
+מטרה: *״חופשה ברומא באוקטובר עד ₪6,000.״*  
+תוכנית: תאריכים → טיסות → מלון → אטרקציות → Buffer לביטולים.
 
-זו לא תוכנית.
+**להקראה:**
 
-כדי לבצע אותה צריך לפרק: תאריכים, יעד, טיסות, מלון, תקציב.
+Planning הוא גשר בין מטרה לפעולות.
 
-ואולי לשנות את התוכנית אם משהו לא מסתדר.
+הדוגמה האנושית חשובה: "חופשה ברומא" היא מטרה.
 
-Agent צריך להתמודד עם אותו רעיון.
+רשימת בדיקות היא תוכנית.
 
-מטרה אומרת לאן רוצים להגיע.
-
-תוכנית אומרת איך מנסים להגיע לשם עכשיו.
+אותו דבר אצל Agent — רק עם Tools במקום אתרים וכרטיסים.
 
 [עצירה]
 
-הנקודה החשובה: מטרה ≠ תוכנית.
+תנו דוגמה נוספת מהעולם שלכם בקצרה: מטרה עסקית מול רשימת צעדים.
 
-אם נותנים ל-Agent רק מטרה בלי מסגרת — הוא עלול לבחור מסלול יקר, מסוכן או לא רלוונטי.
+אם נותנים ל-Agent רק את המטרה בלי מסגרת — הוא עלול לבחור מסלול יקר או מסוכן.
 
-Planning הוא הגשר.
+Planning הוא גם מקום לשים Constraints מוקדם — גם אם נרחיב עליהם בהמשך.
 
 ---
 
@@ -173,49 +152,35 @@ Planning הוא הגשר.
 
 [סטודנטים · 5]
 
-משימה פשוטה:
+**על המסך (מצגת סטודנטים):**
 
-> "בדוק אם שרת מסוים זמין."
+| פשוטה | מורכבת |
+|---|---|
+| Ping לשרת | חקירת אי־יציבות מאז Release |
+| כמעט בלי Planning | סדרת החלטות + Evidence |
 
-משימה מורכבת:
+תרחישי עבודה:
+1. *״העתק קובץ A→B״* — Workflow  
+2. *״למה הלקוח כועס על חיוב?״* — Agent  
+3. *״Deploy ל־prod אחרי בדיקות״* — היברידי (Plan + Policy)
 
-> "חקור למה השירות לא יציב מאז הגרסה האחרונה, מצא את הסיבה הסבירה והכן תוכנית פעולה."
+**להקראה:**
 
-במשימה הראשונה כמעט אין צורך ב-Planning עמוק.
+לא כל משימה צריכה Agent Planning עמוק.
 
-יש כלי, יש בדיקה, יש תשובה.
+Ping לשרת — כמעט Workflow.
 
-במשימה השנייה יש סדרה של החלטות: מאיפה מתחילים, מה בודקים קודם, מתי עוצרים, מה נחשב "סיבה סבירה".
+חקירת אי־יציבות — כאן Planning מתחיל להשתלם.
 
-וזה בדיוק המקום שבו Planning מתחיל להיות שימושי.
-
-[שאלה]
-
-איזו משימה מהשבוע שלכם הייתה "פשוטה" ואיזו דרשה חקירה?
-
-[עצירה]
+שלושת תרחישי העבודה על המסך — עברו עליהם בקול והדגישו היברידי.
 
 ---
 
-## ‏6 — תוכנית = Hypothesis
+## ‏6 — תוכנית = Hypothesis + רמות פירוט
 
 [סטודנטים · 6]
 
-זו נקודה שכדאי לחזור עליה בהקלטה לאט.
-
-אנחנו נוטים לחשוב על Plan כאילו הוא אמת.
-
-בפועל הוא יותר קרוב להשערה.
-
-Agent אומר: "זה כנראה המסלול שיעזור לי לפתור את הבעיה."
-
-ואז הוא מתחיל לבצע.
-
-אחרי הפעולה הראשונה יכול להיות שהכול משתנה.
-
-Planning הוא גם ספקטרום.
-
-לפעמים התוכנית היא רשימה מפורטת:
+**על המסך (מצגת סטודנטים):**
 
 ```text
 1. Get logs
@@ -224,69 +189,77 @@ Planning הוא גם ספקטרום.
 4. Analyze
 ```
 
-ולפעמים היא מופשטת יותר: "Investigate recent instability" — ומתחת לזה Agent מחליט בזמן הביצוע.
+או כוונה מופשטת: `Investigate recent instability` + החלטות מקומיות.
 
-יש Planning מלא מראש.
+רמות: **Full plan מראש** · **Skeleton** · **Step-wise (ReAct)**.
 
-ויש Planning מקומי, רגע לפני כל פעולה.
+**להקראה:**
 
-שניהם לגיטימיים — השאלה היא הקשר.
+תוכנית היא Hypothesis.
 
-[עצירה]
+אפשר רשימה מפורטת ואפשר Skeleton.
+
+ReAct הוא קצה אחד של הספקטרום — החלטה לפני כל צעד.
+
+הבחירה תלויה בסיכון ובאי־ודאות — לא בטרנד.
+
+---
+
+## ‏7 — סוגי טעויות Planning
+
+[סטודנטים · 7]
+
+**על המסך (מצגת סטודנטים):**
+
+| סוג | דוגמה |
+|---|---|
+| Missing step | Deploy בלי Security Scan |
+| Wrong order | Rollback לפני אבחון |
+| Wrong assumption | ״תמיד Runner אשם״ |
+| Overplanning | 40 צעדים למשימה של 5 |
+| Underplanning | ״תתקן את הפרוד״ כצעד אחד |
+
+**להקראה:**
+
+חמשת סוגי הטעויות — זה ארגז כלים לביקורת תוכניות.
+
+Wrong assumption הוא הנפוץ בארגונים: המודל מניח תהליך פשוט יותר ממה שיש ב-Policy.
+
+[שאלה] איזו טעות Planning ראיתם לאחרונה בפרויקט?
 
 ---
 
 # ‏חלק ג׳ — Task Decomposition
 
-## ‏7 — Task Decomposition
-
-[סטודנטים · 7]
-
-![Task Decomposition](assets/02/02-task-decomposition.png)
-
-[תמונה על המסך]
-
-כשאנחנו מדברים על Task Decomposition, אנחנו אומרים:
-
-קיבלתי משימה גדולה.
-
-אני רוצה להפוך אותה לחלקים שאפשר לבצע.
-
-למה לפרק?
-
-כי משימה גדולה היא בדרך כלל עמומה מדי לביצוע ישיר.
-
-"שפר את ביצועי השירות" — מה זאת אומרת?
-
-CPU? Database? Network? Cache? קוד?
-
-אי אפשר לבצע את המטרה כמו שהיא.
-
-צריך לפרק לשאלות קטנות יותר.
-
-[עצירה]
-
-כלל אצבע: לא לפרק לפי מספר צעדים יפה.
-
-לפרק לפי יחידות משמעותיות.
-
-כל Step צריך להיות משהו שאפשר להבין, לבצע, לבדוק, ולהיכשל בו בצורה ברורה.
-
-פירוק דק מדי יוצר רעש, State כבד ו-latency.
-
-פירוק גס מדי מקשה על שליטה ועל Debugging.
-
----
-
-## ‏8 — Decomposition בדוגמה
+## ‏8 — Task Decomposition
 
 [סטודנטים · 8]
 
-המטרה:
+**על המסך (מצגת סטודנטים):**
 
-> "מצא למה latency עלה."
+![Task Decomposition](assets/02/02-task-decomposition.png)
 
-אפשר לפרק:
+**הגדרה:** פירוק לתת־משימות שניתן לבצע, לבדוק ולהיכשל בהן בבירור.
+
+כלל: יחידת משמעות — לא מספר יפה של שורות.
+
+**להקראה:**
+
+Decomposition זה לא לקשט מצגת.
+
+זה להפוך מטרה עמומה ליחידות שאפשר לבצע ולבדוק.
+
+פירוק דק מדי = רעש. גס מדי = אין שליטה.
+
+---
+
+## ‏9 — Decomposition בדוגמת Latency
+
+[סטודנטים · 9]
+
+**על המסך (מצגת סטודנטים):**
+
+מטרה: *״מצא למה latency עלה.״*
 
 ```text
 1. Check when latency increased
@@ -298,167 +271,188 @@ CPU? Database? Network? Cache? קוד?
 7. Identify most likely cause
 ```
 
-אבל שימו לב — זו לא בהכרח התוכנית הנכונה.
+Hypothesis ראשונית — לא חוזה.
 
-אנחנו עדיין רק הצענו Hypothesis.
+**להקראה:**
 
-יכול להיות שאחרי הצעד הראשון נגלה שהעלייה הייתה קצרה ונעלמה — ואז נשנה כיוון.
+עברו על שבעת הצעדים לאט.
 
-[עצירה]
+הדגישו אחרי הצעד הראשון שהכול יכול להשתנות.
+
+זו Hypothesis — לא חוזה עם המציאות.
+
+שאלו בקול: אחרי הצעד הראשון — מה יכול לבטל את שאר הרשימה?
+
+למשל: העלייה הייתה spike קצר שנעלם. אז אין טעם להעמיק ב-DB.
+
+זו המשמעות של Hypothesis.
 
 ---
 
-# ‏חלק ד׳ — Open Loop מול Closed Loop
+## ‏10 — מיני־תרגול: Decomposition
 
-## ‏9 — Open Loop מול Closed Loop
+[סטודנטים · 10]
 
-[סטודנטים · 9]
+**על המסך (מצגת סטודנטים):**
+
+מטרה (60–90 שנ׳ חשיבה / דיון קצר):
+
+> *״הורד את חשבון הענן החודשי ב־20% בלי לפגוע ב־SLA.״*
+
+כתבו 5–7 צעדים. סמנו מה **חייבים** לפני מה שמותר במקביל.
+
+**להקראה:**
+
+[תרגיל קצר · 60–90 שנ׳]
+
+תנו לשקט לחשוב.
+
+אספו 2 פירוקים מהקהל.
+
+בדקו: האם יש תלויות? האם משהו מקבילי?
+
+---
+
+# ‏חלק ד׳ — Open / Closed Loop
+
+## ‏11 — Open Loop מול Closed Loop
+
+[סטודנטים · 11]
+
+**על המסך (מצגת סטודנטים):**
 
 ![Open vs Closed Loop](assets/02/03-open-vs-closed-loop.png)
 
-Open Loop דומה לאוטומציה מסורתית:
+| Open | Closed |
+|---|---|
+| Plan → ביצוע ליניארי | Plan → Execute → Observe → Re-plan? |
+| תהליכים יציבים | עולם עם הפתעות |
 
-Plan → Step 1 → Step 2 → Step 3 → Done.
+**שאלו:** מתי Workflow קבוע עדיף על Agent?
 
-התוכנית נקבעת מראש.
+**להקראה:**
 
-המערכת מבצעת.
+Open Loop = אוטומציה קלאסית.
 
-היא לא משנה הרבה במהלך הדרך.
+Closed Loop = לולאה עם תצפית.
 
-Closed Loop אחרת לגמרי:
+Agents חיים כמעט תמיד ב-Closed — כי העולם מפתיע.
 
-Plan → Execute → Observe → Evaluate → Re-plan?
+[שאלה] מתי Workflow קבוע עדיף?
 
-Agent מקבל מידע חדש.
+---
 
-והמידע הזה יכול לשנות את מה שהוא עומד לעשות.
+## ‏12 — אותה מטרה בשתי גישות
 
-[עצירה]
+[סטודנטים · 12]
 
-למה Closed Loop מתאים ל-Agents?
+**על המסך (מצגת סטודנטים):**
 
-כי העולם לא תמיד צפוי.
+מטרה: *״בדוק למה Checkout נכשל ל־3% מהמשתמשים.״*
 
-API יכול להיכשל.
+**Open:** רשימה קבועה Metrics→Logs→DB→CDN→Report (גם אם כבר מצאתם אחרי Logs).  
+**Closed:** Metrics → Observation → מקצרים ל־Payments API → Evidence → Stop מוקדם.
 
-Data יכול להיות חסר.
+הערך: Adaptation חוסך זמן וכסף — אם יש Stop + Budget.
 
-Tool יכול להחזיר משהו שלא ציפינו.
+**להקראה:**
 
-בעיה יכולה להיות שונה ממה שחשבנו.
+אותה מטרה — שני סיפורים.
 
-ולכן המשפט שכדאי לזכור:
+ב-Open ממשיכים את כל הרשימה גם אחרי שיש תשובה.
 
-> Plan טוב הוא לא בהכרח Plan שלא משתנה.
+ב-Closed עוצרים מוקדם אם Evidence מספיק — וחוסכים כסף.
 
-לפעמים Plan טוב הוא Plan שיודע להשתנות.
-
-[שאלה]
-
-מתי הייתם מעדיפים Open Loop קבוע על Closed Loop?
+בלי Budget זה לא קסם, זה לולאה יקרה.
 
 ---
 
 # ‏חלק ה׳ — ReAct
 
-## ‏10 — ReAct
+## ‏13 — ReAct
 
-[סטודנטים · 10]
+[סטודנטים · 13]
+
+**על המסך (מצגת סטודנטים):**
 
 ![ReAct](assets/02/04-react.png)
 
-על המסך: Thought → Action → Observation (חוזר).
+**הגדרה:** Reason → Act → Observe → חזרה.
 
-ReAct הוא רעיון מרכזי להבנת Agentic behavior.
+יתרון: גמישות. חיסרון: יקר / thrashing בלי תקציב.
 
-ה-Agent מקבל משימה.
+**להקראה:**
 
-הוא חושב איזה מידע חסר לו.
+ReAct בקצרה: חושב, פועל, מתבונן, חוזר.
 
-הוא מבצע פעולה.
-
-הוא מסתכל על התוצאה.
-
-ואז ממשיך מהנקודה הזאת.
-
-היתרון: לא צריך להחליט את כל הדרך מראש.
-
-ה-Agent משתמש במידע החדש כדי לבחור את הפעולה הבאה.
-
-זה מצוין כאשר הבעיה לא ידועה מראש.
-
-החיסרון: יותר החלטות אומרות יותר latency, יותר Tokens, יותר Tool Calls, יותר הזדמנויות לטעות.
-
-בלי תקציב איטרציות — ReAct יכול להתפזר.
-
-[עצירה]
+גמיש — ומסוכן בלי תקרה.
 
 ---
 
-## ‏11 — ReAct בדוגמה
+## ‏14 — ReAct בדוגמה (API 500)
 
-[סטודנטים · 11]
+[סטודנטים · 14]
 
-משימה: "מצא למה ה-API מחזיר 500."
+**על המסך (מצגת סטודנטים):**
 
-Agent חושב: אני צריך לראות Logs.
+```text
+Reason: need logs
+Act:    get_logs
+Observe: DB timeout
+Reason: check pool
+Act:    get_db_pool_metrics
+Observe: pool 95% full
+Reason: enough evidence? → report or dig deeper
+```
 
-Act: קורא Tool של Logs.
+**להקראה:**
 
-Observe: Database timeout.
+הקריאו את רצף ה-500 לאט, כמו תסריט.
 
-Reason: עכשיו צריך לבדוק Database connectivity.
+שימו לב שהצעד הבא נולד מה-Observation — לא מרשימה מראש.
 
-Act: Tool נוסף.
+עצרו אחרי Observe הראשון ושאלו את הקהל: מה הצעד הבא שלהם?
 
-Observe: Connection pool כמעט מלא.
+רק אחר כך המשיכו ל-pool.
 
-Reason: זה נראה כמו כיוון חזק.
+כך ההקלטה מרגישה כמו חשיבה משותפת — לא קריאת תסריט יבש.
 
-כאן אפשר לעצור עם Evidence — או להמשיך לאסוף.
+---
 
-[עצירה]
+## ‏15 — כש-ReAct מתפזר
 
-שימו לב מה קרה: אף אחד לא כתב מראש "אחרי Logs לך ל-pool".
+[סטודנטים · 15]
 
-הצעד הבא נולד מהתצפית.
+**על המסך (מצגת סטודנטים):**
 
-זו הגמישות של ReAct — וגם הסיכון שלה אם אין Stop.
+סימנים:
+- אותם Tools שוב ושוב  
+- Confidence לא עולה  
+- Tokens עולים בלי Evidence חדש  
+
+טיפול: Iteration budget · Tool allow-list · ״אין Evidence חדש ×2 → Stop/Escalate״.
+
+**להקראה:**
+
+Thrashing הוא כשל מוכר ב-Production Agents.
+
+אותו Tool שוב ושוב בלי Evidence חדש.
+
+הפתרון הוא ארכיטקטורה: budget, allow-list, וכלל עצירה.
 
 ---
 
 # ‏חלק ו׳ — Plan-and-Execute
 
-## ‏12 — Plan-and-Execute
+## ‏16 — Plan-and-Execute
 
-[סטודנטים · 12]
+[סטודנטים · 16]
+
+**על המסך (מצגת סטודנטים):**
 
 ![Plan-and-Execute](assets/02/05-plan-and-execute.png)
 
-גישה אחרת:
-
-Goal → Planner → Plan → Executor → Results → Re-plan if needed.
-
-כאן מפרידים בין שני תפקידים.
-
-Planner אומר: אלה המשימות.
-
-Executor אומר: אני אבצע אותן.
-
-למה להפריד?
-
-כי לפעמים רוצים תוכנית ברורה.
-
-יכולת לבדוק את התוכנית לפני ביצוע.
-
-Execution עקבי יותר.
-
-Human approval אחרי Planning.
-
-Debugging יותר קל.
-
-למשל Agent מציע:
+**הגדרה:** Planner בונה תוכנית · Executor מבצע · Re-plan לפי משוב.
 
 ```text
 1. Inspect deployment
@@ -467,278 +461,321 @@ Debugging יותר קל.
 4. Recommend rollback
 ```
 
-ואדם יכול לאשר או לחסום לפני שהמערכת נוגעת בפרודקשן.
+יתרון: Review / HITL לפני ביצוע מסוכן.
 
-[עצירה]
+**להקראה:**
+
+Plan-and-Execute מפריד אחריות.
+
+Planner כותב. Executor מבצע.
+
+מצוין כשרוצים Review לפני פעולה מסוכנת.
 
 ---
 
-## ‏13 — מתי Planner נפרד?
+## ‏17 — אותו Incident: ReAct מול Plan-and-Execute
 
-[סטודנטים · 13]
+[סטודנטים · 17]
 
-לא תמיד חייבים Planner נפרד.
+**על המסך (מצגת סטודנטים):**
 
-במשימות קצרות, ReAct פשוט יכול להספיק — פחות State, פחות עלות.
+| | ReAct | Plan-and-Execute |
+|---|---|---|
+| צעד ראשון | לפי Thought | לפי Plan שאושר |
+| שינוי כיוון | כל Observation | Re-plan מפורש |
+| מתאים ל | חקירה פתוחה | סיכון + צורך בביקורת |
+| סיכון | מתפזר | נצמד לתוכנית שגויה |
 
-Planner נפרד מתחיל להשתלם כשיש תוכנית ארוכה שרוצים לבדוק, Policy Gate, Approval, או סיכון גבוה.
+**להקראה:**
 
-[שאלה]
+הטבלה חשובה להקלטה — אל תדלגו.
 
-אם הייתם בונים Agent לפתיחת Ticket בלבד — הייתם מפרידים Planner?
+אין מנצח אוניברסלי.
 
-ואם Agent שמשנה Production — מה אז?
+יש התאמה לסיכון ולסוג אי־ודאות.
 
-[עצירה]
+תרגיל מחשבתי מהיר (30 שנ׳): אם Rollback עולה כסף רב — איזו גישה תבחרו קודם, ולמה?
 
-המסר: הארכיטקטורה נגזרת מהסיכון ומהמורכבות — לא מהטרנד.
+רמז: Plan-and-Execute נותן נקודת HITL אחרי התוכנית ולפני הנזק.
+
+---
+
+## ‏18 — מתי Planner נפרד?
+
+[סטודנטים · 18]
+
+**על המסך (מצגת סטודנטים):**
+
+| בלי הפרדה | עם Planner נפרד |
+|---|---|
+| משימות קצרות | תוכנית ארוכה לבדיקה |
+| עלות נמוכה | Policy / Approval אחרי Plan |
+| פחות State | Production עם סיכון |
+
+**להקראה:**
+
+Ticket קטן — אולי בלי Planner נפרד.
+
+שינוי Production — כמעט תמיד רוצים נקודת ביקורת אחרי Plan.
 
 ---
 
 # ‏חלק ז׳ — Execution ו-Validation
 
-## ‏14 — שלושה סוגי הצלחה
-
-[סטודנטים · 14]
-
-![Three kinds of success](assets/02/10-three-success.png)
-
-Planning בלי Execution לא שווה הרבה.
-
-Execution הוא המקום שבו התוכנית פוגשת את העולם.
-
-לכל Step אפשר לחשוב על: Intent → Tool Selection → Tool Execution → Result Validation.
-
-והבחנה קריטית:
-
-**Tool Success לא אומר Task Success.**
-
-הכלי יכול להחזיר HTTP 200 — אבל המשימה עדיין נכשלה.
-
-שלושה סוגי הצלחה על המסך:
-
-1. Tool success — הכלי עבד.  
-2. Step success — קיבלנו מידע שימושי.  
-3. Goal success — המטרה באמת הושגה.
-
-[עצירה]
-
-אם זוכרים רק משפט אחד מהמפגש — זה יכול להיות המשפט הזה.
-
----
-
-## ‏15 — Validation בדוגמה
-
-[סטודנטים · 15]
-
-Tool: `search_tickets()`
-
-HTTP: 200 OK
-
-JSON: `{ "tickets": [] }`
-
-הכול תקין מבחינת API.
-
-אבל אם Agent חיפש תקלה ספציפית, התוצאה הריקה היא מידע חשוב.
-
-היא לא אומרת "הכל בסדר".
-
-היא אומרת: "לא מצאתי כאן את מה שחיפשתי."
-
-לכן Execution צריך גם Semantic Validation — לא רק בדיקת סטטוס קוד.
-
-[שאלה]
-
-האם Tool שקיבל HTTP 200 בהכרח הצליח עבור המשימה?
-
-[עצירה]
-
----
-
-# ‏חלק ח׳ — Failure Handling וגבולות
-
-## ‏16 — Failure Handling
-
-[סטודנטים · 16]
-
-![Failure Handling](assets/02/06-failure-handling.png)
-
-Agent תמיד ייתקל בכשלונות בעולם אמיתי:
-
-Timeout, Authentication failure, Bad parameters, Empty result, Rate limit, Network error, Unexpected data, Model mistake.
-
-Failure Handling צריך להיות חלק מהארכיטקטורה — לא משהו שמוסיפים אחרי שהמערכת כבר נשברת.
-
-Retry הוא לא תשובה אוטומטית.
-
-אם הכלי מחזיר Invalid customer_id — לעשות אותו דבר שוב לא יעזור.
-
-Retry לפי סוג שגיאה:
-
-Timeout → Retry.
-
-Rate limit → Wait + Retry.
-
-Invalid parameter → Fix + Retry.
-
-Permission denied → Stop / Escalate.
-
-Dangerous operation → Human approval.
-
-ואפשר Exponential Backoff — עיקרון Software Engineering קלאסי שצריך לשבת בתוך ה-Loop של ה-Agent.
-
-[עצירה]
-
----
-
-## ‏17 — Max Iterations ו-Stop Conditions
-
-[סטודנטים · 17]
-
-בלי מגבלה, Agent יכול להמשיך הרבה יותר זמן ממה שהתכוונו:
-
-Try → Fail → Try another → Fail → …
-
-לכן צריך Limit: למשל MAX_ITERATIONS = 10 — או תקציב אחר.
-
-אני אוהב לחשוב על זה כעל **Iteration Budget**:
-
-תקציב זמן, Tool Calls, Tokens, פעולות.
-
-Agent צריך להשיג את המטרה בתוך הגבולות.
-
-ומתי אומרים "סיימתי"?
-
-Success condition, Failure condition, Timeout, Iteration limit, Human escalation, Confidence threshold.
-
-גם "צור דוח" דורש הגדרה: האם הקובץ קיים מספיק? האם הנתונים נבדקו? האם מישהו אישר?
-
-Agent צריך לדעת מה נחשב הצלחה.
-
-[עצירה]
-
----
-
-# ‏חלק ט׳ — מבנה תוכנית והחלטות
-
-## ‏18 — Dependencies ו-Branches
-
-[סטודנטים · 18]
-
-לא הכול חייב להיות סדרתי.
-
-Search docs, Search tickets, Check release history — לפעמים אפשר במקביל, ואז Analysis.
-
-Parallelization חוסך זמן — ומוסיף מורכבות: Concurrency, Race conditions, Rate limits, Partial failures, Aggregation.
-
-לא עושים Parallelization רק כי אפשר.
-
-תוכנית גם לא חייבת להיות קו ישר — יש Branches.
-
-Is critical? → Human approval או Auto handling.
-
-Agent יכול לזהות את ה־Severity.
-
-את המדיניות עצמה — עדיף לעיתים להחזיק בקוד.
-
-[עצירה]
-
----
-
-## ‏19 — קוד דטרמיניסטי מול LLM
+## ‏19 — שלושה סוגי הצלחה
 
 [סטודנטים · 19]
 
-כלל שימושי:
+**על המסך (מצגת סטודנטים):**
 
-> מה שלא צריך "חשיבה" — עדיף להגדיר באופן דטרמיניסטי.
+![Three kinds of success](assets/02/10-three-success.png)
 
-לדוגמה בקוד:
+**הגדרה:** Execution / Validation.
+
+1. Tool success · 2. Step success · 3. Goal success  
+
+‏Tool success ≠ Goal success.
+
+**שאלו:** Tool Failure מול Task Failure?
+
+**להקראה:**
+
+אם זוכרים משפט אחד: Tool success ≠ Goal success.
+
+HTTP 200 יכול להיות כישלון סמנטי.
+
+---
+
+## ‏20 — Validation — כמה פנים
+
+[סטודנטים · 20]
+
+**על המסך (מצגת סטודנטים):**
+
+```text
+search_tickets() → 200 OK → { "tickets": [] }
+```
+
+| מקרה | משמעות |
+|---|---|
+| 200 + [] | ״לא מצאתי״ — מידע! |
+| 200 + schema שבור | Step fail |
+| 200 + נתונים לא רלוונטיים | Semantic fail |
+| Timeout | Tool fail → typed retry |
+
+**להקראה:**
+
+עברו על ארבעת המקרים בטבלה.
+
+Empty result הוא Evidence — לא בהכרח הצלחה.
+
+---
+
+# ‏חלק ח׳ — Failure וגבולות
+
+## ‏21 — Failure Handling
+
+[סטודנטים · 21]
+
+**על המסך (מצגת סטודנטים):**
+
+![Failure Handling](assets/02/06-failure-handling.png)
+
+Timeout · Auth · Bad params · Empty · Rate limit · Unexpected · Model mistake
+
+טיפול: typed retry · כלי חלופי · Local/Global re-plan · Escalation
+
+**להקראה:**
+
+Failure Handling הוא חלק מהמערכת — לא אפטר־thought.
+
+Typed errors → typed responses.
+
+---
+
+## ‏22 — מטריצת Retry + Backoff
+
+[סטודנטים · 22]
+
+**על המסך (מצגת סטודנטים):**
+
+```text
+Timeout           → Retry + backoff
+Rate limit        → Wait + Retry
+Invalid parameter → Fix args + Retry once
+Permission denied → Stop / Escalate
+Dangerous op      → HITL
+Empty useful data → Re-plan (not blind retry)
+```
+
+```text
+Backoff: 1s → 2s → 4s → 8s (עם תקרה)
+```
+
+**להקראה:**
+
+המטריצה + Backoff — זה Software Engineering קלאסי בתוך Agent Loop.
+
+Empty useful data ≠ Retry עיוור — זה Re-plan.
+
+ספרו סיפור קצר: Agent שעשה Retry עיוור על Invalid ID ויצר עומס על API.
+
+Typed failure handling הוא ההבדל בין מערכת בוגרת לבין דמו.
+
+---
+
+## ‏23 — Budget, Stop, Success Criteria
+
+[סטודנטים · 23]
+
+**על המסך (מצגת סטודנטים):**
+
+**הגדרה:** Iteration Limit · Stop Condition.
+
+דוגמה למשימת דוח:
+- Success: קובץ + 4 סעיפים + נתונים נבדקו  
+- Fail: אין גישה למקור > 2 ניסיונות  
+- Stop: 12 tool calls / 5 דק׳ / Confidence גבוהה מספיק  
+
+**שאלו:** למה Max Iterations?
+
+**להקראה:**
+
+Budget ו-Stop הופכים Agent ממערכת סקרנית למערכת אחראית.
+
+הדוגמה של הדוח — הקריאו את Success/Fail/Stop בקול.
+
+---
+
+# ‏חלק ט׳ — מבנה והחלטות
+
+## ‏24 — Dependencies ו-Branches
+
+[סטודנטים · 24]
+
+**על המסך (מצגת סטודנטים):**
+
+**הגדרה:** Parallel Execution.
+
+- מקבילי כשאין תלות · זהירות מ-rate limits  
+- Branches: `severity==high` → HITL (עדיף בקוד)
+
+**להקראה:**
+
+מקביליות חוסכת זמן ומוסיפה כאב ראש.
+
+Policy של Severity — עדיף בקוד.
+
+---
+
+## ‏25 — קוד דטרמיניסטי מול LLM
+
+[סטודנטים · 25]
+
+**על המסך (מצגת סטודנטים):**
+
+| בקוד | במודל |
+|---|---|
+| Policy, timeouts, retries טכניים | בחירת כיוון, השערות, סיכום |
+| Allow-list של Tools | ניסוח / סיווג |
 
 ```python
 if severity == "critical":
     require_human_approval()
 ```
 
-אין צורך לבקש מ־LLM להחליט אם Critical דורש אישור.
+**להקראה:**
 
-מה להשאיר למודל: פרשנות, סיווג, בחירת כיוון חקירה, Hypotheses, בחירת Tool מתוך אפשרויות חוקיות, סיכום ממצאים.
+הקוד על המסך הוא ההמחשה.
 
-אנחנו לא בונים "AI במקום קוד".
-
-אנחנו בונים: **AI בתוך מערכת תוכנה.**
-
-[שאלה]
-
-איזה דברים בעבודה שלכם עדיף להשאיר בקוד ולא למסור להחלטת LLM?
-
-[עצירה]
+Critical לא צריך "לחשוב" — הוא צריך Policy.
 
 ---
 
-# ‏חלק י׳ — דוגמה והדגמה
+## ‏26 — דוגמאות החלטה: קוד או מודל?
 
-## ‏20 — דוגמה מלאה: Incident Agent
+[סטודנטים · 26]
 
-[סטודנטים · 20]
+**על המסך (מצגת סטודנטים):**
+
+1. האם Restart מותר בלי אישור בלילה? → **קוד/Policy**  
+2. איזה שירות לבדוק קודם לפי תסמינים? → **מודל**  
+3. האם JSON תקין? → **קוד**  
+4. האם הממצאים מספיקים להמלצת Rollback? → **מודל + כללי Confidence**
+
+**להקראה:**
+
+ארבע הדוגמאות — עברו אחת־אחת ושאלו את הקהל לפני התשובה שלכם.
+
+---
+
+# ‏חלק י׳ — Incident, Demo, Lab חי
+
+## ‏27 — Incident Agent (מלא)
+
+[סטודנטים · 27]
+
+**על המסך (מצגת סטודנטים):**
 
 ![Incident Agent](assets/02/09-incident-agent.png)
 
-[הדגמה / B-ROLL]
+מטרה: latency גבוה ב-API · סיבה סבירה · המלצה.  
+Tools קריאה בלבד: metrics · logs · deployments · incidents
+
+זרימה: Confirm → Correlate deploy → Logs → Re-plan לפי Evidence
 
 ![Metrics](assets/screens/metrics-dashboard.png)
 
 ![Kubernetes](assets/screens/k8s-pods-logs.png)
 
-הדרישה:
+**להקראה:**
 
-> "חקור Alert של latency גבוה בשירות API, מצא את הסיבה הסבירה והכן המלצה."
+[הדגמה / B-ROLL מסכים]
 
-Tools בשלב הראשון — קריאה בלבד:
+Incident Agent — קריאה בלבד בהתחלה.
 
-get_metrics, get_logs, get_events, get_deployments, get_recent_changes, search_incidents.
+זה חשוב לביטחון בהקלטה.
 
-אין Tool שמשנה Production. זה חשוב.
+לפני המסכים: הדגישו שוב — בשלב אבחון אין Tool שמשנה Production.
 
-Initial Plan לדוגמה:
-
-Confirm latency → start time → deployments → resources → logs → known incidents → correlate.
-
-Step 1: get_metrics — p95 מ־80ms ל־620ms. הבעיה אמיתית, התחילה לפני ~30 דק׳.
-
-Step 2: deployment 3.8.1 לפני 32 דק׳. יש Correlation — אבל Correlation הוא לא הוכחה.
-
-Step 3: logs עם database connection timeout. יש Evidence נוסף.
-
-עכשיו Re-planning: Inspect DB timeout frequency, compare before/after release, connection pool, previous incidents, estimate confidence.
-
-מה היה קורה ב-Workflow קבוע? הוא היה יכול להריץ את כל השלבים גם אם כבר יש תשובה.
-
-Agent יכול לעצור מוקדם — או להעמיק במקום הנכון.
-
-זה הערך של Adaptation.
-
-[עצירה]
+זה Pattern שכדאי לשנן: Investigate tools ⊆ read-only.
 
 ---
 
-## ‏21 — הדגמה — Plan then Execute
+## ‏28 — צעדים + Re-plan בדוגמה
 
-[סטודנטים · 21]
+[סטודנטים · 28]
 
-[הדגמה]
+**על המסך (מצגת סטודנטים):**
+
+```text
+get_metrics     → p95 80ms→620ms (מאושר)
+get_deployments → 3.8.1 לפני 32 דק׳ (correlation ≠ proof)
+get_logs        → DB timeout
+REPLAN          → pool metrics + before/after + prior incidents
+```
+
+Workflow קבוע היה ממשיך גם אחרי שיש תשובה. Agent יכול Stop מוקדם.
+
+**להקראה:**
+
+הקריאו את ארבעת השלבים.
+
+Correlation אחרי Deploy הוא פיתוי — לא הוכחה.
+
+Re-plan אחרי timeout הוא הסיפור.
+
+---
+
+## ‏29 — הדגמה CI + Pseudocode
+
+[סטודנטים · 29]
+
+**על המסך (מצגת סטודנטים):**
 
 ![CI console](assets/screens/ci-console.png)
 
-![Demo: Plan then Execute](assets/02/demo-plan-execute.png)
-
-בהקלטה: הציגו את הקונסול כ־Observation, ואז את רצף ה־re-plan.
-
-מטרה לדוגמה: "מצא את הסיבה הסבירה לבעיית CI / API."
-
-שימו לב לסיפור: תוכנית ראשונית → מידע חדש → re-plan → תשובה עם ראיה.
-
-אפשר להראות Pseudocode ברמת רעיון:
+![Demo plan execute](assets/02/demo-plan-execute.png)
 
 ```python
 goal = user_request
@@ -749,87 +786,208 @@ while not done:
     done = check_stop(state)
 ```
 
-מה חסר ב־loop הזה ב־Production? Policy, budgets, idempotency, tracing — נגיע לזה מיד.
+**להקראה:**
 
-[עצירה]
+הציגו CI console ואז את ה-Pseudocode.
 
----
-
-# ‏חלק יא׳ — Evidence, Policy ו-State
-
-## ‏22 — Evidence, Hypothesis, Confidence
-
-[סטודנטים · 22]
-
-Agent לא אמור להתאהב בהשערה הראשונה.
-
-Deployment התחיל + Latency עלה — קל להגיד "ה-Deploy אשם".
-
-אולי זו רק התאמה בזמנים. אולי הבעיה ב־Database.
-
-Hypothesis Loop:
-
-Hypothesis → Evidence → Supports? → Increase confidence / Change hypothesis.
-
-Confidence לא חייב להיות מספר מדויק — Low / Medium / High מספיק.
-
-או רשימת Evidence + משפט סיכום עם רמת ביטחון.
-
-[עצירה]
+מה חסר בלופ ל-Production? Policy, budgets, idempotency, trace — עוד רגע.
 
 ---
 
-## ‏23 — Local מול Global Re-plan
+## ‏30 — Lab חי: מטרה ומגבלות
 
-[סטודנטים · 23]
+[סטודנטים · 30]
 
-לא בכל פעולה עושים Re-plan — אחרת המערכת יקרה מאוד.
+**על המסך (מצגת סטודנטים):**
 
-Re-plan כש: התגלתה עובדה חדשה, Tool נכשל, התוכנית לא רלוונטית, נמצאה דרך טובה יותר, Branch חדש, risk threshold.
+**מחוץ למצגת / לצד המצגת:** Claude Code + AWS.
 
-Local: Current step failed → Choose alternative.
+מטרה: לאשר גישה ל-AWS ולדגום אם יש מדדי EC2 CPU (read-only).
 
-Global: Major new evidence → Discard plan → Generate new plan.
+מגבלות בהקלטה:
+- אזור אחד · בלי Create/Update/Delete  
+- `MAX_ITERATIONS = 5`  
+- תקציב: סנטים  
 
-[שאלה]
+קוד: `labs/02-aws-agent-loop/`
 
-מתי כדאי לתכנן הכול מראש, ומתי עדיף Re-planning?
+**להקראה:**
 
-[עצירה]
+[Lab חי · התחלה]
+
+עברו למסוף / Claude Code.
+
+הדגישו read-only ומגבלת איטרציות.
+
+הסטודנטים רואים את המגבלות על המסך.
 
 ---
 
-## ‏24 — Constraints ו-Policy Gate
+## ‏31 — Lab חי: מה נריץ
 
-[סטודנטים · 24]
+[סטודנטים · 31]
+
+**על המסך (מצגת סטודנטים):**
+
+```bash
+cd labs/02-aws-agent-loop
+export AWS_PROFILE=nashpazformatan
+export AWS_REGION=eu-north-1
+python3 agent_loop.py
+```
+
+שימו לב בלייב:
+1. Initial plan  
+2. Observation מ-STS / CloudWatch  
+3. Local re-plan אם 0 נקודות מדד  
+4. Stop + findings  
+
+אופציונלי: לשנות Plan ב-Claude Code ולהריץ שוב.
+
+**להקראה:**
+
+[Lab חי · הרצה ~10–15 דק׳]
+
+הריצו:
+
+```bash
+cd labs/02-aws-agent-loop
+export AWS_PROFILE=nashpazformatan
+export AWS_REGION=eu-north-1
+python3 agent_loop.py
+```
+
+ספרו בקול מה ה-Plan, מה ה-Observation, ומתי קורה Re-plan.
+
+אם CloudWatch ריק — זה פיצ׳ר להוראה, לא באג.
+
+אם credentials נכשלים — אל תיבהלו בהקלטה.
+
+הפכו את זה לשיעור: Auth failure → Stop/Escalate, לא Retry אינסופי.
+
+אפשר להראות את הענף הזה בקוד של `agent_loop.py`.
+
+---
+
+## ‏32 — Lab חי: Debrief
+
+[סטודנטים · 32]
+
+**על המסך (מצגת סטודנטים):**
+
+מה ראינו?
+- Plan ≠ חוזה  
+- Observation ריק עדיין Evidence  
+- Re-plan מקומי זול מ-Global  
+- Stop condition עצר לפני לולאה מיותרת  
+
+**שאלו:** מה הייתם מוסיפים ל-Policy לפני Production?
+
+**להקראה:**
+
+[Lab חי · Debrief]
+
+חברו חזרה למושגים: Hypothesis, Evidence ריק, Local re-plan, Stop.
+
+[שאלה] מה הייתם מוסיפים ל-Policy לפני Production?
+
+---
+
+# ‏חלק יא׳ — Evidence, Policy, State
+
+## ‏33 — Evidence, Hypothesis, Confidence
+
+[סטודנטים · 33]
+
+**על המסך (מצגת סטודנטים):**
+
+```text
+Hypothesis → Evidence → Supports? → ↑confidence / החלף Hypothesis
+```
+
+Correlation ≠ Proof. Low / Medium / High.
+
+**להקראה:**
+
+אל תתאהבו בהשערה הראשונה.
+
+Confidence יכול להיות Low/Medium/High — לא חובה מספר מדויק.
+
+---
+
+## ‏34 — Wrong Assumption (Release)
+
+[סטודנטים · 34]
+
+**על המסך (מצגת סטודנטים):**
+
+Agent מניח: `Build → Test → Deploy`  
+ארגון דורש: Scan → Approvals → Staging → Prod Approval.
+
+בלי Constraints התוכנית ״עובדת״ במעבדה ונכשלת בפרוד.
+
+**להקראה:**
+
+Wrong assumption ארגוני הוא קלאסיקה.
+
+בלי Constraints התוכנית נראית חכמה ונכשלת בפרוד.
+
+---
+
+## ‏35 — Local מול Global Re-plan
+
+[סטודנטים · 35]
+
+**על המסך (מצגת סטודנטים):**
+
+**הגדרה:** Re-planning.
+
+| Local | Global |
+|---|---|
+| צעד נכשל → חלופה | זורקים מסגרת חקירה |
+| זול | יקר |
+
+**שאלו:** מתי Local מספיק?
+
+**להקראה:**
+
+Local קודם. Global כשהמסגרת נשברה.
+
+[שאלה] מתי Local מספיק?
+
+---
+
+## ‏36 — Constraints ו-Policy Gate
+
+[סטודנטים · 36]
+
+**על המסך (מצגת סטודנטים):**
 
 ![Policy Gate](assets/02/07-policy-gate.png)
 
 ![Approval dialog](assets/screens/approval-dialog.png)
 
-מטרה בלי Constraints לא מספיקה.
+**הגדרה:** Constraint / Policy.
 
-"Deploy the application" בלי: Allowed environments, hours, approvals, Rollback policy, Change window, Security.
+זמן · עלות · הרשאות · ״אין נגיעה בפרוד בלי אישור״
 
-Constraint Layer / Policy Gate עומדת בין Plan לבין Execution.
+**להקראה:**
 
-Approval באמצע תהליך: Plan → Inspect → Prepare action → Risk → Human approval → Execute.
+Policy Gate עומדת בין Plan לביצוע.
 
-ה-Agent לא חייב להתחיל מהתחלה אחרי האישור — הוא ממשיך מהמקום שבו עצר. לכן State חשוב.
-
-[עצירה]
+Approval באמצע דורש State — כדי לא להתחיל מאפס.
 
 ---
 
-## ‏25 — Execution State
+## ‏37 — Execution State
 
-[סטודנטים · 25]
+[סטודנטים · 37]
+
+**על המסך (מצגת סטודנטים):**
 
 ![Execution State](assets/02/08-execution-state.png)
 
-המערכת צריכה לדעת: מה בוצע, מה הצליח, מה נכשל, מה עכשיו, מה מחכה, מה דילגנו.
-
-דוגמת State:
+**הגדרה:** Execution State.
 
 ```json
 {
@@ -844,239 +1002,221 @@ Approval באמצע תהליך: Plan → Inspect → Prepare action → Risk →
 }
 ```
 
-בלי State קשה לעשות Retry, Resume, Human approval, Re-planning, Debugging, Multi-step execution.
+**להקראה:**
 
-בהמשך הקורס נעמיק ב-Memory — היום מספיק להבין ש-State הוא בסיס לביצוע רציף.
+ה-JSON על המסך הוא חוזה עבודה של המערכת עם עצמה.
 
-[עצירה]
-
----
-
-## ‏26 — Idempotency, Timeouts, Cost
-
-[סטודנטים · 26]
-
-Idempotency: Agent ביצע create_ticket(), התשובה אבדה — אם מריצים שוב עלולים לקבל שני Tickets.
-
-לכן: create_ticket(idempotency_key="abc123").
-
-Timeouts בשלוש שכבות: Tool timeout, Agent timeout, Overall task timeout.
-
-Cost-aware planning: 5 Tool Calls פשוטים מול 20 קריאות + מודל גדול — שניהם אולי מגיעים לתשובה, אבל המחיר שונה.
-
-מאזנים Quality / Cost / Time.
-
-וגם Context עולה כסף: לא לשלוח 200,000 שורות לוג למודל — Filter → Relevant subset → LLM.
-
-Tool טוב מקבל פרמטרים ממוקדים (service, time range, level, pattern).
-
-[עצירה]
-
-הערה קצרה: Prompt ארוך עם "תעשה 1 ואז 2 ואז 3" הוא לא Planning אמיתי — זה יכול להיות Workflow קשיח בתחפושת.
-
-Planning במערכת Agentic כולל אפשרות שהמערכת תחליט על הדרך לפי מטרה ומצב, בתוך מגבלות.
+בלי State אין Resume, אין Debug, אין HITL אמיתי.
 
 ---
 
-# ‏חלק יב׳ — Anti-patterns, תרגילים וסיכום
+## ‏38 — Idempotency, Timeouts, Cost
 
-## ‏27 — Anti-Patterns
+[סטודנטים · 38]
 
-[סטודנטים · 27]
+**על המסך (מצגת סטודנטים):**
 
-חמישה מלכודות שכדאי לנקוב בשמות:
+**הגדרה:** Idempotency.
 
-1. לתכנן 40 צעדים כשאפשר 5.  
-2. להניח ש-Tool success = Goal success.  
-3. בלי Max iterations.  
-4. בלי HITL על פעולות מסוכנות.  
-5. Prompt ארוך במקום State + Plan אמיתיים.
+- `idempotency_key` ליצירות  
+- Timeouts: Tool / Agent / Task  
+- Quality ↔ Cost ↔ Time · סננו Context ל-LLM
 
-[עצירה]
+**להקראה:**
 
-אם אתם רואים אחד מאלה בסקירה ארכיטקטונית — עצרו ותקנו לפני שמדברים על "איזה מודל יותר חכם".
+Idempotency, Timeouts, Cost — שלושה גבולות שמונעים אסונות שקטים.
+
+Context עולה כסף: אל תשפכו 200k שורות לוג למודל.
+
+חברו ל-Lab: גם אם נריץ שוב את הסקריפט — אין יצירת משאבים כפולים כי השתמשנו רק ב-read.
+
+ברגע שיש create_ticket — בלי idempotency_key הסיכון קופץ.
 
 ---
 
-## ‏28 — תרגיל 1 — תכננו Agent ל-CI
+# ‏חלק יב׳ — Anti-patterns ותרגילים
 
-[סטודנטים · 28]
+## ‏39 — Anti-Patterns
+
+[סטודנטים · 39]
+
+**על המסך (מצגת סטודנטים):**
+
+1. 40 צעדים במקום 5  
+2. Tool success = Goal success  
+3. בלי Max iterations  
+4. בלי HITL על מסוכן  
+5. Prompt ארוך במקום State+Plan  
+6. ReAct בלי Evidence gate (חדש)
+
+**להקראה:**
+
+שישה Anti-patterns.
+
+אם רואים אחד מהם ב-Design Review — עצרו לפני "איזה מודל".
+
+---
+
+## ‏40 — תרגיל 1 — תכננו Agent ל-CI
+
+[סטודנטים · 40]
+
+**על המסך (מצגת סטודנטים):**
+
+**הנחיה (20–25 דק׳):** מטרה *״מצא למה Job ב-CI נכשל.״*
+
+Tools: `get_job_status` · `get_console_log` · `get_recent_changes` · `get_runner_info` · `search_previous_failures`
+
+1. מה חייבים לדעת קודם? (3)  
+2. חובה כל ה-Tools?  
+3. אם `get_console_log` נכשל — מה עכשיו? (2+)  
+4. Stop vs Escalation  
+
+הגשה: חצי עמוד · זוגות OK.
+
+**להקראה:**
 
 [תרגיל · 20–25 דק׳]
 
-הקריאו את ההנחיה מהמסך.
+הקריאו הנחיה. השאירו CI על המסך.
 
-מטרה: מצא למה Job ב-CI נכשל.
-
-Tools על המסך. אפשר להשאיר את צילום הקונסול מההדגמה ברקע.
-
-מה להגיש: חצי עמוד, אפשר בזוגות.
-
-בזמן העבודה אפשר לעבור בין תלמידים / לערוך B-ROLL של הקונסול.
-
-אחרי הזמן: אספו 2–3 תשובות קצרות לדיון — במיוחד סעיף 3 (כישלון get_console_log) וסעיף 4 (Stop / Escalation).
-
-[עצירה]
+עברו בין משתתפים אם זה כיתה חיה; בהקלטה — B-ROLL של קונסול.
 
 ---
 
-## ‏29 — תרגיל 2 — תרחיש עם Re-plan
+## ‏41 — תרגיל 1 — כיווני פתרון (אחרי הגשה)
 
-[סטודנטים · 29]
+[סטודנטים · 41]
+
+**על המסך (מצגת סטודנטים):**
+
+דוגמאות לדיון (לא ״תשובה יחידה״):
+- קודם: job id, זמן כשל, branch/commit  
+- לא חובה כל הכלים — מתחילים מ-status+log  
+- Log נכשל → recent_changes / previous_failures / Escalate  
+- Stop כשיש Evidence ממוקד + המלצה; Escalate כשאין גישה לנתונים
+
+**להקראה:**
+
+[דיון פתרון · 8–10 דק׳]
+
+אל תציגו "תשובה יחידה".
+
+השתמשו בכיוונים על המסך כבסיס לדיון.
+
+---
+
+## ‏42 — תרגיל 2 — Re-plan
+
+[סטודנטים · 42]
+
+**על המסך (מצגת סטודנטים):**
+
+**הנחיה (15–20 דק׳):** הנחה Runner אשם · Observation: Runner תקין, חסר dependency ב-`requirements.txt`.
+
+Plan מקורי · Local · מתי Global · Stop condition
+
+**להקראה:**
 
 [תרגיל · 15–20 דק׳]
 
-הקריאו את התרחיש: הנחה ראשונית על Runner, Observation חדש על dependency חסר.
-
-בקשו Plan מקורי, Local re-plan, מתי Global, ו-Stop condition.
-
-בדיון: הדגישו ש-Local הוא ברירת מחדל זולה, ו-Global כשהמסגרת של החקירה השתנתה.
-
-[עצירה]
+הדגישו Local מול Global אחרי ה-Observation החדש.
 
 ---
 
-## ‏30 — תרגיל 3 — Checklist ל-Production
+## ‏43 — תרגיל 3 — Checklist
 
-[סטודנטים · 30]
+[סטודנטים · 43]
+
+**על המסך (מצגת סטודנטים):**
+
+**הנחיה (10–15 דק׳):** ✓/✗
+
+Goal+Success · Budget · Failure · Policy · HITL · State · Trace · Timeouts · Cost
+
+**להקראה:**
 
 [תרגיל · 10–15 דק׳]
 
-בקשו לסמן ✓/✗ על הרשימה עבור Agent אמיתי מהעבודה או מהתרגילים הקודמים.
-
-אחרי הזמן: שאלו איזה פריט חסר הכי הרבה אצל אנשים — בדרך כלל Iteration budget או HITL או Trace.
-
-[עצירה]
+שאלו בסוף איזה פריט חסר הכי הרבה — לרוב Budget או Trace.
 
 ---
 
-## ‏31 — Design Review מהיר
+## ‏44 — Design Review
 
-[סטודנטים · 31]
+[סטודנטים · 44]
 
-[שאלה / דיון · 5–8 דק׳]
+**על המסך (מצגת סטודנטים):**
 
-> תכננתם Incident Agent. איזו החלטה תשאירו ל-LLM, ואיזו תקבעו בקוד דטרמיניסטי — ולמה?
+> Incident Agent: מה ל-LLM ומה לקוד — ולמה?
 
-כוונו את הדיון לדוגמאות: בחירת כיוון חקירה למודל; Restart / Deploy / Delete — Policy בקוד + HITL.
+תרחיש: *״מצא סיבה ב-Production ותקן.״*  
+Tools: `read_logs` · `get_metrics` · `restart_service` · `scale_service` · `deploy_version` · `delete_resource`
 
-אפשר להישען על נספח ז׳ אם רוצים להעמיק אחרי ההקלטה.
+1. אוטומטי? 2. HITL? 3. מסוכן? 4. דטרמיניסטי? 5. Stop? 6. אנטי-לולאה? 7. Trace?
 
-[עצירה]
+דיון ~10–12 דק׳.
 
----
+**להקראה:**
 
-## ‏32 — סיכום
+[דיון · 10–12 דק׳]
 
-[סטודנטים · 32]
+עברו על שבע השאלות.
 
-מה צריך לזכור:
-
-Planning הוא Hypothesis, לא תסריט קשיח.
-
-Closed loop + Validation + Stop conditions.
-
-Tool success ≠ Goal success.
-
-State, Policy ו-Budget הם חלק מהארכיטקטורה — לא "תוספות אחר כך".
-
-המשפט המרכזי:
-
-> Planning = לבחור את הצעד הבא הטוב ביותר תחת מגבלות, ואז ללמוד מהתוצאה.
-
-זה ההבדל בין Agent שמריץ Script לבין Agent שמנהל תהליך.
-
-[עצירה]
+restart/deploy/delete — לא אוטומטי בלי Policy.
 
 ---
 
-## ‏33 — הכנה למפגש 3
+## ‏45 — סיכום
 
-[סטודנטים · 33]
+[סטודנטים · 45]
 
-במפגש הבא: **Tool Use ו-Function Calling**.
+**על המסך (מצגת סטודנטים):**
 
-שם ה-Agent מפסיק רק לחשוב על פעולות — והמערכת מאפשרת לו לבצע אותן בפועל.
+- Planning = Hypothesis + מגבלות  
+- Closed loop + Validation + Budget/Stop  
+- Tool ≠ Goal success  
+- State · Policy · Idempotency שייכים לארכיטקטורה  
+- Lab: ראינו Re-plan על Observation אמיתי/ריק  
+- מפגש 3: **Tool Use ו-Function Calling**
 
-הכנה: הביאו 3 Tools מהעבודה — קלט, פלט, האם מסוכן / דורש HITL.
+**להקראה:**
 
-[מצלמה: סגירה חמה.]
+סיכום בקול לפי הנקודות על המסך.
 
-תודה — נתראה במפגש 3.
+המשפט: Planning = הצעד הבא הטוב ביותר תחת מגבלות, ואז למידה מהתוצאה.
 
 ---
 
-# ‏נספח א׳ — דיאגרמות וקבצים
+## ‏46 — הכנה למפגש 3
 
-קבצים תחת `assets/02/`:
+[סטודנטים · 46]
+
+**על המסך (מצגת סטודנטים):**
+
+- 3 Tools מהעבודה: קלט · פלט · מסוכן?/HITL  
+- בונוס: סמנו איזה מהם Idempotent
+
+</div>
+
+**להקראה:**
+
+הכנה למפגש 3: Tools ו-Function Calling.
+
+בקשו גם סימון Idempotent — זה מחבר למפגש הזה.
+
+[מצלמה: סגירה.] תודה — נתראה במפגש 3.
+
+---
+
+# ‏נכסים — דיאגרמות וקבצים
 
 | קובץ | שימוש |
 |---|---|
-| `01-goal-plan-actions.png` | פתיחה / Goal→Plan |
-| `02-task-decomposition.png` | פירוק משימה |
-| `03-open-vs-closed-loop.png` | Open/Closed loop |
-| `04-react.png` | ReAct |
-| `05-plan-and-execute.png` | Plan-and-Execute |
-| `06-failure-handling.png` | Failure handling |
-| `07-policy-gate.png` | Policy / Constraints |
-| `08-execution-state.png` | State |
-| `09-incident-agent.png` | Incident agent |
-| `10-three-success.png` | סוגי הצלחה |
-| `demo-plan-execute.png` | הדגמת טרמינל |
+| `assets/02/*.png` | דיאגרמות המפגש |
+| `assets/screens/*` | CI / Metrics / K8s / Approval |
+| `labs/02-aws-agent-loop/` | Lab חי |
 
-חידוש: `python3 scripts/gen_diagrams.py`
-
----
-
-# ‏נספח ב׳ — משפטי מעבר להקלטה
-
-1. "עכשיו כשהבנו מה זה Planning, בואו נראה למה תכנון מראש לא תמיד מספיק."
-2. "וזה בדיוק המקום שבו נכנסת הלולאה."
-3. "עכשיו נעבור מהתכנון עצמו אל הביצוע."
-4. "ופה יש הבדל קטן אבל חשוב בין פעולה שהצליחה לבין משימה שהצליחה."
-5. "עד עכשיו דיברנו על Agent שמתקדם. עכשיו בואו נדבר על Agent שנתקע."
-6. "וכש-Agent נתקע, אנחנו לא רוצים רק Retry. אנחנו רוצים להבין למה הוא נכשל."
-7. "עכשיו נוסיף מגבלות. כי Agent חכם בלי גבולות יכול להיות מערכת בעייתית מאוד."
-8. "עכשיו ניקח את כל הרעיונות האלה ונחבר אותם לדוגמה אחת."
-
----
-
-# ‏נספח ג׳ — שאלות לקהל (מאגר)
-
-1. מתי הייתם מעדיפים Workflow קבוע על Agent?
-2. מתי כדאי לתכנן הכול מראש?
-3. מתי עדיף Re-planning?
-4. האם Tool שקיבל HTTP 200 בהכרח הצליח?
-5. למה צריך Max Iterations?
-6. מה ההבדל בין Tool Failure לבין Task Failure?
-7. איזה דברים עדיף להשאיר בקוד ולא למסור להחלטת LLM?
-
----
-
-# ‏נספח ד׳ — מילון מונחים
-
-**Planning** — יצירת דרך אפשרית ממטרה לתוצאה.  
-**Task Decomposition** — פירוק משימה גדולה לתת־משימות.  
-**Execution** — ביצוע מול Tools ומערכות.  
-**Re-planning** — שינוי תוכנית בעקבות מידע חדש או כשל.  
-**ReAct** — Reason → Act → Observe.  
-**Plan-and-Execute** — הפרדה בין יצירת תוכנית לביצוע.  
-**Validation** — בדיקה שהתוצאה תקינה ורלוונטית.  
-**Stop Condition** — מתי המשימה הסתיימה / נכשלה / נעצרת.  
-**Iteration Limit** — מגבלה על מחזורי Agent.  
-**Idempotency** — חזרה על בקשה בלי תוצאה כפולה בלתי רצויה.  
-**Constraint / Policy** — גבולות וכללי מותר/אסור.  
-**Execution State** — מצב המשימה בזמן ריצה.  
-**Parallel Execution** — הרצת פעולות בלתי תלויות במקביל.
-
----
-
-# ‏נספח ה׳ — Design Review מורחב (אופציונלי)
-
-תרחיש: Agent מקבל "מצא את הסיבה לבעיה ב-Production ותקן אותה."
-
-Tools: read_logs, get_metrics, restart_service, scale_service, deploy_version, delete_resource.
-
-שאלו: מה אוטומטי? מה באישור? אילו Tools מסוכנים? מה דטרמיניסטי? Stop Condition? מניעת לולאה אינסופית? איך יודעים מה Agent עשה (Trace)?
+חידוש דיאגרמות: `python3 scripts/gen_diagrams.py`
 
 </div>
