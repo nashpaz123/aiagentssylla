@@ -9,8 +9,9 @@
 
 > מצגת להצגה בהקלטה · מספור **סטודנטים בלבד** (1…N).  
 > מרצה: `[סטודנטים · N]` באותו מספר וכותרת.  
-> **משך משוער:** ~2.5–3 שעות (הוראה + Lab חי ~20 דק׳ + תרגילים ~50 דק׳).  
-> חוזרה בקצרה מפגש 1 (Goal/Decide/Act/Observe, Spectrum, HITL בסיסי).
+> **משך משוער:** ~2.5–3 שעות **הקלטה** (הוראה + Lab חי + הדגמות פתרון).  
+> אין זמן עבודה לסטודנטים חיים — תרגילים = הדגמת מרצה בקול.  
+> חזרה קצרה על מפגש 1 (Goal/Decide/Act/Observe, Spectrum, HITL בסיסי) — בלי פירוט מחדש.
 
 ---
 
@@ -29,9 +30,9 @@ Planning ו-Execution
 
 ---
 
-## ‏2 — מה היום (בלי חזרה על מפגש 1)
+## ‏2 — מה היום (+ חזרה קצרה על מפגש 1)
 
-| נבנה היום |מפגש 1|
+| נבנה היום | מפגש 1 (בקצרה) |
 |---|---|
 | Planning / Decomposition | מהו Agent מול Chat |
 | Open/Closed · ReAct · Plan-and-Execute | Spectrum L0–L6 |
@@ -139,13 +140,22 @@ Hypothesis ראשונית — לא חוזה.
 
 ---
 
-## ‏10 — מיני־תרגול: Decomposition
+## ‏10 — דוגמה מפורטת: Decomposition לחיסכון בענן
 
-מטרה (60–90 שנ׳ חשיבה / דיון קצר):
+מטרה: *״הורד את חשבון הענן החודשי ב־20% בלי לפגוע ב־SLA.״*
 
-> *״הורד את חשבון הענן החודשי ב־20% בלי לפגוע ב־SLA.״*
+פירוק שמדגימים בקול:
+```text
+1. Baseline: עלות 30 יום לפי שירות
+2. מצא Top-5 עלויות
+3. בדוק idle / over-provision (non-prod קודם)
+4. הצע rightsizing עם הערכת חיסכון
+5. בדוק השפעה על latency/error budget
+6. Policy: אין שינוי prod בלי אישור
+7. דוח: חיסכון צפוי + סיכונים + צעדי HITL
+```
 
-כתבו 5–7 צעדים. סמנו מה **חייבים** לפני מה שמותר במקביל.
+תלויות: 1→2→3; 4 תלוי ב־3; 5 לפני כל שינוי; 6 חוסם ביצוע אוטומטי.
 
 ---
 
@@ -160,7 +170,7 @@ Hypothesis ראשונית — לא חוזה.
 | Plan → ביצוע ליניארי | Plan → Execute → Observe → Re-plan? |
 | תהליכים יציבים | עולם עם הפתעות |
 
-**שאלו:** מתי Workflow קבוע עדיף על Agent?
+**לזכור:** Workflow קבוע עדיף כשאין אי־ודאות וכל הצעדים ידועים מראש.
 
 ---
 
@@ -264,7 +274,7 @@ Reason: enough evidence? → report or dig deeper
 
 ‏Tool success ≠ Goal success.
 
-**שאלו:** Tool Failure מול Task Failure?
+**לזכור:** Tool fail = הכלי נכשל · Task fail = המשימה לא הושגה (גם אם הכלי החזיר 200).
 
 ---
 
@@ -321,7 +331,7 @@ Backoff: 1s → 2s → 4s → 8s (עם תקרה)
 - Fail: אין גישה למקור > 2 ניסיונות  
 - Stop: 12 tool calls / 5 דק׳ / Confidence גבוהה מספיק  
 
-**שאלו:** למה Max Iterations?
+**לזכור:** בלי תקרה Agent יכול לשרוף Tokens/כסף/זמן בלי סוף.
 
 ---
 
@@ -448,7 +458,7 @@ python3 agent_loop.py
 - Re-plan מקומי זול מ-Global  
 - Stop condition עצר לפני לולאה מיותרת  
 
-**שאלו:** מה הייתם מוסיפים ל-Policy לפני Production?
+**לזכור אחרי Lab:** allow-list של Tools · max iterations · אין write בלי HITL.
 
 ---
 
@@ -482,7 +492,7 @@ Agent מניח: `Build → Test → Deploy`
 | צעד נכשל → חלופה | זורקים מסגרת חקירה |
 | זול | יקר |
 
-**שאלו:** מתי Local מספיק?
+**לזכור:** Local כשנשברת רק פעולה; Global כשנשברת מסגרת החקירה.
 
 ---
 
@@ -542,57 +552,67 @@ Agent מניח: `Build → Test → Deploy`
 
 ---
 
-## ‏40 — תרגיל 1 — תכננו Agent ל-CI
+## ‏40 — הדגמה 1 — תכנון Agent ל-CI (בעיה)
 
-**הנחיה (20–25 דק׳):** מטרה *״מצא למה Job ב-CI נכשל.״*
+מטרה: *״מצא למה Job ב-CI נכשל.״*
 
 Tools: `get_job_status` · `get_console_log` · `get_recent_changes` · `get_runner_info` · `search_previous_failures`
 
-1. מה חייבים לדעת קודם? (3)  
+שאלות שנענה עליהן בהדגמה:
+1. מה חייבים לדעת קודם?  
 2. חובה כל ה-Tools?  
-3. אם `get_console_log` נכשל — מה עכשיו? (2+)  
-4. Stop vs Escalation  
-
-הגשה: חצי עמוד · זוגות OK.
+3. אם `get_console_log` נכשל — מה עכשיו?  
+4. Stop מול Escalation  
 
 ---
 
-## ‏41 — תרגיל 1 — כיווני פתרון (אחרי הגשה)
+## ‏41 — הדגמה 1 — פתרון מלא בקול
 
-דוגמאות לדיון (לא ״תשובה יחידה״):
-- קודם: job id, זמן כשל, branch/commit  
-- לא חובה כל הכלים — מתחילים מ-status+log  
-- Log נכשל → recent_changes / previous_failures / Escalate  
-- Stop כשיש Evidence ממוקד + המלצה; Escalate כשאין גישה לנתונים
+1. **קודם:** job id · זמן כשל · branch/commit · הודעת כשל קצרה מהסטטוס  
+2. **לא חובה כל הכלים** — מתחילים ב-`get_job_status` ואז `get_console_log`  
+3. **Log נכשל:** `get_recent_changes` · `search_previous_failures` · אם אין נתונים → Escalate  
+4. **Stop:** Evidence ממוקד + המלצה אחת · **Escalate:** אין גישה ללוג/שינויים אחרי 2 ניסיונות  
 
----
-
-## ‏42 — תרגיל 2 — Re-plan
-
-**הנחיה (15–20 דק׳):** הנחה Runner אשם · Observation: Runner תקין, חסר dependency ב-`requirements.txt`.
-
-Plan מקורי · Local · מתי Global · Stop condition
+Plan לדוגמה: status → log → (אם ImportError) recent_changes → confirm dependency → report.
 
 ---
 
-## ‏43 — תרגיל 3 — Checklist
+## ‏42 — הדגמה 2 — Re-plan מלא
 
-**הנחיה (10–15 דק׳):** ✓/✗
+הנחה ראשונית: Runner אשם.  
+Observation: Runner תקין · חסר dependency ב-`requirements.txt`.
 
-Goal+Success · Budget · Failure · Policy · HITL · State · Trace · Timeouts · Cost
+- **Plan מקורי:** runner_info → console → conclude runner  
+- **Local re-plan:** אחרי runner תקין → חפש בלוג `ModuleNotFound` / השווה requirements ל-lock  
+- **Global:** רק אם מתברר שזה בכלל job אחר / pipeline אחר  
+- **Stop:** נמצא החבילה החסרה + שורת לוגו התומכת · המלצה: להוסיף ל-requirements ולהריץ מחדש  
 
 ---
 
-## ‏44 — Design Review
+## ‏43 — הדגמה 3 — Checklist על Agent לדוגמה
 
-> Incident Agent: מה ל-LLM ומה לקוד — ולמה?
+עבור CI Agent מההדגמה — סטטוס לדוגמה:
+
+- [x] Goal+Success · [x] Budget · [x] Failure typed  
+- [x] Policy read-only · [x] HITL על re-run job  
+- [x] State · [ ] Trace מלא (חסר — נוסיף במפגש Observability)  
+- [x] Timeouts · [x] Cost limit על tool calls  
+
+---
+
+## ‏44 — הדגמה 4 — Design Review מלא
 
 תרחיש: *״מצא סיבה ב-Production ותקן.״*  
 Tools: `read_logs` · `get_metrics` · `restart_service` · `scale_service` · `deploy_version` · `delete_resource`
 
-1. אוטומטי? 2. HITL? 3. מסוכן? 4. דטרמיניסטי? 5. Stop? 6. אנטי-לולאה? 7. Trace?
-
-דיון ~10–12 דק׳.
+תשובות שנקריא:
+1. **אוטומטי:** logs + metrics בלבד  
+2. **HITL:** restart / scale / deploy  
+3. **אסור או תמיד HITL+שני מאשרים:** delete_resource  
+4. **דטרמיניסטי בקוד:** allow-list · severity→HITL · max iterations  
+5. **Stop:** סיבה סבירה + Confidence בינוני+ בלי תיקון, או אחרי תיקון מאושר + בדיקת מדד  
+6. **אנטי-לולאה:** budget · אין retry עיוור על permission denied  
+7. **Trace:** כל Tool call + החלטה + אישור אדם בלוג מובנה  
 
 ---
 
