@@ -10,7 +10,7 @@
 > מצגת להצגה בהקלטה · מספור **סטודנטים בלבד** (1…N).  
 > מרצה: `[סטודנטים · N]` באותו מספר וכותרת.  
 > **משך משוער:** ~2.5–3 שעות (הוראה + Lab חי ~20 דק׳ + תרגילים ~50 דק׳).  
-> לא חוזרים בפירוט על מפגש 1 (Goal/Decide/Act/Observe, Spectrum, HITL בסיסי).
+> חוזרה בקצרה מפגש 1 (Goal/Decide/Act/Observe, Spectrum, HITL בסיסי).
 
 ---
 
@@ -31,7 +31,7 @@ Planning ו-Execution
 
 ## ‏2 — מה היום (בלי חזרה על מפגש 1)
 
-| נבנה היום | לא נפרט שוב |
+| נבנה היום |מפגש 1|
 |---|---|
 | Planning / Decomposition | מהו Agent מול Chat |
 | Open/Closed · ReAct · Plan-and-Execute | Spectrum L0–L6 |
