@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate presentation diagrams for AI Agents course sessions 1–2."""
+"""Generate presentation diagrams for AI Agents course sessions 1–3."""
 
 from __future__ import annotations
 
@@ -761,6 +761,202 @@ def demos():
     )
 
 
+
+# ---------- Session 03 ----------
+
+def s03_tool_hero():
+    img, d = new_img()
+    title = font(46, True)
+    body = font(26)
+    center_text(d, (W / 2, 55), "Tool Use & Function Calling", title)
+    boxes = [
+        (120, 320, 480, 560, "LLM", "proposes call", ACCENT2),
+        (720, 320, 1080, 560, "Host", "validate + run", ACCENT),
+        (1320, 320, 1680, 560, "Tool", "side effect / data", GREEN),
+    ]
+    for x1, y1, x2, y2, t, s, c in boxes:
+        rounded(d, (x1, y1, x2, y2), CARD2, outline=c, radius=20)
+        center_text(d, ((x1 + x2) / 2, (y1 + y2) / 2 - 30), t, font(34, True), c)
+        center_text(d, ((x1 + x2) / 2, (y1 + y2) / 2 + 40), s, body, MUTED)
+    arrow(d, (480, 440), (720, 440))
+    arrow(d, (1080, 440), (1320, 440))
+    # observe back
+    d.arc([200, 200, 1600, 780], start=200, end=340, fill=ORANGE, width=5)
+    center_text(d, (960, 220), "Observation → back to LLM", font(26), ORANGE)
+    save(img, "03/01-tool-calling-loop.png")
+
+
+def s03_protocol():
+    img, d = new_img()
+    title = font(42, True)
+    body = font(24)
+    small = font(22)
+    center_text(d, (W / 2, 50), "Function Calling Protocol", title)
+    steps = [
+        ("1", "Send schemas\n+ user goal", ACCENT),
+        ("2", "Model returns\ntool_calls", ACCENT2),
+        ("3", "Host executes\n(not the model)", GREEN),
+        ("4", "tool results\nwith call ids", ORANGE),
+        ("5", "Model answers\nor calls again", ACCENT),
+    ]
+    for i, (n, label, c) in enumerate(steps):
+        x = 80 + i * 370
+        rounded(d, (x, 380, x + 320, 720), CARD2, outline=c, radius=18)
+        center_text(d, (x + 160, 460), n, font(40, True), c)
+        multiline_center(d, (x + 160, 580), label.split("\n"), body)
+        if i < 4:
+            arrow(d, (x + 320, 550), (x + 370, 550), MUTED, 3)
+    center_text(d, (W / 2, 900), "Model proposes · Code executes · Observation returns", small, MUTED)
+    save(img, "03/02-protocol-steps.png")
+
+
+def s03_schema():
+    img, d = new_img()
+    title = font(44, True)
+    body = font(24)
+    center_text(d, (W / 2, 50), "Tool Schema = Contract", title)
+    rounded(d, (100, 160, 900, 980), CARD)
+    center_text(d, (500, 220), "Good schema", font(32, True), GREEN)
+    lines = [
+        'name: get_order',
+        'description: Fetch order by id',
+        '  (support only; not refunds)',
+        'params:',
+        '  order_id: string  required',
+        '  fields: enum[status,total]',
+    ]
+    y = 300
+    for line in lines:
+        d.text((160, y), line, font=body, fill=TEXT)
+        y += 70
+    rounded(d, (1020, 160, 1820, 980), CARD)
+    center_text(d, (1420, 220), "Bad schema", font(32, True), RED)
+    bad = [
+        'name: do_stuff',
+        'description: helpful tool',
+        'params:',
+        '  data: string',
+        '  options: object',
+        '  → hallucinated args',
+    ]
+    y = 300
+    for line in bad:
+        d.text((1080, y), line, font=body, fill=TEXT)
+        y += 70
+    save(img, "03/03-schema-good-bad.png")
+
+
+def s03_tool_choice():
+    img, d = new_img()
+    title = font(44, True)
+    body = font(26)
+    center_text(d, (W / 2, 55), "tool_choice", title)
+    items = [
+        ("auto", "Model decides", ACCENT),
+        ("required", "Must call a tool", ACCENT2),
+        ("named", "Force one tool", GREEN),
+        ("none", "Text only", ORANGE),
+    ]
+    for i, (k, v, c) in enumerate(items):
+        x = 120 + (i % 2) * 900
+        y = 200 + (i // 2) * 380
+        rounded(d, (x, y, x + 800, y + 300), CARD2, outline=c, radius=20)
+        center_text(d, (x + 400, y + 110), k, font(40, True), c)
+        center_text(d, (x + 400, y + 200), v, body)
+    save(img, "03/04-tool-choice.png")
+
+
+def s03_parallel():
+    img, d = new_img()
+    title = font(42, True)
+    body = font(24)
+    center_text(d, (W / 2, 50), "Parallel vs Sequential Tools", title)
+    # sequential
+    rounded(d, (80, 140, 920, 980), CARD)
+    center_text(d, (500, 200), "Sequential", font(32, True), ORANGE)
+    seq = ["get_customer", "get_orders(customer)", "summarize"]
+    for i, s in enumerate(seq):
+        y = 300 + i * 180
+        rounded(d, (200, y, 800, y + 120), CARD2, outline=LINE, radius=14)
+        center_text(d, (500, y + 60), s, body)
+        if i < 2:
+            arrow(d, (500, y + 120), (500, y + 180), MUTED, 3)
+    # parallel
+    rounded(d, (1000, 140, 1840, 980), CARD)
+    center_text(d, (1420, 200), "Parallel", font(32, True), GREEN)
+    rounded(d, (1180, 300, 1660, 420), CARD2, outline=ACCENT, radius=14)
+    center_text(d, (1420, 360), "get_metrics", body)
+    rounded(d, (1180, 480, 1660, 600), CARD2, outline=ACCENT, radius=14)
+    center_text(d, (1420, 540), "get_logs", body)
+    rounded(d, (1180, 660, 1660, 780), CARD2, outline=ACCENT, radius=14)
+    center_text(d, (1420, 720), "get_deploys", body)
+    rounded(d, (1180, 840, 1660, 960), CARD2, outline=GREEN, radius=14)
+    center_text(d, (1420, 900), "fan-in → reason", body)
+    save(img, "03/05-parallel-vs-sequential.png")
+
+
+def s03_validate():
+    img, d = new_img()
+    title = font(42, True)
+    body = font(26)
+    center_text(d, (W / 2, 55), "Validate → Execute → Observe", title)
+    nodes = [
+        (200, "tool_call\nJSON", ACCENT2),
+        (700, "validate\nschema+policy", ORANGE),
+        (1200, "execute\nhandler", ACCENT),
+        (1580, "observation\nstructured", GREEN),
+    ]
+    for x, label, c in nodes:
+        rounded(d, (x, 420, x + 280, 660), CARD2, outline=c, radius=18)
+        multiline_center(d, (x + 140, 540), label.split("\n"), body, c)
+    for i in range(3):
+        x1 = nodes[i][0] + 280
+        x2 = nodes[i + 1][0]
+        arrow(d, (x1, 540), (x2, 540))
+    center_text(d, (W / 2, 850), "Reject bad args before side effects", font(28), MUTED)
+    save(img, "03/06-validate-execute.png")
+
+
+def s03_mcp():
+    img, d = new_img()
+    title = font(44, True)
+    body = font(26)
+    center_text(d, (W / 2, 55), "MCP (intro): portable tools", title)
+    boxes = [
+        (150, 380, 550, 700, "Host App", "Agent runtime", ACCENT),
+        (700, 380, 1100, 700, "MCP Client", "connects", ACCENT2),
+        (1250, 380, 1750, 700, "MCP Server", "exposes tools", GREEN),
+    ]
+    for x1, y1, x2, y2, t, s, c in boxes:
+        rounded(d, (x1, y1, x2, y2), CARD2, outline=c, radius=20)
+        center_text(d, ((x1 + x2) / 2, (y1 + y2) / 2 - 40), t, font(32, True), c)
+        center_text(d, ((x1 + x2) / 2, (y1 + y2) / 2 + 40), s, body, MUTED)
+    arrow(d, (550, 540), (700, 540))
+    arrow(d, (1100, 540), (1250, 540))
+    center_text(d, (W / 2, 860), "Same tool contract · many servers · many hosts", font(26), MUTED)
+    save(img, "03/07-mcp-intro.png")
+
+
+def s03_catalog():
+    img, d = new_img()
+    title = font(42, True)
+    body = font(24)
+    center_text(d, (W / 2, 50), "Tool Catalog Tradeoffs", title)
+    rows = [
+        ("Few sharp tools", "Clear choice · low tokens", GREEN),
+        ("Many vague tools", "Confusion · high cost", ORANGE),
+        ("Dangerous tools", "Policy / HITL / allow-list", RED),
+        ("Idempotent tools", "Safe retries", ACCENT),
+    ]
+    for i, (a, b, c) in enumerate(rows):
+        y = 180 + i * 200
+        rounded(d, (200, y, 1720, y + 160), CARD2, outline=c, radius=16)
+        center_text(d, (600, y + 80), a, font(30, True), c)
+        center_text(d, (1300, y + 80), b, body)
+    save(img, "03/08-catalog-tradeoffs.png")
+
+
+
 def main():
     gens = [
         v01_human_agent,
@@ -790,6 +986,14 @@ def main():
         s02_incident,
         s02_validation,
         demos,
+        s03_tool_hero,
+        s03_protocol,
+        s03_schema,
+        s03_tool_choice,
+        s03_parallel,
+        s03_validate,
+        s03_mcp,
+        s03_catalog,
     ]
     for g in gens:
         g()

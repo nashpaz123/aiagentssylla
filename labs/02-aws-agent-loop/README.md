@@ -8,7 +8,8 @@
 
 ## דרישות
 
-- AWS CLI / credentials עם הרשאות מינימליות: `sts:GetCallerIdentity`, `cloudwatch:GetMetricData` (או `ListMetrics`)
+- AWS CLI / credentials עם הרשאות מינימליות:
+  `sts:GetCallerIdentity` · `ec2:DescribeInstances` · `cloudwatch:GetMetricData`
 - Python 3.10+ · `pip install boto3`
 - אופציונלי בהקלטה: Claude Code על הלאפטופ לבניית/שינוי הסקריפט בלייב
 

@@ -31,6 +31,7 @@
 - **הקלטה ≠ כיתה חיה:** אין שקט לחשיבה, אין איסוף תשובות מקהל, אין זמן פתרון עצמאי לסטודנטים.  
   תרגילים = **הדגמת מרצה** עם פתרון מלא בקול (או Lab שהמרצה מריץ).
 - **מפגש 2:** Lab חי read-only (`labs/02-aws-agent-loop/`, פרופיל `nashpazformatan`) + הדגמות פתרון מורחבות; חזרה על מפגש 1 — מצביע קצר בלבד.
+- **מפגש 3:** Lab Host ל-Function Calling (`labs/03-tool-calling/`, פרופיל `nashpazformatan`) — Validate · Parallel · Observations; חזרה על מפגש 2 — מצביע קצר בלבד.
 
 ## ‏מוכן עכשיו
 
@@ -38,6 +39,7 @@
 |---|---|---|---|
 | 1 מבוא ל-Agents | [`01-introduction-to-ai-agents.md`](01-introduction-to-ai-agents.md) | [`01-students-slides.md`](01-students-slides.md) | `assets/01/` |
 | 2 Planning & Execution | [`02-agent-planning-and-execution.md`](02-agent-planning-and-execution.md) | [`02-students-slides.md`](02-students-slides.md) | `assets/02/` |
+| 3 Tool Use & Function Calling | [`03-tool-use-and-function-calling.md`](03-tool-use-and-function-calling.md) | [`03-students-slides.md`](03-students-slides.md) | `assets/03/` |
 
 ## ‏חידוש דיאגרמות וצילומי מסך
 
@@ -51,6 +53,6 @@ python3 scripts/gen_mock_uis.py   # צילומי מסך להדגמות (CRM/K8s/
 
 ## ‏מפגשים הבאים (מהסילבוס)
 
-3 Tool Use · 4 LangGraph · 5 CrewAI/Multi-Agent · 6 Memory · 7 Business · 8 Cursor · 9 Testing · 10 Capstone
+4 LangGraph · 5 CrewAI/Multi-Agent · 6 Memory · 7 Business · 8 Cursor · 9 Testing · 10 Capstone
 
 </div>
