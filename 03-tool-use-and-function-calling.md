@@ -43,7 +43,7 @@
 **Tool Use ו-Function Calling**  
 איך Agent נוגע בעולם
 
-![Tool Calling Loop](assets/03/01-tool-calling-loop.png)
+![Augmented LLM: Retrieval · Tools · Memory](assets/03/01-tool-calling-loop.png)
 
 **להקראה:**
 
@@ -331,7 +331,7 @@ Side-effect external-comms חשוב: שליחת מייל או הודעה ללק�
 
 **על המסך:**
 
-![Protocol Steps](assets/03/02-protocol-steps.png)
+![Function Calling Loop](assets/03/02-protocol-steps.png)
 
 1. שולחים schemas + מטרה  
 2. המודל מחזיר `tool_calls` (לא תשובה סופית)  
@@ -1191,7 +1191,7 @@ Argument Hallucination.
 
 **על המסך:**
 
-![Catalog Tradeoffs](assets/03/08-catalog-tradeoffs.png)
+![Tool Selection / Catalog in an Agent Loop](assets/03/08-catalog-tradeoffs.png)
 
 כל Schema נכנס לטוקנים **בכל** קריאה.  
 יותר כלים ≠ יותר חכם. לעיתים = יותר בלבול ועלות.

@@ -231,35 +231,20 @@ def v05_workflow_vs_agent():
 
 
 def v06_autonomy():
-    """L0–L6 AI Agent Spectrum diagram."""
-    img, d = new_img()
-    title = font(40, True)
-    body = font(18)
-    center_text(d, (W / 2, 45), "AI Agent Spectrum (L0–L6)", title)
-    levels = [
-        ("L0", "Rules\nAutomation", LINE),
-        ("L1", "AI-Assisted\nTools", MUTED),
-        ("L2", "Custom\nAssistants", ACCENT),
-        ("L3", "AI\nWorkflows", ORANGE),
-        ("L4", "Task\nAgents", GREEN),
-        ("L5", "Multi-\nAgent", ACCENT2),
-        ("L6", "Agent\nEcosystems", RED),
+    """Do NOT overwrite the Cathey-style spectrum PNGs (hand-curated educational art).
+
+    Those files live at assets/01/06-agent-spectrum-l0-l6.png and
+    assets/01/06-autonomy-spectrum.png. Regenerating the dark placeholder was a
+    regression — skip silently if the curated files already exist.
+    """
+    curated = [
+        ROOT / "01/06-agent-spectrum-l0-l6.png",
+        ROOT / "01/06-autonomy-spectrum.png",
     ]
-    n = len(levels)
-    gap = 16
-    box_w = (W - 120 - gap * (n - 1)) // n
-    y0, y1 = 160, 780
-    for i, (lvl, desc, color) in enumerate(levels):
-        x = 60 + i * (box_w + gap)
-        rounded(d, (x, y0, x + box_w, y1), CARD, outline=color, radius=16)
-        center_text(d, (x + box_w / 2, y0 + 80), lvl, font(32, True), color)
-        multiline_center(d, (x + box_w / 2, 420), desc.split("\n"), body)
-    x_line = 60 + 4 * (box_w + gap) - gap // 2
-    d.line([(x_line, y0 - 10), (x_line, y1 + 10)], fill=GREEN, width=4)
-    center_text(d, (W / 2, 860), "scripts (L0–L3) | genuine agency (L4+) — higher is not always better", font(22), MUTED)
-    center_text(d, (W / 2, 920), "Higher autonomy is not always better", font(18), MUTED)
-    save(img, "01/06-agent-spectrum-l0-l6.png")
-    save(img, "01/06-autonomy-spectrum.png")
+    if all(p.exists() and p.stat().st_size > 200_000 for p in curated):
+        print("skip v06_autonomy — curated spectrum images present")
+        return
+    print("warn: curated spectrum missing; not synthesizing dark replacement")
 
 
 def v07_approval():
