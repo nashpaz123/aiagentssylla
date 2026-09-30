@@ -34,8 +34,8 @@
 |---|---|
 | חוזה Tool · Schema · Protocol | Planning / Decomposition |
 | tool_choice · Parallel · Validate | Closed Loop · ReAct · P&E |
-| Catalog · Policy · MCP מבוא | Budget · Stop · Policy Gate |
-| Lab: Host שמריץ Tools לפי Schema | Lab לולאת Plan→Observe |
+| Catalog · Policy · MCP + PinchTab | Budget · Stop · Policy Gate |
+| Lab: Host + PinchTab headed | Lab לולאת Plan→Observe |
 
 ---
 
@@ -408,9 +408,46 @@ Function Calling נשאר: המודל עדיין מציע; ה-Host עדיין מ
 
 ---
 
+## ‏32 — PinchTab כ-MCP Server לדפדפן
+
+**PinchTab** = דוגמה חיה ל-MCP: Server שחושף כלי Browser ל-Host (Cursor / Claude / סוכן שלכם).
+
+```json
+{ "mcpServers": { "pinchtab": { "command": "pinchtab", "args": ["mcp"] } } }
+```
+
+כלים לדוגמה (קידומת `pinchtab_`):  
+`navigate` · `snapshot` · `click` · `fill` · `get_text` · `screenshot`
+
+מה להראות מקומית:  
+`~/.pinchtab/` · `config.json` · `profiles/` · Skill תחת `~/.claude/skills/pinchtab/`
+
+Lab: [`labs/03-pinchtab-mcp/`](labs/03-pinchtab-mcp/)
+
+---
+
+## ‏33 — הדגמה: headed browser (תריצו אצלכם)
+
+```bash
+cd labs/03-pinchtab-mcp
+./run-headed-demo.sh
+```
+
+מה תראו:
+1. Chrome **גלוי** (`pinchtab server -H`) — ברירת המחדל אצלנו headless  
+2. `nav` + `snap` → refs כמו `e5`  
+3. `text` + `screenshot` תחת `out/`  
+4. (בהקלטה) סיור קצר בתיקיות המקומיות למעלה  
+
+אותו חוזה ב-MCP: המודל מציע `pinchtab_navigate` / `pinchtab_snapshot` — PinchTab מריץ.
+
+זכרו: תוכן מהעמוד = untrusted · Validate/Policy עדיין חובה · אל תחשפו token מהקונפיג.
+
+---
+
 # ‏חלק י׳ — דוגמאות עבודה
 
-## ‏32 — Support Agent: Catalog
+## ‏34 — Support Agent: Catalog
 
 | Tool | Side-effect | Policy |
 |---|---|---|
@@ -423,7 +460,7 @@ Function Calling נשאר: המודל עדיין מציע; ה-Host עדיין מ
 
 ---
 
-## ‏33 — DevOps Agent: Catalog
+## ‏35 — DevOps Agent: Catalog
 
 | Tool | Parallel-safe? | Policy |
 |---|---|---|
@@ -436,7 +473,7 @@ Fan-out על שלושת ה-read, אחר כך החלטה על rollback.
 
 ---
 
-## ‏34 — Anti-Patterns
+## ‏36 — Anti-Patterns
 
 1. כלי אחד ענק `do_anything`  
 2. Schema בלי enum/required  
@@ -450,7 +487,7 @@ Fan-out על שלושת ה-read, אחר כך החלטה על rollback.
 
 # ‏חלק יא׳ — Lab חי
 
-## ‏35 — Lab חי: מטרה ומגבלות
+## ‏37 — Lab חי: מטרה ומגבלות
 
 **מטרה:** להריץ Host שמקבל `tool_calls` לפי Schema, מאמת, מריץ כלים (כולל AWS read-only), ומחזיר Observations.
 
@@ -462,7 +499,7 @@ Fan-out על שלושת ה-read, אחר כך החלטה על rollback.
 
 ---
 
-## ‏36 — Lab חי: מה נריץ
+## ‏38 — Lab חי: מה נריץ
 
 ```bash
 cd labs/03-tool-calling
@@ -479,7 +516,7 @@ python3 host_loop.py
 
 ---
 
-## ‏37 — Lab חי: Debrief
+## ‏39 — Lab חי: Debrief
 
 Checklist:
 - [ ] המודל לא הרץ — ה-Host הרץ  
@@ -492,7 +529,7 @@ Checklist:
 
 # ‏חלק יב׳ — הדגמות פתרון
 
-## ‏38 — הדגמה 1 — כתיבת Schema (בעיה)
+## ‏40 — הדגמה 1 — כתיבת Schema (בעיה)
 
 תרחיש: כלי לחיפוש לוגים לפי שירות וחלון זמן.
 
@@ -503,7 +540,7 @@ Checklist:
 
 ---
 
-## ‏39 — הדגמה 1 — פתרון מלא
+## ‏41 — הדגמה 1 — פתרון מלא
 
 ```json
 {
@@ -525,7 +562,7 @@ Policy: auto · Idempotent: כן · Parallel-safe: כן.
 
 ---
 
-## ‏40 — הדגמה 2 — Validate דוחה Args
+## ‏42 — הדגמה 2 — Validate דוחה Args
 
 קריאה גרועה:
 ```json
@@ -541,7 +578,7 @@ Policy: auto · Idempotent: כן · Parallel-safe: כן.
 
 ---
 
-## ‏41 — הדגמה 3 — Parallel Fan-out
+## ‏43 — הדגמה 3 — Parallel Fan-out
 
 מטרה: *״למה ה-API איטי?״*
 
@@ -554,7 +591,7 @@ tool_calls: [get_metrics, get_logs, get_deploys]   # parallel
 
 ---
 
-## ‏42 — הדגמה 4 — Design Review ל-Catalog
+## ‏44 — הדגמה 4 — Design Review ל-Catalog
 
 תרחיש: Agent תמיכה עם `get_order`, `get_customer`, `create_ticket`, `issue_refund`, `delete_customer`.
 
@@ -568,7 +605,7 @@ tool_calls: [get_metrics, get_logs, get_deploys]   # parallel
 
 ---
 
-## ‏43 — הדגמה 5 — Checklist על Host
+## ‏45 — הדגמה 5 — Checklist על Host
 
 - [x] Schemas בקונטקסט  
 - [x] Validate לפני execute  
@@ -579,19 +616,19 @@ tool_calls: [get_metrics, get_logs, get_deploys]   # parallel
 
 ---
 
-## ‏44 — סיכום
+## ‏46 — סיכום
 
 - Tool = חוזה; המודל מציע, הקוד מריץ  
 - Schema טוב = Description + enum/required  
 - Validate · Observation · tool_choice · Parallel  
 - Catalog קטן + Policy לכתיבה/כסף  
-- MCP = ניידות כלים (מבוא)  
-- Lab: Host אמיתי עם Validate + AWS read-only  
+- MCP = ניידות כלים · דוגמה: PinchTab browser tools  
+- Lab: Host אמיתי עם Validate + AWS read-only · PinchTab headed MCP  
 - מפגש 4: **LangGraph לבניית Agents**
 
 ---
 
-## ‏45 — הכנה למפגש 4
+## ‏47 — הכנה למפגש 4
 
 - ציירו Graph קטן: nodes = tools/steps, edges = מעברים  
 - סמנו איפה Conditional edge אחרי Observation  
@@ -599,7 +636,7 @@ tool_calls: [get_metrics, get_logs, get_deploys]   # parallel
 
 ---
 
-## ‏46 — תרגיל בית (אחרי ההקלטה)
+## ‏48 — תרגיל בית (אחרי ההקלטה)
 
 1. 3 Tools מהעבודה: Name · Schema · Side-effect · HITL?  
 2. כתבו Observation format לכישלון אחד  

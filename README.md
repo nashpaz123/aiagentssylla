@@ -31,7 +31,7 @@
 - **הקלטה ≠ כיתה חיה:** אין שקט לחשיבה, אין איסוף תשובות מקהל, אין זמן פתרון עצמאי לסטודנטים.  
   תרגילים = **הדגמת מרצה** עם פתרון מלא בקול (או Lab שהמרצה מריץ).
 - **מפגש 2:** Lab חי read-only (`labs/02-aws-agent-loop/`, פרופיל `nashpazformatan`) + הדגמות פתרון מורחבות; חזרה על מפגש 1 — מצביע קצר בלבד.
-- **מפגש 3:** Lab Host ל-Function Calling (`labs/03-tool-calling/`, פרופיל `nashpazformatan`) — Validate · Parallel · Observations; חזרה על מפגש 2 — מצביע קצר בלבד.
+- **מפגש 3:** Lab Host ל-Function Calling (`labs/03-tool-calling/`, פרופיל `nashpazformatan`) — Validate · Parallel · Observations; הדגמת MCP חיה עם PinchTab headed (`labs/03-pinchtab-mcp/`); חזרה על מפגש 2 — מצביע קצר בלבד.
 
 ## ‏מוכן עכשיו
 

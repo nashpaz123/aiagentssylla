@@ -11,9 +11,9 @@
 > **קהל בהקלטה:** אין זמן עבודה לסטודנטים חיים · אין שקט לחשיבה · אין המתנה לתשובות מקהל חי  
 > **תרגילים/הדגמות:** המרצה מקריא פתרון מלא · אין זמן פתרון עצמאי של צופים  
 > **מצגת סטודנטים:** [`03-students-slides.md`](03-students-slides.md)  
-> **Lab:** [`labs/03-tool-calling/`](labs/03-tool-calling/) · פרופיל `nashpazformatan` · `eu-north-1`
+> **Lab:** [`labs/03-tool-calling/`](labs/03-tool-calling/) · PinchTab MCP: [`labs/03-pinchtab-mcp/`](labs/03-pinchtab-mcp/) · פרופיל AWS `nashpazformatan` · `eu-north-1`
 
-> מספור המרצה = מספור הסטודנטים (1…46). לא מפרטים שוב את מפגש 2 לעומק.
+> מספור המרצה = מספור הסטודנטים (1…48). לא מפרטים שוב את מפגש 2 לעומק.
 
 ---
 
@@ -91,8 +91,8 @@
 |---|---|
 | חוזה Tool · Schema · Protocol | Planning / Decomposition |
 | tool_choice · Parallel · Validate | Closed Loop · ReAct · P&E |
-| Catalog · Policy · MCP מבוא | Budget · Stop · Policy Gate |
-| Lab: Host שמריץ Tools לפי Schema | Lab לולאת Plan→Observe |
+| Catalog · Policy · MCP + PinchTab | Budget · Stop · Policy Gate |
+| Lab: Host + PinchTab headed | Lab לולאת Plan→Observe |
 
 **להקראה:**
 
@@ -1421,12 +1421,95 @@ Server שמחזיר מאה כלים בלי תיאורים טובים מחזיר 
 
 ---
 
+## ‏32 — PinchTab כ-MCP Server לדפדפן
+
+[סטודנטים · 32]
+
+**על המסך:**
+
+**PinchTab** = דוגמה חיה ל-MCP: Server שחושף כלי Browser ל-Host (Cursor / Claude / סוכן שלכם).
+
+```json
+{ "mcpServers": { "pinchtab": { "command": "pinchtab", "args": ["mcp"] } } }
+```
+
+כלים לדוגמה (קידומת `pinchtab_`):  
+`navigate` · `snapshot` · `click` · `fill` · `get_text` · `screenshot`
+
+מה להראות מקומית:  
+`~/.pinchtab/` · `config.json` · `profiles/` · Skill תחת `~/.claude/skills/pinchtab/`
+
+Lab: [`labs/03-pinchtab-mcp/`](labs/03-pinchtab-mcp/)
+
+**להקראה:**
+
+עכשיו דוגמה שתראו גם מחוץ למצגת: PinchTab.
+
+PinchTab הוא MCP Server לדפדפן. ה-Host — למשל Cursor — מתחבר עם command pinchtab ו-args mcp. מהרגע הזה לסוכן יש כלים: navigate, snapshot, click, fill, get_text, screenshot.
+
+שימו לב למשמעת של המפגש: המודל עדיין רק מציע. PinchTab הוא ה-Host-side executor מול Chrome. Schema של כל כלי, הרשאות domains, ו-Policy — חיים בצד של PinchTab ושלכם, לא בתוך המודל.
+
+יש Lab קטן תחת labs/03-pinchtab-mcp. בהקלטה אפשר להראות את קובץ ה-MCP ואת רשימת הכלים. אתם תריצו אצלכם ב-headed כדי לראות את החלון.
+
+נחבר לקו האדום של המפגש: כל כלי הוא חוזה; כל קריאה עוברת Host; כל תוצאה היא Observation. PinchTab פשוט מוכיח ש-MCP הוא צינור לחוזים כאלה — לא קסם.
+
+
+נחבר את השקף לקו האדום של המפגש: כל כלי הוא חוזה; כל קריאה עוברת Host; כל תוצאה היא Observation מובנה. PinchTab הוא MCP Server אמיתי שמוכיח את המשפט הזה מול דפדפן.
+
+דוגמת עבודה קצרה נוספת: מערכת CI שואלת למה ה-job נכשל — לא PinchTab. אבל Agent שמאמת UI אחרי Deploy יכול לקרוא ל-pinchtab_snapshot דרך MCP. אותו Host, Catalog אחר.
+
+בהקלטה כדאי גם לפתוח את התיקיות המקומיות: נקודה tilt pinchtab, את config.json בלי לחשוף token, את profiles, ואת ה-Skill תחת claude או cursor skills. זה מחבר MCP מרעיון לקבצים אמיתיים על הדיסק.
+
+---
+
+## ‏33 — הדגמה: headed browser (תריצו אצלכם)
+
+[סטודנטים · 33]
+
+**על המסך:**
+
+```bash
+cd labs/03-pinchtab-mcp
+./run-headed-demo.sh
+```
+
+מה תראו:
+1. Chrome **גלוי** (`pinchtab server -H`) — ברירת המחדל אצלנו headless  
+2. `nav` + `snap` → refs כמו `e5`  
+3. `text` + `screenshot` תחת `out/`  
+4. (בהקלטה) סיור קצר בתיקיות המקומיות למעלה  
+
+אותו חוזה ב-MCP: המודל מציע `pinchtab_navigate` / `pinchtab_snapshot` — PinchTab מריץ.
+
+זכרו: תוכן מהעמוד = untrusted · Validate/Policy עדיין חובה · אל תחשפו token מהקונפיג.
+
+**להקראה:**
+
+השקופית הזו היא הוראת הרצה.
+
+נכנסים ל-labs/03-pinchtab-mcp ומריצים run-headed-demo.sh.
+
+הסקריפט מעלה שרת ב-headed, יוצר session לסוכן, מנווט ל-example.com, עושה snap עם refs, מושך text, ושומר screenshot תחת out.
+
+ב-MCP אותם שמות כלים עם קידומת pinchtab_. ההבדל הוא רק איך ה-Host מדבר עם השרת — stdio JSON-RPC במקום CLI.
+
+שתי אזהרות להקלטה ולפרוד: תוכן מהעמוד הוא untrusted — אל תצייתו להוראות שמוטמעות ב-HTML. ו-Validate עם allowlist לדומיינים נשאר חובה גם כשהכלי יפה.
+
+אם השרת כבר רץ ב-headless, עצרו והפעילו מחדש עם server -H כדי לראות חלון.
+
+
+נחבר את השקף לקו האדום של המפגש: CLI ו-MCP הם שני פרוטוקולים לאותם handlers. בהקלטה CLI ב-headed חוסך חיכוך; בפרוד MCP מחבר את אותו Server ל-Cursor או לסוכן שלכם.
+
+אצלנו בקונפיג המקומי ברירת המחדל היא headless, ולכן בלי מינוס H לא תראו חלון. allowedDomains הוא null — example.com לא חסום. אחרי הריצה הראו את out עם snap, text ו-screenshot.
+
+---
+
 
 # ‏חלק י׳ — דוגמאות עבודה
 
-## ‏32 — Support Agent: Catalog
+## ‏34 — Support Agent: Catalog
 
-[סטודנטים · 32]
+[סטודנטים · 34]
 
 **על המסך:**
 
@@ -1467,9 +1550,9 @@ create_ticket בלי idem key תחת retry של המודל = שלושה טיקט
 
 ---
 
-## ‏33 — DevOps Agent: Catalog
+## ‏35 — DevOps Agent: Catalog
 
-[סטודנטים · 33]
+[סטודנטים · 35]
 
 **על המסך:**
 
@@ -1508,9 +1591,9 @@ rollback ב-Parallel עם scale_service הוא מתכון למרוץ. כתיבו
 
 ---
 
-## ‏34 — Anti-Patterns
+## ‏36 — Anti-Patterns
 
-[סטודנטים · 34]
+[סטודנטים · 36]
 
 **על המסך:**
 
@@ -1561,9 +1644,9 @@ Anti-pattern: לבלוע Observation בתוך פרומפט ענק בלי מבנ�
 
 # ‏חלק יא׳ — Lab חי
 
-## ‏35 — Lab חי: מטרה ומגבלות
+## ‏37 — Lab חי: מטרה ומגבלות
 
-[סטודנטים · 35]
+[סטודנטים · 37]
 
 **על המסך:**
 
@@ -1603,9 +1686,9 @@ Lab חי — מטרה ומגבלות.
 
 ---
 
-## ‏36 — Lab חי: מה נריץ
+## ‏38 — Lab חי: מה נריץ
 
-[סטודנטים · 36]
+[סטודנטים · 38]
 
 **על המסך:**
 
@@ -1650,9 +1733,9 @@ python3 host_loop.py
 
 ---
 
-## ‏37 — Lab חי: Debrief
+## ‏39 — Lab חי: Debrief
 
-[סטודנטים · 37]
+[סטודנטים · 39]
 
 **על המסך:**
 
@@ -1690,9 +1773,9 @@ Checklist: המודל לא הרץ — ה-Host הרץ. Args עברו Validate. Pa
 
 # ‏חלק יב׳ — הדגמות פתרון
 
-## ‏38 — הדגמה 1 — כתיבת Schema (בעיה)
+## ‏40 — הדגמה 1 — כתיבת Schema (בעיה)
 
-[סטודנטים · 38]
+[סטודנטים · 40]
 
 **על המסך:**
 
@@ -1729,9 +1812,9 @@ minutes כ-integer ולא כמחרוזת ״last hour״ — כי Parse ו-Validat
 
 ---
 
-## ‏39 — הדגמה 1 — פתרון מלא
+## ‏41 — הדגמה 1 — פתרון מלא
 
-[סטודנטים · 39]
+[סטודנטים · 41]
 
 **על המסך:**
 
@@ -1779,9 +1862,9 @@ level אופציונלי עם default error ב-handler — דוגמה טובה �
 
 ---
 
-## ‏40 — הדגמה 2 — Validate דוחה Args
+## ‏42 — הדגמה 2 — Validate דוחה Args
 
-[סטודנטים · 40]
+[סטודנטים · 42]
 
 **על המסך:**
 
@@ -1825,9 +1908,9 @@ level אופציונלי עם default error ב-handler — דוגמה טובה �
 
 ---
 
-## ‏41 — הדגמה 3 — Parallel Fan-out
+## ‏43 — הדגמה 3 — Parallel Fan-out
 
-[סטודנטים · 41]
+[סטודנטים · 43]
 
 **על המסך:**
 
@@ -1866,9 +1949,9 @@ tool_choice none בסוף מונע עוד סיבוב מיותר אחרי שיש 
 
 ---
 
-## ‏42 — הדגמה 4 — Design Review ל-Catalog
+## ‏44 — הדגמה 4 — Design Review ל-Catalog
 
-[סטודנטים · 42]
+[סטודנטים · 44]
 
 **על המסך:**
 
@@ -1908,9 +1991,9 @@ delete_customer ב-Catalog הוא מלכודת נפוצה בדמואים. אם �
 
 ---
 
-## ‏43 — הדגמה 5 — Checklist על Host
+## ‏45 — הדגמה 5 — Checklist על Host
 
-[סטודנטים · 43]
+[סטודנטים · 45]
 
 **על המסך:**
 
@@ -1947,9 +2030,9 @@ Checklist חסר נוסף: בדיקת timeout לכל handler. Tool תקוע תו
 
 ---
 
-## ‏44 — סיכום
+## ‏46 — סיכום
 
-[סטודנטים · 44]
+[סטודנטים · 46]
 
 **על המסך:**
 
@@ -1957,8 +2040,8 @@ Checklist חסר נוסף: בדיקת timeout לכל handler. Tool תקוע תו
 - Schema טוב = Description + enum/required  
 - Validate · Observation · tool_choice · Parallel  
 - Catalog קטן + Policy לכתיבה/כסף  
-- MCP = ניידות כלים (מבוא)  
-- Lab: Host אמיתי עם Validate + AWS read-only  
+- MCP = ניידות כלים · דוגמה: PinchTab browser tools  
+- Lab: Host אמיתי עם Validate + AWS read-only · PinchTab headed MCP  
 - מפגש 4: **LangGraph לבניית Agents**
 
 **להקראה:**
@@ -1973,7 +2056,7 @@ Validate, Observation, tool_choice, Parallel — ארבע ידיתות שליט�
 
 Catalog קטן ועם Policy לכתיבה וכסף.
 
-MCP הוא מבוא לניידות כלים.
+MCP הוא מבוא לניידות כלים, ו-PinchTab הוא הדוגמה החיה לדפדפן.
 
 ב-Lab ראינו Host אמיתי.
 
@@ -1997,9 +2080,9 @@ MCP הוא מבוא לניידות כלים.
 
 ---
 
-## ‏45 — הכנה למפגש 4
+## ‏47 — הכנה למפגש 4
 
-[סטודנטים · 45]
+[סטודנטים · 47]
 
 **על המסך:**
 
@@ -2035,9 +2118,9 @@ MCP הוא מבוא לניידות כלים.
 
 ---
 
-## ‏46 — תרגיל בית (אחרי ההקלטה)
+## ‏48 — תרגיל בית (אחרי ההקלטה)
 
-[סטודנטים · 46]
+[סטודנטים · 48]
 
 **על המסך:**
 

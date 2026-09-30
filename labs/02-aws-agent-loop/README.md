@@ -1,19 +1,21 @@
-# Lab 02 — Agent Loop חי (Claude Code + AWS)
+<div dir="rtl" lang="he">
+
+# ‏Lab 02 — Agent Loop חי (Claude Code + AWS)
 
 תרגיל הקלטה למפגש 2. **עלות צפויה:** סנטים בודדים (קריאות `sts` / `cloudwatch` בלבד; אין יצירת משאבים).
 
-## מטרה
+## ‏מטרה
 
 לבנות/להריץ לולאת Planning → Execute → Observe → Re-plan מול AWS **בקריאה בלבד**, ולהדגים שהתוכנית משתנה אחרי Observation.
 
-## דרישות
+## ‏דרישות
 
-- AWS CLI / credentials עם הרשאות מינימליות:
+- AWS CLI / credentials עם הרשאות מינימליות:  
   `sts:GetCallerIdentity` · `ec2:DescribeInstances` · `cloudwatch:GetMetricData`
 - Python 3.10+ · `pip install boto3`
 - אופציונלי בהקלטה: Claude Code על הלאפטופ לבניית/שינוי הסקריפט בלייב
 
-## הרצה
+## ‏הרצה
 
 ```bash
 cd labs/02-aws-agent-loop
@@ -24,7 +26,7 @@ python3 agent_loop.py
 
 הסקריפט גם מגדיר כברירת מחדל `AWS_PROFILE=nashpazformatan` ו־`eu-north-1` אם לא הוגדר אחרת.
 
-## מה להראות בהקלטה (~15–20 דק׳)
+## ‏מה להראות בהקלטה (~15–20 דק׳)
 
 1. מטרה על המסך (שקופית Lab במצגת הסטודנטים)
 2. הרצת `agent_loop.py` — Plan ראשוני
@@ -32,6 +34,8 @@ python3 agent_loop.py
 4. Re-plan מקומי כשהמדדים ריקים / חלקיים
 5. עצירה עם Stop condition + סיכום Evidence
 
-## ניקוי
+## ‏ניקוי
 
 אין משאבים ליצור — אין מה למחוק. אל תריצו Tools שכותבים ל־Production.
+
+</div>
