@@ -102,15 +102,15 @@ User → Prompt → LLM → Response
 
 ## ‏10 — הרמות בקצרה
 
-| Level | שם | בקצרה |
+|‏ Level | שם | בקצרה |
 |---|---|---|
-| L0 | Rules Automation | בלי AI |
-| L1 | AI-Assisted Tools | אדם נוהג |
-| L2 | Custom Assistants | ריאקטיבי |
-| L3 | AI Workflows | תסריט + AI |
-| L4 | Task Agents | agency מוגבלת |
-| L5 | Collaborative Agents | צוות Agents |
-| L6 | Autonomous Ecosystems | חזית |
+|‏ L0 | Rules Automation | בלי AI |
+|‏ L1 | AI-Assisted Tools | אדם נוהג |
+|‏ L2 | Custom Assistants | ריאקטיבי |
+|‏ L3 | AI Workflows | תסריט + AI |
+|‏ L4 | Task Agents | agency מוגבלת |
+|‏ L5 | Collaborative Agents | צוות Agents |
+|‏ L6 | Autonomous Ecosystems | חזית |
 
 **הקו החשוב:** בין L3 ל־L4.
 
@@ -121,7 +121,7 @@ User → Prompt → LLM → Response
 - הרבה מוצרים נקראים Agent בלי יכולת אמיתית.
 - השאלה: *איזו רמה התהליך באמת דורש?*
 
-Agent אמיתי צריך את כולם:
+‏Agent אמיתי צריך את כולם:
 1. ‏Goal-orientation  
 2. ‏Autonomous planning  
 3. ‏Tool use & action  
@@ -336,13 +336,13 @@ Auto · Approval · Blocked
 
 | שדה | תוכן |
 |---|---|
-| Goal | משפט אחד |
-| Spectrum level | L? ולמה |
+|‏ Goal | משפט אחד |
+|‏ Spectrum level | L? ולמה |
 | Tools | 3–6 |
 | Decisions | 2–3 |
-| HITL | איפה אישור |
-| Stop | מתי עוצרים |
-| Risks | סיכון אחד |
+|‏ HITL | איפה אישור |
+|‏ Stop | מתי עוצרים |
+|‏ Risks | סיכון אחד |
 
 ---
 

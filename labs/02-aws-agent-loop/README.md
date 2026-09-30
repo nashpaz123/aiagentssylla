@@ -10,7 +10,7 @@
 
 ## ‏דרישות
 
-- AWS CLI / credentials עם הרשאות מינימליות:  
+- ‏AWS CLI / credentials עם הרשאות מינימליות:  
   `sts:GetCallerIdentity` · `ec2:DescribeInstances` · `cloudwatch:GetMetricData`
 - Python 3.10+ · `pip install boto3`
 - אופציונלי בהקלטה: Claude Code על הלאפטופ לבניית/שינוי הסקריפט בלייב
@@ -30,8 +30,8 @@ python3 agent_loop.py
 
 1. מטרה על המסך (שקופית Lab במצגת הסטודנטים)
 2. הרצת `agent_loop.py` — Plan ראשוני
-3. Observation מ־STS / CloudWatch
-4. Re-plan מקומי כשהמדדים ריקים / חלקיים
+3. ‏Observation מ־STS / CloudWatch
+4. ‏Re-plan מקומי כשהמדדים ריקים / חלקיים
 5. עצירה עם Stop condition + סיכום Evidence
 
 ## ‏ניקוי

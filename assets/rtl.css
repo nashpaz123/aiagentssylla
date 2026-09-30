@@ -1,13 +1,49 @@
 /* Hebrew RTL preview for course markdown */
-.vscode-body, body {
+.vscode-body,
+body {
   direction: rtl;
   text-align: right;
+  unicode-bidi: isolate;
 }
-.vscode-body ul, .vscode-body ol,
-body ul, body ol {
+
+.vscode-body p,
+.vscode-body li,
+.vscode-body h1,
+.vscode-body h2,
+.vscode-body h3,
+.vscode-body h4,
+.vscode-body h5,
+.vscode-body h6,
+.vscode-body blockquote,
+.vscode-body td,
+.vscode-body th,
+body p,
+body li,
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6,
+body blockquote,
+body td,
+body th {
   direction: rtl;
   text-align: right;
+  unicode-bidi: isolate;
 }
+
+.vscode-body ul,
+.vscode-body ol,
+body ul,
+body ol {
+  direction: rtl;
+  text-align: right;
+  unicode-bidi: isolate;
+  padding-right: 1.5em;
+  padding-left: 0;
+}
+
 .vscode-body blockquote,
 body blockquote {
   border-right: 4px solid #ccc;
@@ -15,7 +51,22 @@ body blockquote {
   padding-right: 1em;
   padding-left: 0;
 }
-.vscode-body table th, .vscode-body table td,
-body table th, body table td {
+
+.vscode-body table th,
+.vscode-body table td,
+body table th,
+body table td {
   text-align: right;
+}
+
+/* Keep code LTR so identifiers stay readable */
+.vscode-body pre,
+.vscode-body code,
+.vscode-body .hljs,
+body pre,
+body code,
+body .hljs {
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: isolate;
 }

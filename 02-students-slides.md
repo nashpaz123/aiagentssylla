@@ -22,7 +22,7 @@
 </p>
 
 **Agent Architecture**  
-Planning ו-Execution
+‏Planning ו-Execution
 
 ![Goal → Plan → Actions](assets/02/01-goal-plan-actions.png)
 
@@ -32,10 +32,10 @@ Planning ו-Execution
 
 | נבנה היום | מפגש 1 (בקצרה) |
 |---|---|
-| Planning / Decomposition | מהו Agent מול Chat |
+|‏ Planning / Decomposition | מהו Agent מול Chat |
 | Open/Closed · ReAct · Plan-and-Execute | Spectrum L0–L6 |
-| Validation · Failure · Budget · State | HITL ברמת מבוא |
-| Lab חי: Claude Code + AWS (read-only) | |
+|‏ Validation · Failure · Budget · State | HITL ברמת מבוא |
+|‏ Lab חי: Claude Code + AWS (read-only) | |
 
 ---
 
@@ -71,7 +71,7 @@ GOAL → PLAN → ACTIONS → RESULT
 
 | פשוטה | מורכבת |
 |---|---|
-| Ping לשרת | חקירת אי־יציבות מאז Release |
+|‏ Ping לשרת | חקירת אי־יציבות מאז Release |
 | כמעט בלי Planning | סדרת החלטות + Evidence |
 
 תרחישי עבודה:
@@ -100,11 +100,11 @@ GOAL → PLAN → ACTIONS → RESULT
 
 | סוג | דוגמה |
 |---|---|
-| Missing step | Deploy בלי Security Scan |
-| Wrong order | Rollback לפני אבחון |
-| Wrong assumption | ״תמיד Runner אשם״ |
-| Overplanning | 40 צעדים למשימה של 5 |
-| Underplanning | ״תתקן את הפרוד״ כצעד אחד |
+|‏ Missing step | Deploy בלי Security Scan |
+|‏ Wrong order | Rollback לפני אבחון |
+|‏ Wrong assumption | ״תמיד Runner אשם״ |
+|‏ Overplanning | 40 צעדים למשימה של 5 |
+|‏ Underplanning | ״תתקן את הפרוד״ כצעד אחד |
 
 ---
 
@@ -134,7 +134,7 @@ GOAL → PLAN → ACTIONS → RESULT
 7. Identify most likely cause
 ```
 
-Hypothesis ראשונית — לא חוזה.
+‏Hypothesis ראשונית — לא חוזה.
 
 ---
 
@@ -165,7 +165,7 @@ Hypothesis ראשונית — לא חוזה.
 
 | Open | Closed |
 |---|---|
-| Plan → ביצוע ליניארי | Plan → Execute → Observe → Re-plan? |
+|‏ Plan → ביצוע ליניארי | Plan → Execute → Observe → Re-plan? |
 | תהליכים יציבים | עולם עם הפתעות |
 
 **לזכור:** Workflow קבוע עדיף כשאין אי־ודאות וכל הצעדים ידועים מראש.
@@ -213,8 +213,8 @@ Reason: enough evidence? → report or dig deeper
 
 סימנים:
 - אותם Tools שוב ושוב  
-- Confidence לא עולה  
-- Tokens עולים בלי Evidence חדש  
+- ‏Confidence לא עולה  
+- ‏Tokens עולים בלי Evidence חדש  
 
 טיפול: Iteration budget · Tool allow-list · ״אין Evidence חדש ×2 → Stop/Escalate״.
 
@@ -284,9 +284,9 @@ search_tickets() → 200 OK → { "tickets": [] }
 
 | מקרה | משמעות |
 |---|---|
-| 200 + [] | ״לא מצאתי״ — מידע! |
-| 200 + schema שבור | Step fail |
-| 200 + נתונים לא רלוונטיים | Semantic fail |
+|‏ 200 + [] | ״לא מצאתי״ — מידע! |
+|‏ 200 + schema שבור | Step fail |
+|‏ 200 + נתונים לא רלוונטיים | Semantic fail |
 | Timeout | Tool fail → typed retry |
 
 ---
@@ -325,9 +325,9 @@ Backoff: 1s → 2s → 4s → 8s (עם תקרה)
 **הגדרה:** Iteration Limit · Stop Condition.
 
 דוגמה למשימת דוח:
-- Success: קובץ + 4 סעיפים + נתונים נבדקו  
-- Fail: אין גישה למקור > 2 ניסיונות  
-- Stop: 12 tool calls / 5 דק׳ / Confidence גבוהה מספיק  
+- ‏Success: קובץ + 4 סעיפים + נתונים נבדקו  
+- ‏Fail: אין גישה למקור > 2 ניסיונות  
+- ‏Stop: 12 tool calls / 5 דק׳ / Confidence גבוהה מספיק  
 
 **לזכור:** בלי תקרה Agent יכול לשרוף Tokens/כסף/זמן בלי סוף.
 
@@ -340,7 +340,7 @@ Backoff: 1s → 2s → 4s → 8s (עם תקרה)
 **הגדרה:** Parallel Execution.
 
 - מקבילי כשאין תלות · זהירות מ-rate limits  
-- Branches: `severity==high` → HITL (עדיף בקוד)
+- ‏Branches: `severity==high` → HITL (עדיף בקוד)
 
 ---
 
@@ -348,8 +348,8 @@ Backoff: 1s → 2s → 4s → 8s (עם תקרה)
 
 | בקוד | במודל |
 |---|---|
-| Policy, timeouts, retries טכניים | בחירת כיוון, השערות, סיכום |
-| Allow-list של Tools | ניסוח / סיווג |
+|‏ Policy, timeouts, retries טכניים | בחירת כיוון, השערות, סיכום |
+|‏ Allow-list של Tools | ניסוח / סיווג |
 
 ```python
 if severity == "critical":
@@ -374,7 +374,7 @@ if severity == "critical":
 ![Incident Agent](assets/02/09-incident-agent.png)
 
 מטרה: latency גבוה ב-API · סיבה סבירה · המלצה.  
-Tools קריאה בלבד: metrics · logs · deployments · incidents
+‏Tools קריאה בלבד: metrics · logs · deployments · incidents
 
 זרימה: Confirm → Correlate deploy → Logs → Re-plan לפי Evidence
 
@@ -393,7 +393,7 @@ get_logs        → DB timeout
 REPLAN          → pool metrics + before/after + prior incidents
 ```
 
-Workflow קבוע היה ממשיך גם אחרי שיש תשובה. Agent יכול Stop מוקדם.
+‏Workflow קבוע היה ממשיך גם אחרי שיש תשובה. Agent יכול Stop מוקדם.
 
 ---
 
@@ -439,8 +439,8 @@ python3 agent_loop.py
 
 שימו לב בלייב:
 1. Initial plan  
-2. Observation מ-STS / CloudWatch  
-3. Local re-plan אם 0 נקודות מדד  
+2. ‏Observation מ-STS / CloudWatch  
+3. ‏Local re-plan אם 0 נקודות מדד  
 4. Stop + findings  
 
 אופציונלי: לשנות Plan ב-Claude Code ולהריץ שוב.
@@ -450,10 +450,10 @@ python3 agent_loop.py
 ## ‏32 — Lab חי: Debrief
 
 מה ראינו?
-- Plan ≠ חוזה  
-- Observation ריק עדיין Evidence  
-- Re-plan מקומי זול מ-Global  
-- Stop condition עצר לפני לולאה מיותרת  
+- ‏Plan ≠ חוזה  
+- ‏Observation ריק עדיין Evidence  
+- ‏Re-plan מקומי זול מ-Global  
+- ‏Stop condition עצר לפני לולאה מיותרת  
 
 **לזכור אחרי Lab:** allow-list של Tools · max iterations · אין write בלי HITL.
 
@@ -473,7 +473,7 @@ Correlation ≠ Proof. Low / Medium / High.
 
 ## ‏34 — Wrong Assumption (Release)
 
-Agent מניח: `Build → Test → Deploy`  
+‏Agent מניח: `Build → Test → Deploy`  
 ארגון דורש: Scan → Approvals → Staging → Prod Approval.
 
 בלי Constraints התוכנית ״עובדת״ במעבדה ונכשלת בפרוד.
@@ -530,9 +530,9 @@ Agent מניח: `Build → Test → Deploy`
 
 **הגדרה:** Idempotency.
 
-- `idempotency_key` ליצירות  
+- ‏`idempotency_key` ליצירות  
 - Timeouts: Tool / Agent / Task  
-- Quality ↔ Cost ↔ Time · סננו Context ל-LLM  
+- ‏Quality ↔ Cost ↔ Time · סננו Context ל-LLM  
 
 ---
 
@@ -540,12 +540,12 @@ Agent מניח: `Build → Test → Deploy`
 
 ## ‏39 — Anti-Patterns
 
-1. 40 צעדים במקום 5  
+1. ‏40 צעדים במקום 5  
 2. Tool success = Goal success  
 3. בלי Max iterations  
 4. בלי HITL על מסוכן  
-5. Prompt ארוך במקום State+Plan  
-6. ReAct בלי Evidence gate (חדש)
+5. ‏Prompt ארוך במקום State+Plan  
+6. ‏ReAct בלי Evidence gate (חדש)
 
 ---
 
@@ -559,7 +559,7 @@ Tools: `get_job_status` · `get_console_log` · `get_recent_changes` · `get_run
 1. מה חייבים לדעת קודם?  
 2. חובה כל ה-Tools?  
 3. אם `get_console_log` נכשל — מה עכשיו?  
-4. Stop מול Escalation  
+4. ‏Stop מול Escalation  
 
 ---
 
@@ -567,22 +567,22 @@ Tools: `get_job_status` · `get_console_log` · `get_recent_changes` · `get_run
 
 1. **קודם:** job id · זמן כשל · branch/commit · הודעת כשל קצרה מהסטטוס  
 2. **לא חובה כל הכלים** — מתחילים ב-`get_job_status` ואז `get_console_log`  
-3. **Log נכשל:** `get_recent_changes` · `search_previous_failures` · אם אין נתונים → Escalate  
-4. **Stop:** Evidence ממוקד + המלצה אחת · **Escalate:** אין גישה ללוג/שינויים אחרי 2 ניסיונות  
+3. ‏**Log נכשל:** `get_recent_changes` · `search_previous_failures` · אם אין נתונים → Escalate  
+4. ‏**Stop:** Evidence ממוקד + המלצה אחת · **Escalate:** אין גישה ללוג/שינויים אחרי 2 ניסיונות  
 
-Plan לדוגמה: status → log → (אם ImportError) recent_changes → confirm dependency → report.
+‏Plan לדוגמה: status → log → (אם ImportError) recent_changes → confirm dependency → report.
 
 ---
 
 ## ‏42 — הדגמה 2 — Re-plan מלא
 
 הנחה ראשונית: Runner אשם.  
-Observation: Runner תקין · חסר dependency ב-`requirements.txt`.
+‏Observation: Runner תקין · חסר dependency ב-`requirements.txt`.
 
-- **Plan מקורי:** runner_info → console → conclude runner  
-- **Local re-plan:** אחרי runner תקין → חפש בלוג `ModuleNotFound` / השווה requirements ל-lock  
-- **Global:** רק אם מתברר שזה בכלל job אחר / pipeline אחר  
-- **Stop:** נמצא החבילה החסרה + שורת לוגו התומכת · המלצה: להוסיף ל-requirements ולהריץ מחדש  
+- ‏**Plan מקורי:** runner_info → console → conclude runner  
+- ‏**Local re-plan:** אחרי runner תקין → חפש בלוג `ModuleNotFound` / השווה requirements ל-lock  
+- ‏**Global:** רק אם מתברר שזה בכלל job אחר / pipeline אחר  
+- ‏**Stop:** נמצא החבילה החסרה + שורת לוגו התומכת · המלצה: להוסיף ל-requirements ולהריץ מחדש  
 
 ---
 
@@ -591,9 +591,9 @@ Observation: Runner תקין · חסר dependency ב-`requirements.txt`.
 עבור CI Agent מההדגמה — סטטוס לדוגמה:
 
 - [x] Goal+Success · [x] Budget · [x] Failure typed  
-- [x] Policy read-only · [x] HITL על re-run job  
-- [x] State · [ ] Trace מלא (חסר — נוסיף במפגש Observability)  
-- [x] Timeouts · [x] Cost limit על tool calls  
+- ‏[x] Policy read-only · [x] HITL על re-run job  
+- ‏[x] State · [ ] Trace מלא (חסר — נוסיף במפגש Observability)  
+- ‏[x] Timeouts · [x] Cost limit על tool calls  
 
 ---
 
@@ -607,26 +607,26 @@ Tools: `read_logs` · `get_metrics` · `restart_service` · `scale_service` · `
 2. **HITL:** restart / scale / deploy  
 3. **אסור או תמיד HITL+שני מאשרים:** delete_resource  
 4. **דטרמיניסטי בקוד:** allow-list · severity→HITL · max iterations  
-5. **Stop:** סיבה סבירה + Confidence בינוני+ בלי תיקון, או אחרי תיקון מאושר + בדיקת מדד  
+5. ‏**Stop:** סיבה סבירה + Confidence בינוני+ בלי תיקון, או אחרי תיקון מאושר + בדיקת מדד  
 6. **אנטי-לולאה:** budget · אין retry עיוור על permission denied  
-7. **Trace:** כל Tool call + החלטה + אישור אדם בלוג מובנה  
+7. ‏**Trace:** כל Tool call + החלטה + אישור אדם בלוג מובנה  
 
 ---
 
 ## ‏45 — סיכום
 
-- Planning = Hypothesis + מגבלות  
+- ‏Planning = Hypothesis + מגבלות  
 - Closed loop + Validation + Budget/Stop  
 - Tool ≠ Goal success  
-- State · Policy · Idempotency שייכים לארכיטקטורה  
-- Lab: ראינו Re-plan על Observation אמיתי/ריק  
+- ‏State · Policy · Idempotency שייכים לארכיטקטורה  
+- ‏Lab: ראינו Re-plan על Observation אמיתי/ריק  
 - מפגש 3: **Tool Use ו-Function Calling**
 
 ---
 
 ## ‏46 — הכנה למפגש 3
 
-- 3 Tools מהעבודה: קלט · פלט · מסוכן?/HITL  
+- ‏3 Tools מהעבודה: קלט · פלט · מסוכן?/HITL  
 - בונוס: סמנו איזה מהם Idempotent
 
 </div>

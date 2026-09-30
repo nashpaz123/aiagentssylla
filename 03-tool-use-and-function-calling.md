@@ -20,9 +20,9 @@
 # ‏הנחיות למרצה (הקלטה)
 
 - מקריאים את בלוק **להקראה** במלואו; מותר להרחיב אבל לא לקצר את הפירוט על הדוגמאות.
-- **`[סטודנטים · N]`** — גללו למספר N לפני ההקראה.
+- ‏**`[סטודנטים · N]`** — גללו למספר N לפני ההקראה.
 - **אין** סימוני המתנה לקהל. שאלות רטוריות נענות מיד בקול המרצה.
-- **`[Lab חי]`** — מסוף לפי `labs/03-tool-calling/`.
+- ‏**`[Lab חי]`** — מסוף לפי `labs/03-tool-calling/`.
 - כל בלוק קוד אצל המרצה מופיע גם אצל הסטודנטים באותו מספר.
 
 ---
@@ -31,7 +31,7 @@
 
 ## ‏1 — כותרת
 
-[סטודנטים · 1]
+‏[סטודנטים · 1]
 
 **על המסך:**
 
@@ -68,7 +68,7 @@
 
 ## ‏2 — מה היום (+ חזרה קצרה על מפגש 2)
 
-[סטודנטים · 2]
+‏[סטודנטים · 2]
 
 **על המסך:**
 
@@ -77,7 +77,7 @@
 | חוזה Tool · Schema · Protocol | Planning / Decomposition |
 | tool_choice · Parallel · Validate | Closed Loop · ReAct · P&E |
 | Catalog · Policy · MCP + PinchTab | Budget · Stop · Policy Gate |
-| Lab: Host + PinchTab headed | Lab לולאת Plan→Observe |
+|‏ Lab: Host + PinchTab headed | Lab לולאת Plan→Observe |
 
 **להקראה:**
 
@@ -99,7 +99,7 @@
 
 ## ‏3 — שאלת המפגש + תוצרים
 
-[סטודנטים · 3]
+‏[סטודנטים · 3]
 
 **על המסך:**
 
@@ -151,7 +151,7 @@
 
 ## ‏4 — Tool = חוזה מול העולם
 
-[סטודנטים · 4]
+‏[סטודנטים · 4]
 
 **על המסך:**
 
@@ -188,7 +188,7 @@ GOAL → (LLM) tool_call → (HOST) execute → OBSERVE → …
 
 ## ‏5 — Act בלי Tool מול Act עם Tool
 
-[סטודנטים · 5]
+‏[סטודנטים · 5]
 
 **על המסך:**
 
@@ -223,7 +223,7 @@ GOAL → (LLM) tool_call → (HOST) execute → OBSERVE → …
 
 ## ‏6 — ארבעת חלקי כלי טוב
 
-[סטודנטים · 6]
+‏[סטודנטים · 6]
 
 **על המסך:**
 
@@ -238,21 +238,21 @@ GOAL → (LLM) tool_call → (HOST) execute → OBSERVE → …
 
 ארבעה חלקים לכל כלי טוב.
 
-Name — מזהה יציב לקוד. לא שירה. לא do_stuff. שם שתוכלו לחפש בלוגים.
+ה-Name — מזהה יציב לקוד. לא שירה. לא do_stuff. שם שתוכלו לחפש בלוגים.
 
-Description — זה ה-Prompt של הכלי. המודל בוחר לפי הטקסט הזה. כתבו מתי להשתמש ומתי לא.
+ה-Description — זה ה-Prompt של הכלי. המודל בוחר לפי הטקסט הזה. כתבו מתי להשתמש ומתי לא.
 
-Schema — פרמטרים עם טיפוסים, required, ו-enum איפה שאפשר.
+ה-Schema — פרמטרים עם טיפוסים, required, ו-enum איפה שאפשר.
 
-Side-effects — האם זה read, write, money, או delete. זה מה שמזין Policy Gate.
+ה-Side-effects — האם זה read, write, money, או delete. זה מה שמזין Policy Gate.
 
 אם אחד מארבעת החלקים חלש — הכלי ״עובד בדמו״ ונכשל בפרוד. במיוחד Description עמום ו-Schema רחב מדי.
 
-Side-effects הם לא הערת שוליים בתיעוד. הם שדה החלטה. צוות טוב מסמן לכל כלי: read / write / money / delete / external-comms. אחר כך Policy Gate קורא את הסימון.
+‏Side-effects הם לא הערת שוליים בתיעוד. הם שדה החלטה. צוות טוב מסמן לכל כלי: read / write / money / delete / external-comms. אחר כך Policy Gate קורא את הסימון.
 
-Name צריך להיות יציב לאורך גרסאות. אם שיניתם התנהגות דרמטית — שנו שם או גרסה ב-description, אחרת Trace ישן משקר.
+‏Name צריך להיות יציב לאורך גרסאות. אם שיניתם התנהגות דרמטית — שנו שם או גרסה ב-description, אחרת Trace ישן משקר.
 
-Side-effect external-comms חשוב: שליחת מייל או הודעה ללקוח. גם בלי כסף וגם בלי delete — זה בלתי הפיך חברתית. לרוב HITL או תבניות מאושרות.
+‏Side-effect external-comms חשוב: שליחת מייל או הודעה ללקוח. גם בלי כסף וגם בלי delete — זה בלתי הפיך חברתית. לרוב HITL או תבניות מאושרות.
 
 ---
 
@@ -260,7 +260,7 @@ Side-effect external-comms חשוב: שליחת מייל או הודעה ללק�
 
 ## ‏7 — חמשת השלבים
 
-[סטודנטים · 7]
+‏[סטודנטים · 7]
 
 **על המסך:**
 
@@ -302,7 +302,7 @@ Side-effect external-comms חשוב: שליחת מייל או הודעה ללק�
 
 ## ‏8 — מי מבצע? המודל מציע, הקוד מריץ
 
-[סטודנטים · 8]
+‏[סטודנטים · 8]
 
 **על המסך:**
 
@@ -340,15 +340,15 @@ LLM  →  answer | more tool_calls
 
 ## ‏9 — תפקידי הודעות (Message Roles)
 
-[סטודנטים · 9]
+‏[סטודנטים · 9]
 
 **על המסך:**
 
-| Role | מה יש בפנים |
+|‏ Role | מה יש בפנים |
 |---|---|
-| `user` | מטרה / הקשר |
-| `assistant` | טקסט ו/או `tool_calls[]` |
-| `tool` | תוצאת כלי + `tool_call_id` |
+|‏ `user` | מטרה / הקשר |
+|‏ `assistant` | טקסט ו/או `tool_calls[]` |
+|‏ `tool` | תוצאת כלי + `tool_call_id` |
 | (שוב) `assistant` | תשובה או קריאות נוספות |
 
 ספקים שונים (OpenAI / Anthropic / Gemini) — אותו רעיון, סינטקס שונה.
@@ -357,11 +357,11 @@ LLM  →  answer | more tool_calls
 
 תפקידי ההודעות.
 
-user — המטרה וההקשר.
+תפקיד user — המטרה וההקשר.
 
-assistant — טקסט ו/או מערך tool_calls.
+תפקיד assistant — טקסט ו/או מערך tool_calls.
 
-tool — תוצאת הכלי מחוברת ל-id של הקריאה.
+תפקיד tool — תוצאת הכלי מחוברת ל-id של הקריאה.
 
 ואז שוב assistant — תשובה או קריאות נוספות.
 
@@ -371,19 +371,19 @@ tool — תוצאת הכלי מחוברת ל-id של הקריאה.
 
 כשמסכמים למשתמש אחרי כלים — העדיפו tool_choice none כדי שלא ימשיך לקרוא סתם.
 
-Anthropic שם tool_result בתוך הודעת user. OpenAI משתמש ב-role tool. כשתקראו דוקס — חפשו את הרעיון, לא את שם השדה בלבד.
+‏Anthropic שם tool_result בתוך הודעת user. OpenAI משתמש ב-role tool. כשתקראו דוקס — חפשו את הרעיון, לא את שם השדה בלבד.
 
 ---
 
 ## ‏10 — למה `tool_call_id` חובה
 
-[סטודנטים · 10]
+‏[סטודנטים · 10]
 
 **על המסך:**
 
-- Parallel: כמה תוצאות בבת אחת  
+- ב-Parallel: כמה תוצאות בבת אחת  
 - המודל חייב להתאים תוצאה לקריאה  
-- Trace ו-Debug: מי ביקש מה ומתי  
+- ל-Trace ו-Debug: מי ביקש מה ומתי  
 
 בלי id → בלבול בין תוצאות, במיוחד ב-Parallel.
 
@@ -399,11 +399,11 @@ Anthropic שם tool_result בתוך הודעת user. OpenAI משתמש ב-role t
 
 בלי id — במיוחד תחת Parallel — אתם בונים מערכת שמבולבלת בהצלחה שברירית.
 
-בלוגים מובנים שמרו: run_id, turn, tool_call_id, tool_name, ok, latency_ms, policy_decision. בלי זה Multi-Agent ו-Graphs במפגשים הבאים יהיו קופסה שחורה.
+שמרו לוגים מובנים עם השדות: run_id, turn, tool_call_id, tool_name, ok, latency_ms, policy_decision. בלי זה Multi-Agent ו-Graphs במפגשים הבאים יהיו קופסה שחורה.
 
 אם ספק לא נותן id — צרו id ב-Host לפני ההרצה ושמרו מיפוי. אל תזרקו את העוגן.
 
-tool_call_id גם מאפשר ביטול חלקי: אם call אחד נכשל ו-call אחר הצליח באותו batch, אתם יודעים מה לשייך ל-retry.
+גם ביטול חלקי נשען על tool_call_id: אם קריאה אחת נכשלה ואחרת הצליחה באותו batch, אתם יודעים מה לשייך ל-retry.
 
 ---
 
@@ -411,7 +411,7 @@ tool_call_id גם מאפשר ביטול חלקי: אם call אחד נכשל ו-c
 
 ## ‏11 — JSON Schema לפרמטרים
 
-[סטודנטים · 11]
+‏[סטודנטים · 11]
 
 **על המסך:**
 
@@ -440,7 +440,7 @@ tool_call_id גם מאפשר ביטול חלקי: אם call אחד נכשל ו-c
 
 שימו לב לתיאור: Fetch order by id for support. Do NOT use for refunds. זה לא קישוט. זה Prompt שמקטין סיכוי שהמודל ישתמש בכלי הלא נכון.
 
-order_id הוא string required. fields הוא enum. זה מצמצם הזיות.
+‏order_id הוא string required. fields הוא enum. זה מצמצם הזיות.
 
 זה הפורמט שתוכלו להעתיק לכל כלי בקורס. Name, Description, Parameters עם properties ו-required.
 
@@ -448,15 +448,15 @@ order_id הוא string required. fields הוא enum. זה מצמצם הזיות.
 
 נקרא את ה-Schema שורה־שורה כאילו זה PR.
 
-name: get_order — ברור.
+‏name: get_order — ברור.
 
-description: כולל Do NOT use for refunds — מעולה.
+‏description: כולל Do NOT use for refunds — מעולה.
 
-order_id: string עם דוגמה ORD-9912 — מוריד הזיות פורמט.
+‏order_id: string עם דוגמה ORD-9912 — מוריד הזיות פורמט.
 
-fields: enum — מצמצם פלט וטוקנים.
+‏fields: enum — מצמצם פלט וטוקנים.
 
-required רק order_id — fields יכול לקבל default ב-handler.
+‏required רק order_id — fields יכול לקבל default ב-handler.
 
 אם fields לא נשלח — handler יכול להחזיר status כברירת מחדל. תעדו את זה ב-description של fields כ-optional עם default status.
 
@@ -464,7 +464,7 @@ required רק order_id — fields יכול לקבל default ב-handler.
 
 ## ‏12 — Description = Prompt לכלי
 
-[סטודנטים · 12]
+‏[סטודנטים · 12]
 
 **על המסך:**
 
@@ -478,7 +478,7 @@ required רק order_id — fields יכול לקבל default ב-handler.
 
 **להקראה:**
 
-Description הוא Prompt לכלי.
+‏Description הוא Prompt לכלי.
 
 המודל לא קורא את קוד ה-Python שלכם. הוא קורא את הטקסט ששמתם ב-description של הכלי ושל הפרמטרים.
 
@@ -496,40 +496,40 @@ Description הוא Prompt לכלי.
 
 ## ‏13 — enum · required · defaults
 
-[סטודנטים · 13]
+‏[סטודנטים · 13]
 
 **על המסך:**
 
 | טכניקה | למה |
 |---|---|
-| `enum` | חוסם `"Celsius"` / `"C"` / `"celsius"` |
-| `required` | רק מה שבאמת חייב |
-| Optional + default בקוד | פחות הזדמנות להזיה |
-| `type` מדויק | פחות parse errors |
+|‏ `enum` | חוסם `"Celsius"` / `"C"` / `"celsius"` |
+|‏ `required` | רק מה שבאמת חייב |
+|‏ Optional + default בקוד | פחות הזדמנות להזיה |
+|‏ `type` מדויק | פחות parse errors |
 
 **להקראה:**
 
-enum, required, ו-defaults.
+‏enum, required, ו-defaults.
 
-enum חוסם וריאציות כתיב. בלי enum תקבלו Celsius ו-C ו-celsius באותו אחר צהריים.
+‏enum חוסם וריאציות כתיב. בלי enum תקבלו Celsius ו-C ו-celsius באותו אחר צהריים.
 
-required רק למה שבאמת חייב. יותר מדי required מפחיד את המודל לבחור כלי אחר, או ממציא ערכים.
+‏required רק למה שבאמת חייב. יותר מדי required מפחיד את המודל לבחור כלי אחר, או ממציא ערכים.
 
-Optional עם default בקוד — פחות הזדמנות להזיה.
+‏Optional עם default בקוד — פחות הזדמנות להזיה.
 
 טיפוס מדויק — פחות parse errors ב-Host.
 
-defaults בקוד לא ב-Schema הם לעיתים עדיפים: המודל לא חייב להמציא ערך, וה-handler יודע את ברירת המחדל העסקית.
+‏defaults בקוד לא ב-Schema הם לעיתים עדיפים: המודל לא חייב להמציא ערך, וה-handler יודע את ברירת המחדל העסקית.
 
-integer עם טווח ב-description זה טוב; עוד יותר טוב — Validate ב-Host על 1..180 גם אם המודל התעלם מהטקסט.
+‏integer עם טווח ב-description זה טוב; עוד יותר טוב — Validate ב-Host על 1..180 גם אם המודל התעלם מהטקסט.
 
-enum עם עשרות ערכים יכול להיות כבד בטוקנים. לפעמים עדיף string עם Validate עסקי ודוגמאות. הבחירה היא tradeoff — תעדו אותה.
+‏enum עם עשרות ערכים יכול להיות כבד בטוקנים. לפעמים עדיף string עם Validate עסקי ודוגמאות. הבחירה היא tradeoff — תעדו אותה.
 
 ---
 
 ## ‏14 — Schema טוב מול גרוע
 
-[סטודנטים · 14]
+‏[סטודנטים · 14]
 
 **על המסך:**
 
@@ -537,9 +537,9 @@ enum עם עשרות ערכים יכול להיות כבד בטוקנים. לפ�
 
 | טוב | גרוע |
 |---|---|
-| `get_order` + תיאור צר | `do_stuff` + "helpful" |
+|‏ `get_order` + תיאור צר | `do_stuff` + "helpful" |
 | `order_id` string required | `data: string` |
-| `fields` enum | `options: object` חופשי |
+|‏ `fields` enum | `options: object` חופשי |
 
 **להקראה:**
 
@@ -561,7 +561,7 @@ enum עם עשרות ערכים יכול להיות כבד בטוקנים. לפ�
 
 ## ‏15 — הדגמה: שני Schemas לאותו צורך
 
-[סטודנטים · 15]
+‏[סטודנטים · 15]
 
 **על המסך:**
 
@@ -588,7 +588,7 @@ enum עם עשרות ערכים יכול להיות כבד בטוקנים. לפ�
 
 נראה מה קורה ב-handler של handle(q). מישהו יעשה if "הזמנה" in q ואז regex. זה שביר. Schema טוב דוחף מבנה לפני הקוד העסקי.
 
-Policy על refund נפרד מה-Schema של get_order. אל תערבבו: Schema מתאר כלי אחד; Policy מחליטה אם מותר להפעיל כלי אחר.
+‏Policy על refund נפרד מה-Schema של get_order. אל תערבבו: Schema מתאר כלי אחד; Policy מחליטה אם מותר להפעיל כלי אחר.
 
 אחרי שעוברים ל-get_order — כתבו טסט Host: args חסרים נדחים, enum שגוי נדחה, order תקין עובר. Schema בלי טסטים הוא מצגת.
 
@@ -598,7 +598,7 @@ Policy על refund נפרד מה-Schema של get_order. אל תערבבו: Schem
 
 ## ‏16 — tool_choice
 
-[סטודנטים · 16]
+‏[סטודנטים · 16]
 
 **על המסך:**
 
@@ -606,78 +606,78 @@ Policy על refund נפרד מה-Schema של get_order. אל תערבבו: Schem
 
 | מצב | שימוש |
 |---|---|
-| `auto` | ברירת מחדל |
-| `required` / `any` | חובה לגעת בכלי (אסור תשובה ריקה) |
-| named | כפיית כלי ספציפי |
-| `none` | טקסט בלבד — בלי קריאות |
+|‏ `auto` | ברירת מחדל |
+|‏ `required` / `any` | חובה לגעת בכלי (אסור תשובה ריקה) |
+|‏ named | כפיית כלי ספציפי |
+|‏ `none` | טקסט בלבד — בלי קריאות |
 
 **להקראה:**
 
-tool_choice על המסך.
+‏tool_choice על המסך.
 
-auto — המודל מחליט אם לקרוא לכלי.
+‏auto — המודל מחליט אם לקרוא לכלי.
 
-required או any — חובה לגעת בכלי. מתאים כשאסור לענות בלי Evidence.
+‏required או any — חובה לגעת בכלי. מתאים כשאסור לענות בלי Evidence.
 
-named — כפיית כלי ספציפי. מתאים לשלב קבוע ב-Workflow.
+‏named — כפיית כלי ספציפי. מתאים לשלב קבוע ב-Workflow.
 
-none — טקסט בלבד. מתאים לסיכום אחרי שיש Observations, או לשאלת הבהרה.
+‏none — טקסט בלבד. מתאים לסיכום אחרי שיש Observations, או לשאלת הבהרה.
 
-tool_choice הוא ידית שליטה של הארכיטקט, לא קישוט של ה-SDK.
+‏tool_choice הוא ידית שליטה של הארכיטקט, לא קישוט של ה-SDK.
 
-named tool_choice שימושי בבדיקות: אתם כופים get_metrics כדי לבדוק את ה-handler בלי שהמודל יברח ל-get_logs. זה כלי הוראה וגם כלי פרוד ל-Workflow קשיח.
+‏named tool_choice שימושי בבדיקות: אתם כופים get_metrics כדי לבדוק את ה-handler בלי שהמודל יברח ל-get_logs. זה כלי הוראה וגם כלי פרוד ל-Workflow קשיח.
 
-required בלי כלים רלוונטיים ב-catalog ייצור קריאות מוזרות. קודם Router, אחר כך required.
+‏required בלי כלים רלוונטיים ב-catalog ייצור קריאות מוזרות. קודם Router, אחר כך required.
 
-auto לא אומר בלי שליטה. אתם עדיין שולטים ב-catalog, ב-Router, וב-Policy. auto רק אומר שהמודל בוחר אם ומתי מתוך מה שהותר.
+‏auto לא אומר בלי שליטה. אתם עדיין שולטים ב-catalog, ב-Router, וב-Policy. auto רק אומר שהמודל בוחר אם ומתי מתוך מה שהותר.
 
 ---
 
 ## ‏17 — מתי `none` / מתי `required`
 
-[סטודנטים · 17]
+‏[סטודנטים · 17]
 
 **על המסך:**
 
-- `none`: סיכום אחרי Evidence, שאלת הבהרה, Escalate  
-- `required`: חייבים Evidence לפני תשובה (*״מה הסטטוס בפרוד?״*)  
-- named: שלב קבוע ב-Workflow (תמיד `get_metrics` קודם)
+- ‏`none`: סיכום אחרי Evidence, שאלת הבהרה, Escalate  
+- ‏`required`: חייבים Evidence לפני תשובה (*״מה הסטטוס בפרוד?״*)  
+- ‏named: שלב קבוע ב-Workflow (תמיד `get_metrics` קודם)
 
 **להקראה:**
 
 מתי none ומתי required.
 
-none: אחרי שאספתם Evidence ואתם רוצים תשובה למשתמש בלי עוד קריאות. או Escalate. או הבהרה.
+‏none: אחרי שאספתם Evidence ואתם רוצים תשובה למשתמש בלי עוד קריאות. או Escalate. או הבהרה.
 
-required: כשהשאלה דורשת מציאות. מה הסטטוס בפרוד. אל תתנו למודל להמציא.
+‏required: כשהשאלה דורשת מציאות. מה הסטטוס בפרוד. אל תתנו למודל להמציא.
 
-named: תמיד get_metrics קודם ב-Incident מסוים, כי ככה ה-Policy שלכם.
+‏named: תמיד get_metrics קודם ב-Incident מסוים, כי ככה ה-Policy שלכם.
 
 השילוב עם מפגש 2 ברור: tool_choice הוא עוד שכבה מעל Budget ו-Stop.
 
 דוגמה מלאה: משתמש שואל ״תסכם לי מה מצאנו״. tool_choice none. משתמש שואל ״מה CPU עכשיו״. required או auto עם כלי מדדים בcatalog. משתמש בתהליך onboarding קבוע. named create_customer_draft בשלב 2.
 
-none שימושי גם אחרי POLICY deny: להסביר למשתמש שצריך אישור אדם, בלי לנסות כלי אחר מסוכן.
+‏none שימושי גם אחרי POLICY deny: להסביר למשתמש שצריך אישור אדם, בלי לנסות כלי אחר מסוכן.
 
 ---
 
 ## ‏18 — Router דטרמיניסטי מול בחירת מודל
 
-[סטודנטים · 18]
+‏[סטודנטים · 18]
 
 **על המסך:**
 
 | קוד | מודל |
 |---|---|
-| if intent==billing → billing tools | בוחר מתוך catalog מלא |
-| allow-list לפי תפקיד | גמיש יותר, יקר יותר |
+|‏ if intent==billing → billing tools | בוחר מתוך catalog מלא |
+|‏ allow-list לפי תפקיד | גמיש יותר, יקר יותר |
 | חוסם כלים מסוכנים מראש | עלול לבחור כלי מסוכן |
 
 היברידי נפוץ: Router מצמצם catalog → מודל בוחר בפנים.
 
 **להקראה:**
 
-Router דטרמיניסטי מול בחירת מודל.
+‏Router דטרמיניסטי מול בחירת מודל.
 
 קוד יכול לצמצם: אם הכוונה billing — רק כלי billing. זה זול וצפוי.
 
@@ -685,11 +685,11 @@ Router דטרמיניסטי מול בחירת מודל.
 
 היברידי נפוץ: Router מצמצם את הרשימה, ואז המודל בוחר בתוך הרשימה המצומצמת. ככה שומרים גמישות בלי לתת למודל מאה כלים בקונטקסט.
 
-Router יכול להיות קוד פשוט על כוונות, או מסווג קטן, או כללי מוצר. החשוב: הפלט שלו הוא allow-list של שמות כלים, לא תשובה למשתמש.
+‏Router יכול להיות קוד פשוט על כוונות, או מסווג קטן, או כללי מוצר. החשוב: הפלט שלו הוא allow-list של שמות כלים, לא תשובה למשתמש.
 
 כשה-Router טועה ומצמצם יותר מדי — המודל לא יכול לקרוא לכלי הנכון. לכן לוגים על החלטת Router הם חובה.
 
-Router גרוע: regex על מילות מפתח בלי לוג. Router טוב: מחזיר רשימת כלים + סיבת צמצום ב-Trace.
+‏Router גרוע: regex על מילות מפתח בלי לוג. Router טוב: מחזיר רשימת כלים + סיבת צמצום ב-Trace.
 
 ---
 
@@ -697,7 +697,7 @@ Router גרוע: regex על מילות מפתח בלי לוג. Router טוב: מ
 
 ## ‏19 — Parallel tool calls
 
-[סטודנטים · 19]
+‏[סטודנטים · 19]
 
 **על המסך:**
 
@@ -714,7 +714,7 @@ Parallel tool calls.
 
 על המסך הצד הימני מראה get_metrics, get_logs, get_deploys ואז fan-in.
 
-Parallel חוסך זמן כשהקריאות עצמאיות. הוא לא קסם. הוא חוזה תזמון שאתם חייבים להבין.
+‏Parallel חוסך זמן כשהקריאות עצמאיות. הוא לא קסם. הוא חוזה תזמון שאתם חייבים להבין.
 
 מימוש Parallel ב-Host יכול להיות threads או asyncio או סתם תור. להוראה חשוב העיקרון: אוספים את כל התוצאות לפני הצעד הבא של המודל, ושומרים ids.
 
@@ -726,7 +726,7 @@ Parallel חוסך זמן כשהקריאות עצמאיות. הוא לא קסם. 
 
 ## ‏20 — מתי אסור Parallel
 
-[סטודנטים · 20]
+‏[סטודנטים · 20]
 
 **על המסך:**
 
@@ -759,7 +759,7 @@ Parallel חוסך זמן כשהקריאות עצמאיות. הוא לא קסם. 
 
 ## ‏21 — Fan-out / Fan-in בדוגמת Incident
 
-[סטודנטים · 21]
+‏[סטודנטים · 21]
 
 **על המסך:**
 
@@ -768,11 +768,11 @@ fan-out: get_metrics || get_logs || get_deploys
 fan-in:  observe-all → hypothesis → (optional) get_trace
 ```
 
-Parallel חוסך latency כשהקריאות **עצמאיות**.
+‏Parallel חוסך latency כשהקריאות **עצמאיות**.
 
 **להקראה:**
 
-Fan-out ו-Fan-in בדוגמת Incident.
+‏Fan-out ו-Fan-in בדוגמת Incident.
 
 שלושה כלי קריאה במקביל. אחר כך Observation משותף. אחר כך Hypothesis. ורק אז אולי get_trace ממוקד.
 
@@ -780,7 +780,7 @@ Fan-out ו-Fan-in בדוגמת Incident.
 
 אחרי fan-in אל תזרקו את כל ה-JSON הגולמי חזרה למודל אם הוא ענק. סכמו ב-Host: top errors, p95 latency, last deploy id. Observation קצר = פחות טוקנים ויותר סיגנל.
 
-fan-in ב-Host יכול לבחור להשמיט לוגים ארוכים ולהשאיר רק error lines. זו אחריות הנדסית, לא תפקיד המודל.
+‏fan-in ב-Host יכול לבחור להשמיט לוגים ארוכים ולהשאיר רק error lines. זו אחריות הנדסית, לא תפקיד המודל.
 
 ---
 
@@ -788,7 +788,7 @@ fan-in ב-Host יכול לבחור להשמיט לוגים ארוכים ולהש
 
 ## ‏22 — Validate לפני Execute
 
-[סטודנטים · 22]
+‏[סטודנטים · 22]
 
 **על המסך:**
 
@@ -799,29 +799,29 @@ fan-in ב-Host יכול לבחור להשמיט לוגים ארוכים ולהש
 3. Policy (allow-list, HITL, budget)  
 4. רק אז handler  
 
-Args לא חוקיים → Observation של שגיאה, **לא** crash של ה-Agent.
+‏Args לא חוקיים → Observation של שגיאה, **לא** crash של ה-Agent.
 
 **להקראה:**
 
-Validate לפני Execute.
+‏Validate לפני Execute.
 
 ארבעה שלבים: Parse, Schema validate, Policy, ורק אז handler.
 
-Args לא חוקיים מחזירים Observation של שגיאה. לא מפילים את כל ה-Agent. זה מאפשר למודל לתקן קריאה במקום לסיים את התהליך בחריגה מכוערת.
+‏Args לא חוקיים מחזירים Observation של שגיאה. לא מפילים את כל ה-Agent. זה מאפשר למודל לתקן קריאה במקום לסיים את התהליך בחריגה מכוערת.
 
 הדיאגרמה על המסך היא המשמעת: אין קיצור דרך מ-tool_call ישר ל-side effect.
 
-Policy באמצע Validate ו-Execute הוא המקום ל-HITL. לא אחרי שה-delete כבר רץ. לפני.
+‏Policy באמצע Validate ו-Execute הוא המקום ל-HITL. לא אחרי שה-delete כבר רץ. לפני.
 
-Validate הוא גם המקום לבדוק הרשאות משתמש: האם ה-user רשאי לראות order_id הזה. Schema לא מספיק. Authorization חי ב-Host.
+‏Validate הוא גם המקום לבדוק הרשאות משתמש: האם ה-user רשאי לראות order_id הזה. Schema לא מספיק. Authorization חי ב-Host.
 
-Policy deny צריך Observation ברור: ok false, code POLICY, message needs_hitl. אחרת המודל ינסה שוב את אותו כלי.
+‏Policy deny צריך Observation ברור: ok false, code POLICY, message needs_hitl. אחרת המודל ינסה שוב את אותו כלי.
 
 ---
 
 ## ‏23 — פורמט Observation מומלץ
 
-[סטודנטים · 23]
+‏[סטודנטים · 23]
 
 **על המסך:**
 
@@ -855,21 +855,21 @@ Policy deny צריך Observation ברור: ok false, code POLICY, message needs_
 
 שמרו על יציבות שדות ה-Observation בין גרסאות. אם שיניתם ok ל-success בלי מיגרציה — שברתם פרומפטים ולוגים. גרסאו חוזים כמו API.
 
-meta.latency_ms עוזר לתקציב. meta.request_id עוזר לקורלציה עם לוגי השירות. תוסיפו מה שצריך — אבל יציב.
+‏meta.latency_ms עוזר לתקציב. meta.request_id עוזר לקורלציה עם לוגי השירות. תוסיפו מה שצריך — אבל יציב.
 
 ---
 
 ## ‏24 — Error as Observation
 
-[סטודנטים · 24]
+‏[סטודנטים · 24]
 
 **על המסך:**
 
 | גישה רעה | גישה טובה |
 |---|---|
-| Exception בולע את הלולאה | מחזירים `ok:false` למודל |
+|‏ Exception בולע את הלולאה | מחזירים `ok:false` למודל |
 | מסתירים stack בפרומפט | קוד קצר + הודעה לפעולה |
-| Retry עיוור על 403 | Stop / Escalate / כלי אחר |
+|‏ Retry עיוור על 403 | Stop / Escalate / כלי אחר |
 
 חיבור למפגש 2: Failure Handling + Budget.
 
@@ -885,13 +885,13 @@ Error as Observation.
 
 מפת error codes קטנה עוזרת: SCHEMA, POLICY, NOT_FOUND, TIMEOUT, UPSTREAM_5XX, RATE_LIMIT. המודל והקוד יכולים להגיב אחרת לכל קוד. הודעה חופשית בלבד חוזרת לאותו בלבול.
 
-RATE_LIMIT: backoff דטרמיניסטי ב-Host עדיף על תקווה שהמודל יחכה. המודל לא שעון.
+‏RATE_LIMIT: backoff דטרמיניסטי ב-Host עדיף על תקווה שהמודל יחכה. המודל לא שעון.
 
 ---
 
 ## ‏25 — Argument Hallucination
 
-[סטודנטים · 25]
+‏[סטודנטים · 25]
 
 **על המסך:**
 
@@ -899,7 +899,7 @@ RATE_LIMIT: backoff דטרמיניסטי ב-Host עדיף על תקווה שהמ
 
 הגנות:
 - enum + required  
-- Validate ב-Host  
+- ‏Validate ב-Host  
 - דוגמאות ב-description  
 - לא לתת `object` חופשי בלי schema פנימי
 
@@ -925,7 +925,7 @@ Argument Hallucination.
 
 ## ‏26 — כמה Tools בקונטקסט
 
-[סטודנטים · 26]
+‏[סטודנטים · 26]
 
 **על המסך:**
 
@@ -954,30 +954,30 @@ Argument Hallucination.
 
 ## ‏27 — Allow-list + Policy Gate לכלים
 
-[סטודנטים · 27]
+‏[סטודנטים · 27]
 
 **על המסך:**
 
 | רמת סיכון | דוגמה | מדיניות |
 |---|---|---|
-| Read | `get_logs` | אוטומטי |
+|‏ Read | `get_logs` | אוטומטי |
 | Soft write | `restart_service` | HITL |
-| Hard write | `delete_resource` | אסור / שני מאשרים |
+|‏ Hard write | `delete_resource` | אסור / שני מאשרים |
 | Money | `issue_refund` | HITL + audit |
 
 חיבור ישיר ל-Policy Gate ממפגש 2.
 
 **להקראה:**
 
-Allow-list ו-Policy Gate לכלים.
+‏Allow-list ו-Policy Gate לכלים.
 
-Read כמו get_logs — אוטומטי.
+‏Read כמו get_logs — אוטומטי.
 
-Soft write כמו restart — HITL.
+‏Soft write כמו restart — HITL.
 
-Hard write כמו delete — אסור או שני מאשרים.
+‏Hard write כמו delete — אסור או שני מאשרים.
 
-Money כמו refund — HITL ו-Audit.
+‏Money כמו refund — HITL ו-Audit.
 
 זה אותו רעיון ממפגש 2, עכשיו ברמת הכלי הבודד. Catalog בלי רמות סיכון הוא רשימת משאלות, לא מערכת.
 
@@ -989,26 +989,26 @@ Money כמו refund — HITL ו-Audit.
 
 ## ‏28 — Idempotency של Tools
 
-[סטודנטים · 28]
+‏[סטודנטים · 28]
 
 **על המסך:**
 
 - Idempotent: `get_order`, `describe_instances`  
 - לא: `charge_card`, `create_ticket` בלי idempotency key  
 
-Retry בטוח רק על Idempotent (או עם key).
+‏Retry בטוח רק על Idempotent (או עם key).
 
 **להקראה:**
 
-Idempotency של Tools.
+‏Idempotency של Tools.
 
-get_order ו-describe_instances הם Idempotent. אפשר retry.
+‏get_order ו-describe_instances הם Idempotent. אפשר retry.
 
-charge_card ו-create_ticket בלי מפתח — לא. Retry יכול לחייב פעמיים או לפתוח עשרה טיקטים.
+‏charge_card ו-create_ticket בלי מפתח — לא. Retry יכול לחייב פעמיים או לפתוח עשרה טיקטים.
 
 אם חייבים retry על כתיבה — Idempotency key בצד ה-Host והשירות.
 
-Idempotency key אפשר להעביר כפרמטר או לייצר ב-Host מ-hash של user+intent+window. העיקר שאותו retry לא ייצור ישות כפולה.
+‏Idempotency key אפשר להעביר כפרמטר או לייצר ב-Host מ-hash של user+intent+window. העיקר שאותו retry לא ייצור ישות כפולה.
 
 גם read יכול להיות לא Idempotent אם הוא מקדם cursor או מושך הודעה מתור. סמנו נכון.
 
@@ -1016,26 +1016,26 @@ Idempotency key אפשר להעביר כפרמטר או לייצר ב-Host מ-ha
 
 ## ‏29 — Secrets ו-PII
 
-[סטודנטים · 29]
+‏[סטודנטים · 29]
 
 **על המסך:**
 
 - אל תשימו מפתחות ב-Schema / ב-Description  
 - אל תדפיסו secrets ב-Observation ללוג פתוח  
-- Redact PII ב-Trace כשצריך  
-- Credentials רק ב-Host env / IAM
+- ‏Redact PII ב-Trace כשצריך  
+- ‏Credentials רק ב-Host env / IAM
 
 **להקראה:**
 
-Secrets ו-PII.
+‏Secrets ו-PII.
 
 אל תשימו מפתחות ב-Schema או ב-Description. אל תדפיסו secrets ב-Observation ללוג פתוח. Redact PII ב-Trace כשצריך. Credentials רק ב-Host env או IAM.
 
-Function Calling לא מבטל אבטחה בסיסית. הוא מגדיל את משטח ההדלפה אם אתם רשלנים בלוגים.
+‏Function Calling לא מבטל אבטחה בסיסית. הוא מגדיל את משטח ההדלפה אם אתם רשלנים בלוגים.
 
 גם מפתחות זמניים ב-Observation הם סכנה אם הלוג נשלח לצד שלישי לניתוח. Redact לפני ship ל-log aggregator כשצריך.
 
-PII ב-arguments גם מסוכן בלוגים של פרומפט. שקלו hashing של customer email ב-Trace.
+‏PII ב-arguments גם מסוכן בלוגים של פרומפט. שקלו hashing של customer email ב-Trace.
 
 ---
 
@@ -1043,7 +1043,7 @@ PII ב-arguments גם מסוכן בלוגים של פרומפט. שקלו hashin
 
 ## ‏30 — למה MCP?
 
-[סטודנטים · 30]
+‏[סטודנטים · 30]
 
 **על המסך:**
 
@@ -1062,45 +1062,45 @@ PII ב-arguments גם מסוכן בלוגים של פרומפט. שקלו hashin
 
 למה לא צוללים היום: MCP אקוסיסטם מתפתח, והקורס רוצה קודם חוזה Function Calling יציב בראש. בלי החוזה — MCP רק מצמיד צינורות לכלים גרועים.
 
-MCP מופיע בכלים כמו Claude Desktop ו-Cursor. ההיכרות היום היא כדי שתזהו את השכבה כשתפגשו אותה.
+‏MCP מופיע בכלים כמו Claude Desktop ו-Cursor. ההיכרות היום היא כדי שתזהו את השכבה כשתפגשו אותה.
 
 ---
 
 ## ‏31 — Host · Client · Server
 
-[סטודנטים · 31]
+‏[סטודנטים · 31]
 
 **על המסך:**
 
 | רכיב | תפקיד |
 |---|---|
-| Host | אפליקציית ה-Agent |
-| Client | מתחבר ל-Servers |
-| Server | חושף Tools / Resources |
+|‏ Host | אפליקציית ה-Agent |
+|‏ Client | מתחבר ל-Servers |
+|‏ Server | חושף Tools / Resources |
 
-Function Calling נשאר: המודל עדיין מציע; ה-Host עדיין מריץ.
+‏Function Calling נשאר: המודל עדיין מציע; ה-Host עדיין מריץ.
 
 **להקראה:**
 
 Host, Client, Server.
 
-Host — אפליקציית ה-Agent.
+‏Host — אפליקציית ה-Agent.
 
-Client — מתחבר ל-Servers.
+‏Client — מתחבר ל-Servers.
 
-Server — חושף Tools ו-Resources.
+‏Server — חושף Tools ו-Resources.
 
-Function Calling נשאר: המודל מציע, ה-Host מריץ. MCP משנה איך מגלים ומחברים כלים, לא את כלל הברזל של הביצוע.
+‏Function Calling נשאר: המודל מציע, ה-Host מריץ. MCP משנה איך מגלים ומחברים כלים, לא את כלל הברזל של הביצוע.
 
 אם Host שלכם כבר יודע Validate ו-Policy, חיבור MCP Server הוא תוספת discovery. אם Host לא יודע — MCP לא יציל אתכם.
 
-Server שמחזיר מאה כלים בלי תיאורים טובים מחזיר אתכם לבעיית Catalog — רק עם פרוטוקול יפה מסביב.
+‏Server שמחזיר מאה כלים בלי תיאורים טובים מחזיר אתכם לבעיית Catalog — רק עם פרוטוקול יפה מסביב.
 
 ---
 
 ## ‏32 — PinchTab כ-MCP Server לדפדפן
 
-[סטודנטים · 32]
+‏[סטודנטים · 32]
 
 **על המסך:**
 
@@ -1114,7 +1114,7 @@ Server שמחזיר מאה כלים בלי תיאורים טובים מחזיר 
 `navigate` · `snapshot` · `click` · `fill` · `get_text` · `screenshot`
 
 מה להראות מקומית:  
-`~/.pinchtab/` · `config.json` · `profiles/` · Skill תחת `~/.claude/skills/pinchtab/`
+‏`~/.pinchtab/` · `config.json` · `profiles/` · Skill תחת `~/.claude/skills/pinchtab/`
 
 Lab: [`labs/03-pinchtab-mcp/`](labs/03-pinchtab-mcp/)
 
@@ -1122,13 +1122,13 @@ Lab: [`labs/03-pinchtab-mcp/`](labs/03-pinchtab-mcp/)
 
 עכשיו דוגמה שתראו גם מחוץ למצגת: PinchTab.
 
-PinchTab הוא MCP Server לדפדפן. ה-Host — למשל Cursor — מתחבר עם command pinchtab ו-args mcp. מהרגע הזה לסוכן יש כלים: navigate, snapshot, click, fill, get_text, screenshot.
+‏PinchTab‏ הוא MCP Server לדפדפן. ה-Host — למשל Cursor — מתחבר עם command pinchtab ו-args mcp. מהרגע הזה לסוכן יש כלים: navigate, snapshot, click, fill, get_text, screenshot.
 
 שימו לב למשמעת של המפגש: המודל עדיין רק מציע. PinchTab הוא ה-Host-side executor מול Chrome. Schema של כל כלי, הרשאות domains, ו-Policy — חיים בצד של PinchTab ושלכם, לא בתוך המודל.
 
 יש Lab קטן תחת labs/03-pinchtab-mcp. בהקלטה אפשר להראות את קובץ ה-MCP ואת רשימת הכלים. אתם תריצו אצלכם ב-headed כדי לראות את החלון.
 
-PinchTab מוכיח ש-MCP הוא צינור לחוזים כאלה — לא קסם.
+‏PinchTab מוכיח ש-MCP הוא צינור לחוזים כאלה — לא קסם.
 
 בהקלטה כדאי גם לפתוח את התיקיות המקומיות: `~/.pinchtab/`, את `config.json` בלי לחשוף token, את `profiles/`, ואת ה-Skill תחת `~/.claude/skills/pinchtab/` או `~/.cursor/skills/pinchtab/`. זה מחבר MCP מרעיון לקבצים אמיתיים על הדיסק.
 
@@ -1136,7 +1136,7 @@ PinchTab מוכיח ש-MCP הוא צינור לחוזים כאלה — לא קס
 
 ## ‏33 — הדגמה: headed browser (תריצו אצלכם)
 
-[סטודנטים · 33]
+‏[סטודנטים · 33]
 
 **על המסך:**
 
@@ -1146,10 +1146,10 @@ cd labs/03-pinchtab-mcp
 ```
 
 מה תראו:
-1. Chrome **גלוי** (`pinchtab server -H`) — ברירת המחדל אצלנו headless  
-2. `nav` + `snap` → refs כמו `e5`  
-3. `text` + `screenshot` תחת `out/`  
-4. (בהקלטה) סיור קצר בתיקיות המקומיות למעלה  
+1. ‏Chrome **גלוי** (`pinchtab server -H`) — ברירת המחדל אצלנו headless  
+2. ‏`nav` + `snap` → refs כמו `e5`  
+3. ‏`text` + `screenshot` תחת `out/`  
+4. ‏(בהקלטה) סיור קצר בתיקיות המקומיות למעלה  
 
 אותו חוזה ב-MCP: המודל מציע `pinchtab_navigate` / `pinchtab_snapshot` — PinchTab מריץ.
 
@@ -1175,7 +1175,7 @@ cd labs/03-pinchtab-mcp
 
 ## ‏34 — Support Agent: Catalog
 
-[סטודנטים · 34]
+‏[סטודנטים · 34]
 
 **על המסך:**
 
@@ -1190,11 +1190,11 @@ cd labs/03-pinchtab-mcp
 
 **להקראה:**
 
-Support Agent — Catalog לדוגמה.
+‏Support Agent — Catalog לדוגמה.
 
-get_customer ו-get_order — read, אוטומטי.
+‏get_customer ו-get_order — read, אוטומטי.
 
-create_ticket — write עם idempotency key.
+‏create_ticket — write עם idempotency key.
 
 issue_refund — money, HITL.
 
@@ -1202,78 +1202,78 @@ issue_refund — money, HITL.
 
 נריץ בראש את תרחיש 441/9912: get_customer → get_order → תשובה. בלי refund. אם המודל מנסה issue_refund — Policy Gate עוצרת. זה הצלחה של Catalog, לא כישלון של המודל בלבד.
 
-create_ticket בלי idem key תחת retry של המודל = שלושה טיקטים לאותה בעיה. זה כאב תמיכה קלאסי.
+‏create_ticket בלי idem key תחת retry של המודל = שלושה טיקטים לאותה בעיה. זה כאב תמיכה קלאסי.
 
 ---
 
 ## ‏35 — DevOps Agent: Catalog
 
-[סטודנטים · 35]
+‏[סטודנטים · 35]
 
 **על המסך:**
 
 | Tool | Parallel-safe? | Policy |
 |---|---|---|
-| `get_metrics` | כן | auto |
-| `get_logs` | כן | auto |
-| `get_deploys` | כן | auto |
-| `rollback` | לא (write) | HITL |
+|‏ `get_metrics` | כן | auto |
+|‏ `get_logs` | כן | auto |
+|‏ `get_deploys` | כן | auto |
+|‏ `rollback` | לא (write) | HITL |
 
-Fan-out על שלושת ה-read, אחר כך החלטה על rollback.
+‏Fan-out על שלושת ה-read, אחר כך החלטה על rollback.
 
 **להקראה:**
 
 DevOps Agent — Catalog.
 
-get_metrics, get_logs, get_deploys — Parallel-safe ו-auto.
+‏get_metrics, get_logs, get_deploys — Parallel-safe ו-auto.
 
-rollback — write, HITL, לא Parallel עם כתיבות אחרות.
+‏rollback — write, HITL, לא Parallel עם כתיבות אחרות.
 
 הזרימה: Fan-out על שלושת ה-read, אחר כך החלטה אנושית או מדיניות על rollback. זה מחבר Tool Use ל-Incident Agent ממפגש 2.
 
 אם get_deploys מראה שחרור לפני עשר דקות ו-get_logs מראה spike — יש Hypothesis. rollback עדיין HITL. Tool Use נכון יודע מתי לעצור לבקש אדם.
 
-rollback ב-Parallel עם scale_service הוא מתכון למרוץ. כתיבות תשתית — Sequential ומאושרות.
+‏rollback ב-Parallel עם scale_service הוא מתכון למרוץ. כתיבות תשתית — Sequential ומאושרות.
 
 ---
 
 ## ‏36 — Anti-Patterns
 
-[סטודנטים · 36]
+‏[סטודנטים · 36]
 
 **על המסך:**
 
 1. כלי אחד ענק `do_anything`  
-2. Schema בלי enum/required  
+2. ‏Schema בלי enum/required  
 3. ביצוע בלי Validate  
-4. Parallel על כתיבות תלויות  
-5. Catalog של 80 כלים בלי Router  
-6. Secrets בתוך Observation  
+4. ‏Parallel על כתיבות תלויות  
+5. ‏Catalog של 80 כלים בלי Router  
+6. ‏Secrets בתוך Observation  
 7. לבלבל Tool success עם Goal success (מפגש 2!)
 
 **להקראה:**
 
-Anti-Patterns — נקריא אחד אחד.
+‏Anti-Patterns — נקריא אחד אחד.
 
 כלי אחד ענק do_anything.
 
-Schema בלי enum ו-required.
+‏Schema בלי enum ו-required.
 
 ביצוע בלי Validate.
 
-Parallel על כתיבות תלויות.
+‏Parallel על כתיבות תלויות.
 
-Catalog של שמונים כלים בלי Router.
+‏Catalog של שמונים כלים בלי Router.
 
-Secrets בתוך Observation.
+‏Secrets בתוך Observation.
 
 ולבלבל Tool success עם Goal success — מה שמפגש 2 כבר הזהיר מפניו.
 
 אם אתם עושים Review לצוות — התחילו מהרשימה הזו. היא תופסת שמונים אחוז מהכאב.
 
-Anti-pattern נוסף שלא על המסך: כפילות כלים עם שמות כמעט זהים. get_order ו-fetch_order ו-order_lookup. המודל מתפזר. אחד חזק עדיף משלושה חלשים.
+‏Anti-pattern נוסף שלא על המסך: כפילות כלים עם שמות כמעט זהים. get_order ו-fetch_order ו-order_lookup. המודל מתפזר. אחד חזק עדיף משלושה חלשים.
 
-Anti-pattern: לבלוע Observation בתוך פרומפט ענק בלי מבנה. תמיד העדיפו JSON קצר עם ok.
+‏Anti-pattern: לבלוע Observation בתוך פרומפט ענק בלי מבנה. תמיד העדיפו JSON קצר עם ok.
 
 ---
 
@@ -1281,21 +1281,21 @@ Anti-pattern: לבלוע Observation בתוך פרומפט ענק בלי מבנ�
 
 ## ‏37 — Lab חי: מטרה ומגבלות
 
-[סטודנטים · 37]
+‏[סטודנטים · 37]
 
 **על המסך:**
 
 **מטרה:** להריץ Host שמקבל `tool_calls` לפי Schema, מאמת, מריץ כלים (כולל AWS read-only), ומחזיר Observations.
 
 מגבלות:
-- Read-only בלבד ל-AWS  
+- ‏Read-only בלבד ל-AWS  
 - פרופיל: `nashpazformatan` · אזור: `eu-north-1`  
 - בלי יצירת משאבים  
 - Lab: [`labs/03-tool-calling/`](labs/03-tool-calling/)
 
 **להקראה:**
 
-Lab חי — מטרה ומגבלות.
+‏Lab חי — מטרה ומגבלות.
 
 המטרה: להריץ Host שמקבל tool_calls לפי Schema, מאמת, מריץ כלים כולל AWS בקריאה בלבד, ומחזיר Observations.
 
@@ -1305,7 +1305,7 @@ Lab חי — מטרה ומגבלות.
 
 במפגש 2 ה-Lab הדגים Re-plan. היום ה-Lab מדגים את שכבת ה-Tool עצמה. שניהם read-only בכוונה — כדי שנוכל להקליט בלי פחד.
 
-[Lab חי] עכשיו עוברים למסוף. אם AWS לא זמין — עדיין תראו את echo_status ואת דחיית ה-SCHEMA. כלי AWS ייכשלו עם EXEC ברור ב-Observation, וזה גם שיעור.
+‏[Lab חי] עכשיו עוברים למסוף. אם AWS לא זמין — עדיין תראו את echo_status ואת דחיית ה-SCHEMA. כלי AWS ייכשלו עם EXEC ברור ב-Observation, וזה גם שיעור.
 
 הפרופיל nashpazformatan זהה למפגש 2 בכוונה — אותה סביבת הקלטה, חוקים מוכרים, בלי הפתעות IAM באמצע צילום.
 
@@ -1313,7 +1313,7 @@ Lab חי — מטרה ומגבלות.
 
 ## ‏38 — Lab חי: מה נריץ
 
-[סטודנטים · 38]
+‏[סטודנטים · 38]
 
 **על המסך:**
 
@@ -1324,10 +1324,10 @@ python3 host_loop.py
 ```
 
 תראו:
-1. Catalog עם Schemas  
-2. `tool_calls` מסקריפט-מודל  
+1. ‏Catalog עם Schemas  
+2. ‏`tool_calls` מסקריפט-מודל  
 3. Validate → Execute → Observe  
-4. Parallel של שני כלי-קריאה  
+4. ‏Parallel של שני כלי-קריאה  
 5. סיכום + Stop
 
 **להקראה:**
@@ -1340,7 +1340,7 @@ python3 host_loop.py
 
 שימו לב שוב: המודל המדומה לא מריץ כלום. ה-Host מריץ. זה כל המפגש במשפט אחד.
 
-[Lab חי] בהרצה תראו קודם קריאה עם label=healthy שנדחית. אחר כך parallel של echo_status תקין, sts_whoami, ו-list_ec2_running. אחר כך סיכום.
+‏[Lab חי] בהרצה תראו קודם קריאה עם label=healthy שנדחית. אחר כך parallel של echo_status תקין, sts_whoami, ו-list_ec2_running. אחר כך סיכום.
 
 אני אקריא בקול את ה-tool_call_id כדי לקבע את ההרגל.
 
@@ -1350,22 +1350,22 @@ python3 host_loop.py
 
 ## ‏39 — Lab חי: Debrief
 
-[סטודנטים · 39]
+‏[סטודנטים · 39]
 
 **על המסך:**
 
 Checklist:
-- [ ] המודל לא הרץ — ה-Host הרץ  
-- [ ] Args עברו Validate  
-- [ ] Parallel החזיר שני `tool_call_id`  
-- [ ] שגיאת Schema חזרה כ-Observation  
-- [ ] אין כתיבה ל-AWS
+- ‏[ ] המודל לא הרץ — ה-Host הרץ  
+- ‏[ ] Args עברו Validate  
+- ‏[ ] Parallel החזיר שני `tool_call_id`  
+- ‏[ ] שגיאת Schema חזרה כ-Observation  
+- ‏[ ] אין כתיבה ל-AWS
 
 **להקראה:**
 
-Debrief של ה-Lab.
+‏Debrief של ה-Lab.
 
-Checklist: המודל לא הרץ — ה-Host הרץ. Args עברו Validate. Parallel החזיר שני ids או יותר. שגיאת Schema חזרה כ-Observation. אין כתיבה ל-AWS.
+‏Checklist: המודל לא הרץ — ה-Host הרץ. Args עברו Validate. Parallel החזיר שני ids או יותר. שגיאת Schema חזרה כ-Observation. אין כתיבה ל-AWS.
 
 אם אחד מהם נכשל אצלכם אחר כך בבית — תתקנו לפני שאתם מוסיפים עוד כלים. בסיס שבור עם Catalog גדול רק מגדיל את הרעש.
 
@@ -1379,14 +1379,14 @@ Checklist: המודל לא הרץ — ה-Host הרץ. Args עברו Validate. Pa
 
 ## ‏40 — הדגמה 1 — כתיבת Schema (בעיה)
 
-[סטודנטים · 40]
+‏[סטודנטים · 40]
 
 **על המסך:**
 
 תרחיש: כלי לחיפוש לוגים לפי שירות וחלון זמן.
 
 על המסך נכתוב יחד (המרצה):
-- Name · Description (מתי כן/לא)  
+- ‏Name · Description (מתי כן/לא)  
 - params: `service` enum, `minutes` int, `level` enum  
 - required · side-effect = read
 
@@ -1402,13 +1402,13 @@ Checklist: המודל לא הרץ — ה-Host הרץ. Args עברו Validate. Pa
 
 בהדגמה אני נמנע מ-service כ-string חופשי. enum של api/worker/payments מכריח החלטה מוצרית: אילו שירותים ה-Agent בכלל רשאי לראות.
 
-minutes כ-integer ולא כמחרוזת ״last hour״ — כי Parse ו-Validate אוהבים מספרים, לא NLP בתוך args.
+‏minutes כ-integer ולא כמחרוזת ״last hour״ — כי Parse ו-Validate אוהבים מספרים, לא NLP בתוך args.
 
 ---
 
 ## ‏41 — הדגמה 1 — פתרון מלא
 
-[סטודנטים · 41]
+‏[סטודנטים · 41]
 
 **על המסך:**
 
@@ -1428,7 +1428,7 @@ minutes כ-integer ולא כמחרוזת ״last hour״ — כי Parse ו-Validat
 }
 ```
 
-Policy: auto · Idempotent: כן · Parallel-safe: כן.
+‏Policy: auto · Idempotent: כן · Parallel-safe: כן.
 
 **להקראה:**
 
@@ -1436,19 +1436,19 @@ Policy: auto · Idempotent: כן · Parallel-safe: כן.
 
 שימו לב ל-description שאוסר deploy ו-rollback. ל-enum של service. לטווח הדקות בתיאור. ל-required.
 
-Policy: auto. Idempotent: כן. Parallel-safe: כן.
+‏Policy: auto. Idempotent: כן. Parallel-safe: כן.
 
 זה Schema שתוכלו לשים בפרוד אחרי שתממשו handler אמיתי. החוזה כבר נכון.
 
 אחרי Schema כזה, ה-handler יכול לקרוא למערכת לוגים אמיתית. החוזה לא משתנה. זו הנקודה: Schema יציב, מימוש מתחלף.
 
-level אופציונלי עם default error ב-handler — דוגמה טובה ל-optional חכם.
+‏level אופציונלי עם default error ב-handler — דוגמה טובה ל-optional חכם.
 
 ---
 
 ## ‏42 — הדגמה 2 — Validate דוחה Args
 
-[סטודנטים · 42]
+‏[סטודנטים · 42]
 
 **על המסך:**
 
@@ -1484,7 +1484,7 @@ level אופציונלי עם default error ב-handler — דוגמה טובה �
 
 ## ‏43 — הדגמה 3 — Parallel Fan-out
 
-[סטודנטים · 43]
+‏[סטודנטים · 43]
 
 **על המסך:**
 
@@ -1507,7 +1507,7 @@ tool_calls: [get_metrics, get_logs, get_deploys]   # parallel
 
 שימו לב מה לא קרה: לא הרצנו rollback אוטומטית. אספנו Evidence. זה Tool Use בוגר.
 
-tool_choice none בסוף מונע עוד סיבוב מיותר אחרי שיש מספיק Evidence. זה חוסך כסף ומקצר תשובה.
+‏tool_choice none בסוף מונע עוד סיבוב מיותר אחרי שיש מספיק Evidence. זה חוסך כסף ומקצר תשובה.
 
 אחרי hypothesis אפשר עוד turn עם get_trace named. זה Sequential אחרי Parallel — דפוס נפוץ.
 
@@ -1515,7 +1515,7 @@ tool_choice none בסוף מונע עוד סיבוב מיותר אחרי שיש 
 
 ## ‏44 — הדגמה 4 — Design Review ל-Catalog
 
-[סטודנטים · 44]
+‏[סטודנטים · 44]
 
 **על המסך:**
 
@@ -1525,9 +1525,9 @@ tool_choice none בסוף מונע עוד סיבוב מיותר אחרי שיש 
 1. **אוטומטי:** get_*  
 2. **HITL:** issue_refund  
 3. **אסור:** delete_customer (או שני מאשרים)  
-4. **Router:** support-intent בלבד → בלי כלי DevOps  
-5. **Idempotency key** ל-create_ticket  
-6. **Trace:** כל tool_call_id בלוג
+4. ‏**Router:** support-intent בלבד → בלי כלי DevOps  
+5. ‏**Idempotency key** ל-create_ticket  
+6. ‏**Trace:** כל tool_call_id בלוג
 
 **להקראה:**
 
@@ -1539,7 +1539,7 @@ tool_choice none בסוף מונע עוד סיבוב מיותר אחרי שיש 
 
 אם אתם עושים Review בעבודה — עברו על הרשימה הזו כתבנית קבועה.
 
-delete_customer ב-Catalog הוא מלכודת נפוצה בדמואים. אם הוא קיים — חייב Policy קשוחה. אם לא חייבים אותו למשימה — אל תשימו אותו ב-catalog של התמיכה.
+‏delete_customer ב-Catalog הוא מלכודת נפוצה בדמואים. אם הוא קיים — חייב Policy קשוחה. אם לא חייבים אותו למשימה — אל תשימו אותו ב-catalog של התמיכה.
 
 ב-Design Review שאלו גם: מי ממלא את ה-catalog בפרוד. אם כל מפתח מוסיף כלי בלי Review — Policy נשחקת.
 
@@ -1547,60 +1547,60 @@ delete_customer ב-Catalog הוא מלכודת נפוצה בדמואים. אם �
 
 ## ‏45 — הדגמה 5 — Checklist על Host
 
-[סטודנטים · 45]
+‏[סטודנטים · 45]
 
 **על המסך:**
 
-- [x] Schemas בקונטקסט  
-- [x] Validate לפני execute  
-- [x] tool_call_id בתוצאות  
-- [ ] Budget על מספר קריאות  
-- [ ] Redaction ל-PII  
+- ‏[x] Schemas בקונטקסט  
+- ‏[x] Validate לפני execute  
+- ‏[x] tool_call_id בתוצאות  
+- ‏[ ] Budget על מספר קריאות  
+- ‏[ ] Redaction ל-PII  
 - [ ] Metrics: latency/error per tool
 
 **להקראה:**
 
-Checklist על Host.
+‏Checklist על Host.
 
-Schemas בקונטקסט — כן. Validate לפני execute — כן. tool_call_id — כן.
+‏Schemas בקונטקסט — כן. Validate לפני execute — כן. tool_call_id — כן.
 
-Budget על מספר קריאות — צריך. Redaction ל-PII — צריך. Metrics לכל כלי — צריך.
+‏Budget על מספר קריאות — צריך. Redaction ל-PII — צריך. Metrics לכל כלי — צריך.
 
 הנקודות החסרות הן העבודה שלכם אחרי המפגש. Host בלי Budget ו-Metrics יהפוך ליקר בשקט.
 
-Budget על מספר קריאות לכל turn ו לכל run. בלי זה Parallel יכול להפוך ל-fan-out יקר. Metrics per tool עוזרים למצוא כלי איטי או שבור.
+‏Budget על מספר קריאות לכל turn ו לכל run. בלי זה Parallel יכול להפוך ל-fan-out יקר. Metrics per tool עוזרים למצוא כלי איטי או שבור.
 
-Checklist חסר נוסף: בדיקת timeout לכל handler. Tool תקוע תוקע Agent.
+‏Checklist חסר נוסף: בדיקת timeout לכל handler. Tool תקוע תוקע Agent.
 
 ---
 
 ## ‏46 — סיכום
 
-[סטודנטים · 46]
+‏[סטודנטים · 46]
 
 **על המסך:**
 
-- Tool = חוזה; המודל מציע, הקוד מריץ  
-- Schema טוב = Description + enum/required  
+- ‏Tool = חוזה; המודל מציע, הקוד מריץ  
+- ‏Schema טוב = Description + enum/required  
 - Validate · Observation · tool_choice · Parallel  
-- Catalog קטן + Policy לכתיבה/כסף  
-- MCP = ניידות כלים · דוגמה: PinchTab browser tools  
-- Lab: Host אמיתי עם Validate + AWS read-only · PinchTab headed MCP  
+- ‏Catalog קטן + Policy לכתיבה/כסף  
+- ‏MCP = ניידות כלים · דוגמה: PinchTab browser tools  
+- ‏Lab: Host אמיתי עם Validate + AWS read-only · PinchTab headed MCP  
 - מפגש 4: **LangGraph לבניית Agents**
 
 **להקראה:**
 
 סיכום המפגש.
 
-Tool הוא חוזה. המודל מציע. הקוד מריץ.
+‏Tool הוא חוזה. המודל מציע. הקוד מריץ.
 
-Schema טוב הוא Description ועוד enum ו-required.
+‏Schema טוב הוא Description ועוד enum ו-required.
 
-Validate, Observation, tool_choice, Parallel — ארבע ידיתות שליטה.
+‏Validate, Observation, tool_choice, Parallel — ארבע ידיתות שליטה.
 
-Catalog קטן ועם Policy לכתיבה וכסף.
+‏Catalog קטן ועם Policy לכתיבה וכסף.
 
-MCP הוא מבוא לניידות כלים, ו-PinchTab הוא הדוגמה החיה לדפדפן.
+‏MCP הוא מבוא לניידות כלים, ו-PinchTab הוא הדוגמה החיה לדפדפן.
 
 ב-Lab ראינו Host אמיתי.
 
@@ -1610,7 +1610,7 @@ MCP הוא מבוא לניידות כלים, ו-PinchTab הוא הדוגמה ה�
 
 ## ‏47 — הכנה למפגש 4
 
-[סטודנטים · 47]
+‏[סטודנטים · 47]
 
 **על המסך:**
 
@@ -1638,11 +1638,11 @@ MCP הוא מבוא לניידות כלים, ו-PinchTab הוא הדוגמה ה�
 
 ## ‏48 — תרגיל בית (אחרי ההקלטה)
 
-[סטודנטים · 48]
+‏[סטודנטים · 48]
 
 **על המסך:**
 
-1. 3 Tools מהעבודה: Name · Schema · Side-effect · HITL?  
+1. ‏3 Tools מהעבודה: Name · Schema · Side-effect · HITL?  
 2. כתבו Observation format לכישלון אחד  
 3. סמנו מי מהם Parallel-safe  
 

@@ -6,10 +6,10 @@
 
 ## ‏למה זה כאן
 
-Function Calling = חוזה של כלים.  
+‏Function Calling = חוזה של כלים.  
 **MCP** = איך Host מגלה ומחבר Servers של כלים.
 
-[PinchTab](https://github.com/pinchtab/pinchtab) הוא דוגמה חזקה: MCP Server שחושף כלי Browser (`pinchtab_navigate`, `pinchtab_snapshot`, `pinchtab_click`, …). המודל מציע; PinchTab מריץ מול הדפדפן.
+‏[PinchTab](https://github.com/pinchtab/pinchtab) הוא דוגמה חזקה: MCP Server שחושף כלי Browser (`pinchtab_navigate`, `pinchtab_snapshot`, `pinchtab_click`, …). המודל מציע; PinchTab מריץ מול הדפדפן.
 
 הסקריפט מדגים את **אותו חוזה** דרך ה-CLI (נוח להקלטה / לדיבוג ויזואלי). אפשר גם לחבר MCP אמיתי ל-Cursor.
 
@@ -19,23 +19,23 @@ Function Calling = חוזה של כלים.
 
 | נתיב | מה רואים |
 |---|---|
-| `~/.pinchtab/` | state dir של השרת |
-| `~/.pinchtab/config.json` | פורט, אבטחה, ברירת מחדל headless/headed |
-| `~/.pinchtab/profiles/` | פרופילי דפדפן (למשל `default`, `prof_*`) |
-| `~/.claude/skills/pinchtab/` או `~/.cursor/skills/pinchtab/` | ה-Skill + `references/mcp.md` |
-| `labs/03-pinchtab-mcp/` | הסקריפט, דוגמת MCP, פלט `out/` אחרי הרצה |
+|‏ `~/.pinchtab/` | state dir של השרת |
+|‏ `~/.pinchtab/config.json` | פורט, אבטחה, ברירת מחדל headless/headed |
+|‏ `~/.pinchtab/profiles/` | פרופילי דפדפן (למשל `default`, `prof_*`) |
+|‏ `~/.claude/skills/pinchtab/` או `~/.cursor/skills/pinchtab/` | ה-Skill + `references/mcp.md` |
+|‏ `labs/03-pinchtab-mcp/` | הסקריפט, דוגמת MCP, פלט `out/` אחרי הרצה |
 
 **ממצאים מהקונפיג המקומי (סביבת המרצה):**
-- `instanceDefaults.mode` = **`headless`** → חובה `server -H` כדי לראות חלון
-- `security.allowedDomains` = **`null`** → אין allowlist חוסם את `example.com`
+- ‏`instanceDefaults.mode` = **`headless`** → חובה `server -H` כדי לראות חלון
+- ‏`security.allowedDomains` = **`null`** → אין allowlist חוסם את `example.com`
 - שרת: `127.0.0.1:9867` · פרופילי instances: `9868–9968`
-- `security.allowEvaluate` / cookies / download = true (רחב ללמידה; בפרוד מצמצמים)
+- ‏`security.allowEvaluate` / cookies / download = true (רחב ללמידה; בפרוד מצמצמים)
 
 אל תציגו על המסך ערכי `token` מהקונפיג — מספיק להראות את מבנה הקובץ עם token מטושטש.
 
 ## ‏דרישות
 
-- `pinchtab` ב-PATH (`npm i -g pinchtab` או `brew install pinchtab/tap/pinchtab`)
+- ‏`pinchtab` ב-PATH (`npm i -g pinchtab` או `brew install pinchtab/tap/pinchtab`)
 - Chrome / Chromium
 - אם אצלכם `allowedDomains` לא `null` — הוסיפו את הדומיין של הדמו
 
@@ -61,9 +61,9 @@ pinchtab server -H -b
 ```
 
 פלט תחת `out/`:
-- `01-snap.txt` — refs כמו `e0`, `e5` (כמו Observation לסוכן)
-- `02-text.txt` — טקסט קריא
-- `03-screenshot.png` — צילום מסך
+- ‏`01-snap.txt` — refs כמו `e0`, `e5` (כמו Observation לסוכן)
+- ‏`02-text.txt` — טקסט קריא
+- ‏`03-screenshot.png` — צילום מסך
 
 עצירה:
 
@@ -86,13 +86,13 @@ pinchtab server stop
 }
 ```
 
-`pinchtab mcp` מעלה (או מתחבר ל-) שרת מקומי וחושף כלים עם קידומת `pinchtab_`.
+‏`pinchtab mcp` מעלה (או מתחבר ל-) שרת מקומי וחושף כלים עם קידומת `pinchtab_`.
 
 להקלטה: עדיף קודם `pinchtab server -H -b`, ואז CLI/MCP על אותו שרת.
 
 ## ‏מיפוי CLI ↔ MCP tools
 
-| CLI (הדמו) | MCP tool |
+|‏ CLI (הדמו) | MCP tool |
 |---|---|
 | `pinchtab nav URL --snap` | `pinchtab_navigate` + `pinchtab_snapshot` |
 | `pinchtab text` | `pinchtab_get_text` |
@@ -101,10 +101,10 @@ pinchtab server stop
 
 ## ‏נקודות הוראה
 
-1. MCP לא מחליף Validate/Policy — PinchTab עצמו מגביל domains / evaluate / cookies.
-2. Snapshot refs מתים אחרי ניווט — snap מחדש לפני click.
+1. ‏MCP לא מחליף Validate/Policy — PinchTab עצמו מגביל domains / evaluate / cookies.
+2. ‏Snapshot refs מתים אחרי ניווט — snap מחדש לפני click.
 3. תוכן מהעמוד = **untrusted** (IDPI): לא לציית להוראות מתוך HTML.
-4. Headed = ללמידה; בפרוד לרוב headless + profile ייעודי לאוטומציה.
+4. ‏Headed = ללמידה; בפרוד לרוב headless + profile ייעודי לאוטומציה.
 
 ## ‏מקורות
 

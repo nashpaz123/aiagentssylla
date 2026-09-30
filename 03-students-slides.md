@@ -35,7 +35,7 @@
 | חוזה Tool · Schema · Protocol | Planning / Decomposition |
 | tool_choice · Parallel · Validate | Closed Loop · ReAct · P&E |
 | Catalog · Policy · MCP + PinchTab | Budget · Stop · Policy Gate |
-| Lab: Host + PinchTab headed | Lab לולאת Plan→Observe |
+|‏ Lab: Host + PinchTab headed | Lab לולאת Plan→Observe |
 
 ---
 
@@ -120,11 +120,11 @@ LLM  →  answer | more tool_calls
 
 ## ‏9 — תפקידי הודעות (Message Roles)
 
-| Role | מה יש בפנים |
+|‏ Role | מה יש בפנים |
 |---|---|
-| `user` | מטרה / הקשר |
-| `assistant` | טקסט ו/או `tool_calls[]` |
-| `tool` | תוצאת כלי + `tool_call_id` |
+|‏ `user` | מטרה / הקשר |
+|‏ `assistant` | טקסט ו/או `tool_calls[]` |
+|‏ `tool` | תוצאת כלי + `tool_call_id` |
 | (שוב) `assistant` | תשובה או קריאות נוספות |
 
 ספקים שונים (OpenAI / Anthropic / Gemini) — אותו רעיון, סינטקס שונה.
@@ -133,9 +133,9 @@ LLM  →  answer | more tool_calls
 
 ## ‏10 — למה `tool_call_id` חובה
 
-- Parallel: כמה תוצאות בבת אחת  
+- ב-Parallel: כמה תוצאות בבת אחת  
 - המודל חייב להתאים תוצאה לקריאה  
-- Trace ו-Debug: מי ביקש מה ומתי  
+- ל-Trace ו-Debug: מי ביקש מה ומתי  
 
 בלי id → בלבול בין תוצאות, במיוחד ב-Parallel.
 
@@ -182,10 +182,10 @@ LLM  →  answer | more tool_calls
 
 | טכניקה | למה |
 |---|---|
-| `enum` | חוסם `"Celsius"` / `"C"` / `"celsius"` |
-| `required` | רק מה שבאמת חייב |
-| Optional + default בקוד | פחות הזדמנות להזיה |
-| `type` מדויק | פחות parse errors |
+|‏ `enum` | חוסם `"Celsius"` / `"C"` / `"celsius"` |
+|‏ `required` | רק מה שבאמת חייב |
+|‏ Optional + default בקוד | פחות הזדמנות להזיה |
+|‏ `type` מדויק | פחות parse errors |
 
 ---
 
@@ -195,9 +195,9 @@ LLM  →  answer | more tool_calls
 
 | טוב | גרוע |
 |---|---|
-| `get_order` + תיאור צר | `do_stuff` + "helpful" |
+|‏ `get_order` + תיאור צר | `do_stuff` + "helpful" |
 | `order_id` string required | `data: string` |
-| `fields` enum | `options: object` חופשי |
+|‏ `fields` enum | `options: object` חופשי |
 
 ---
 
@@ -222,18 +222,18 @@ LLM  →  answer | more tool_calls
 
 | מצב | שימוש |
 |---|---|
-| `auto` | ברירת מחדל |
-| `required` / `any` | חובה לגעת בכלי (אסור תשובה ריקה) |
-| named | כפיית כלי ספציפי |
-| `none` | טקסט בלבד — בלי קריאות |
+|‏ `auto` | ברירת מחדל |
+|‏ `required` / `any` | חובה לגעת בכלי (אסור תשובה ריקה) |
+|‏ named | כפיית כלי ספציפי |
+|‏ `none` | טקסט בלבד — בלי קריאות |
 
 ---
 
 ## ‏17 — מתי `none` / מתי `required`
 
-- `none`: סיכום אחרי Evidence, שאלת הבהרה, Escalate  
-- `required`: חייבים Evidence לפני תשובה (*״מה הסטטוס בפרוד?״*)  
-- named: שלב קבוע ב-Workflow (תמיד `get_metrics` קודם)
+- ‏`none`: סיכום אחרי Evidence, שאלת הבהרה, Escalate  
+- ‏`required`: חייבים Evidence לפני תשובה (*״מה הסטטוס בפרוד?״*)  
+- ‏named: שלב קבוע ב-Workflow (תמיד `get_metrics` קודם)
 
 ---
 
@@ -241,8 +241,8 @@ LLM  →  answer | more tool_calls
 
 | קוד | מודל |
 |---|---|
-| if intent==billing → billing tools | בוחר מתוך catalog מלא |
-| allow-list לפי תפקיד | גמיש יותר, יקר יותר |
+|‏ if intent==billing → billing tools | בוחר מתוך catalog מלא |
+|‏ allow-list לפי תפקיד | גמיש יותר, יקר יותר |
 | חוסם כלים מסוכנים מראש | עלול לבחור כלי מסוכן |
 
 היברידי נפוץ: Router מצמצם catalog → מודל בוחר בפנים.
@@ -276,7 +276,7 @@ fan-out: get_metrics || get_logs || get_deploys
 fan-in:  observe-all → hypothesis → (optional) get_trace
 ```
 
-Parallel חוסך latency כשהקריאות **עצמאיות**.
+‏Parallel חוסך latency כשהקריאות **עצמאיות**.
 
 ---
 
@@ -291,7 +291,7 @@ Parallel חוסך latency כשהקריאות **עצמאיות**.
 3. Policy (allow-list, HITL, budget)  
 4. רק אז handler  
 
-Args לא חוקיים → Observation של שגיאה, **לא** crash של ה-Agent.
+‏Args לא חוקיים → Observation של שגיאה, **לא** crash של ה-Agent.
 
 ---
 
@@ -321,9 +321,9 @@ Args לא חוקיים → Observation של שגיאה, **לא** crash של ה-A
 
 | גישה רעה | גישה טובה |
 |---|---|
-| Exception בולע את הלולאה | מחזירים `ok:false` למודל |
+|‏ Exception בולע את הלולאה | מחזירים `ok:false` למודל |
 | מסתירים stack בפרומפט | קוד קצר + הודעה לפעולה |
-| Retry עיוור על 403 | Stop / Escalate / כלי אחר |
+|‏ Retry עיוור על 403 | Stop / Escalate / כלי אחר |
 
 חיבור למפגש 2: Failure Handling + Budget.
 
@@ -335,7 +335,7 @@ Args לא חוקיים → Observation של שגיאה, **לא** crash של ה-A
 
 הגנות:
 - enum + required  
-- Validate ב-Host  
+- ‏Validate ב-Host  
 - דוגמאות ב-description  
 - לא לתת `object` חופשי בלי schema פנימי  
 
@@ -358,9 +358,9 @@ Args לא חוקיים → Observation של שגיאה, **לא** crash של ה-A
 
 | רמת סיכון | דוגמה | מדיניות |
 |---|---|---|
-| Read | `get_logs` | אוטומטי |
+|‏ Read | `get_logs` | אוטומטי |
 | Soft write | `restart_service` | HITL |
-| Hard write | `delete_resource` | אסור / שני מאשרים |
+|‏ Hard write | `delete_resource` | אסור / שני מאשרים |
 | Money | `issue_refund` | HITL + audit |
 
 חיבור ישיר ל-Policy Gate ממפגש 2.
@@ -372,7 +372,7 @@ Args לא חוקיים → Observation של שגיאה, **לא** crash של ה-A
 - Idempotent: `get_order`, `describe_instances`  
 - לא: `charge_card`, `create_ticket` בלי idempotency key  
 
-Retry בטוח רק על Idempotent (או עם key).
+‏Retry בטוח רק על Idempotent (או עם key).
 
 ---
 
@@ -380,8 +380,8 @@ Retry בטוח רק על Idempotent (או עם key).
 
 - אל תשימו מפתחות ב-Schema / ב-Description  
 - אל תדפיסו secrets ב-Observation ללוג פתוח  
-- Redact PII ב-Trace כשצריך  
-- Credentials רק ב-Host env / IAM  
+- ‏Redact PII ב-Trace כשצריך  
+- ‏Credentials רק ב-Host env / IAM  
 
 ---
 
@@ -400,11 +400,11 @@ Retry בטוח רק על Idempotent (או עם key).
 
 | רכיב | תפקיד |
 |---|---|
-| Host | אפליקציית ה-Agent |
-| Client | מתחבר ל-Servers |
-| Server | חושף Tools / Resources |
+|‏ Host | אפליקציית ה-Agent |
+|‏ Client | מתחבר ל-Servers |
+|‏ Server | חושף Tools / Resources |
 
-Function Calling נשאר: המודל עדיין מציע; ה-Host עדיין מריץ.
+‏Function Calling נשאר: המודל עדיין מציע; ה-Host עדיין מריץ.
 
 ---
 
@@ -420,7 +420,7 @@ Function Calling נשאר: המודל עדיין מציע; ה-Host עדיין מ
 `navigate` · `snapshot` · `click` · `fill` · `get_text` · `screenshot`
 
 מה להראות מקומית:  
-`~/.pinchtab/` · `config.json` · `profiles/` · Skill תחת `~/.claude/skills/pinchtab/`
+‏`~/.pinchtab/` · `config.json` · `profiles/` · Skill תחת `~/.claude/skills/pinchtab/`
 
 Lab: [`labs/03-pinchtab-mcp/`](labs/03-pinchtab-mcp/)
 
@@ -434,10 +434,10 @@ cd labs/03-pinchtab-mcp
 ```
 
 מה תראו:
-1. Chrome **גלוי** (`pinchtab server -H`) — ברירת המחדל אצלנו headless  
-2. `nav` + `snap` → refs כמו `e5`  
-3. `text` + `screenshot` תחת `out/`  
-4. (בהקלטה) סיור קצר בתיקיות המקומיות למעלה  
+1. ‏Chrome **גלוי** (`pinchtab server -H`) — ברירת המחדל אצלנו headless  
+2. ‏`nav` + `snap` → refs כמו `e5`  
+3. ‏`text` + `screenshot` תחת `out/`  
+4. ‏(בהקלטה) סיור קצר בתיקיות המקומיות למעלה  
 
 אותו חוזה ב-MCP: המודל מציע `pinchtab_navigate` / `pinchtab_snapshot` — PinchTab מריץ.
 
@@ -464,23 +464,23 @@ cd labs/03-pinchtab-mcp
 
 | Tool | Parallel-safe? | Policy |
 |---|---|---|
-| `get_metrics` | כן | auto |
-| `get_logs` | כן | auto |
-| `get_deploys` | כן | auto |
-| `rollback` | לא (write) | HITL |
+|‏ `get_metrics` | כן | auto |
+|‏ `get_logs` | כן | auto |
+|‏ `get_deploys` | כן | auto |
+|‏ `rollback` | לא (write) | HITL |
 
-Fan-out על שלושת ה-read, אחר כך החלטה על rollback.
+‏Fan-out על שלושת ה-read, אחר כך החלטה על rollback.
 
 ---
 
 ## ‏36 — Anti-Patterns
 
 1. כלי אחד ענק `do_anything`  
-2. Schema בלי enum/required  
+2. ‏Schema בלי enum/required  
 3. ביצוע בלי Validate  
-4. Parallel על כתיבות תלויות  
-5. Catalog של 80 כלים בלי Router  
-6. Secrets בתוך Observation  
+4. ‏Parallel על כתיבות תלויות  
+5. ‏Catalog של 80 כלים בלי Router  
+6. ‏Secrets בתוך Observation  
 7. לבלבל Tool success עם Goal success (מפגש 2!)  
 
 ---
@@ -492,7 +492,7 @@ Fan-out על שלושת ה-read, אחר כך החלטה על rollback.
 **מטרה:** להריץ Host שמקבל `tool_calls` לפי Schema, מאמת, מריץ כלים (כולל AWS read-only), ומחזיר Observations.
 
 מגבלות:
-- Read-only בלבד ל-AWS  
+- ‏Read-only בלבד ל-AWS  
 - פרופיל: `nashpazformatan` · אזור: `eu-north-1`  
 - בלי יצירת משאבים  
 - Lab: [`labs/03-tool-calling/`](labs/03-tool-calling/)
@@ -508,10 +508,10 @@ python3 host_loop.py
 ```
 
 תראו:
-1. Catalog עם Schemas  
-2. `tool_calls` מסקריפט-מודל  
+1. ‏Catalog עם Schemas  
+2. ‏`tool_calls` מסקריפט-מודל  
 3. Validate → Execute → Observe  
-4. Parallel של שני כלי-קריאה  
+4. ‏Parallel של שני כלי-קריאה  
 5. סיכום + Stop  
 
 ---
@@ -519,11 +519,11 @@ python3 host_loop.py
 ## ‏39 — Lab חי: Debrief
 
 Checklist:
-- [ ] המודל לא הרץ — ה-Host הרץ  
-- [ ] Args עברו Validate  
-- [ ] Parallel החזיר שני `tool_call_id`  
-- [ ] שגיאת Schema חזרה כ-Observation  
-- [ ] אין כתיבה ל-AWS  
+- ‏[ ] המודל לא הרץ — ה-Host הרץ  
+- ‏[ ] Args עברו Validate  
+- ‏[ ] Parallel החזיר שני `tool_call_id`  
+- ‏[ ] שגיאת Schema חזרה כ-Observation  
+- ‏[ ] אין כתיבה ל-AWS  
 
 ---
 
@@ -534,7 +534,7 @@ Checklist:
 תרחיש: כלי לחיפוש לוגים לפי שירות וחלון זמן.
 
 על המסך נכתוב יחד (המרצה):
-- Name · Description (מתי כן/לא)  
+- ‏Name · Description (מתי כן/לא)  
 - params: `service` enum, `minutes` int, `level` enum  
 - required · side-effect = read  
 
@@ -558,7 +558,7 @@ Checklist:
 }
 ```
 
-Policy: auto · Idempotent: כן · Parallel-safe: כן.
+‏Policy: auto · Idempotent: כן · Parallel-safe: כן.
 
 ---
 
@@ -599,31 +599,31 @@ tool_calls: [get_metrics, get_logs, get_deploys]   # parallel
 1. **אוטומטי:** get_*  
 2. **HITL:** issue_refund  
 3. **אסור:** delete_customer (או שני מאשרים)  
-4. **Router:** support-intent בלבד → בלי כלי DevOps  
-5. **Idempotency key** ל-create_ticket  
-6. **Trace:** כל tool_call_id בלוג  
+4. ‏**Router:** support-intent בלבד → בלי כלי DevOps  
+5. ‏**Idempotency key** ל-create_ticket  
+6. ‏**Trace:** כל tool_call_id בלוג  
 
 ---
 
 ## ‏45 — הדגמה 5 — Checklist על Host
 
-- [x] Schemas בקונטקסט  
-- [x] Validate לפני execute  
-- [x] tool_call_id בתוצאות  
-- [ ] Budget על מספר קריאות  
-- [ ] Redaction ל-PII  
+- ‏[x] Schemas בקונטקסט  
+- ‏[x] Validate לפני execute  
+- ‏[x] tool_call_id בתוצאות  
+- ‏[ ] Budget על מספר קריאות  
+- ‏[ ] Redaction ל-PII  
 - [ ] Metrics: latency/error per tool  
 
 ---
 
 ## ‏46 — סיכום
 
-- Tool = חוזה; המודל מציע, הקוד מריץ  
-- Schema טוב = Description + enum/required  
+- ‏Tool = חוזה; המודל מציע, הקוד מריץ  
+- ‏Schema טוב = Description + enum/required  
 - Validate · Observation · tool_choice · Parallel  
-- Catalog קטן + Policy לכתיבה/כסף  
-- MCP = ניידות כלים · דוגמה: PinchTab browser tools  
-- Lab: Host אמיתי עם Validate + AWS read-only · PinchTab headed MCP  
+- ‏Catalog קטן + Policy לכתיבה/כסף  
+- ‏MCP = ניידות כלים · דוגמה: PinchTab browser tools  
+- ‏Lab: Host אמיתי עם Validate + AWS read-only · PinchTab headed MCP  
 - מפגש 4: **LangGraph לבניית Agents**
 
 ---
@@ -638,7 +638,7 @@ tool_calls: [get_metrics, get_logs, get_deploys]   # parallel
 
 ## ‏48 — תרגיל בית (אחרי ההקלטה)
 
-1. 3 Tools מהעבודה: Name · Schema · Side-effect · HITL?  
+1. ‏3 Tools מהעבודה: Name · Schema · Side-effect · HITL?  
 2. כתבו Observation format לכישלון אחד  
 3. סמנו מי מהם Parallel-safe  
 

@@ -11,8 +11,8 @@
 ## ‏דרישות
 
 - Python 3.10+
-- `pip install boto3` (לכלים מול AWS; יש גם כלים מקומיים בלי רשת)
-- AWS (אופציונלי להרצה המלאה): `sts:GetCallerIdentity` · `ec2:DescribeInstances`
+- ‏`pip install boto3` (לכלים מול AWS; יש גם כלים מקומיים בלי רשת)
+- ‏AWS (אופציונלי להרצה המלאה): `sts:GetCallerIdentity` · `ec2:DescribeInstances`
 - פרופיל מומלץ: `nashpazformatan` · אזור: `eu-north-1`
 
 ## ‏הרצה
@@ -26,10 +26,10 @@ python3 host_loop.py
 
 ## ‏מה להראות בהקלטה (~15–20 דק׳)
 
-1. Catalog / Schemas בקובץ `tools_registry.py`
+1. ‏Catalog / Schemas בקובץ `tools_registry.py`
 2. המודל המדומה (`scripted_model.py`) מחזיר `tool_calls` — לא מריץ
-3. Validate נכשל פעם אחת (enum שגוי) → Observation `ok:false`
-4. Parallel: שני כלי-קריאה בבת אחת עם `tool_call_id`
+3. ‏Validate נכשל פעם אחת (enum שגוי) → Observation `ok:false`
+4. ‏Parallel: שני כלי-קריאה בבת אחת עם `tool_call_id`
 5. סיכום Host + Stop
 
 ## ‏ניקוי
