@@ -481,138 +481,7 @@ cd labs/03-pinchtab-mcp
 
 ---
 
-# ‏חלק יא׳ — Lab חי
-
-## ‏37 — Lab חי: מטרה ומגבלות
-
-**מטרה:** להריץ Host שמקבל `tool_calls` לפי Schema, מאמת, מריץ כלים (כולל AWS read-only), ומחזיר Observations.
-
-מגבלות:
-- ‏Read-only בלבד ל-AWS  
-- פרופיל: `nashpazformatan` · אזור: `eu-north-1`  
-- בלי יצירת משאבים  
-- Lab: [`labs/03-tool-calling/`](labs/03-tool-calling/)
-
----
-
-## ‏38 — Lab חי: מה נריץ
-
-```bash
-cd labs/03-tool-calling
-export AWS_PROFILE=nashpazformatan AWS_REGION=eu-north-1
-python3 host_loop.py
-```
-
-תראו:
-1. ‏Catalog עם Schemas  
-2. ‏`tool_calls` מסקריפט-מודל  
-3. Validate → Execute → Observe  
-4. ‏Parallel של שני כלי-קריאה  
-5. סיכום + Stop  
-
----
-
-## ‏39 — Lab חי: Debrief
-
-Checklist:
-- ‏[ ] המודל לא הרץ — ה-Host הרץ  
-- ‏[ ] Args עברו Validate  
-- ‏[ ] Parallel החזיר שני `tool_call_id`  
-- ‏[ ] שגיאת Schema חזרה כ-Observation  
-- ‏[ ] אין כתיבה ל-AWS  
-
----
-
-# ‏חלק יב׳ — הדגמות פתרון
-
-## ‏40 — הדגמה 1 — כתיבת Schema (בעיה)
-
-תרחיש: כלי לחיפוש לוגים לפי שירות וחלון זמן.
-
-על המסך נכתוב יחד (המרצה):
-- ‏Name · Description (מתי כן/לא)  
-- params: `service` enum, `minutes` int, `level` enum  
-- required · side-effect = read  
-
----
-
-## ‏41 — הדגמה 1 — פתרון מלא
-
-```json
-{
-  "name": "search_logs",
-  "description": "Search app logs by service and time window. Read-only. Not for deploy/rollback.",
-  "parameters": {
-    "type": "object",
-    "properties": {
-      "service": { "type": "string", "enum": ["api", "worker", "payments"] },
-      "minutes": { "type": "integer", "description": "Lookback window 1..180" },
-      "level": { "type": "string", "enum": ["error", "warn", "info"] }
-    },
-    "required": ["service", "minutes"]
-  }
-}
-```
-
-‏Policy: auto · Idempotent: כן · Parallel-safe: כן.
-
----
-
-## ‏42 — הדגמה 2 — Validate דוחה Args
-
-קריאה גרועה:
-```json
-{ "name": "search_logs", "arguments": { "service": "billing", "minutes": "many" } }
-```
-
-תשובת Host:
-```json
-{ "ok": false, "error": { "code": "SCHEMA", "message": "service not in enum; minutes not int" } }
-```
-
-המודל מתקן → קריאה חוקית → Observation עם שורות לוג.
-
----
-
-## ‏43 — הדגמה 3 — Parallel Fan-out
-
-מטרה: *״למה ה-API איטי?״*
-
-```text
-tool_calls: [get_metrics, get_logs, get_deploys]   # parallel
-→ observations (3 ids)
-→ hypothesis: deploy 14:02 + error spike
-→ tool_choice=none → תשובה למשתמש
-```
-
----
-
-## ‏44 — הדגמה 4 — Design Review ל-Catalog
-
-תרחיש: Agent תמיכה עם `get_order`, `get_customer`, `create_ticket`, `issue_refund`, `delete_customer`.
-
-תשובות שנקריא:
-1. **אוטומטי:** get_*  
-2. **HITL:** issue_refund  
-3. **אסור:** delete_customer (או שני מאשרים)  
-4. ‏**Router:** support-intent בלבד → בלי כלי DevOps  
-5. ‏**Idempotency key** ל-create_ticket  
-6. ‏**Trace:** כל tool_call_id בלוג  
-
----
-
-## ‏45 — הדגמה 5 — Checklist על Host
-
-- ‏[x] Schemas בקונטקסט  
-- ‏[x] Validate לפני execute  
-- ‏[x] tool_call_id בתוצאות  
-- ‏[ ] Budget על מספר קריאות  
-- ‏[ ] Redaction ל-PII  
-- [ ] Metrics: latency/error per tool  
-
----
-
-## ‏46 — סיכום
+## ‏37 — סיכום
 
 - ‏Tool = חוזה; המודל מציע, הקוד מריץ  
 - ‏Schema טוב = Description + enum/required  
@@ -624,7 +493,7 @@ tool_calls: [get_metrics, get_logs, get_deploys]   # parallel
 
 ---
 
-## ‏47 — הכנה למפגש 4
+## ‏37 — הכנה למפגש 4
 
 - ציירו Graph קטן: nodes = tools/steps, edges = מעברים  
 - סמנו איפה Conditional edge אחרי Observation  
@@ -632,7 +501,7 @@ tool_calls: [get_metrics, get_logs, get_deploys]   # parallel
 
 ---
 
-## ‏48 — תרגיל בית (אחרי ההקלטה)
+## ‏39 — תרגיל 
 
 1. ‏3 Tools מהעבודה: Name · Schema · Side-effect · HITL?  
 2. כתבו Observation format לכישלון אחד  
