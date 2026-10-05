@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate presentation diagrams for AI Agents course sessions 1–3."""
+"""Generate presentation diagrams for AI Agents course sessions 1–4."""
 
 from __future__ import annotations
 
@@ -942,6 +942,159 @@ def s03_catalog():
 
 
 
+
+# ---------- Session 04 ----------
+
+def s04_hero():
+    img, d = new_img()
+    title = font(44, True)
+    body = font(26)
+    center_text(d, (W / 2, 55), "LangGraph: Agent as a Graph", title)
+    # nodes
+    boxes = [
+        (200, 420, 480, 620, "START", ACCENT),
+        (620, 300, 920, 500, "Node A\n(LLM)", ACCENT2),
+        (620, 580, 920, 780, "Node B\n(Tools)", GREEN),
+        (1060, 420, 1360, 620, "Decide", ORANGE),
+        (1500, 420, 1780, 620, "END", MUTED),
+    ]
+    for x1,y1,x2,y2,label,c in boxes:
+        rounded(d, (x1,y1,x2,y2), CARD2, outline=c, radius=18)
+        multiline_center(d, ((x1+x2)/2, (y1+y2)/2), label.split("\n"), body, c)
+    arrow(d, (480, 520), (620, 400))
+    arrow(d, (480, 520), (620, 680))
+    arrow(d, (920, 400), (1060, 500))
+    arrow(d, (920, 680), (1060, 540))
+    arrow(d, (1360, 520), (1500, 520))
+    center_text(d, (W/2, 920), "State flows through nodes · edges choose the next step", font(24), MUTED)
+    save(img, "04/01-langgraph-hero.png")
+
+
+def s04_graph_basics():
+    img, d = new_img()
+    title = font(42, True)
+    body = font(28)
+    center_text(d, (W/2, 50), "What is a Directed Graph?", title)
+    rounded(d, (220, 280, 520, 480), CARD2, outline=ACCENT, radius=20)
+    center_text(d, (370, 380), "Node", font(36, True), ACCENT)
+    rounded(d, (800, 280, 1100, 480), CARD2, outline=GREEN, radius=20)
+    center_text(d, (950, 380), "Node", font(36, True), GREEN)
+    rounded(d, (1380, 280, 1680, 480), CARD2, outline=ORANGE, radius=20)
+    center_text(d, (1530, 380), "Node", font(36, True), ORANGE)
+    arrow(d, (520, 380), (800, 380))
+    arrow(d, (1100, 380), (1380, 380))
+    center_text(d, (660, 320), "Edge", font(24), MUTED)
+    center_text(d, (1240, 320), "Edge", font(24), MUTED)
+    center_text(d, (W/2, 620), "Node = step / action", body)
+    center_text(d, (W/2, 700), "Edge = who comes next (direction matters)", body)
+    center_text(d, (W/2, 820), "Directed = arrows only one way (A→B ≠ B→A)", font(26), MUTED)
+    save(img, "04/02-graph-basics.png")
+
+
+def s04_state():
+    img, d = new_img()
+    title = font(42, True)
+    body = font(24)
+    center_text(d, (W/2, 50), "Shared State travels the graph", title)
+    rounded(d, (120, 200, 600, 900), CARD2, outline=ACCENT, radius=18)
+    center_text(d, (360, 260), "State", font(34, True), ACCENT)
+    fields = ["messages[]", "goal", "tool_results", "status", "needs_hitl"]
+    for i,f in enumerate(fields):
+        y = 340 + i*90
+        rounded(d, (180, y, 540, y+70), CARD, outline=LINE, radius=12)
+        center_text(d, (360, y+35), f, body)
+    for i,label in enumerate(["Node A", "Node B", "Node C"]):
+        x = 780 + i*350
+        rounded(d, (x, 360, x+280, 560), CARD2, outline=GREEN, radius=16)
+        center_text(d, (x+140, 460), label, font(28, True), GREEN)
+        arrow(d, (600, 500), (x+40, 460), MUTED, 3)
+        arrow(d, (x+140, 560), (360, 860), MUTED, 2)
+    center_text(d, (W/2, 980), "Each node reads State · returns updates · graph merges them", font(24), MUTED)
+    save(img, "04/03-shared-state.png")
+
+
+def s04_conditional():
+    img, d = new_img()
+    title = font(40, True)
+    body = font(24)
+    center_text(d, (W/2, 50), "Conditional Edge = if/else on the graph", title)
+    rounded(d, (720, 180, 1200, 360), CARD2, outline=ACCENT, radius=18)
+    center_text(d, (960, 270), "Agent Node", font(32, True), ACCENT)
+    rounded(d, (200, 560, 560, 760), CARD2, outline=GREEN, radius=18)
+    center_text(d, (380, 660), "call tools", font(28, True), GREEN)
+    rounded(d, (720, 560, 1200, 760), CARD2, outline=ORANGE, radius=18)
+    center_text(d, (960, 660), "ask human\n(HITL)", font(28, True), ORANGE)
+    rounded(d, (1360, 560, 1720, 760), CARD2, outline=MUTED, radius=18)
+    center_text(d, (1540, 660), "END\nanswer", font(28, True), MUTED)
+    arrow(d, (850, 360), (380, 560))
+    arrow(d, (960, 360), (960, 560))
+    arrow(d, (1070, 360), (1540, 560))
+    center_text(d, (560, 430), "needs tool", font(22), MUTED)
+    center_text(d, (1100, 430), "needs approval", font(22), MUTED)
+    center_text(d, (1400, 430), "done", font(22), MUTED)
+    save(img, "04/04-conditional-edges.png")
+
+
+def s04_checkpoint():
+    img, d = new_img()
+    title = font(40, True)
+    body = font(26)
+    center_text(d, (W/2, 50), "Checkpoint = save point between steps", title)
+    steps = [("Step 1", 200), ("Step 2", 700), ("Step 3", 1200)]
+    for label,x in steps:
+        rounded(d, (x, 280, x+320, 480), CARD2, outline=ACCENT, radius=16)
+        center_text(d, (x+160, 380), label, font(30, True), ACCENT)
+    for x in (520, 1020):
+        arrow(d, (x, 380), (x+180, 380))
+        rounded(d, (x+40, 520, x+160, 620), CARD, outline=GREEN, radius=12)
+        center_text(d, (x+100, 570), "save", font(22), GREEN)
+    rounded(d, (560, 740, 1360, 920), CARD2, outline=ORANGE, radius=16)
+    center_text(d, (960, 830), "thread_id = which conversation / run to resume", body, ORANGE)
+    save(img, "04/05-checkpoint.png")
+
+
+def s04_hitl():
+    img, d = new_img()
+    title = font(40, True)
+    body = font(26)
+    center_text(d, (W/2, 50), "Interrupt → Human → Resume", title)
+    flow = [
+        (180, "Run graph", ACCENT),
+        (560, "interrupt()", ORANGE),
+        (940, "Human decides", ACCENT2),
+        (1320, "resume", GREEN),
+    ]
+    for x,label,c in flow:
+        rounded(d, (x, 400, x+300, 600), CARD2, outline=c, radius=18)
+        center_text(d, (x+150, 500), label, body, c)
+    for i in range(3):
+        x1 = flow[i][0]+300
+        x2 = flow[i+1][0]
+        arrow(d, (x1, 500), (x2, 500))
+    center_text(d, (W/2, 780), "Needs a checkpointer — otherwise there is nowhere to pause", font(24), MUTED)
+    save(img, "04/06-hitl-interrupt.png")
+
+
+def s04_agent_loop():
+    img, d = new_img()
+    title = font(40, True)
+    body = font(26)
+    center_text(d, (W/2, 50), "Classic Agent Loop in LangGraph", title)
+    rounded(d, (560, 200, 1000, 400), CARD2, outline=ACCENT2, radius=18)
+    center_text(d, (780, 300), "LLM / Agent", font(32, True), ACCENT2)
+    rounded(d, (560, 600, 1000, 800), CARD2, outline=GREEN, radius=18)
+    center_text(d, (780, 700), "Tools", font(32, True), GREEN)
+    arrow(d, (700, 400), (700, 600))
+    arrow(d, (860, 600), (860, 400))
+    center_text(d, (560, 500), "tool_calls", font(22), MUTED)
+    center_text(d, (1000, 500), "observations", font(22), MUTED)
+    rounded(d, (1200, 350, 1700, 550), CARD2, outline=ORANGE, radius=18)
+    center_text(d, (1450, 450), "END / answer", font(28, True), ORANGE)
+    arrow(d, (1000, 300), (1200, 420))
+    center_text(d, (W/2, 920), "Same idea as Session 3 — now the loop is an explicit graph", font(24), MUTED)
+    save(img, "04/07-agent-tools-loop.png")
+
+
 def main():
     gens = [
         v01_human_agent,
@@ -979,6 +1132,13 @@ def main():
         s03_validate,
         s03_mcp,
         s03_catalog,
+        s04_hero,
+        s04_graph_basics,
+        s04_state,
+        s04_conditional,
+        s04_checkpoint,
+        s04_hitl,
+        s04_agent_loop,
     ]
     for g in gens:
         g()
