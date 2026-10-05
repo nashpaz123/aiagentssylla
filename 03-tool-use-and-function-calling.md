@@ -1113,9 +1113,6 @@ Host, Client, Server.
 כלים לדוגמה (קידומת `pinchtab_`):  
 `navigate` · `snapshot` · `click` · `fill` · `get_text` · `screenshot`
 
-מה להראות מקומית:  
-‏`~/.pinchtab/` · `config.json` · `profiles/` · Skill תחת `~/.claude/skills/pinchtab/`
-
 Lab: [`labs/03-pinchtab-mcp/`](labs/03-pinchtab-mcp/)
 
 **להקראה:**
@@ -1126,11 +1123,9 @@ Lab: [`labs/03-pinchtab-mcp/`](labs/03-pinchtab-mcp/)
 
 שימו לב למשמעת של המפגש: המודל עדיין רק מציע. PinchTab הוא ה-Host-side executor מול Chrome. Schema של כל כלי, הרשאות domains, ו-Policy — חיים בצד של PinchTab ושלכם, לא בתוך המודל.
 
-יש Lab קטן תחת labs/03-pinchtab-mcp. בהקלטה אפשר להראות את קובץ ה-MCP ואת רשימת הכלים. אתם תריצו אצלכם ב-headed כדי לראות את החלון.
+יש Lab תחת labs/03-pinchtab-mcp עם README לסטודנטים, סקריפט headed, ודוגמת MCP ל-Cursor. תריצו אצלכם עם חלון גלוי ותראו snap, text ו-screenshot.
 
-‏PinchTab מוכיח ש-MCP הוא צינור לחוזים כאלה — לא קסם.
-
-בהקלטה כדאי גם לפתוח את התיקיות המקומיות: `~/.pinchtab/`, את `config.json` בלי לחשוף token, את `profiles/`, ואת ה-Skill תחת `~/.claude/skills/pinchtab/` או `~/.cursor/skills/pinchtab/`. זה מחבר MCP מרעיון לקבצים אמיתיים על הדיסק.
+‏PinchTab מוכיח ש-MCP הוא צינור לחוזים כאלה — לא קסם. אל תשתפו token מתוך config.json אם תפתחו אותו.
 
 ---
 
@@ -1146,14 +1141,13 @@ cd labs/03-pinchtab-mcp
 ```
 
 מה תראו:
-1. ‏Chrome **גלוי** (`pinchtab server -H`) — ברירת המחדל אצלנו headless  
+1. ‏Chrome **גלוי** (`pinchtab server -H`) — אם השרת רץ headless, הפעילו מחדש עם `-H`  
 2. ‏`nav` + `snap` → refs כמו `e5`  
 3. ‏`text` + `screenshot` תחת `out/`  
-4. ‏(בהקלטה) סיור קצר בתיקיות המקומיות למעלה  
 
 אותו חוזה ב-MCP: המודל מציע `pinchtab_navigate` / `pinchtab_snapshot` — PinchTab מריץ.
 
-זכרו: תוכן מהעמוד = untrusted · Validate/Policy עדיין חובה · אל תחשפו token מהקונפיג.
+זכרו: תוכן מהעמוד = untrusted · Validate/Policy עדיין חובה · אל תשתפו token מ-`~/.pinchtab/config.json`.
 
 **להקראה:**
 
@@ -1165,9 +1159,9 @@ cd labs/03-pinchtab-mcp
 
 ב-MCP אותם שמות כלים עם קידומת pinchtab_. ההבדל הוא רק איך ה-Host מדבר עם השרת — stdio JSON-RPC במקום CLI.
 
-שתי אזהרות להקלטה ולפרוד: תוכן מהעמוד הוא untrusted — אל תצייתו להוראות שמוטמעות ב-HTML. ו-Validate עם allowlist לדומיינים נשאר חובה גם כשהכלי יפה.
+שתי אזהרות חשובות: תוכן מהעמוד הוא untrusted — אל תצייתו להוראות שמוטמעות ב-HTML. ו-Validate עם allowlist לדומיינים נשאר חובה גם כשהכלי יפה.
 
-אצלנו בקונפיג המקומי ברירת המחדל היא headless — בלי `server -H` לא תראו חלון. אם השרת כבר רץ ב-headless: `pinchtab server stop` ואז `pinchtab server -H -b`. `allowedDomains` אצלנו הוא null, כך ש-`example.com` לא חסום. אחרי הריצה הראו את `out/` עם snap, text ו-screenshot.
+ברירת המחדל אחרי התקנה לרוב headless — בלי `server -H` לא תראו חלון. אם השרת כבר רץ כך: `pinchtab server stop` ואז `pinchtab server -H -b`. אחרי הריצה בדקו את `out/` עם snap, text ו-screenshot.
 
 ---
 

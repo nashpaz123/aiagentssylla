@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # PinchTab headed demo for Session 3 MCP section.
 # Mirrors what an MCP client would call (navigate → snapshot → text → screenshot),
-# but via CLI so you can watch the browser and run it without wiring MCP mid-recording.
+# via CLI so you can watch the browser.
 #
 # Requires: pinchtab on PATH, Chrome/Chromium installed.
-# You run this on your laptop (headed). Safe demo URL: https://example.com
+# Safe demo URL: https://example.com
 
 set -euo pipefail
 
@@ -15,11 +15,6 @@ AGENT_ID="${PINCHTAB_AGENT_ID:-aiagentssylla-s3-mcp}"
 mkdir -p "$OUT_DIR"
 
 echo "== PinchTab headed MCP-style demo =="
-echo "Local paths worth showing on camera:"
-echo "  ~/.pinchtab/                 (state + config.json + profiles/)"
-echo "  ~/.claude/skills/pinchtab/   (skill + references/mcp.md)"
-echo "  $(pwd)                       (this lab)"
-echo
 echo "URL:  $DEMO_URL"
 echo "Out:  $OUT_DIR"
 echo
@@ -66,7 +61,7 @@ pinchtab tab || true
 
 echo
 echo "DONE."
-echo "What you just saw is the same contract MCP exposes:"
+echo "Same contract MCP exposes:"
 echo "  Host (you/agent) → MCP Client → PinchTab MCP Server → browser tools"
 echo "Wire MCP into Cursor with: mcp.cursor.example.json"
-echo "Keep the headed Chrome window open while you inspect refs in 01-snap.txt"
+echo "Inspect refs in out/01-snap.txt while the headed Chrome window is open."

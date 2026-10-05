@@ -419,9 +419,6 @@ fan-in:  observe-all → hypothesis → (optional) get_trace
 כלים לדוגמה (קידומת `pinchtab_`):  
 `navigate` · `snapshot` · `click` · `fill` · `get_text` · `screenshot`
 
-מה להראות מקומית:  
-‏`~/.pinchtab/` · `config.json` · `profiles/` · Skill תחת `~/.claude/skills/pinchtab/`
-
 Lab: [`labs/03-pinchtab-mcp/`](labs/03-pinchtab-mcp/)
 
 ---
@@ -434,14 +431,13 @@ cd labs/03-pinchtab-mcp
 ```
 
 מה תראו:
-1. ‏Chrome **גלוי** (`pinchtab server -H`) — ברירת המחדל אצלנו headless  
+1. ‏Chrome **גלוי** (`pinchtab server -H`) — אם השרת רץ headless, הפעילו מחדש עם `-H`  
 2. ‏`nav` + `snap` → refs כמו `e5`  
 3. ‏`text` + `screenshot` תחת `out/`  
-4. ‏(בהקלטה) סיור קצר בתיקיות המקומיות למעלה  
 
 אותו חוזה ב-MCP: המודל מציע `pinchtab_navigate` / `pinchtab_snapshot` — PinchTab מריץ.
 
-זכרו: תוכן מהעמוד = untrusted · Validate/Policy עדיין חובה · אל תחשפו token מהקונפיג.
+זכרו: תוכן מהעמוד = untrusted · Validate/Policy עדיין חובה · אל תשתפו token מ-`~/.pinchtab/config.json`.
 
 ---
 

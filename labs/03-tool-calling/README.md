@@ -2,7 +2,7 @@
 
 # ‏Lab 03 — Tool Calling Host (Function Calling)
 
-תרגיל הקלטה למפגש 3. **עלות צפויה:** סנטים בודדים (קריאות AWS read-only בלבד).
+תרגיל למפגש 3. **עלות צפויה:** סנטים בודדים (קריאות AWS read-only בלבד).
 
 ## ‏מטרה
 
@@ -24,7 +24,7 @@ export AWS_REGION=eu-north-1
 python3 host_loop.py
 ```
 
-## ‏מה להראות בהקלטה (~15–20 דק׳)
+## ‏מה לבדוק בהרצה
 
 1. ‏Catalog / Schemas בקובץ `tools_registry.py`
 2. המודל המדומה (`scripted_model.py`) מחזיר `tool_calls` — לא מריץ
@@ -38,6 +38,6 @@ python3 host_loop.py
 
 ## ‏המשך: MCP + PinchTab (headed)
 
-אחרי ה-Host המקומי — הדגמת MCP חיה עם דפדפן גלוי: [`../03-pinchtab-mcp/`](../03-pinchtab-mcp/).
+המשך מומלץ — הדגמת MCP עם דפדפן גלוי: [`../03-pinchtab-mcp/`](../03-pinchtab-mcp/).
 
 </div>
