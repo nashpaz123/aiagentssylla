@@ -32,10 +32,10 @@
 
 | נבנה היום | מפגש 3 (בקצרה) |
 |---|---|
-| גרף · Node · Edge · State | Tool Schema · Function Calling |
+| גרף · Node · Edge · State |‏ Tool Schema · Function Calling |
 | Conditional edges · Loops | Validate · Parallel · Observations |
-| Checkpoint · thread_id · HITL interrupt | MCP · PinchTab (דוגמה) |
-| Lab: גרף קטן רץ בפייתון | Host שמריץ tool_calls |
+|‏ Checkpoint · thread_id · HITL interrupt |‏ MCP · PinchTab (דוגמה) |
+|‏ Lab: גרף קטן רץ בפייתון |‏ Host שמריץ tool_calls |
 
 לא חוזרים בפירוט על Schema — מניחים אותו כנתון.
 
@@ -57,16 +57,16 @@
 
 | ראשי תיבות | פירוש מלא (EN) | בעברית פשוטה |
 |---|---|---|
-| **LLM** | Large Language Model | מודל שפה גדול (Claude / GPT וכו׳) |
-| **API** | Application Programming Interface | ממשק תכנותי בין מערכות |
-| **JSON** | JavaScript Object Notation | פורמט נתונים מובנה טקסטואלי |
-| **SDK** | Software Development Kit | ערכת פיתוח / ספריות מוכנות |
-| **HITL** | Human In The Loop | אדם בתוך הלולאה (אישור / התערבות) |
-| **MCP** | Model Context Protocol | פרוטוקול לחיבור כלי-עזר לסוכנים |
-| **RAG** | Retrieval-Augmented Generation | יצירה מועשרת בשליפה ממאגר |
-| **FSM / State Machine** | Finite State Machine | מכונת מצבים — מצבים + מעברים |
-| **DAG** | Directed Acyclic Graph | גרף מכוון בלי מעגלים |
-| **LangGraph** | (שם ספרייה) | בניית Agents כגרף מצבים (יכול לכלול לולאות) |
+|‏ **LLM** |‏ Large Language Model | מודל שפה גדול (Claude / GPT וכו׳) |
+|‏ **API** |‏ Application Programming Interface | ממשק תכנותי בין מערכות |
+|‏ **JSON** |‏ JavaScript Object Notation | פורמט נתונים מובנה טקסטואלי |
+|‏ **SDK** |‏ Software Development Kit | ערכת פיתוח / ספריות מוכנות |
+|‏ **HITL** |‏ Human In The Loop | אדם בתוך הלולאה (אישור / התערבות) |
+|‏ **MCP** |‏ Model Context Protocol | פרוטוקול לחיבור כלי-עזר לסוכנים |
+|‏ **RAG** |‏ Retrieval-Augmented Generation | יצירה מועשרת בשליפה ממאגר |
+|‏ **FSM / State Machine** |‏ Finite State Machine | מכונת מצבים — מצבים + מעברים |
+|‏ **DAG** |‏ Directed Acyclic Graph | גרף מכוון בלי מעגלים |
+|‏ **LangGraph** | (שם ספרייה) | בניית Agents כגרף מצבים (יכול לכלול לולאות) |
 
 הערה: LangGraph **מאפשר לולאות** — לא חייב להיות DAG.
 
@@ -76,9 +76,9 @@
 
 ![Graph Basics](assets/04/02-graph-basics.png)
 
-- **Node (צומת):** פעולה / שלב  
-- **Edge (קשת):** מעבר לשלב הבא  
-- **Directed (מכוון):** החץ קובע כיוון  
+- ‏**Node (צומת):** פעולה / שלב  
+- ‏**Edge (קשת):** מעבר לשלב הבא  
+- ‏**Directed (מכוון):** החץ קובע כיוון  
 
 דוגמה אנושית: בית קפה  
 `הזמנה → הכנה → תשלום → מסירה`
@@ -90,7 +90,7 @@
 | סקריפט A→B→C | גרף עם החלטות |
 |---|---|
 | תמיד אותו סדר | לפעמים מדלגים / חוזרים |
-| קשה לעצור באמצע ולחזור | Checkpoint בין צעדים |
+| קשה לעצור באמצע ולחזור |‏ Checkpoint בין צעדים |
 | דיבאג = לקרוא לוג ארוך | דיבאג = איזה צומת רץ |
 
 ‏Agent אמיתי צריך **ענפים ולולאות** — לא רק צינור חד־כיווני.
@@ -115,9 +115,9 @@ State + Nodes + Edges  →  compile()  →  invoke / stream
 
 | שם | תפקיד קצר |
 |---|---|
-| **LangChain** | לבני קריאות ל-LLM, פרומפטים, שרשורים, אינטגרציות |
-| **LangGraph** | תזמור זרימה כגרף (מצב, ענפים, לולאות, שמירה) |
-| **LangSmith** | מעקב, לוגים, הערכה (Observability) |
+|‏ **LangChain** | לבני קריאות ל-LLM, פרומפטים, שרשורים, אינטגרציות |
+|‏ **LangGraph** | תזמור זרימה כגרף (מצב, ענפים, לולאות, שמירה) |
+|‏ **LangSmith** | מעקב, לוגים, הערכה (Observability) |
 
 אפשר לבנות Agent בלי LangChain המלא — אבל הרבה דוגמאות משלבות.
 
@@ -164,7 +164,7 @@ print(app.invoke({"text": "hello"}))  # {'text': 'HELLO'}
 
 ![Shared State](assets/04/03-shared-state.png)
 
-**State** = תיבת הזיכרון המשותפת של הריצה.
+‏**State** = תיבת הזיכרון המשותפת של הריצה.
 
 כל Node:
 1. קורא מה-State  
@@ -261,7 +261,7 @@ START → agent ⇄ tools → (maybe HITL) → END
 ```
 
 לולאה חוקית ב-LangGraph:
-`agent → tools → agent → …` עד תנאי עצירה.
+‏`agent → tools → agent → …` עד תנאי עצירה.
 
 בלי תנאי עצירה = לולאה אינסופית = חשבון עננים בוער.
 
@@ -312,7 +312,7 @@ def should_continue(state: AgentState) -> str:
 - אין `tool_calls` ויש תשובה  
 - ‏`step_count >= MAX_STEPS`  
 - שגיאת Policy חוזרת  
-- Confidence נמוך → HITL / Escalate  
+- ‏Confidence נמוך → HITL / Escalate  
 
 שמרו `step_count` ב-State ועדכנו בכל סיבוב.
 
@@ -324,7 +324,7 @@ def should_continue(state: AgentState) -> str:
 
 ![Checkpoint](assets/04/05-checkpoint.png)
 
-**Checkpoint** = צילום State אחרי צעד (super-step).
+‏**Checkpoint** = צילום State אחרי צעד (super-step).
 
 מאפשר:
 - להמשיך אחרי קריסה  
@@ -352,7 +352,7 @@ app.invoke(None, config=config)  # ממשיך אותו thread (לפי דפוס �
 | סוג | שימוש |
 |---|---|
 | ‏InMemorySaver | למידה / טסטים — נמחק עם התהליך |
-| Sqlite / Postgres וכו׳ | פרוד — שורד ריסטארט |
+|‏ Sqlite / Postgres וכו׳ | פרוד — שורד ריסטארט |
 
 ‏`compile(checkpointer=...)` מדליק שמירה.
 
@@ -376,7 +376,7 @@ app.invoke(None, config=config)  # ממשיך אותו thread (לפי דפוס �
 |---|---|
 | קריאת לוגים | לא |
 | טיוטת מייל ללקוח | לרוב כן |
-| Refund / Delete | כן / אסור |
+|‏ Refund / Delete | כן / אסור |
 | תשובת FAQ ודאית | לא |
 
 חיבור ל-Policy Gate ממפגש 2–3 — עכשיו כצומת או כתנאי לפני צומת.
@@ -457,7 +457,7 @@ for event in app.stream(inputs, config=config):
 
 1. צומת ענק אחד שעושה הכל  
 2. לולאה בלי `MAX_STEPS`  
-3. HITL בלי Checkpointer  
+3. ‏HITL בלי Checkpointer  
 4. דריסת `messages` בלי Reducer  
 5. ‏thread_id אקראי בכל בקשת HTTP  
 6. לערבב ניתוב עסקי בתוך פרומפט בלבד בלי Edge
@@ -466,13 +466,13 @@ for event in app.stream(inputs, config=config):
 
 ## ‏34 — Checklist תכנון גרף
 
-- [ ] State מוגדר עם שדות עסקיים  
-- [ ] Reducers לרשימות צומחות  
+- ‏[ ] State מוגדר עם שדות עסקיים  
+- ‏[ ] Reducers לרשימות צומחות  
 - [ ] צמתים קטנים עם אחריות אחת  
-- [ ] Conditional edges במקום if ענק  
+- ‏[ ] Conditional edges במקום if ענק  
 - [ ] Stop / Budget  
-- [ ] Checkpoint אם יש HITL או פרוד  
-- [ ] Trace: שם צומת + tool_call_id
+- ‏[ ] Checkpoint אם יש HITL או פרוד  
+- ‏[ ] Trace: שם צומת + tool_call_id
 
 ---
 
@@ -496,14 +496,16 @@ Lab: [`labs/04-langgraph-basics/`](labs/04-langgraph-basics/)
 cd labs/04-langgraph-basics
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-python3 graph_demo.py
+python3 graph_demo.py            # חלק 1: State + ענף מותנה
+python3 hitl_demo.py approve     # חלק 2: Checkpoint + interrupt + resume
 ```
 
 תראו:
-1. State התחלתי  
+1. ‏State התחלתי  
 2. מעבר צמתים עם לוג  
 3. ענף מותנה (קצר / ארוך)  
-4. סיכום סופי
+4. סיכום סופי  
+5. ‏Checkpoint · thread_id · עצירה ל-HITL והמשך (`hitl_demo.py`)
 
 ---
 
@@ -577,10 +579,10 @@ hitl→END
 
 - גרף = Nodes + Edges + State  
 - ‏LangGraph = תזמור Agent כגרף (עם לולאות)  
-- Conditional edges = if/else מפורש  
-- Checkpoint + thread_id = זיכרון ריצה  
-- interrupt = HITL אמיתי  
-- Tools ממפגש 3 חיים בתוך Nodes  
+- ‏Conditional edges = if/else מפורש  
+- ‏Checkpoint + thread_id = זיכרון ריצה  
+- ‏interrupt = HITL אמיתי  
+- ‏Tools ממפגש 3 חיים בתוך Nodes  
 - מפגש 5: **CrewAI ו-Multi-Agent**
 
 ---
