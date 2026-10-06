@@ -945,153 +945,598 @@ def s03_catalog():
 
 # ---------- Session 04 ----------
 
+def _s04_legend(d, items, x=80, y=980):
+    """items: list of (color, label)."""
+    f = font(20)
+    cx = x
+    for color, label in items:
+        d.ellipse([cx, y - 10, cx + 18, y + 8], fill=color)
+        d.text((cx + 26, y - 12), label, font=f, fill=MUTED)
+        bbox = d.textbbox((0, 0), label, font=f)
+        cx += 40 + (bbox[2] - bbox[0]) + 28
+
+
+def _s04_panel(d, box, title, lines, outline=LINE, title_color=TEXT):
+    rounded(d, box, CARD, outline=outline, radius=14, width=2)
+    x1, y1, x2, y2 = box
+    center_text(d, ((x1 + x2) / 2, y1 + 28), title, font(22, True), title_color)
+    f = font(20)
+    ty = y1 + 58
+    for line in lines:
+        d.text((x1 + 18, ty), line, font=f, fill=MUTED)
+        ty += 28
+
+
 def s04_hero():
+    """Rich support-agent graph: nodes, loop, HITL branch, State sidebar."""
     img, d = new_img()
-    title = font(44, True)
-    body = font(26)
-    center_text(d, (W / 2, 55), "LangGraph: Agent as a Graph", title)
-    # nodes
-    boxes = [
-        (200, 420, 480, 620, "START", ACCENT),
-        (620, 300, 920, 500, "Node A\n(LLM)", ACCENT2),
-        (620, 580, 920, 780, "Node B\n(Tools)", GREEN),
-        (1060, 420, 1360, 620, "Decide", ORANGE),
-        (1500, 420, 1780, 620, "END", MUTED),
+    center_text(d, (W / 2, 42), "LangGraph — Support Agent as a State Graph", font(40, True))
+    center_text(
+        d,
+        (W / 2, 88),
+        "Nodes do work · Edges choose the next step · State is the shared memory of the run",
+        font(22),
+        MUTED,
+    )
+
+    _s04_panel(
+        d,
+        (40, 140, 420, 900),
+        "Shared State (example)",
+        [
+            "customer_id: C-9912",
+            "question: refund?",
+            "messages[]  (+ Reducer)",
+            "order_status: shipped",
+            "draft_reply: …",
+            "needs_hitl: True",
+            "step_count: 3",
+            "",
+            "Each node returns UPDATES",
+            "(not always the full object).",
+            "Graph merges updates into",
+            "this State after every step.",
+        ],
+        outline=ACCENT,
+        title_color=ACCENT,
+    )
+
+    nodes = [
+        (520, 200, 780, 320, "START", ACCENT, ["entry", "load input"]),
+        (860, 160, 1180, 320, "lookup_order", GREEN, ["Tool / API", "writes order_status"]),
+        (1260, 160, 1580, 320, "draft_reply", ACCENT2, ["LLM node", "writes draft + messages"]),
+        (900, 420, 1220, 560, "route", ORANGE, ["Conditional Edge", "reads State flags"]),
+        (520, 640, 820, 820, "tools", GREEN, ["Validate→Execute", "Session-3 host"]),
+        (900, 640, 1220, 820, "hitl_approve", ORANGE, ["interrupt()", "wait for human"]),
+        (1380, 640, 1720, 820, "END", MUTED, ["final answer", "or deny"]),
     ]
-    for x1,y1,x2,y2,label,c in boxes:
-        rounded(d, (x1,y1,x2,y2), CARD2, outline=c, radius=18)
-        multiline_center(d, ((x1+x2)/2, (y1+y2)/2), label.split("\n"), body, c)
-    arrow(d, (480, 520), (620, 400))
-    arrow(d, (480, 520), (620, 680))
-    arrow(d, (920, 400), (1060, 500))
-    arrow(d, (920, 680), (1060, 540))
-    arrow(d, (1360, 520), (1500, 520))
-    center_text(d, (W/2, 920), "State flows through nodes · edges choose the next step", font(24), MUTED)
+    for x1, y1, x2, y2, label, c, subs in nodes:
+        rounded(d, (x1, y1, x2, y2), CARD2, outline=c, radius=16, width=3)
+        center_text(d, ((x1 + x2) / 2, y1 + 36), label, font(24, True), c)
+        multiline_center(d, ((x1 + x2) / 2, (y1 + y2) / 2 + 22), subs, font(18), MUTED, gap=4)
+
+    arrow(d, (780, 260), (860, 240), ACCENT, 4)
+    arrow(d, (1180, 240), (1260, 240), ACCENT, 4)
+    arrow(d, (1420, 320), (1060, 420), ACCENT, 4)
+    arrow(d, (900, 520), (700, 640), GREEN, 4)
+    arrow(d, (1060, 560), (1060, 640), ORANGE, 4)
+    arrow(d, (1220, 520), (1500, 640), MUTED, 4)
+    arrow(d, (670, 640), (670, 360), GREEN, 3)
+    arrow(d, (670, 360), (860, 240), GREEN, 3)
+    center_text(d, (620, 480), "loop", font(18), GREEN)
+    arrow(d, (1220, 730), (1380, 730), ORANGE, 3)
+
+    center_text(d, (700, 580), "has tool_calls", font(18), GREEN)
+    center_text(d, (1180, 600), "needs_hitl", font(18), ORANGE)
+    center_text(d, (1380, 560), "done", font(18), MUTED)
+
+    _s04_legend(
+        d,
+        [
+            (ACCENT, "control / LLM"),
+            (GREEN, "tools"),
+            (ORANGE, "decision / HITL"),
+            (MUTED, "terminal"),
+        ],
+        x=480,
+        y=980,
+    )
     save(img, "04/01-langgraph-hero.png")
 
 
 def s04_graph_basics():
     img, d = new_img()
-    title = font(42, True)
-    body = font(28)
-    center_text(d, (W/2, 50), "What is a Directed Graph?", title)
-    rounded(d, (220, 280, 520, 480), CARD2, outline=ACCENT, radius=20)
-    center_text(d, (370, 380), "Node", font(36, True), ACCENT)
-    rounded(d, (800, 280, 1100, 480), CARD2, outline=GREEN, radius=20)
-    center_text(d, (950, 380), "Node", font(36, True), GREEN)
-    rounded(d, (1380, 280, 1680, 480), CARD2, outline=ORANGE, radius=20)
-    center_text(d, (1530, 380), "Node", font(36, True), ORANGE)
-    arrow(d, (520, 380), (800, 380))
-    arrow(d, (1100, 380), (1380, 380))
-    center_text(d, (660, 320), "Edge", font(24), MUTED)
-    center_text(d, (1240, 320), "Edge", font(24), MUTED)
-    center_text(d, (W/2, 620), "Node = step / action", body)
-    center_text(d, (W/2, 700), "Edge = who comes next (direction matters)", body)
-    center_text(d, (W/2, 820), "Directed = arrows only one way (A→B ≠ B→A)", font(26), MUTED)
+    center_text(d, (W / 2, 42), "Directed Graph — Nodes, Edges, Direction", font(40, True))
+    center_text(
+        d,
+        (W / 2, 88),
+        "Everyday example (café) mapped to Agent vocabulary",
+        font(22),
+        MUTED,
+    )
+
+    cafe = [
+        (80, 180, 380, 340, "1. Order", "customer request", ACCENT),
+        (460, 180, 760, 340, "2. Prepare", "barista action", GREEN),
+        (840, 180, 1140, 340, "3. Pay", "checkout", ACCENT2),
+        (1220, 180, 1520, 340, "4. Deliver", "hand-off", ORANGE),
+    ]
+    for x1, y1, x2, y2, t, sub, c in cafe:
+        rounded(d, (x1, y1, x2, y2), CARD2, outline=c, radius=16, width=3)
+        center_text(d, ((x1 + x2) / 2, y1 + 50), t, font(26, True), c)
+        center_text(d, ((x1 + x2) / 2, y1 + 110), sub, font(20), MUTED)
+    for x in (380, 760, 1140):
+        arrow(d, (x, 260), (x + 80, 260), ACCENT, 4)
+        center_text(d, (x + 40, 220), "Edge", font(18), MUTED)
+
+    rounded(d, (840, 420, 1140, 560), CARD2, outline=RED, radius=14, width=3)
+    multiline_center(d, (990, 490), ["Cancel branch", "Conditional Edge"], font(22, True), RED)
+    arrow(d, (990, 340), (990, 420), RED, 3)
+    center_text(d, (1120, 380), "if cancelled", font(18), RED)
+
+    cards = [
+        (80, 620, 600, 900, "Node", ACCENT, [
+            "A named step / function",
+            "Does the real work:",
+            "  · call LLM",
+            "  · call Tool / API",
+            "  · validate / compute",
+            "Returns State updates",
+        ]),
+        (660, 620, 1180, 900, "Edge", GREEN, [
+            "Who runs next",
+            "Normal edge: always A→B",
+            "Conditional: function picks",
+            "  one of several targets",
+            "Edges should NOT call APIs",
+            "(routing only)",
+        ]),
+        (1240, 620, 1840, 900, "Directed + Loops", ORANGE, [
+            "Arrows have direction",
+            "A→B does NOT imply B→A",
+            "Loops ARE allowed in",
+            "  LangGraph (not a DAG)",
+            "Always pair loops with",
+            "  MAX_STEPS / Budget",
+        ]),
+    ]
+    for x1, y1, x2, y2, title, c, lines in cards:
+        rounded(d, (x1, y1, x2, y2), CARD, outline=c, radius=16, width=3)
+        center_text(d, ((x1 + x2) / 2, y1 + 36), title, font(24, True), c)
+        f = font(20)
+        ty = y1 + 70
+        for line in lines:
+            d.text((x1 + 24, ty), line, font=f, fill=MUTED)
+            ty += 32
     save(img, "04/02-graph-basics.png")
 
 
 def s04_state():
     img, d = new_img()
-    title = font(42, True)
-    body = font(24)
-    center_text(d, (W/2, 50), "Shared State travels the graph", title)
-    rounded(d, (120, 200, 600, 900), CARD2, outline=ACCENT, radius=18)
-    center_text(d, (360, 260), "State", font(34, True), ACCENT)
-    fields = ["messages[]", "goal", "tool_results", "status", "needs_hitl"]
-    for i,f in enumerate(fields):
-        y = 340 + i*90
-        rounded(d, (180, y, 540, y+70), CARD, outline=LINE, radius=12)
-        center_text(d, (360, y+35), f, body)
-    for i,label in enumerate(["Node A", "Node B", "Node C"]):
-        x = 780 + i*350
-        rounded(d, (x, 360, x+280, 560), CARD2, outline=GREEN, radius=16)
-        center_text(d, (x+140, 460), label, font(28, True), GREEN)
-        arrow(d, (600, 500), (x+40, 460), MUTED, 3)
-        arrow(d, (x+140, 560), (360, 860), MUTED, 2)
-    center_text(d, (W/2, 980), "Each node reads State · returns updates · graph merges them", font(24), MUTED)
+    center_text(d, (W / 2, 40), "Shared State — read, update, merge", font(40, True))
+    center_text(
+        d,
+        (W / 2, 84),
+        "One memory box for the whole run · each node touches only what it owns",
+        font(22),
+        MUTED,
+    )
+
+    rounded(d, (620, 130, 1300, 980), CARD2, outline=ACCENT, radius=20, width=3)
+    center_text(d, (960, 170), "AgentState", font(30, True), ACCENT)
+    fields = [
+        ("messages[]", "Annotated + add_messages (Reducer)", GREEN),
+        ("customer_id", "from user input", MUTED),
+        ("question", "from user input", MUTED),
+        ("order_status", "written by lookup_order", GREEN),
+        ("draft_reply", "written by draft node / LLM", ACCENT2),
+        ("needs_hitl", "written by policy / draft", ORANGE),
+        ("step_count", "budget counter (++ each loop)", ORANGE),
+    ]
+    for i, (name, note, c) in enumerate(fields):
+        y = 220 + i * 95
+        rounded(d, (660, y, 1260, y + 78), CARD, outline=c, radius=12, width=2)
+        d.text((690, y + 12), name, font=font(22, True), fill=c)
+        d.text((690, y + 42), note, font=font(18), fill=MUTED)
+
+    _s04_panel(
+        d,
+        (40, 160, 560, 500),
+        "Node: lookup_order",
+        [
+            "READS  customer_id",
+            "CALLS  get_order tool",
+            "WRITES order_status",
+            "",
+            "return {",
+            '  "order_status": "shipped"',
+            "}",
+        ],
+        outline=GREEN,
+        title_color=GREEN,
+    )
+    _s04_panel(
+        d,
+        (40, 540, 560, 900),
+        "Node: draft_reply",
+        [
+            "READS  question, order_status",
+            "CALLS  LLM",
+            "WRITES draft_reply, messages",
+            "        maybe needs_hitl",
+            "",
+            "Partial updates only —",
+            "customer_id stays untouched.",
+        ],
+        outline=ACCENT2,
+        title_color=ACCENT2,
+    )
+
+    _s04_panel(
+        d,
+        (1360, 160, 1880, 520),
+        "Why Reducer matters",
+        [
+            "Without add_messages:",
+            "  messages=[new] WIPES history",
+            "",
+            "With add_messages:",
+            "  new messages are APPENDED",
+            "",
+            "Symptom of the bug:",
+            "  after step 2, early turns vanish",
+            "  → model 'forgets' context",
+        ],
+        outline=RED,
+        title_color=RED,
+    )
+    _s04_panel(
+        d,
+        (1360, 560, 1880, 900),
+        "Merge rule of thumb",
+        [
+            "Growing lists → need Reducer",
+            "Scalar flags → overwrite OK",
+            "  (status, needs_hitl)",
+            "",
+            "Parallel nodes in one step",
+            "all read the SAME snapshot,",
+            "then updates merge by rule.",
+        ],
+        outline=ORANGE,
+        title_color=ORANGE,
+    )
     save(img, "04/03-shared-state.png")
 
 
 def s04_conditional():
     img, d = new_img()
-    title = font(40, True)
-    body = font(24)
-    center_text(d, (W/2, 50), "Conditional Edge = if/else on the graph", title)
-    rounded(d, (720, 180, 1200, 360), CARD2, outline=ACCENT, radius=18)
-    center_text(d, (960, 270), "Agent Node", font(32, True), ACCENT)
-    rounded(d, (200, 560, 560, 760), CARD2, outline=GREEN, radius=18)
-    center_text(d, (380, 660), "call tools", font(28, True), GREEN)
-    rounded(d, (720, 560, 1200, 760), CARD2, outline=ORANGE, radius=18)
-    center_text(d, (960, 660), "ask human\n(HITL)", font(28, True), ORANGE)
-    rounded(d, (1360, 560, 1720, 760), CARD2, outline=MUTED, radius=18)
-    center_text(d, (1540, 660), "END\nanswer", font(28, True), MUTED)
-    arrow(d, (850, 360), (380, 560))
-    arrow(d, (960, 360), (960, 560))
-    arrow(d, (1070, 360), (1540, 560))
-    center_text(d, (560, 430), "needs tool", font(22), MUTED)
-    center_text(d, (1100, 430), "needs approval", font(22), MUTED)
-    center_text(d, (1400, 430), "done", font(22), MUTED)
+    center_text(d, (W / 2, 40), "Conditional Edge — should_continue router", font(38, True))
+    center_text(
+        d,
+        (W / 2, 84),
+        "Routing function reads State · returns a key · graph jumps to that node",
+        font(22),
+        MUTED,
+    )
+
+    rounded(d, (660, 120, 1260, 280), CARD2, outline=ACCENT2, radius=18, width=3)
+    multiline_center(
+        d,
+        (960, 200),
+        ["agent (LLM node)", "may emit tool_calls · may set needs_hitl · may answer"],
+        font(22),
+        ACCENT2,
+        gap=8,
+    )
+
+    rounded(d, (720, 340, 1200, 500), CARD2, outline=ORANGE, radius=18, width=3)
+    multiline_center(
+        d,
+        (960, 420),
+        ["should_continue(state) -> str", "pure function · no network · easy to unit-test"],
+        font(22, True),
+        ORANGE,
+        gap=8,
+    )
+    arrow(d, (960, 280), (960, 340), ACCENT, 4)
+
+    targets = [
+        (80, 580, 560, 820, "tools", GREEN, [
+            'return "tools"',
+            "when last message",
+            "has tool_calls",
+            "",
+            "then: Validate -> Execute",
+            "write Observations",
+            "EDGE back -> agent",
+        ]),
+        (680, 580, 1240, 820, "hitl", ORANGE, [
+            'return "hitl"',
+            "when needs_hitl is True",
+            "(and no open tool_calls)",
+            "",
+            "then: interrupt(payload)",
+            "wait for approve/reject",
+            "resume same thread_id",
+        ]),
+        (1360, 580, 1840, 820, "end", MUTED, [
+            'return "end"',
+            "when answer ready",
+            "and no tools / HITL",
+            "",
+            "also: step_count >= MAX",
+            "-> stop_budget path",
+            "(prevents infinite loops)",
+        ]),
+    ]
+    for x1, y1, x2, y2, title, c, lines in targets:
+        rounded(d, (x1, y1, x2, y2), CARD, outline=c, radius=16, width=3)
+        center_text(d, ((x1 + x2) / 2, y1 + 32), title, font(26, True), c)
+        f = font(18)
+        ty = y1 + 70
+        for line in lines:
+            d.text((x1 + 24, ty), line, font=f, fill=MUTED)
+            ty += 26
+
+    arrow(d, (800, 500), (320, 580), GREEN, 4)
+    arrow(d, (960, 500), (960, 580), ORANGE, 4)
+    arrow(d, (1120, 500), (1600, 580), MUTED, 4)
+
+    center_text(d, (180, 400), "loop until", font(18), GREEN)
+    center_text(d, (180, 430), "done / budget", font(18), GREEN)
+
+    center_text(
+        d,
+        (W / 2, 980),
+        'add_conditional_edges("agent", should_continue, {"tools":..., "hitl":..., "end": END})',
+        font(20),
+        MUTED,
+    )
     save(img, "04/04-conditional-edges.png")
 
 
 def s04_checkpoint():
     img, d = new_img()
-    title = font(40, True)
-    body = font(26)
-    center_text(d, (W/2, 50), "Checkpoint = save point between steps", title)
-    steps = [("Step 1", 200), ("Step 2", 700), ("Step 3", 1200)]
-    for label,x in steps:
-        rounded(d, (x, 280, x+320, 480), CARD2, outline=ACCENT, radius=16)
-        center_text(d, (x+160, 380), label, font(30, True), ACCENT)
-    for x in (520, 1020):
-        arrow(d, (x, 380), (x+180, 380))
-        rounded(d, (x+40, 520, x+160, 620), CARD, outline=GREEN, radius=12)
-        center_text(d, (x+100, 570), "save", font(22), GREEN)
-    rounded(d, (560, 740, 1360, 920), CARD2, outline=ORANGE, radius=16)
-    center_text(d, (960, 830), "thread_id = which conversation / run to resume", body, ORANGE)
+    center_text(d, (W / 2, 40), "Checkpoint — snapshot after every super-step", font(38, True))
+    center_text(
+        d,
+        (W / 2, 84),
+        "Not a text log · a loadable State photo keyed by thread_id",
+        font(22),
+        MUTED,
+    )
+
+    steps = [
+        (100, "super-step 1", "lookup_order", "order_status=shipped"),
+        (520, "super-step 2", "draft_reply", "draft ready · needs_hitl"),
+        (940, "super-step 3", "hitl interrupt", "PAUSED for human"),
+        (1360, "super-step 4", "resume -> END", "approved · answered"),
+    ]
+    for x, title, node, detail in steps:
+        rounded(d, (x, 150, x + 380, 360), CARD2, outline=ACCENT, radius=14, width=3)
+        center_text(d, (x + 190, 190), title, font(20, True), ACCENT)
+        center_text(d, (x + 190, 250), node, font(24, True), TEXT)
+        center_text(d, (x + 190, 310), detail, font(18), MUTED)
+    for x in (480, 900, 1320):
+        arrow(d, (x, 255), (x + 40, 255), ACCENT, 4)
+
+    for x in (240, 660, 1080, 1500):
+        rounded(d, (x - 70, 400, x + 70, 460), CARD, outline=GREEN, radius=10, width=2)
+        center_text(d, (x, 430), "ckpt", font(18), GREEN)
+
+    _s04_panel(
+        d,
+        (80, 520, 640, 920),
+        "thread_id",
+        [
+            'config = {"configurable": {',
+            '  "thread_id": "ticket-9912"',
+            "}}",
+            "",
+            "Same id -> continue / resume",
+            "New id -> brand-new memory",
+            "Shared id across users -> leak",
+            "",
+            "Use stable ticket / chat id.",
+        ],
+        outline=ORANGE,
+        title_color=ORANGE,
+    )
+    _s04_panel(
+        d,
+        (680, 520, 1240, 920),
+        "Checkpointer choices",
+        [
+            "InMemorySaver",
+            "  · demos & unit tests",
+            "  · dies with the process",
+            "",
+            "Sqlite / Postgres / ...",
+            "  · production + HITL",
+            "  · survives restarts",
+            "  · needed with multiple workers",
+            "",
+            "compile(checkpointer=...)",
+        ],
+        outline=GREEN,
+        title_color=GREEN,
+    )
+    _s04_panel(
+        d,
+        (1280, 520, 1840, 920),
+        "What it unlocks",
+        [
+            "+ resume after crash",
+            "+ Human-In-The-Loop",
+            "+ debug / time-travel*",
+            "+ durable long runs",
+            "",
+            "* depending on tooling",
+            "",
+            "!= long-term Memory (S6)",
+            "Checkpoint = this run's film",
+            "Memory = lasting knowledge",
+        ],
+        outline=ACCENT2,
+        title_color=ACCENT2,
+    )
     save(img, "04/05-checkpoint.png")
 
 
 def s04_hitl():
     img, d = new_img()
-    title = font(40, True)
-    body = font(26)
-    center_text(d, (W/2, 50), "Interrupt → Human → Resume", title)
+    center_text(d, (W / 2, 40), "HITL — interrupt -> human -> resume", font(40, True))
+    center_text(
+        d,
+        (W / 2, 84),
+        "Human In The Loop · requires Checkpointer + stable thread_id",
+        font(22),
+        MUTED,
+    )
+
     flow = [
-        (180, "Run graph", ACCENT),
-        (560, "interrupt()", ORANGE),
-        (940, "Human decides", ACCENT2),
-        (1320, "resume", GREEN),
+        (60, 140, 400, 320, "1. Graph runs", ACCENT, ["lookup -> draft", "policy sets needs_hitl"]),
+        (460, 140, 820, 320, "2. interrupt()", ORANGE, ["pause at sensitive node", "save Checkpoint"]),
+        (880, 140, 1260, 320, "3. Human UI", ACCENT2, ["see risk payload", "Approve / Reject"]),
+        (1320, 140, 1860, 320, "4. resume", GREEN, ["Command(resume=...)", "same thread_id"]),
     ]
-    for x,label,c in flow:
-        rounded(d, (x, 400, x+300, 600), CARD2, outline=c, radius=18)
-        center_text(d, (x+150, 500), label, body, c)
-    for i in range(3):
-        x1 = flow[i][0]+300
-        x2 = flow[i+1][0]
-        arrow(d, (x1, 500), (x2, 500))
-    center_text(d, (W/2, 780), "Needs a checkpointer — otherwise there is nowhere to pause", font(24), MUTED)
+    for x1, y1, x2, y2, title, c, lines in flow:
+        rounded(d, (x1, y1, x2, y2), CARD2, outline=c, radius=14, width=3)
+        center_text(d, ((x1 + x2) / 2, y1 + 40), title, font(22, True), c)
+        multiline_center(d, ((x1 + x2) / 2, y1 + 120), lines, font(18), MUTED, gap=4)
+    for x in (400, 820, 1260):
+        arrow(d, (x, 230), (x + 60, 230), ACCENT, 4)
+
+    rounded(d, (60, 360, 1860, 450), CARD, outline=GREEN, radius=12, width=2)
+    center_text(
+        d,
+        (W / 2, 405),
+        "Checkpointer underneath the whole timeline — without it, resume starts from zero",
+        font(22),
+        GREEN,
+    )
+
+    _s04_panel(
+        d,
+        (60, 490, 920, 920),
+        "Good interrupt payload (for humans)",
+        [
+            "action: issue_refund",
+            "amount: 249 ILS",
+            "order_id: ORD-441",
+            "risk: irreversible money move",
+            "options: approve | reject",
+            "",
+            "NOT a raw dump of entire State.",
+            "NOT a place to bypass a hard deny.",
+            "",
+            "If policy says FORBIDDEN -> END deny",
+            "(do not ask the human to override).",
+        ],
+        outline=ORANGE,
+        title_color=ORANGE,
+    )
+    _s04_panel(
+        d,
+        (980, 490, 1860, 920),
+        "When to interrupt (policy examples)",
+        [
+            "Read logs / metrics          -> usually NO",
+            "Draft email to customer      -> often YES",
+            "Refund / delete / deploy     -> YES or FORBID",
+            "High-confidence FAQ answer   -> NO",
+            "",
+            "Also define timeout:",
+            "  if no human in 2h -> escalate / cancel",
+            "",
+            "UI validates approve|reject BEFORE",
+            "the value reaches the graph.",
+        ],
+        outline=ACCENT2,
+        title_color=ACCENT2,
+    )
     save(img, "04/06-hitl-interrupt.png")
 
 
 def s04_agent_loop():
     img, d = new_img()
-    title = font(40, True)
-    body = font(26)
-    center_text(d, (W/2, 50), "Classic Agent Loop in LangGraph", title)
-    rounded(d, (560, 200, 1000, 400), CARD2, outline=ACCENT2, radius=18)
-    center_text(d, (780, 300), "LLM / Agent", font(32, True), ACCENT2)
-    rounded(d, (560, 600, 1000, 800), CARD2, outline=GREEN, radius=18)
-    center_text(d, (780, 700), "Tools", font(32, True), GREEN)
-    arrow(d, (700, 400), (700, 600))
-    arrow(d, (860, 600), (860, 400))
-    center_text(d, (560, 500), "tool_calls", font(22), MUTED)
-    center_text(d, (1000, 500), "observations", font(22), MUTED)
-    rounded(d, (1200, 350, 1700, 550), CARD2, outline=ORANGE, radius=18)
-    center_text(d, (1450, 450), "END / answer", font(28, True), ORANGE)
-    arrow(d, (1000, 300), (1200, 420))
-    center_text(d, (W/2, 920), "Same idea as Session 3 — now the loop is an explicit graph", font(24), MUTED)
+    center_text(d, (W / 2, 40), "Agent <-> Tools loop — Session 3 inside a graph", font(36, True))
+    center_text(
+        d,
+        (W / 2, 84),
+        "Function Calling protocol stays the same · Host becomes explicit Nodes + Edges",
+        font(22),
+        MUTED,
+    )
+
+    rounded(d, (80, 200, 280, 320), CARD2, outline=ACCENT, radius=14, width=3)
+    center_text(d, (180, 260), "START", font(24, True), ACCENT)
+
+    rounded(d, (400, 160, 860, 380), CARD2, outline=ACCENT2, radius=18, width=3)
+    multiline_center(
+        d,
+        (630, 270),
+        ["agent node", "LLM reasons", "may request tools"],
+        font(22, True),
+        ACCENT2,
+        gap=6,
+    )
+
+    rounded(d, (400, 520, 860, 780), CARD2, outline=GREEN, radius=18, width=3)
+    multiline_center(
+        d,
+        (630, 650),
+        ["tools node", "1) Validate args", "2) Execute allow-listed tools", "3) Observations + tool_call_id"],
+        font(20),
+        GREEN,
+        gap=6,
+    )
+
+    rounded(d, (1000, 240, 1400, 400), CARD2, outline=ORANGE, radius=16, width=3)
+    multiline_center(
+        d,
+        (1200, 320),
+        ["should_continue", "tools | hitl | end"],
+        font(22, True),
+        ORANGE,
+        gap=6,
+    )
+
+    rounded(d, (1480, 160, 1840, 320), CARD2, outline=ORANGE, radius=14, width=3)
+    center_text(d, (1660, 240), "HITL", font(26, True), ORANGE)
+    rounded(d, (1480, 400, 1840, 560), CARD2, outline=MUTED, radius=14, width=3)
+    center_text(d, (1660, 480), "END", font(26, True), MUTED)
+
+    rounded(d, (1000, 520, 1400, 780), CARD2, outline=RED, radius=16, width=3)
+    multiline_center(
+        d,
+        (1200, 650),
+        ["Budget guard", "step_count++", "if >= MAX_STEPS -> END", "stop_budget reason"],
+        font(20),
+        RED,
+        gap=6,
+    )
+
+    arrow(d, (280, 260), (400, 260), ACCENT, 4)
+    arrow(d, (860, 270), (1000, 300), ORANGE, 4)
+    arrow(d, (1100, 400), (700, 520), GREEN, 4)
+    center_text(d, (820, 460), "tool_calls", font(18), GREEN)
+    arrow(d, (630, 520), (630, 380), GREEN, 3)
+    center_text(d, (760, 450), "observations", font(18), GREEN)
+    arrow(d, (1400, 280), (1480, 240), ORANGE, 3)
+    arrow(d, (1400, 340), (1480, 460), MUTED, 3)
+    arrow(d, (1200, 520), (1200, 400), RED, 3)
+
+    rounded(d, (80, 840, 1840, 1000), CARD, outline=LINE, radius=14, width=2)
+    center_text(d, (W / 2, 875), "Session 3 mapping (unchanged contracts)", font(22, True), TEXT)
+    center_text(
+        d,
+        (W / 2, 940),
+        "Schema -> tool_calls -> Validate -> Execute -> Observation(+tool_call_id) -> model  |  LangGraph makes the loop visible & stoppable",
+        font(20),
+        MUTED,
+    )
     save(img, "04/07-agent-tools-loop.png")
 
 
