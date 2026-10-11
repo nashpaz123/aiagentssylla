@@ -519,63 +519,7 @@ Checklist:
 
 ---
 
-# ‏חלק יא׳ — הדגמות פתרון
-
-## ‏38 — הדגמה 1 — מציור לגרף
-
-תרחיש: *״בדוק סטטוס הזמנה וענה ללקוח; אם refund — HITL.״*
-
-על המסך נפרק ל:
-`START → lookup → draft → route → (hitl|end)`
-
----
-
-## ‏39 — הדגמה 1 — פתרון מבנה
-
-```text
-State: customer_id, question, order_status, draft, needs_hitl, messages
-Nodes: lookup_order, draft_reply, hitl_approve
-Edges: START→lookup→draft→(conditional)→hitl|END
-hitl→END
-```
-
----
-
-## ‏40 — הדגמה 2 — באג Reducer
-
-סימפטום: אחרי הצעד השני נעלמו הודעות ראשונות.
-
-סיבה שכיחה: החזרתם `messages=[new]` בלי `add_messages`.
-
-תיקון: Annotated + reducer, או להחזיר רק את התוספת לפי החוזה של הספרייה.
-
----
-
-## ‏41 — הדגמה 3 — HITL בלי שמירה
-
-סימפטום: אחרי אישור האדם הגרף מתחיל מאפס.
-
-סיבה: אין Checkpointer או thread_id לא תואם.
-
-תיקון: `compile(checkpointer=...)` + אותו `thread_id` ב-resume.
-
----
-
-## ‏42 — הדגמה 4 — Design Review לגרף Incident
-
-צמתים מוצעים: `fetch_metrics`, `fetch_logs`, `correlate`, `propose_action`, `hitl_action`, `execute_action`
-
-תשובות שנקריא:
-1. אילו מקביליים? metrics+logs  
-2. היכן Budget? אחרי correlate  
-3. היכן HITL? לפני execute_action  
-4. מה ב-State? evidence[], hypothesis, approved_action
-
----
-
-# ‏חלק יב׳ — סיכום
-
-## ‏43 — סיכום
+# ‏חלק יא׳ — סיכום —
 
 - גרף = Nodes + Edges + State  
 - ‏LangGraph = תזמור Agent כגרף (עם לולאות)  
@@ -587,7 +531,7 @@ hitl→END
 
 ---
 
-## ‏44 — הכנה למפגש 5
+## ‏38 — הכנה למפגש 5
 
 - ציירו 2–3 תפקידי סוכן לאותה משימה (למשל Researcher / Writer / Reviewer)  
 - סמנו מי מדבר עם מי  
@@ -595,7 +539,7 @@ hitl→END
 
 ---
 
-## ‏45 — תרגיל בית
+## 39 — תרגיל בית
 
 1. הוסיפו ל-Lab צומת אחד משלכם (למשל סופר מילים)  
 2. הוסיפו ענף מותנה נוסף  
