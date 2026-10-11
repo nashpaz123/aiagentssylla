@@ -519,7 +519,7 @@ Checklist:
 
 ---
 
-# ‏חלק יא׳ — סיכום —
+# ‏סיכום —
 
 - גרף = Nodes + Edges + State  
 - ‏LangGraph = תזמור Agent כגרף (עם לולאות)  
