@@ -33,6 +33,7 @@
 - **מפגש 2:** Lab חי read-only (`labs/02-aws-agent-loop/`, פרופיל `nashpazformatan`) + הדגמות פתרון מורחבות; חזרה על מפגש 1 — מצביע קצר בלבד.
 - **מפגש 3:** Lab Host ל-Function Calling (`labs/03-tool-calling/`, פרופיל `nashpazformatan`) — Validate · Parallel · Observations; הדגמת MCP חיה עם PinchTab headed (`labs/03-pinchtab-mcp/`); חזרה על מפגש 2 — מצביע קצר בלבד.
 - **מפגש 4:** Lab גרף LangGraph דטרמיניסטי בלי מפתח LLM (`labs/04-langgraph-basics/`) — State · Conditional edges · לוג צמתים; חזרה על מפגש 3 — מצביע קצר בלבד; מילון ראשי תיבות (MCP · RAG · HITL …) חובה בהקראה.
+- **מפגש 5 (קצר יותר — ~2–2.5 שעות):** נפתח ב**הדגמה חיה** של צוות 3 subagents ב-Claude Code / Cursor (`demos/05-crew-opening/`), ואז CrewAI (Agent · Task · Crew · Process), Guardrails לצוות, ו-Lab (`labs/05-crewai-multi-agent/` — `mini_crew.py` בלי מפתח, `crew_demo.py` עם CrewAI אמיתי). בראש כל שקף סטודנטים שורת **בקטע הזה** — עוגן לצופים בהקלטה.
 
 ## ‏מוכן עכשיו
 
@@ -42,6 +43,7 @@
 | 2 Planning & Execution | [`02-agent-planning-and-execution.md`](02-agent-planning-and-execution.md) | [`02-students-slides.md`](02-students-slides.md) | `assets/02/` |
 | 3 Tool Use & Function Calling | [`03-tool-use-and-function-calling.md`](03-tool-use-and-function-calling.md) | [`03-students-slides.md`](03-students-slides.md) | `assets/03/` |
 | 4 LangGraph | [`04-langgraph-for-agents.md`](04-langgraph-for-agents.md) | [`04-students-slides.md`](04-students-slides.md) | `assets/04/` |
+| 5 CrewAI & Multi-Agent | [`05-crewai-multi-agent.md`](05-crewai-multi-agent.md) | [`05-students-slides.md`](05-students-slides.md) | `assets/05/` · `demos/05-crew-opening/` |
 
 ## ‏חידוש דיאגרמות וצילומי מסך
 
@@ -55,6 +57,6 @@ python3 scripts/gen_mock_uis.py   # צילומי מסך להדגמות (CRM/K8s/
 
 ## ‏מפגשים הבאים (מהסילבוס)
 
-5 CrewAI/Multi-Agent · 6 Memory · 7 Business · 8 Cursor · 9 Testing · 10 Capstone
+6 Memory · 7 Business · 8 Cursor · 9 Testing · 10 Capstone
 
 </div>

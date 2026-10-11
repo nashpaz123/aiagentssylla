@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate presentation diagrams for AI Agents course sessions 1–4."""
+"""Generate presentation diagrams for AI Agents course sessions 1–5."""
 
 from __future__ import annotations
 
@@ -1540,6 +1540,445 @@ def s04_agent_loop():
     save(img, "04/07-agent-tools-loop.png")
 
 
+# ---------- Session 05 ----------
+
+def _s05_agent_card(d, box, role, color, lines):
+    x1, y1, x2, y2 = box
+    rounded(d, box, CARD2, outline=color, radius=16, width=3)
+    center_text(d, ((x1 + x2) / 2, y1 + 32), role, font(26, True), color)
+    f = font(18)
+    ty = y1 + 68
+    for line in lines:
+        d.text((x1 + 22, ty), line, font=f, fill=MUTED)
+        ty += 26
+
+
+def s05_hero():
+    """Crew of specialised agents + orchestrator + shared artifacts."""
+    img, d = new_img()
+    center_text(d, (W / 2, 42), "Multi-Agent System — a crew of specialists, not one giant prompt", font(38, True))
+    center_text(
+        d,
+        (W / 2, 88),
+        "Each agent = role + goal + tools · Orchestrator hands work over · Artifacts are the shared memory",
+        font(22),
+        MUTED,
+    )
+
+    rounded(d, (700, 140, 1220, 290), CARD, outline=ACCENT, radius=18, width=3)
+    multiline_center(
+        d,
+        (960, 215),
+        ["Orchestrator / Crew", "owns the plan · decides hand-offs · enforces budget & HITL"],
+        font(22, True),
+        ACCENT,
+        gap=8,
+    )
+
+    cards = [
+        ((80, 400, 600, 720), "Researcher", GREEN, [
+            "goal: collect verified facts",
+            "tools: Read, Grep, get_order",
+            "input: brief.md + policy.md",
+            "output: facts.md (bullets + sources)",
+            "",
+            "never writes customer text",
+        ]),
+        ((700, 400, 1220, 720), "Writer", ACCENT2, [
+            "goal: customer-facing Hebrew FAQ",
+            "tools: Read, Write",
+            "input: facts.md only",
+            "output: faq.md",
+            "",
+            "no new facts allowed",
+        ]),
+        ((1320, 400, 1840, 720), "Reviewer", ORANGE, [
+            "goal: catch policy violations",
+            "tools: Read (read-only!)",
+            "input: faq.md vs policy.md",
+            "output: review.md + verdict",
+            "",
+            "APPROVE / REVISE (max 2 rounds)",
+        ]),
+    ]
+    for box, role, c, lines in cards:
+        _s05_agent_card(d, box, role, c, lines)
+
+    arrow(d, (860, 290), (340, 400), GREEN, 4)
+    arrow(d, (960, 290), (960, 400), ACCENT2, 4)
+    arrow(d, (1060, 290), (1580, 400), ORANGE, 4)
+    arrow(d, (600, 560), (700, 560), MUTED, 4)
+    arrow(d, (1220, 560), (1320, 560), MUTED, 4)
+    center_text(d, (650, 530), "facts.md", font(18), MUTED)
+    center_text(d, (1270, 530), "faq.md", font(18), MUTED)
+
+    rounded(d, (80, 790, 1840, 930), CARD, outline=LINE, radius=14, width=2)
+    multiline_center(
+        d,
+        (960, 860),
+        [
+            "Same loop as sessions 1–4 inside every agent: think -> tool -> observe -> answer",
+            "What is new: WHO does each part, WHAT they may touch, and HOW the result moves on",
+        ],
+        font(22),
+        TEXT,
+        gap=10,
+    )
+    _s04_legend(d, [(ACCENT, "orchestration"), (GREEN, "read / research"), (ACCENT2, "write"), (ORANGE, "review / gate")], x=560, y=990)
+    save(img, "05/01-multi-agent-hero.png")
+
+
+def s05_single_vs_crew():
+    img, d = new_img()
+    center_text(d, (W / 2, 42), "One agent vs. a crew — when splitting actually helps", font(38, True))
+
+    rounded(d, (80, 120, 920, 900), CARD, outline=RED, radius=18, width=3)
+    center_text(d, (500, 160), "Single agent, one huge prompt", font(28, True), RED)
+    rounded(d, (140, 210, 860, 560), CARD2, outline=LINE, radius=14, width=2)
+    f = font(19)
+    lines = [
+        "system: you are researcher + writer + reviewer + ...",
+        "tools: 23 tools (read, write, deploy, refund, ...)",
+        "context: policy.md + 40 tickets + style guide + ...",
+        "",
+        "-> context window fills up",
+        "-> instructions compete (be creative / be strict)",
+        "-> reviewer 'forgets' to review its own text",
+        "-> one bad step poisons everything after it",
+    ]
+    ty = 236
+    for line in lines:
+        d.text((170, ty), line, font=f, fill=MUTED)
+        ty += 36
+    _s04_panel(d, (140, 600, 860, 860), "Fine for", [
+        "small, single-skill tasks",
+        "short context, few tools",
+        "no need for independent review",
+        "",
+        "Cheapest option — start here.",
+    ], outline=GREEN, title_color=GREEN)
+
+    rounded(d, (1000, 120, 1840, 900), CARD, outline=GREEN, radius=18, width=3)
+    center_text(d, (1420, 160), "Crew of specialists", font(28, True), GREEN)
+    for i, (role, c, what) in enumerate([
+        ("Researcher", GREEN, "facts only · read tools"),
+        ("Writer", ACCENT2, "text only · no new facts"),
+        ("Reviewer", ORANGE, "verdict only · read-only"),
+    ]):
+        y = 210 + i * 110
+        rounded(d, (1060, y, 1780, y + 86), CARD2, outline=c, radius=12, width=2)
+        d.text((1084, y + 14), role, font=font(22, True), fill=c)
+        d.text((1084, y + 48), what, font=font(18), fill=MUTED)
+    _s04_panel(d, (1060, 560, 1780, 860), "Helps when", [
+        "roles need different instructions / tools",
+        "context would not fit one window",
+        "independent review has real value",
+        "parts can run in parallel",
+        "",
+        "Costs: N x tokens, hand-off bugs, latency.",
+    ], outline=ORANGE, title_color=ORANGE)
+
+    center_text(d, (W / 2, 970), "Rule: split by RESPONSIBILITY, not by sentence count. If one prompt still works — keep one agent.", font(22), TEXT)
+    save(img, "05/02-single-vs-crew.png")
+
+
+def s05_patterns():
+    img, d = new_img()
+    center_text(d, (W / 2, 40), "Four orchestration patterns", font(38, True))
+    center_text(d, (W / 2, 84), "Sequential · Hierarchical (manager) · Parallel fan-out / merge · Writer-Reviewer loop", font(22), MUTED)
+
+    def node(x, y, label, c, w=150, h=64):
+        rounded(d, (x, y, x + w, y + h), CARD2, outline=c, radius=12, width=3)
+        center_text(d, (x + w / 2, y + h / 2), label, font(20, True), c)
+
+    # Sequential
+    rounded(d, (60, 130, 940, 480), CARD, outline=LINE, radius=16, width=2)
+    d.text((84, 146), "1. Sequential (CrewAI Process.sequential)", font=font(24, True), fill=ACCENT)
+    node(100, 240, "Research", GREEN); arrow(d, (250, 272), (330, 272), ACCENT)
+    node(330, 240, "Write", ACCENT2); arrow(d, (480, 272), (560, 272), ACCENT)
+    node(560, 240, "Review", ORANGE); arrow(d, (710, 272), (790, 272), ACCENT)
+    node(790, 240, "Done", MUTED, w=120)
+    f = font(18)
+    d.text((100, 340), "output of task N becomes context of task N+1", font=f, fill=MUTED)
+    d.text((100, 368), "simple · predictable · easy to trace · no parallelism", font=f, fill=MUTED)
+    d.text((100, 396), "use first — covers most real cases", font=f, fill=GREEN)
+
+    # Hierarchical
+    rounded(d, (980, 130, 1860, 480), CARD, outline=LINE, radius=16, width=2)
+    d.text((1004, 146), "2. Hierarchical (manager delegates)", font=font(24, True), fill=ACCENT)
+    node(1330, 200, "Manager", ACCENT, w=180)
+    node(1040, 330, "Research", GREEN); node(1300, 330, "Write", ACCENT2); node(1560, 330, "Review", ORANGE)
+    arrow(d, (1380, 264), (1115, 330), ACCENT); arrow(d, (1420, 264), (1375, 330), ACCENT); arrow(d, (1470, 264), (1635, 330), ACCENT)
+    d.text((1020, 420), "manager LLM picks who works next · flexible · extra tokens · harder to predict", font=f, fill=MUTED)
+    d.text((1020, 448), "needs max_iter + budget — manager can loop", font=f, fill=ORANGE)
+
+    # Parallel
+    rounded(d, (60, 520, 940, 900), CARD, outline=LINE, radius=16, width=2)
+    d.text((84, 536), "3. Parallel fan-out / merge", font=font(24, True), fill=ACCENT)
+    node(100, 660, "Split", ACCENT, w=120)
+    node(330, 590, "fetch_metrics", GREEN, w=190); node(330, 690, "fetch_logs", GREEN, w=190); node(330, 790, "fetch_deploys", GREEN, w=190)
+    arrow(d, (220, 692), (330, 622), GREEN); arrow(d, (220, 692), (330, 722), GREEN); arrow(d, (220, 692), (330, 822), GREEN)
+    node(640, 660, "Merge", ACCENT2, w=140)
+    arrow(d, (520, 622), (640, 692), ACCENT2); arrow(d, (520, 722), (640, 692), ACCENT2); arrow(d, (520, 822), (640, 692), ACCENT2)
+    d.text((100, 860), "read-only work in parallel · merge needs a Reducer (session 4)", font=f, fill=MUTED)
+
+    # Loop
+    rounded(d, (980, 520, 1860, 900), CARD, outline=LINE, radius=16, width=2)
+    d.text((1004, 536), "4. Writer <-> Reviewer loop (bounded!)", font=font(24, True), fill=ACCENT)
+    node(1100, 650, "Writer", ACCENT2, w=180); node(1500, 650, "Reviewer", ORANGE, w=180)
+    arrow(d, (1280, 668), (1500, 668), ACCENT2); arrow(d, (1500, 700), (1280, 700), ORANGE)
+    center_text(d, (1390, 640), "draft", font(18), ACCENT2)
+    center_text(d, (1390, 728), "REVISE + notes", font(18), ORANGE)
+    arrow(d, (1680, 682), (1760, 682), GREEN); center_text(d, (1800, 682), "OK", font(20, True), GREEN)
+    d.text((1020, 800), "quality goes up for 1-2 rounds, then flat", font=f, fill=MUTED)
+    d.text((1020, 828), "MAX_ROUNDS is mandatory — otherwise infinite debate", font=f, fill=RED)
+    d.text((1020, 856), "after MAX: escalate to human (HITL)", font=f, fill=ORANGE)
+
+    center_text(d, (W / 2, 980), "Pick the simplest pattern that satisfies the task. Combine only when a real need appears.", font(22), TEXT)
+    save(img, "05/03-orchestration-patterns.png")
+
+
+def s05_crewai_concepts():
+    img, d = new_img()
+    center_text(d, (W / 2, 40), "CrewAI building blocks — Agent · Task · Crew · Process · Tools", font(38, True))
+
+    _s05_agent_card(d, (60, 130, 640, 520), "Agent", GREEN, [
+        "role: 'Support Researcher'",
+        "goal: 'collect verified order facts'",
+        "backstory: who it is, how it works",
+        "tools: [get_order, search_policy]",
+        "llm: model for THIS agent",
+        "allow_delegation: False (default safe)",
+        "max_iter: 5   <- loop budget",
+        "verbose: True <- trace",
+        "",
+        "= system prompt + tools + budget",
+    ])
+    _s05_agent_card(d, (680, 130, 1260, 520), "Task", ACCENT2, [
+        "description: what to do (concrete)",
+        "expected_output: shape of the result",
+        "agent: who owns it",
+        "context: [previous_tasks]",
+        "output_pydantic / output_json",
+        "human_input: True (HITL gate)",
+        "",
+        "Task = unit of work + contract",
+        "expected_output is the real spec:",
+        "'bullets with source per fact'",
+    ])
+    _s05_agent_card(d, (1300, 130, 1860, 520), "Crew", ACCENT, [
+        "agents: [researcher, writer, reviewer]",
+        "tasks: [t_research, t_write, t_review]",
+        "process: Process.sequential",
+        "        | Process.hierarchical",
+        "manager_llm: for hierarchical",
+        "memory: False (session 6!)",
+        "verbose: True",
+        "",
+        "crew.kickoff(inputs={...})",
+        "-> CrewOutput (raw, tasks_output)",
+    ])
+
+    rounded(d, (60, 580, 1860, 900), CARD, outline=LINE, radius=16, width=2)
+    d.text((84, 598), "kickoff() — what happens at runtime (sequential)", font=font(24, True), fill=TEXT)
+    steps = [
+        ("inputs", ACCENT, "{order_id, question}"),
+        ("Task 1", GREEN, "researcher: think -> tool -> facts"),
+        ("Task 2", ACCENT2, "writer: context=[T1] -> faq text"),
+        ("Task 3", ORANGE, "reviewer: context=[T2] -> verdict"),
+        ("CrewOutput", MUTED, "raw + per-task outputs"),
+    ]
+    x = 100
+    for i, (label, c, sub) in enumerate(steps):
+        rounded(d, (x, 660, x + 300, 760), CARD2, outline=c, radius=12, width=3)
+        center_text(d, (x + 150, 690), label, font(22, True), c)
+        center_text(d, (x + 150, 730), sub, font(16), MUTED)
+        if i < len(steps) - 1:
+            arrow(d, (x + 300, 710), (x + 350, 710), ACCENT, 4)
+        x += 350
+    d.text((100, 800), "Every task runs the session-1 loop inside the agent. The Crew only decides ORDER and CONTEXT passing.", font=font(20), fill=MUTED)
+    d.text((100, 832), "Tools are the session-3 contract: @tool def get_order(order_id: str) -> str  — schema from the signature + docstring.", font=font(20), fill=MUTED)
+    d.text((100, 864), "No Checkpointer by default: a crash mid-crew restarts from Task 1. For resumable flows wrap the crew in a LangGraph node.", font=font(20), fill=ORANGE)
+    save(img, "05/04-crewai-concepts.png")
+
+
+def s05_subagents():
+    img, d = new_img()
+    center_text(d, (W / 2, 40), "Claude Code / Cursor subagents — Multi-Agent inside your coding tool", font(36, True))
+    center_text(d, (W / 2, 84), "Same idea as CrewAI: an orchestrator session delegates to role-specific agents with isolated context", font(22), MUTED)
+
+    rounded(d, (60, 130, 700, 900), CARD, outline=ACCENT, radius=18, width=3)
+    center_text(d, (380, 170), "Orchestrator session (you + main agent)", font(24, True), ACCENT)
+    f = font(19)
+    lines = [
+        "reads prompt.md:",
+        "  1. researcher -> facts.md",
+        "  2. writer     -> faq.md",
+        "  3. reviewer   -> review.md",
+        "",
+        "calls the Task tool per step",
+        "gets back a SHORT summary",
+        "(not the subagent's whole context)",
+        "",
+        "enforces order, retries, HITL",
+        "keeps its own context small",
+    ]
+    ty = 210
+    for line in lines:
+        d.text((90, ty), line, font=f, fill=MUTED)
+        ty += 32
+
+    for i, (name, c, tools, model) in enumerate([
+        ("researcher", GREEN, "tools: Read, Grep, Glob", "model: sonnet"),
+        ("writer", ACCENT2, "tools: Read, Write", "model: sonnet"),
+        ("reviewer", ORANGE, "tools: Read   (read-only)", "model: opus / sonnet"),
+    ]):
+        y = 150 + i * 250
+        rounded(d, (820, y, 1340, y + 210), CARD2, outline=c, radius=16, width=3)
+        center_text(d, (1080, y + 30), f".claude/agents/{name}.md", font(22, True), c)
+        d.text((846, y + 66), "---  (frontmatter)", font=font(18), fill=MUTED)
+        d.text((846, y + 92), f"name: {name}", font=font(18), fill=TEXT)
+        d.text((846, y + 118), tools, font=font(18), fill=TEXT)
+        d.text((846, y + 144), model, font=font(18), fill=TEXT)
+        d.text((846, y + 170), "--- then: the role prompt (markdown body)", font=font(18), fill=MUTED)
+        arrow(d, (700, 300 + i * 200), (820, y + 105), c, 4)
+
+    _s04_panel(d, (1400, 150, 1860, 520), "Isolated context", [
+        "subagent starts fresh",
+        "sees only: its prompt +",
+        "what the orchestrator passed",
+        "+ files it reads itself",
+        "",
+        "returns: one final message",
+        "",
+        "=> the reviewer cannot be",
+        "   'convinced' by the writer's",
+        "   reasoning — it only sees",
+        "   the artifact (faq.md)",
+    ], outline=GREEN, title_color=GREEN)
+    _s04_panel(d, (1400, 560, 1860, 900), "Cursor equivalent", [
+        "Agent chat -> Task / subagents",
+        "parallel subagents for read-only",
+        "work, then a merge step",
+        "",
+        "Rules & allowed tools per role",
+        "via prompt + .cursor/rules",
+        "",
+        "Same guardrails apply:",
+        "budget, bounded rounds,",
+        "human approves before writes",
+    ], outline=ACCENT, title_color=ACCENT)
+    save(img, "05/05-claude-code-subagents.png")
+
+
+def s05_crew_vs_graph():
+    img, d = new_img()
+    center_text(d, (W / 2, 40), "CrewAI vs LangGraph — different questions, same loop", font(38, True))
+
+    rows = [
+        ("Mental model", "roles & tasks (who does what)", "nodes & edges (what happens next)"),
+        ("Control flow", "process: sequential / hierarchical", "explicit graph, conditional edges, loops"),
+        ("Shared memory", "task outputs passed as context", "typed State + Reducers"),
+        ("Pause / resume", "human_input per task; no checkpoint", "Checkpointer + thread_id + interrupt()"),
+        ("Parallelism", "async tasks (limited)", "fan-out / Send / subgraphs"),
+        ("Best for", "fast prototypes, content pipelines", "production flows needing HITL & audit"),
+        ("Learning curve", "hours", "days"),
+        ("Debuggability", "verbose logs per agent", "state snapshot per step"),
+    ]
+    x0, y0 = 80, 130
+    colw = [360, 700, 700]
+    hdr = ["", "CrewAI", "LangGraph"]
+    for ci, h in enumerate(hdr):
+        x = x0 + sum(colw[:ci])
+        rounded(d, (x, y0, x + colw[ci] - 10, y0 + 56), CARD2, outline=LINE, radius=10, width=2)
+        center_text(d, (x + colw[ci] / 2 - 5, y0 + 28), h, font(24, True), [TEXT, ORANGE, ACCENT][ci])
+    f = font(20)
+    for ri, row in enumerate(rows):
+        y = y0 + 70 + ri * 74
+        for ci, cell in enumerate(row):
+            x = x0 + sum(colw[:ci])
+            rounded(d, (x, y, x + colw[ci] - 10, y + 62), CARD, outline=LINE, radius=10, width=1)
+            d.text((x + 18, y + 18), cell, font=font(20, ci == 0), fill=TEXT if ci == 0 else MUTED)
+
+    rounded(d, (80, 760, 1840, 960), CARD, outline=GREEN, radius=16, width=3)
+    center_text(d, (960, 792), "Combine: a Crew as ONE node inside a LangGraph", font(26, True), GREEN)
+    def node(x, y, label, c, w=200):
+        rounded(d, (x, y, x + w, y + 60), CARD2, outline=c, radius=12, width=3)
+        center_text(d, (x + w / 2, y + 30), label, font(20, True), c)
+    node(140, 850, "lookup_order", GREEN); arrow(d, (340, 880), (420, 880))
+    node(420, 850, "content_crew (CrewAI)", ACCENT2, w=320); arrow(d, (740, 880), (820, 880))
+    node(820, 850, "route", ORANGE); arrow(d, (1020, 880), (1100, 880))
+    node(1100, 850, "hitl_approve", ORANGE, w=240); arrow(d, (1340, 880), (1420, 880))
+    node(1420, 850, "send / END", MUTED, w=240)
+    center_text(d, (960, 935), "Graph keeps State, checkpoint and HITL; the crew does the multi-role content work inside one step.", font(19), MUTED)
+    save(img, "05/06-crew-vs-graph.png")
+
+
+def s05_guardrails():
+    img, d = new_img()
+    center_text(d, (W / 2, 40), "Guardrails for a crew — where multi-agent systems break", font(38, True))
+    panels = [
+        ((60, 130, 640, 500), "Budget per agent & per crew", ORANGE, [
+            "max_iter on every Agent",
+            "MAX_ROUNDS on every loop",
+            "token / cost counter per role",
+            "",
+            "Failure it prevents:",
+            "manager re-delegates forever,",
+            "writer-reviewer debate x 40",
+        ]),
+        ((680, 130, 1260, 500), "HITL before any write", RED, [
+            "reviewer verdict != permission",
+            "human approves: refund, email,",
+            "deploy, delete, post",
+            "",
+            "CrewAI: human_input=True on task",
+            "LangGraph: interrupt() node",
+            "Claude Code: permission prompt",
+        ]),
+        ((1300, 130, 1860, 500), "Output contracts", ACCENT2, [
+            "expected_output written as a spec",
+            "output_pydantic / JSON schema",
+            "validate BEFORE hand-off",
+            "",
+            "Failure it prevents:",
+            "writer receives prose instead",
+            "of facts; reviewer gets no verdict",
+        ]),
+        ((60, 540, 640, 900), "Trace: who said what", GREEN, [
+            "log fields: run_id, agent, task,",
+            "round, tool, latency_ms, tokens",
+            "",
+            "one line per hand-off",
+            "",
+            "Without it a crew is a",
+            "black box of N black boxes",
+        ]),
+        ((680, 540, 1260, 900), "Context isolation", ACCENT, [
+            "reviewer sees artifact, not chat",
+            "writer sees facts, not raw tickets",
+            "least privilege for tools",
+            "",
+            "Failure it prevents:",
+            "prompt-injection in a ticket",
+            "steering the whole crew",
+        ]),
+        ((1300, 540, 1860, 900), "Escalation path", MUTED, [
+            "after MAX_ROUNDS -> human",
+            "after tool failure x2 -> stop",
+            "never 'try again' silently",
+            "",
+            "Say it in the output:",
+            "'needs human: reason'",
+            "— that is a valid result",
+        ]),
+    ]
+    for box, title, c, lines in panels:
+        _s04_panel(d, box, title, lines, outline=c, title_color=c)
+    center_text(d, (W / 2, 975), "Session 2 (Budget, Policy Gate) + Session 3 (Validate) + Session 4 (HITL, State) — applied to N agents at once.", font(21), TEXT)
+    save(img, "05/07-crew-guardrails.png")
+
+
 def main():
     gens = [
         v01_human_agent,
@@ -1584,6 +2023,13 @@ def main():
         s04_checkpoint,
         s04_hitl,
         s04_agent_loop,
+        s05_hero,
+        s05_single_vs_crew,
+        s05_patterns,
+        s05_crewai_concepts,
+        s05_subagents,
+        s05_crew_vs_graph,
+        s05_guardrails,
     ]
     for g in gens:
         g()
