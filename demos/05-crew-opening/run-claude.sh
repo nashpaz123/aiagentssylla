@@ -6,7 +6,10 @@ cd "$(dirname "$0")"
 mkdir -p out
 rm -f out/*.md
 
+# --setting-sources project,local: מתעלמים מ-~/.claude/settings.json האישי (כללי הרשאה/hooks של פרויקטים אחרים),
+# כדי שהפלט בהקלטה יהיה נקי מאזהרות שלא קשורות להדגמה. ההתחברות (OAuth) לא מושפעת.
 claude -p "$(cat prompt.md)" \
+  --setting-sources project,local \
   --allowedTools "Read,Write,Glob,Grep,Task" \
   --max-turns 40 \
   --output-format text

@@ -25,8 +25,8 @@
 
 ```bash
 cd demos/05-crew-opening
-claude                 # סשן אינטראקטיבי
-/agents                # מציג את researcher / writer / reviewer מהתיקייה
+claude --setting-sources project,local   # סשן אינטראקטיבי, בלי ההגדרות האישיות מ-~/.claude (פלט נקי)
+/agents                                  # מציג את researcher / writer / reviewer מהתיקייה
 # ואז מדביקים את התוכן של prompt.md
 ```
 
@@ -62,5 +62,7 @@ claude                 # סשן אינטראקטיבי
 - ‏`claude: command not found` — התקינו Claude Code או השתמשו בחלופת Cursor.
 - הסוכנים לא מופיעים — ודאו שאתם מריצים מתוך התיקייה (`.claude/agents/` יחסי לתיקיית העבודה).
 - בקשת הרשאה לכתיבה — זה ה-HITL של הכלי עצמו; אשרו רק כתיבה ל-`out/`.
+- אזהרה בתחילת הפלט כמו `Permission allow rule (~/.claude/settings.json): Bash(…) has a wildcard…` — זו הערה על כלל הרשאה ישן בהגדרות **האישיות** שלכם, לא קשורה להדגמה והריצה ממשיכה. `run-claude.sh` כבר מריץ עם `--setting-sources project,local` ולכן לא מציג אותה; במצב אינטראקטיבי הוסיפו את אותו דגל. לניקוי קבוע: מחקו את הכלל מ-`~/.claude/settings.json` (רשימת `permissions.allow`).
+- המתזמר הפעיל את ה-writer במקביל לשמירת `facts.md` — `prompt.md` דורש במפורש ריצה טורית; אם זה קורה בכל זאת, זו דוגמה חיה לכשל "מסירה לפני שהתוצר מוכן" — מצביעים עליו ומריצים שוב.
 
 </div>
