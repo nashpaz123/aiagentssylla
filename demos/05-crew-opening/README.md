@@ -14,7 +14,8 @@
 | ‏`.claude/agents/writer.md` | סוכן 2 — כותב `out/faq.md` מהעובדות בלבד |
 | ‏`.claude/agents/reviewer.md` | סוכן 3 — משווה למדיניות, מחזיר `APPROVE` / `REVISE`, קריאה בלבד |
 | ‏`prompt.md` | הוראות ה-Orchestrator: סדר, תקרת 2 סבבים, "NEEDS HUMAN" |
-| ‏`run-claude.sh` | הרצה אחת לא-אינטראקטיבית (`claude -p`) |
+| ‏`run-claude.sh` | הרצה אחת לא-אינטראקטיבית (`claude -p`) עם פלט חי לכל פעולה |
+| ‏`stream_filter.py` | הופך את זרם ה-JSON של Claude Code לשורות קריאות (TASK / READ / WRITE / תוצאה) |
 | ‏`prompt-cursor.md` | אותה הדגמה בצ׳אט של Cursor (subagents דרך Task) |
 | ‏`out/` | התוצרים: `facts.md`, `faq.md`, `review.md` (לא נשמרים ב-git) |
 | ‏`sample-output/` | תוצרים מהרצת בדיקה אמיתית — גיבוי להקלטה |
@@ -30,13 +31,33 @@ claude --setting-sources project,local   # סשן אינטראקטיבי, בלי
 # ואז מדביקים את התוכן של prompt.md
 ```
 
-**לא-אינטראקטיבי (בדיקה / חזרה מהירה, ~70 שניות):**
+**סקריפט עם פלט חי (מתאים גם להקלטה, ~60–70 שניות):**
 
 ```bash
 ./run-claude.sh
 ```
 
-הרצת בדיקה אמיתית (Claude Code 2.1): שלושת הסוכנים רצו בתור, סבב ביקורת אחד, `VERDICT: APPROVE`.
+הסקריפט מריץ `claude -p … --output-format stream-json` ומסנן דרך `stream_filter.py` לשורה אחת לכל פעולה, עם חותמת זמן:
+
+```text
+[  0.8s] INIT  model=… agents=[…, 'researcher', 'reviewer', 'writer', …]
+[  3.2s] TASK  -> subagent 'researcher': …
+[  5.3s] READ  -> …/policy.md
+[ 13.7s] WRITE -> …/out/facts.md
+[ 16.3s] TASK  -> subagent 'writer': …
+[ 34.4s] WRITE -> …/out/faq.md
+[ 39.1s] TASK  -> subagent 'reviewer': …
+[ 63.3s] WRITE -> …/out/review.md
+======================================================================
+(סיכום 5 שורות של המתזמר)
+======================================================================
+turns=6 duration=66s cost_usd=0.23
+```
+
+> **חשוב:** בלי הסינון (`--output-format text`) Claude Code **לא מדפיס כלום עד הסוף** — כדקה של מסך ריק שנראה "תקוע". זו הסיבה לפורמט הזרמה.
+> הזרם הגולמי נשמר ב-`out/stream.jsonl` לדיבאג.
+
+הרצות בדיקה אמיתיות (Claude Code 2.1): שלושת הסוכנים רצו בתור, סבב ביקורת אחד, `VERDICT: APPROVE`, ~66 שניות, ~0.23$ לריצה.
 התוצרים שהתקבלו שמורים ב-`sample-output/` — אפשר להראות אותם אם אין רשת בזמן ההקלטה.
 
 מה להראות על המסך תוך כדי:

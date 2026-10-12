@@ -111,7 +111,7 @@ cat out/review.md                    # VERDICT: APPROVE | REVISE
 
 1. ‏פותחים טרמינל בתיקיית הריפו ומריצים `claude --version` — מצפים לשורה כמו `2.1.283 (Claude Code)`. אם `command not found` → עוברים לחלופת Cursor (סעיף "חלופה" למטה).
 2. ‏`cd demos/05-crew-opening && ls -la .claude/agents out` — מצפים לשלושה קבצים: `researcher.md`, `writer.md`, `reviewer.md`; בתיקיית `out/` רק `.gitignore` ו-`.gitkeep` (אין תוצרים ישנים). אם יש `facts.md`/`faq.md`/`review.md` ישנים → `rm out/*.md`, אחרת הצופים יראו תוצאה "מוכנה מראש".
-3. ‏הרצת חימום שקטה: `./run-claude.sh` (כ-70 שניות). מצפים בסוף ל-`VERDICT: APPROVE` ולשלושה קבצים ב-`out/`. זה מאמת התחברות ורשת. אחרי החימום — שוב `rm out/*.md`.
+3. ‏הרצת חימום: `./run-claude.sh` (כ-60–70 שניות). **הפלט חי** — שורה לכל פעולה עם חותמת זמן: `INIT` עם רשימת הסוכנים (חייבת לכלול researcher/writer/reviewer), `TASK -> subagent 'researcher'`, `READ`/`WRITE` של הקבצים, ואז `TASK -> subagent 'writer'`, `TASK -> subagent 'reviewer'`, סיכום 5 שורות בין קווי `=`, ו-`turns=… duration=…s cost_usd=…` (כ-0.23$). מצפים ל-`VERDICT: APPROVE` ולשלושה קבצים ב-`out/`. אם רואים רק את שורת `>>> starting crew` ושום דבר 10+ שניות — בודקים התחברות (`claude` אינטראקטיבי). אחרי החימום — שוב `rm out/*.md`.
 4. ‏פותחים שני חלונות זה לצד זה: טרמינל (ימין), ועורך עם `.claude/agents/reviewer.md` פתוח (שמאל).
 
 **הרצה בזמן ההקלטה — צעד אחר צעד:**
@@ -143,6 +143,8 @@ cat out/review.md                    # VERDICT: APPROVE | REVISE
 7. ‏**מה מריצים:** `cat out/review.md`
    **מה רואים:** `VERDICT: APPROVE` ואז `NOTES:` — כל נקודה מצטטת שורה מה-FAQ ואת שורת המדיניות המתאימה ("FAQ line 10 … vs policy line 5 …").
    **מה להגיד:** "הבודק לא כתב 'נראה טוב'. הוא הצמיד כל טענה למקור. זה מה שחוזה פלט מדויק נותן".
+
+**חלופה להרצה חיה — הסקריפט במקום הסשן האינטראקטיבי:** אם לא רוצים להדביק פרומפט מול המצלמה, `./run-claude.sh` נותן את אותה תמונה: בכל שורת `TASK -> subagent` אומרים מי נכנס לעבודה; בכל `WRITE` — איזה תוצר נוצר; שורות `RESULT<- [Subagent hand-back]` הן הרגע שבו הסוכן מחזיר למתזמר הודעה אחת (להצביע: "המתזמר מקבל סיכום, לא את כל השיחה"). שורות `READ` של הסוכנים מראות בדיוק אילו קבצים כל תפקיד ראה — ה-reviewer קורא `policy.md` ו-`out/faq.md` בלבד.
 
 **חלופה — Cursor (אם אין Claude Code):** פותחים את `demos/05-crew-opening` כתיקיית עבודה ב-Cursor, פותחים צ׳אט Agent, מדביקים את תוכן `prompt-cursor.md`. מצפים לראות את ה-Agent מפעיל Task/subagents בשם researcher, writer, reviewer, ולכתיבת שלושת הקבצים ב-`out/`. ההסברים זהים; מצביעים על כך שההגדרה של כל תפקיד נמצאת בפרומפט במקום בקובץ.
 
