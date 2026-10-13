@@ -1,9 +1,16 @@
 """
 crew_demo.py — אותו צוות (Researcher · Writer · Reviewer) ב-CrewAI אמיתי.
 
-דורש מפתח API למודל שפה. CrewAI משתמש ב-LiteLLM, לכן שם המודל הוא "ספק/מודל":
-    export OPENAI_API_KEY=...      && export CREW_MODEL=openai/gpt-4o-mini
-    export ANTHROPIC_API_KEY=...   && export CREW_MODEL=anthropic/claude-sonnet-4-5
+דורש מפתח API למודל שפה. CrewAI משתמש ב-LiteLLM, לכן שם המודל הוא "ספק/מודל".
+ברירת המחדל: openai/gpt-4o-mini — לכן בלי CREW_MODEL יידרש OPENAI_API_KEY גם אם יש ANTHROPIC_API_KEY.
+
+    # OpenAI — מפתח + מודל מאותו ספק:
+    export OPENAI_API_KEY=...
+    export CREW_MODEL=openai/gpt-4o-mini
+
+    # Anthropic — חובה גם CREW_MODEL (לא מספיק המפתח לבד):
+    export ANTHROPIC_API_KEY=...
+    export CREW_MODEL=anthropic/claude-sonnet-4-5
 
 הרצה:
     python3 crew_demo.py                 # Process.sequential (ברירת מחדל)

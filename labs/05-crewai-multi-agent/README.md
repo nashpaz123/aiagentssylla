@@ -37,13 +37,23 @@ python3 mini_crew.py loop
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt            # או: pip3 install --user -r requirements.txt
 
-export OPENAI_API_KEY=sk-...               # או ANTHROPIC_API_KEY
-export CREW_MODEL=openai/gpt-4o-mini       # או anthropic/claude-sonnet-4-5
+# המפתח ו-CREW_MODEL חייבים להתאים לאותו ספק.
+# ברירת המחדל של crew_demo.py היא openai/gpt-4o-mini — בלי CREW_MODEL יחפש OPENAI_API_KEY גם אם הגדרתם Anthropic.
+
+# OpenAI:
+export OPENAI_API_KEY=sk-...
+export CREW_MODEL=openai/gpt-4o-mini
+
+# Anthropic (שני השורות — לא רק המפתח):
+export ANTHROPIC_API_KEY=sk-ant-...
+export CREW_MODEL=anthropic/claude-sonnet-4-5
 
 python3 crew_demo.py --dry-run             # בונה את הצוות בלי לקרוא למודל
 python3 crew_demo.py                       # Process.sequential
 python3 crew_demo.py hierarchical          # manager_llm מחלק משימות
 ```
+
+אם מופיע `OPENAI_API_KEY is required` למרות ש־`ANTHROPIC_API_KEY` מוגדר — חסר `CREW_MODEL=anthropic/...`.
 
 מה לבדוק:
 

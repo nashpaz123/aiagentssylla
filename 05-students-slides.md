@@ -562,7 +562,10 @@ python3 mini_crew.py loop            # חלק 1: Writer ⇄ Reviewer, MAX_ROUNDS
 
 # חלק 2 (אופציונלי, דורש API KEY):
 pip3 install --user crewai           # או venv + pip install -r requirements.txt
-export OPENAI_API_KEY=sk-...  CREW_MODEL=openai/gpt-4o-mini
+# מפתח + CREW_MODEL מאותו ספק (ברירת מחדל = OpenAI; עם Anthropic חובה גם CREW_MODEL):
+export OPENAI_API_KEY=sk-... && export CREW_MODEL=openai/gpt-4o-mini
+# או:
+# export ANTHROPIC_API_KEY=sk-ant-... && export CREW_MODEL=anthropic/claude-sonnet-4-5
 python3 crew_demo.py --dry-run       # בונה צוות בלי לקרוא למודל
 python3 crew_demo.py                 # Process.sequential אמיתי
 ```
