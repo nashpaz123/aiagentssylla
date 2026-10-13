@@ -550,9 +550,9 @@ print(crew.usage_metrics)     # טוקנים לכל הריצה
 
 ---
 
-## ‏28 — Lab — מה נריץ
+## ‏28 — Lab 
 
-> הרצת ה-Lab צעד-צעד: שלושת המצבים של mini_crew, הניסוי עם MAX_ROUNDS, ו-CrewAI אמיתי
+> הרצה: שלושת המצבים של mini_crew, הניסוי עם MAX_ROUNDS, ו-CrewAI אמיתי
 
 ```bash
 cd labs/05-crewai-multi-agent
@@ -560,7 +560,7 @@ python3 mini_crew.py sequential      # חלק 1: רציף — מי קיבל אי
 python3 mini_crew.py hierarchical    # חלק 1: מנהל דטרמיניסטי מחלק משימות
 python3 mini_crew.py loop            # חלק 1: Writer ⇄ Reviewer, MAX_ROUNDS=3
 
-# חלק 2 (אופציונלי, דורש מפתח):
+# חלק 2 (אופציונלי, דורש API KEY):
 pip3 install --user crewai           # או venv + pip install -r requirements.txt
 export OPENAI_API_KEY=sk-...  CREW_MODEL=openai/gpt-4o-mini
 python3 crew_demo.py --dry-run       # בונה צוות בלי לקרוא למודל
@@ -590,7 +590,7 @@ python3 crew_demo.py                 # Process.sequential אמיתי
 
 # ‏חלק ז׳ — הדגמות פתרון
 
-_שלושה תרחישים שהמרצה פותר בקול: פיצול תפקידים, באג דיון אינסופי, Design Review_
+_שלושה תרחישיםפ: פיצול תפקידים, באג דיון אינסופי, Design Review_
 
 ## ‏30 — הדגמה 1 — פיצול draft_reply לשני תפקידים
 
