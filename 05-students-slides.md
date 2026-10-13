@@ -561,7 +561,7 @@ python3 mini_crew.py hierarchical    # חלק 1: מנהל דטרמיניסטי �
 python3 mini_crew.py loop            # חלק 1: Writer ⇄ Reviewer, MAX_ROUNDS=3
 
 # חלק 2 (אופציונלי, דורש API KEY):
-pip3 install --user crewai           # או venv + pip install -r requirements.txt
+pip install -r requirements.txt      # בתוך venv; כולל crewai[anthropic]
 # מפתח + CREW_MODEL מאותו ספק (ברירת מחדל = OpenAI; עם Anthropic חובה גם CREW_MODEL):
 export OPENAI_API_KEY=sk-... && export CREW_MODEL=openai/gpt-4o-mini
 # או:

@@ -1275,7 +1275,7 @@ print(crew.usage_metrics)     # טוקנים לכל הריצה
 **לפני ההקלטה (חלק 2 — אופציונלי, ~5 דקות):**
 
 1. ‏`pip3 install --user crewai` (או venv). ההתקנה כבדה — כ-3 דקות ומאות חבילות. לא עושים את זה מול המצלמה.
-2. ‏מפתח ו-`CREW_MODEL` מאותו ספק. ברירת המחדל של `crew_demo.py` היא `openai/gpt-4o-mini` — בלי `CREW_MODEL` הוא מחפש `OPENAI_API_KEY` גם אם הוגדר `ANTHROPIC_API_KEY`. OpenAI: `export OPENAI_API_KEY=…` ו-`export CREW_MODEL=openai/gpt-4o-mini`. Anthropic: `export ANTHROPIC_API_KEY=…` ו-**גם** `export CREW_MODEL=anthropic/claude-sonnet-4-5` (המפתח לבד לא מספיק).
+2. ‏מפתח ו-`CREW_MODEL` מאותו ספק. ברירת המחדל של `crew_demo.py` היא `openai/gpt-4o-mini` — בלי `CREW_MODEL` הוא מחפש `OPENAI_API_KEY` גם אם הוגדר `ANTHROPIC_API_KEY`. OpenAI: `export OPENAI_API_KEY=…` ו-`export CREW_MODEL=openai/gpt-4o-mini`. Anthropic: `export ANTHROPIC_API_KEY=…` ו-**גם** `export CREW_MODEL=anthropic/claude-sonnet-4-5` (המפתח לבד לא מספיק). ל-Anthropic נדרש גם ה-extra: `requirements.txt` כולל `crewai[anthropic]` — אם הותקן רק `crewai` בלי extra, `pip install "crewai[anthropic]"`.
 3. ‏`python3 crew_demo.py --dry-run` — מצפים לשורה אחת: `DRY RUN OK: model=… process=sequential agents=3 tasks=3`. זה בונה את הצוות בלי לקרוא למודל — מאמת התקנה בלי עלות.
 4. ‏הרצה מלאה אחת לחימום: `python3 crew_demo.py` — מצפים ללוג ארוך (verbose) ובסוף `==== FINAL (reviewer) ====` עם APPROVE/REVISE, `==== PER TASK ====` עם שלוש שורות, ו-`GOAL_COMPLETE: True`. אם זה נכשל על Authentication — המפתח או שם המודל; חלק 2 אינו חובה להקלטה.
 
@@ -1296,7 +1296,7 @@ python3 mini_crew.py hierarchical    # חלק 1: מנהל דטרמיניסטי �
 python3 mini_crew.py loop            # חלק 1: Writer ⇄ Reviewer, MAX_ROUNDS=3
 
 # חלק 2 (אופציונלי, דורש מפתח):
-pip3 install --user crewai           # או venv + pip install -r requirements.txt
+pip install -r requirements.txt      # בתוך venv; כולל crewai[anthropic]
 # מפתח + CREW_MODEL מאותו ספק (ברירת מחדל = OpenAI; עם Anthropic חובה גם CREW_MODEL):
 export OPENAI_API_KEY=sk-... && export CREW_MODEL=openai/gpt-4o-mini
 # או:
@@ -1368,7 +1368,7 @@ python3 crew_demo.py                 # Process.sequential אמיתי
    **מה להגיד/להצביע:** על קריאת `get_order` — "הלולאה ממפגש 1 בתוך סוכן אחד: מחשבה, כלי, תצפית, תשובה". על פאנל ה-Writer — "אין כלים. ההקשר שלו הוא הפלט של research — זה ה-context=[t_research]". על `PER TASK` — "זה ה-Trace המינימלי: מי ייצר מה".
    **השוואה (אופציונלי):** `python3 crew_demo.py hierarchical` — מצפים ללוג ארוך יותר עם פאנל נוסף של `Crew Manager` לפני כל הקצאה. אומרים: "זו עלות המנהל — עוד קריאות מודל על אותה עבודה".
 
-**תקלות נפוצות:** `ModuleNotFoundError: crewai` → ההתקנה לא הסתיימה או venv לא פעיל (חלק 1 לא מושפע). `OPENAI_API_KEY is required` למרות שמוגדר `ANTHROPIC_API_KEY` → חסר `export CREW_MODEL=anthropic/claude-sonnet-4-5` (ברירת המחדל היא OpenAI). `AuthenticationError` → המפתח לא תואם לספק שב-`CREW_MODEL`. לוג "נתקע" >2 דקות → `Ctrl+C`; זה בדרך כלל rate-limit, לא באג.
+**תקלות נפוצות:** `ModuleNotFoundError: crewai` → ההתקנה לא הסתיימה או venv לא פעיל (חלק 1 לא מושפע). `OPENAI_API_KEY is required` למרות שמוגדר `ANTHROPIC_API_KEY` → חסר `export CREW_MODEL=anthropic/claude-sonnet-4-5` (ברירת המחדל היא OpenAI). `ImportError: Anthropic native provider not available` → `pip install "crewai[anthropic]"` בתוך ה-venv (או מחדש `pip install -r requirements.txt`); לא `uv add` — אין כאן `pyproject.toml`. `AuthenticationError` → המפתח לא תואם לספק שב-`CREW_MODEL`. לוג "נתקע" >2 דקות → `Ctrl+C`; זה בדרך כלל rate-limit, לא באג.
 
 ---
 

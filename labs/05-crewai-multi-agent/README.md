@@ -35,7 +35,8 @@ python3 mini_crew.py loop
 
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt            # או: pip3 install --user -r requirements.txt
+pip install -r requirements.txt            # כולל crewai[anthropic] — נדרש למודל Anthropic
+                                           # (לא: uv add — אין pyproject.toml בתיקייה זו)
 
 # המפתח ו-CREW_MODEL חייבים להתאים לאותו ספק.
 # ברירת המחדל של crew_demo.py היא openai/gpt-4o-mini — בלי CREW_MODEL יחפש OPENAI_API_KEY גם אם הגדרתם Anthropic.
@@ -53,7 +54,9 @@ python3 crew_demo.py                       # Process.sequential
 python3 crew_demo.py hierarchical          # manager_llm מחלק משימות
 ```
 
-אם מופיע `OPENAI_API_KEY is required` למרות ש־`ANTHROPIC_API_KEY` מוגדר — חסר `CREW_MODEL=anthropic/...`.
+אם מופיע `OPENAI_API_KEY is required` למרות ש־`ANTHROPIC_API_KEY` מוגדר — חסר `CREW_MODEL=anthropic/...`.  
+אם מופיע `ImportError: Anthropic native provider not available` — חסר ה-extra:  
+`pip install "crewai[anthropic]"` (או מחדש `pip install -r requirements.txt`). לא `uv add` בתיקייה זו.
 
 מה לבדוק:
 

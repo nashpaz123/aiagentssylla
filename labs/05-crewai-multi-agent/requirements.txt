@@ -1,3 +1,6 @@
 # חלק 1 (mini_crew.py) — ללא תלויות, פייתון 3.10+ בלבד.
-# חלק 2 (crew_demo.py) — CrewAI אמיתי, דורש מפתח API למודל:
-crewai>=1.0.0
+# חלק 2 (crew_demo.py) — CrewAI אמיתי; ה-extra anthropic נדרש ל-CREW_MODEL=anthropic/...
+# (בלי זה: ImportError: Anthropic native provider not available — to install: … "crewai[anthropic]")
+# התקנה בתוך venv:  pip install -r requirements.txt
+# אל תשתמשו ב-uv add כאן — אין pyproject.toml בתיקיית ה-Lab.
+crewai[anthropic]>=1.0.0

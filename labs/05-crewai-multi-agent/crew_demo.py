@@ -8,7 +8,8 @@ crew_demo.py — אותו צוות (Researcher · Writer · Reviewer) ב-CrewAI 
     export OPENAI_API_KEY=...
     export CREW_MODEL=openai/gpt-4o-mini
 
-    # Anthropic — חובה גם CREW_MODEL (לא מספיק המפתח לבד):
+    # Anthropic — חובה: (1) pip install "crewai[anthropic]"  (2) CREW_MODEL (המפתח לבד לא מספיק):
+    # בתוך ה-venv:  pip install -r requirements.txt   ← לא uv add (אין pyproject.toml כאן)
     export ANTHROPIC_API_KEY=...
     export CREW_MODEL=anthropic/claude-sonnet-4-5
 
