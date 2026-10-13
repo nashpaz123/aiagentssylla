@@ -1979,6 +1979,179 @@ def s05_guardrails():
     save(img, "05/07-crew-guardrails.png")
 
 
+# ---------- Session 06 ----------
+
+def s06_hero():
+    img, d = new_img()
+    center_text(d, (W / 2, 40), "Checkpoint vs Memory — two clocks, two jobs", font(38, True))
+    center_text(d, (W / 2, 84), "Same agent loop · different lifetime · different failure mode if missing", font(22), MUTED)
+
+    _s04_panel(d, (60, 140, 920, 720), "Checkpoint (run memory)", [
+        "lifetime: one thread / one run",
+        "key: thread_id",
+        "holds: State snapshot after steps",
+        "enables: pause, resume, HITL",
+        "",
+        "without it:",
+        "  interrupt() cannot resume",
+        "  crash => restart from zero",
+        "",
+        "LangGraph: compile(checkpointer=…)",
+        "Session 4 concept — revisited",
+    ], outline=ACCENT, title_color=ACCENT)
+
+    _s04_panel(d, (1000, 140, 1860, 720), "Memory / Store (cross-run)", [
+        "lifetime: across runs & days",
+        "key: user_id / customer_id / entity",
+        "holds: facts, prefs, prior cases",
+        "enables: 'what about my refund?'",
+        "",
+        "without it:",
+        "  every session starts blank",
+        "  customer repeats everything",
+        "",
+        "file / sqlite / vector DB / Store API",
+        "Session 6 focus",
+    ], outline=ORANGE, title_color=ORANGE)
+
+    rounded(d, (60, 760, 1860, 980), CARD, outline=GREEN, radius=16, width=3)
+    multiline_center(
+        d,
+        (960, 870),
+        [
+            "Rule of thumb: Checkpoint = WHERE we are in THIS run · Memory = WHAT we know ABOUT the world",
+            "Lab 06: InMemorySaver(thread_id) + profiles.json(customer_id) — change either knob, result changes",
+        ],
+        font(22),
+        TEXT,
+        gap=12,
+    )
+    save(img, "06/01-checkpoint-vs-memory.png")
+
+
+def s06_layers():
+    img, d = new_img()
+    center_text(d, (W / 2, 40), "Four layers of agent memory", font(40, True))
+    layers = [
+        (120, ACCENT, "Working / State", "current State fields · tool results this step · cleared when run ends"),
+        (280, GREEN, "Thread / Checkpoint", "messages[] for this thread_id · resume after HITL · same conversation"),
+        (440, ORANGE, "Profile / Entity Store", "customer prefs, open refunds, account flags · keyed by user_id"),
+        (600, ACCENT2, "Long-term / RAG corpus", "docs, past tickets (retrieved) · not 'remembered' verbatim in prompt"),
+    ]
+    for y, c, title, body in layers:
+        rounded(d, (120, y, 1800, y + 130), CARD2, outline=c, radius=14, width=3)
+        d.text((160, y + 28), title, font=font(28, True), fill=c)
+        d.text((160, y + 78), body, font=font(22), fill=MUTED)
+    center_text(d, (W / 2, 800), "Higher layer ≠ always better. Prefer the lowest layer that solves the product need.", font(22), TEXT)
+    center_text(d, (W / 2, 860), "Privacy filter applies at EVERY layer: card numbers, secrets, irrelevant gossip — do not store.", font(22), RED)
+    save(img, "06/02-memory-layers.png")
+
+
+def s06_thread_vs_user():
+    img, d = new_img()
+    center_text(d, (W / 2, 40), "thread_id vs user_id — the bug that looks like amnesia", font(36, True))
+    _s04_panel(d, (60, 130, 920, 520), "Same user, NEW thread_id", [
+        "Checkpoint: empty (new conversation)",
+        "Store(user_id): still has profile",
+        "",
+        "Symptom: 'bot forgot my chat'",
+        "but still knows 'open refund 101'",
+        "",
+        "Fix: map UI session carefully;",
+        "don't mint a random thread every click",
+    ], outline=ORANGE, title_color=ORANGE)
+    _s04_panel(d, (1000, 130, 1860, 520), "Same thread, WRONG user_id", [
+        "Checkpoint: old messages leak",
+        "Store: writes into another profile",
+        "",
+        "Symptom: privacy incident",
+        "",
+        "Fix: bind thread_id <-> user_id",
+        "in your gateway; never trust client alone",
+    ], outline=RED, title_color=RED)
+    _s04_panel(d, (60, 560, 1860, 900), "Lab experiment", [
+        "1) chat --customer C-101 --amount 101",
+        "2) chat --customer C-101 --message 'status' --thread other",
+        "   => Checkpoint empty for 'other', Store still answers from profile",
+        "3) forget --customer C-101  => Store blank; status fails even on old thread",
+        "",
+        "Say out loud: which knob did I turn — thread or store?",
+    ], outline=GREEN, title_color=GREEN)
+    save(img, "06/03-thread-vs-user.png")
+
+
+def s06_retention():
+    img, d = new_img()
+    center_text(d, (W / 2, 40), "What to remember · what to forget · when", font(38, True))
+    cols = [
+        ((60, 130, 640, 900), "Remember", GREEN, [
+            "open case id + amount band",
+            "language / channel preference",
+            "policy version used",
+            "last human decision (approve)",
+            "",
+            "TTL: case lifetime + 30d",
+        ]),
+        ((680, 130, 1260, 900), "Summarize, don't dump", ORANGE, [
+            "long chat => rolling summary",
+            "keep last N raw turns only",
+            "entity facts extracted once",
+            "",
+            "Cost: tokens scale with dump",
+            "Quality: dump hides the signal",
+        ]),
+        ((1300, 130, 1860, 900), "Never store", RED, [
+            "full PAN / CVV / passwords",
+            "raw secrets from tools",
+            "other customers' data",
+            "one-off rants as 'prefs'",
+            "",
+            "If tool returned it once,",
+            "redact before write-to-Store",
+        ]),
+    ]
+    for box, title, c, lines in cols:
+        _s04_panel(d, box, title, lines, outline=c, title_color=c)
+    center_text(d, (W / 2, 970), "Memory without retention policy is a compliance bug waiting for a date.", font(22), TEXT)
+    save(img, "06/04-retention.png")
+
+
+def s06_lab_flow():
+    img, d = new_img()
+    center_text(d, (W / 2, 40), "Lab 06 flow — StateGraph + Store", font(38, True))
+    nodes = [
+        (80, 200, 420, 360, "START", ACCENT),
+        (520, 200, 900, 360, "lookup_profile", GREEN),
+        (1000, 200, 1400, 360, "decide", ORANGE),
+        (1500, 200, 1840, 360, "END", MUTED),
+    ]
+    for x1, y1, x2, y2, label, c in nodes:
+        rounded(d, (x1, y1, x2, y2), CARD2, outline=c, radius=16, width=3)
+        center_text(d, ((x1 + x2) / 2, (y1 + y2) / 2), label, font(26, True), c)
+    arrow(d, (420, 280), (520, 280), ACCENT)
+    arrow(d, (900, 280), (1000, 280), ACCENT)
+    arrow(d, (1400, 280), (1500, 280), ACCENT)
+
+    _s04_panel(d, (80, 420, 900, 900), "Checkpointer", [
+        "InMemorySaver + thread_id",
+        "keeps messages for THIS chat",
+        "get_state(config) after invoke",
+        "",
+        "change --thread => new blank chat",
+        "Store may still answer",
+    ], outline=ACCENT, title_color=ACCENT)
+    _s04_panel(d, (980, 420, 1840, 900), "Store (profiles.json)", [
+        "key: customer_id",
+        "fields: amount, route, status",
+        "99 => auto / 101 => hitl",
+        "",
+        "forget --customer C-99",
+        "=> next status turn has no memory",
+        "reset => wipe store + thread log",
+    ], outline=ORANGE, title_color=ORANGE)
+    save(img, "06/05-lab-flow.png")
+
+
 def main():
     gens = [
         v01_human_agent,
@@ -2030,6 +2203,11 @@ def main():
         s05_subagents,
         s05_crew_vs_graph,
         s05_guardrails,
+        s06_hero,
+        s06_layers,
+        s06_thread_vs_user,
+        s06_retention,
+        s06_lab_flow,
     ]
     for g in gens:
         g()
