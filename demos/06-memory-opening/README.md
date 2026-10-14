@@ -2,41 +2,49 @@
 
 # ‏הדגמת פתיחה — מפגש 6: Checkpoint ≠ Memory
 
-**משך:** ~4–6 דקות. **בלי מפתח API.**
+**משך:** ~5–8 דקות. **מומלץ: Claude Code (או Cursor).** חלופה בלי מפתח: `memory_opening.py`.
 
-מטרה: להראות שתור שני בלי Store מתחיל מאפס, ועם Store הסוכן "זוכר" בקשת החזר — כולל ההבדל 99 מול 101.
+מטרה: תור סטטוס בלי Store מתחיל מאפס; עם `out/store.json` הסוכן זוכר — כולל **99→auto** מול **101→hitl**.
 
-## ‏הרצה
+## ‏א׳ — Claude Code (מומלץ להקלטה)
 
 ```bash
 cd demos/06-memory-opening
-
-# 1) בלי זיכרון — תור 2 ריק
-python3 memory_opening.py --mode none --amount 99
-
-# 2) עם Store — תור 1 (99 → auto)
-python3 memory_opening.py --mode store --customer C-99 --amount 99
-
-# 3) אותו לקוח, תור סטטוס — זוכר
-python3 memory_opening.py --mode store --customer C-99 --status
-
-# 4) לקוח אחר, 101 → hitl
-python3 memory_opening.py --mode store --customer C-101 --amount 101
-python3 memory_opening.py --mode store --customer C-101 --status
-
-# שינוי / ניקוי
-python3 memory_opening.py --show
-python3 memory_opening.py --forget --customer C-99
-python3 memory_opening.py --reset
+./run-claude.sh reset
+./run-claude.sh turn1          # C-99 / 99 → כותב out/store.json (auto)
+./run-claude.sh status         # קורא מה-Store — חייב לזכור
+./run-claude.sh turn1-101      # C-101 / 101 → hitl (לא מוחק את C-99)
+cat out/store.json
 ```
 
-ה-Store נשמר ב-`out/profiles.json` (לא ב-git). שנו `--amount` / `--customer` והריצו שוב — התוצאה משתנה.
+אינטראקטיבי (רואים subagent בזמן אמת):
+
+```bash
+cd demos/06-memory-opening
+claude --setting-sources project,local
+/agents                        # אמור להציג support
+# הדביקו את prompt-turn1.md, אחר כך prompt-status.md, אחר כך prompt-turn1-101.md
+```
+
+## ‏ב׳ — Cursor
+
+פתחו את התיקייה ב-Cursor, צ׳אט Agent, והדביקו שלבים מ-`prompt-cursor.md` (Turn A → B → C).
+
+## ‏ג׳ — חלופה בלי API (פייתון דטרמיניסטי)
+
+```bash
+python3 memory_opening.py --mode none --amount 99
+python3 memory_opening.py --reset
+python3 memory_opening.py --mode store --customer C-99 --amount 99
+python3 memory_opening.py --mode store --customer C-99 --status
+python3 memory_opening.py --mode store --customer C-101 --amount 101
+```
 
 ## ‏מה להגיד על המסך
 
-1. ‏`--mode none`: "אין קובץ, אין זיכרון — תור 2 שואל מחדש."
-2. ‏`--amount 99` ואז `--status`: "זוכר 99 ומסלול auto."
-3. ‏`--amount 101`: "אותו קוד, מסלול hitl — שינוי קלט = שינוי התנהגות."
-4. ‏זה **Memory / Store** בין ריצות. **Checkpoint** (מפגש 4) שומר מצב *בתוך* ריצה כדי להמשיך — נושא נפרד שנחדד במפגש.
+1. אחרי `turn1`: "נשמר לקובץ — זה Memory/Store, לא Checkpoint של שיחה."
+2. אחרי `status`: "המודל *חייב* לקרוא את הקובץ; בלי קובץ — אין זיכרון."
+3. אחרי `turn1-101`: "אותו סוכן, קלט אחר → hitl."
+4. אופציונלי: מחקו את C-99 מה-Store והריצו `status` שוב — אמנזיה מכוונת.
 
 </div>

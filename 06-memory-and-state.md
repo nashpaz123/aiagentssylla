@@ -21,7 +21,7 @@
 
 - מקריאים את בלוק **להקראה** במלואו.
 - **`[סטודנטים · N]`** — גללו למספר N.
-- **`[הדגמה חיה]`** שקף 2: `demos/06-memory-opening/README.md`.
+- **`[הדגמה חיה]`** שקף 2: Claude Code `./run-claude.sh` (או Cursor) — `demos/06-memory-opening/README.md`. חלופה: `memory_opening.py`.
 - **‏`[Lab חי]`** שקפים 20–21: `labs/06-memory-state/README.md`.
 - כל בלוק קוד אצל המרצה מופיע גם אצל הסטודנטים.
 
@@ -57,7 +57,7 @@ _רואים בלי זיכרון ועם Store, ואז מפרקים_
 הכותרת, והדיאגרמה שחוזרת כל המפגש: משמאל Checkpoint — זיכרון הריצה; מימין Memory או Store — זיכרון בין ריצות. שני שעון, שני תפקידים, שני כשלים שונים כשחסרים.
 
 **[איך המפגש בנוי]**
-נתחיל בהדגמה פשוטה בלי מפתח API: בקשת החזר ב-99 מול 101, עם Store ובלי. אחר כך נפרק שכבות ומפתחות. אחר כך Lab עם Checkpointer ו-profiles.json, שבו משנים כפתור אחד ומקבלים תוצאה אחרת. נסיים בבאג קלאסי וב-Design Review קצר. היעד: כשעתיים עד שעתיים וחצי — קצר ממפגש 5 בכוונה.
+נתחיל בהדגמת Claude Code (או Cursor): בקשת החזר ב-99 מול 101, עם Store בקובץ `out/store.json`. אחר כך נפרק שכבות ומפתחות. אחר כך Lab עם Anthropic API (`memory_claude.py`) — או חלופה בלי מפתח (`memory_lab.py`) — שבו משנים כפתור אחד ומקבלים תוצאה אחרת. נסיים בבאג קלאסי וב-Design Review קצר. היעד: כשעתיים עד שעתיים וחצי — קצר ממפגש 5 בכוונה.
 **[חיבור לקורס]**
 שמרו בראש: מפגש 4 נתן לנו Checkpoint. מפגש 5 נתן לנו מסירה בין סוכנים. מפגש 6 נותן לנו זיכרון ששורד את הריצה — ואת המשמעת לא לשמור הכל.
 **[למה זה קשה]**
@@ -68,26 +68,26 @@ _רואים בלי זיכרון ועם Store, ואז מפרקים_
 
 ---
 
-## ‏2 — הדגמת פתיחה — בלי זיכרון / עם Store
+## ‏2 — הדגמת פתיחה — Claude Code + Store
 
 [סטודנטים · 2]
 
 **על המסך:**
 
-תיקייה: `demos/06-memory-opening/`
+תיקייה: `demos/06-memory-opening/` · מומלץ **Claude Code** (או Cursor · `prompt-cursor.md`)
 
 ```bash
 cd demos/06-memory-opening
-python3 memory_opening.py --mode none --amount 99
-python3 memory_opening.py --reset
-python3 memory_opening.py --mode store --customer C-99 --amount 99
-python3 memory_opening.py --mode store --customer C-99 --status
-python3 memory_opening.py --mode store --customer C-101 --amount 101
-python3 memory_opening.py --show
+./run-claude.sh reset
+./run-claude.sh turn1          # C-99 / 99 → out/store.json (auto)
+./run-claude.sh status         # קורא מה-Store
+./run-claude.sh turn1-101      # C-101 / 101 → hitl
+cat out/store.json
 ```
 
-- ‏99 → `auto` · 101 → `hitl` · אותו קוד, קלט שונה  
-- ‏`out/profiles.json` = Memory בין ריצות (לא Checkpoint)
+- ‏99 → `auto` · 101 → `hitl` · אותו סוכן, קלט שונה  
+- ‏`out/store.json` = Memory בין תורות (לא Checkpoint של שיחה)  
+- חלופה בלי מפתח: `python3 memory_opening.py …` (ראה README)
 
 **להקראה:**
 
@@ -115,14 +115,13 @@ python3 memory_opening.py --show
 
 **[וריאציה אם יש דקה]**
 הריצו פעם נוספת עם amount 100 בדיוק — לפי הקוד שלנו ≤100 הוא auto. זה בודק הבנה של הסף כולל השוויון.
-
 **הרצה — צעד אחר צעד (למרצה, לא מקריאים):**
 
-1. `python3 memory_opening.py --mode none --amount 99` — תור 2 בלי הקשר.
-2. `--reset` ואז store ל-C-99/99 ואז `--status` — זוכר auto.
-3. C-101/101 ואז status — hitl/pending_human.
-4. `--show` — שני פרופילים. אמרו: שינוי amount משנה route.
-5. אופציונלי: `--forget --customer C-99` ואז status — אמנזיה מכוונת.
+1. `cd demos/06-memory-opening && ./run-claude.sh reset`
+2. `./run-claude.sh turn1` — חכו ל-WRITE של `out/store.json`; אמרו: Memory/Store.
+3. `./run-claude.sh status` — חייב Read של store; מצטט 99/auto.
+4. `./run-claude.sh turn1-101` — hitl; `cat out/store.json` עם שני לקוחות.
+5. חלופת Cursor: `prompt-cursor.md`. חלופה בלי מפתח: `memory_opening.py`.
 
 ---
 
@@ -135,8 +134,8 @@ python3 memory_opening.py --show
 | מה ראינו | מושג |
 |---|---|
 | תור 2 בלי קובץ מתחיל מאפס | אין **Memory** בין ריצות |
-‏| ‏`profiles.json` זוכר amount/route/status | ‏**Store** / פרופיל ישות |
-‏| ‏99→auto · 101→hitl | מדיניות על זיכרון עסקי, לא על צ׳אט |
+| ‏`out/store.json` זוכר amount/route/status | ‏**Store** / פרופיל ישות |
+| ‏99→auto · 101→hitl | מדיניות על זיכרון עסקי, לא על צ׳אט |
 | זה לא `thread_id` | ‏**Checkpoint** (מפגש 4) = מצב *בתוך* ריצה |
 
 הדגמה זו במכוון בלי LLM — כדי שלא נבלבל "המודל זכר" עם "שמרנו עובדה".
@@ -572,13 +571,13 @@ _מריצים, משנים קלט, מנבאים תוצאה_
 
 תיקייה: [`labs/06-memory-state/`](labs/06-memory-state/)
 
-| חלק | מה |
-|---|---|
-| Checkpointer |‏ `InMemorySaver` + `thread_id` |
-‏| Store |‏ `data/profiles.json` לפי customer |
-| כפתורים |‏ `--amount` · `--message` · `--thread` · `forget` · `reset` |
+| חלק | קובץ | מפתח? |
+|---|---|---|
+| ‏**A (מומלץ)** |‏ `memory_claude.py` |‏ `ANTHROPIC_API_KEY` |
+| ‏**B** |‏ `memory_lab.py` | לא (LangGraph דטרמיניסטי) |
 
-בלי מפתח LLM. מודדים: האם ניחשתי נכון מה יקרה אחרי השינוי.
+כפתורים שמשנים תוצאה: `99`/`101` · `--fresh-thread` · `forget` · `reset`.  
+מודדים: האם ניחשתי נכון מה יקרה אחרי השינוי.
 
 **להקראה:**
 
@@ -602,15 +601,16 @@ _מריצים, משנים קלט, מנבאים תוצאה_
 cd labs/06-memory-state
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
+export ANTHROPIC_API_KEY=sk-ant-...
 
-python3 memory_lab.py reset
-python3 memory_lab.py chat --customer C-99 --amount 99
-python3 memory_lab.py chat --customer C-99 --message "מה הסטטוס?"
-python3 memory_lab.py chat --customer C-101 --amount 101
-python3 memory_lab.py chat --customer C-101 --message "מה הסטטוס?" --thread other
-python3 memory_lab.py forget --customer C-99
-python3 memory_lab.py chat --customer C-99 --message "מה הסטטוס?"
-python3 memory_lab.py show
+python3 memory_claude.py reset
+python3 memory_claude.py chat --customer C-99 --message "אני רוצה החזר על 99 שקל"
+python3 memory_claude.py chat --customer C-99 --message "מה הסטטוס של הבקשה שלי?"
+python3 memory_claude.py chat --customer C-101 --message "אני רוצה החזר על 101 שקל"
+python3 memory_claude.py chat --customer C-99 --message "מה הסטטוס?" --fresh-thread
+python3 memory_claude.py forget --customer C-99
+python3 memory_claude.py show
+# חלופה בלי מפתח: memory_lab.py (ראה README)
 ```
 
 **להקראה:**
@@ -629,16 +629,16 @@ python3 memory_lab.py show
 "ראיתם? messages_in_thread התחיל מחדש, אבל התשובה ידעה שיש hitl. זה Store. מי שמבלבל את זה עם Checkpoint יתקן את הבאג הלא נכון בפרוד."
 **[זמן צפוי]**
 שבע עד שתים-עשרה דקות כולל דיבור. אל תדחסו. השקט אחרי thread other שווה יותר משקף נוסף.
-
 **הרצה — צעד אחר צעד (למרצה, לא מקריאים):**
 
-1. venv + `pip install -r requirements.txt` (מראש, לא מול מצלמה אם אפשר).
-2. `python3 memory_lab.py reset`
-3. `chat --customer C-99 --amount 99` → route=auto
-4. `chat --customer C-99 --message "מה הסטטוס?"` → זוכר מה-Store; שימו לב ל-messages_in_thread
-5. `chat --customer C-101 --amount 101` → hitl
-6. **עצירה:** `chat --customer C-101 --message "מה הסטטוס?" --thread other` — Checkpoint חדש, Store עדיין עונה. זה לב המעבדה.
-7. `forget --customer C-99` ואז status ל-C-99 — אין זיכרון; `show` מציג רק C-101.
+1. venv + `pip install -r requirements.txt` + `export ANTHROPIC_API_KEY=...`
+2. `python3 memory_claude.py reset`
+3. chat C-99 בקשת 99 — חפשו `TOOL -> save_profile`
+4. chat סטטוס — `TOOL -> get_profile`
+5. chat C-101 / 101 — route hitl
+6. **עצירה:** אותו C-99 עם `--fresh-thread` — Checkpoint ריק, Store עדיין עונה
+7. `forget C-99` ואז status — אמנזיה. `show`.
+8. אם אין מפתח: עבורו ל-`memory_lab.py` לפי README.
 
 ---
 
@@ -649,7 +649,7 @@ python3 memory_lab.py show
 **על המסך:**
 
 - [ ] אני יודע מתי התשובה באה מ-Store ומתי מ-Checkpoint  
-- [ ] ניחשתי נכון מה יעשה `--thread other`  
+- [ ] ניחשתי נכון מה יעשה `--fresh-thread` / `--thread other`  
 - [ ] אחרי `forget` — רק הלקוח שנמחק נפגע  
 - [ ] שינוי 99↔101 משנה route בלי שינוי קוד
 

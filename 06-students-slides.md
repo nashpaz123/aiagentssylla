@@ -8,7 +8,7 @@
 ## ‏Memory ו-State Management
 
 > **משך משוער:** ~2–2.5 שעות (הדגמת פתיחה + הוראה + Lab + הדגמות).  
-> נפתח בהדגמה פשוטה בלי API — ואז Lab עם כפתורים שמשנים תוצאה בין הרצות.  
+> נפתח בהדגמת Claude Code/Cursor (Store בקובץ) — ואז Lab עם Anthropic API (או חלופה בלי מפתח).  
 > חזרה קצרה על Checkpoint (מפגש 4) ו-context (מפגש 5).
 
 ---
@@ -32,22 +32,22 @@ _רואים בלי זיכרון ועם Store, ואז מפרקים_
 
 ---
 
-## ‏2 — הדגמת פתיחה — בלי זיכרון / עם Store
+## ‏2 — הדגמת פתיחה — Claude Code + Store
 
-תיקייה: `demos/06-memory-opening/`
+תיקייה: `demos/06-memory-opening/` · מומלץ **Claude Code** (או Cursor · `prompt-cursor.md`)
 
 ```bash
 cd demos/06-memory-opening
-python3 memory_opening.py --mode none --amount 99
-python3 memory_opening.py --reset
-python3 memory_opening.py --mode store --customer C-99 --amount 99
-python3 memory_opening.py --mode store --customer C-99 --status
-python3 memory_opening.py --mode store --customer C-101 --amount 101
-python3 memory_opening.py --show
+./run-claude.sh reset
+./run-claude.sh turn1          # C-99 / 99 → out/store.json (auto)
+./run-claude.sh status         # קורא מה-Store
+./run-claude.sh turn1-101      # C-101 / 101 → hitl
+cat out/store.json
 ```
 
-- ‏99 → `auto` · 101 → `hitl` · אותו קוד, קלט שונה  
-- ‏`out/profiles.json` = Memory בין ריצות (לא Checkpoint)
+- ‏99 → `auto` · 101 → `hitl` · אותו סוכן, קלט שונה  
+- ‏`out/store.json` = Memory בין תורות (לא Checkpoint של שיחה)  
+- חלופה בלי מפתח: `python3 memory_opening.py …` (ראה README)
 
 ---
 
@@ -56,7 +56,7 @@ python3 memory_opening.py --show
 | מה ראינו | מושג |
 |---|---|
 | תור 2 בלי קובץ מתחיל מאפס | אין **Memory** בין ריצות |
-| ‏`profiles.json` זוכר amount/route/status | ‏**Store** / פרופיל ישות |
+| ‏`out/store.json` זוכר amount/route/status | ‏**Store** / פרופיל ישות |
 | ‏99→auto · 101→hitl | מדיניות על זיכרון עסקי, לא על צ׳אט |
 | זה לא `thread_id` | ‏**Checkpoint** (מפגש 4) = מצב *בתוך* ריצה |
 
@@ -250,13 +250,13 @@ _מריצים, משנים קלט, מנבאים תוצאה_
 
 תיקייה: [`labs/06-memory-state/`](labs/06-memory-state/)
 
-| חלק | מה |
-|---|---|
-| Checkpointer |‏ `InMemorySaver` + `thread_id` |
-| Store |‏ `data/profiles.json` לפי customer |
-| כפתורים |‏ `--amount` · `--message` · `--thread` · `forget` · `reset` |
+| חלק | קובץ | מפתח? |
+|---|---|---|
+| ‏**A (מומלץ)** |‏ `memory_claude.py` |‏ `ANTHROPIC_API_KEY` |
+| ‏**B** |‏ `memory_lab.py` | לא (LangGraph דטרמיניסטי) |
 
-בלי מפתח LLM. מודדים: האם ניחשתי נכון מה יקרה אחרי השינוי.
+כפתורים שמשנים תוצאה: `99`/`101` · `--fresh-thread` · `forget` · `reset`.  
+מודדים: האם ניחשתי נכון מה יקרה אחרי השינוי.
 
 ---
 
@@ -266,15 +266,16 @@ _מריצים, משנים קלט, מנבאים תוצאה_
 cd labs/06-memory-state
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
+export ANTHROPIC_API_KEY=sk-ant-...
 
-python3 memory_lab.py reset
-python3 memory_lab.py chat --customer C-99 --amount 99
-python3 memory_lab.py chat --customer C-99 --message "מה הסטטוס?"
-python3 memory_lab.py chat --customer C-101 --amount 101
-python3 memory_lab.py chat --customer C-101 --message "מה הסטטוס?" --thread other
-python3 memory_lab.py forget --customer C-99
-python3 memory_lab.py chat --customer C-99 --message "מה הסטטוס?"
-python3 memory_lab.py show
+python3 memory_claude.py reset
+python3 memory_claude.py chat --customer C-99 --message "אני רוצה החזר על 99 שקל"
+python3 memory_claude.py chat --customer C-99 --message "מה הסטטוס של הבקשה שלי?"
+python3 memory_claude.py chat --customer C-101 --message "אני רוצה החזר על 101 שקל"
+python3 memory_claude.py chat --customer C-99 --message "מה הסטטוס?" --fresh-thread
+python3 memory_claude.py forget --customer C-99
+python3 memory_claude.py show
+# חלופה בלי מפתח: memory_lab.py (ראה README)
 ```
 
 ---
@@ -282,7 +283,7 @@ python3 memory_lab.py show
 ## ‏20 — Lab — Debrief
 
 - [ ] אני יודע מתי התשובה באה מ-Store ומתי מ-Checkpoint  
-- [ ] ניחשתי נכון מה יעשה `--thread other`  
+- [ ] ניחשתי נכון מה יעשה `--fresh-thread` / `--thread other`  
 - [ ] אחרי `forget` — רק הלקוח שנמחק נפגע  
 - [ ] שינוי 99↔101 משנה route בלי שינוי קוד
 

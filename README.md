@@ -34,7 +34,7 @@
 - **מפגש 3:** Lab Host ל-Function Calling (`labs/03-tool-calling/`, פרופיל `nashpazformatan`) — Validate · Parallel · Observations; הדגמת MCP חיה עם PinchTab headed (`labs/03-pinchtab-mcp/`); חזרה על מפגש 2 — מצביע קצר בלבד.
 - **מפגש 4:** Lab גרף LangGraph דטרמיניסטי בלי מפתח LLM (`labs/04-langgraph-basics/`) — State · Conditional edges · לוג צמתים; חזרה על מפגש 3 — מצביע קצר בלבד; מילון ראשי תיבות (MCP · RAG · HITL …) חובה בהקראה.
 - **מפגש 5 (קצר יותר — ~2–2.5 שעות):** נפתח ב**הדגמה חיה** של צוות 3 subagents ב-Claude Code / Cursor (`demos/05-crew-opening/`), ואז CrewAI (Agent · Task · Crew · Process), Guardrails לצוות, ו-Lab (`labs/05-crewai-multi-agent/` — `mini_crew.py` בלי מפתח, `crew_demo.py` עם CrewAI אמיתי).
-- **מפגש 6 (~2–2.5 שעות):** הדגמת פתיחה בלי API (`demos/06-memory-opening/`) — 99 מול 101 עם/בלי Store; Lab (`labs/06-memory-state/`) עם Checkpointer+profiles.json וכפתורים (`--thread` / `forget`) שמשנים תוצאה בין הרצות.
+- **מפגש 6 (~2–2.5 שעות):** הדגמת פתיחה מומלצת ב-Claude Code/Cursor (`demos/06-memory-opening/`) — Store ב-`out/store.json`, 99 מול 101; Lab עם `memory_claude.py` + `ANTHROPIC_API_KEY` (או `memory_lab.py` בלי מפתח) וכפתורים (`--fresh-thread` / `forget`).
 
 ## ‏מוכן עכשיו
 

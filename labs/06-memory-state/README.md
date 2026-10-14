@@ -2,18 +2,21 @@
 
 # ‏Lab 06 — Memory & State Management
 
-**עלות:** אפס (בלי LLM). דורש `langgraph` (כמו מפגש 4).
+שני מסלולים (אותם מושגים):
+
+| חלק | קובץ | מפתח? | מה מדגים |
+|---|---|---|---|
+| ‏**A (מומלץ)** |‏ `memory_claude.py` |‏ `ANTHROPIC_API_KEY` | סוכן Claude עם כלי Store + היסטוריית thread |
+| ‏**B** |‏ `memory_lab.py` | לא | גרף LangGraph דטרמיניסטי (Checkpointer + Store) |
 
 ## ‏מטרה
 
-להבדיל בין:
-
-| מנגנון | חיים | תפקיד במעבדה |
+| מנגנון | חיים | איפה |
 |---|---|---|
-| ‏**Checkpointer** (`InMemorySaver` + `thread_id`) | בתוך ריצת תהליך / thread | שומר `messages` של השיחה |
-| ‏**Store** (`data/profiles.json`) | בין ריצות / תהליכים | זוכר בקשת החזר של לקוח |
+| Thread / Working | בתוך שיחה | היסטוריית הודעות / Checkpointer |
+| Store / Memory | בין ריצות |‏ `data/profiles.json` (+ כלים) |
 
-ולראות ששינוי קלט (`--amount` / `--customer` / `--thread` / `forget`) משנה תוצאה בהרצה הבאה.
+שינוי קלט (`99`/`101`, `--fresh-thread`, `forget`) → תוצאה אחרת בהרצה הבאה.
 
 ## ‏התקנה
 
@@ -23,45 +26,43 @@ python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## ‏הרצות מומלצות (שונות זו מזו)
+## ‏חלק A — Anthropic (מומלץ)
 
 ```bash
-# איפוס
+export ANTHROPIC_API_KEY=sk-ant-...
+# אופציונלי: export ANTHROPIC_MODEL=claude-sonnet-4-5
+
+python3 memory_claude.py reset
+python3 memory_claude.py chat --customer C-99 --message "אני רוצה החזר על 99 שקל"
+python3 memory_claude.py chat --customer C-99 --message "מה הסטטוס של הבקשה שלי?"
+python3 memory_claude.py chat --customer C-101 --message "אני רוצה החזר על 101 שקל"
+# Checkpoint ריק, Store חי:
+python3 memory_claude.py chat --customer C-99 --message "מה הסטטוס?" --fresh-thread
+python3 memory_claude.py forget --customer C-99
+python3 memory_claude.py chat --customer C-99 --message "מה הסטטוס?"
+python3 memory_claude.py show
+```
+
+בלוג חפשו שורות `TOOL -> get_profile` / `save_profile` — זו קריאת ה-Memory המפורשת.
+
+## ‏חלק B — בלי מפתח (LangGraph)
+
+```bash
 python3 memory_lab.py reset
-
-# 99 → auto, נשמר ב-Store
 python3 memory_lab.py chat --customer C-99 --amount 99
-
-# אותו לקוח, תור סטטוס — קורא מה-Store (גם אם זה תהליך חדש)
 python3 memory_lab.py chat --customer C-99 --message "מה הסטטוס?"
-
-# 101 → hitl
 python3 memory_lab.py chat --customer C-101 --amount 101
-python3 memory_lab.py chat --customer C-101 --message "מה הסטטוס?"
-
-# אותו לקוח, thread אחר — ה-Checkpointer לא רואה את הודעות ה-thread הקודם,
-# אבל ה-Store עדיין זוכר את הפרופיל (הבדל חשוב!)
-python3 memory_lab.py chat --customer C-101 --message "מה הסטטוס?" --thread other-thread
-
-# מוחקים רק את C-99 מה-Store — הסטטוס שלו ייעלם; C-101 נשאר
+python3 memory_lab.py chat --customer C-101 --message "מה הסטטוס?" --thread other
 python3 memory_lab.py forget --customer C-99
-python3 memory_lab.py chat --customer C-99 --message "מה הסטטוס?"
 python3 memory_lab.py show
 ```
 
-## ‏מה לבדוק בלוג
+## ‏מה לבדוק
 
-1. ‏`route=auto` מול `route=hitl` לפי סף 100.  
-2. ‏`messages_in_thread` גדל כשנשארים באותו `--thread`.  
-3. ‏`--thread other-thread`: Checkpoint חדש, אבל התשובה עדיין מה-Store.  
-4. ‏`forget` מוחק Memory ארוך-טווח בלי למחוק את קוד הגרף.
+1. ‏99 → `auto` / 101 → `hitl`  
+2. ‏`--fresh-thread` או `--thread other`: שיחה חדשה, Store עדיין זוכר  
+3. ‏`forget` מוחק רק לקוח אחד  
 
-## ‏קבצים
-
-| קובץ | תפקיד |
-|---|---|
-| ‏`memory_lab.py` | גרף + CLI |
-| ‏`data/profiles.json` | Store (נוצר בהרצה) |
-| ‏`data/checkpoints.sqlite` | לוג thread פשוט להמחשה |
+חלופת הדגמה בלי Lab: `demos/06-memory-opening/` עם Claude Code / Cursor.
 
 </div>
