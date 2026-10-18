@@ -1,0 +1,55 @@
+{
+  "L-SMB": {
+    "company": "פיקסל סטודיו",
+    "segment": "smb",
+    "seats": 12,
+    "sku_interest": "pro",
+    "requested_discount_pct": 5,
+    "email": "maya@pixelstudio.co.il",
+    "budget_band": "medium",
+    "urgency": "this_quarter",
+    "existing_customer": false,
+    "stage": "new",
+    "owner": "AE-Dana"
+  },
+  "L-ENT": {
+    "company": "בנק דלתא",
+    "segment": "enterprise",
+    "seats": 400,
+    "sku_interest": "enterprise",
+    "requested_discount_pct": 18,
+    "email": "procurement@delta-bank.example",
+    "budget_band": "high",
+    "urgency": "rfp_open",
+    "existing_customer": false,
+    "stage": "new",
+    "owner": "AE-Noa"
+  },
+  "L-NOMAIL": {
+    "company": "סטארטאפ בלי מייל",
+    "segment": "smb",
+    "seats": 8,
+    "sku_interest": "starter",
+    "requested_discount_pct": 0,
+    "email": "",
+    "budget_band": "low",
+    "urgency": "exploring",
+    "existing_customer": false,
+    "stage": "new",
+    "owner": "AE-Dana"
+  },
+  "L-UPSELL": {
+    "company": "חברת גמא",
+    "segment": "midmarket",
+    "seats": 60,
+    "sku_interest": "pro",
+    "requested_discount_pct": 8,
+    "email": "it@gamma.co.il",
+    "budget_band": "medium",
+    "urgency": "renewal",
+    "existing_customer": true,
+    "stage": "new",
+    "owner": "CSM-Avi",
+    "current_sku": "starter"
+  }
+}

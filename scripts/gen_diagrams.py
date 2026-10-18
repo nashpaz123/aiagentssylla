@@ -2152,6 +2152,173 @@ def s06_lab_flow():
     save(img, "06/05-lab-flow.png")
 
 
+# ---------- Session 07 ----------
+
+def s07_hero():
+    img, d = new_img()
+    center_text(d, (W / 2, 40), "Business automation with Agents — Revenue Ops loop", font(36, True))
+    center_text(d, (W / 2, 84), "CRM facts + pricebook + policy  →  quote  →  money gate  →  draft (not send)", font(22), MUTED)
+    steps = [
+        (80, 160, 360, 340, "Lead\nCRM", ACCENT),
+        (400, 160, 680, 340, "Score\nICP", GREEN),
+        (720, 160, 1000, 340, "Price\nbook", ORANGE),
+        (1040, 160, 1320, 340, "Quote\ncalc", ACCENT2),
+        (1360, 160, 1640, 340, "Route\nauto/HITL", RED),
+        (1680, 160, 1860, 340, "Draft\nemail", MUTED),
+    ]
+    for x1, y1, x2, y2, label, c in steps:
+        rounded(d, (x1, y1, x2, y2), CARD2, outline=c, radius=14, width=3)
+        multiline_center(d, ((x1 + x2) / 2, (y1 + y2) / 2), label.split("\n"), font(24, True), c, gap=6)
+    for i in range(len(steps) - 1):
+        arrow(d, (steps[i][2], 250), (steps[i + 1][0], 250), ACCENT, width=3)
+    _s04_panel(d, (80, 400, 920, 980), "What the agent owns", [
+        "read CRM fields (never invent)",
+        "score with transparent rules",
+        "compute totals from pricebook",
+        "apply discount policy",
+        "write quote + stage + draft",
+        "",
+        "Session 7 focus: money + CRM",
+        "writes are product decisions",
+    ], outline=GREEN, title_color=GREEN)
+    _s04_panel(d, (1000, 400, 1860, 980), "What stays human", [
+        "discount > 10% (manager HITL)",
+        "discount > 25% (blocked — renegotiate)",
+        "actually SEND email / contract",
+        "legal exceptions, custom SKUs",
+        "relationship calls",
+        "",
+        "Agent accelerates; policy decides",
+        "who may spend margin",
+    ], outline=ORANGE, title_color=ORANGE)
+    save(img, "07/01-sales-ops-loop.png")
+
+
+def s07_gates():
+    img, d = new_img()
+    center_text(d, (W / 2, 40), "Money gates — same agent, different outcomes", font(36, True))
+    cols = [
+        ((60, 120, 640, 520), "≤ 10% discount", GREEN, [
+            "route = auto",
+            "status = approved",
+            "CRM stage = quoted",
+            "",
+            "Demo: L-SMB @ 5%",
+            "AE may send after glance",
+        ]),
+        ((680, 120, 1260, 520), "10% < d ≤ 25%", ORANGE, [
+            "route = hitl",
+            "status = pending_manager",
+            "CRM stage = pending_approval",
+            "",
+            "Demo: L-ENT @ 18%",
+            "manager_decide required",
+        ]),
+        ((1300, 120, 1860, 520), "> 25% OR no email", RED, [
+            "route = blocked",
+            "need_email OR rejected",
+            "CRM stage = blocked",
+            "",
+            "Demo: L-STEAL @ 40%",
+            "Demo: L-NOMAIL",
+        ]),
+    ]
+    for box, title, c, lines in cols:
+        _s04_panel(d, box, title, lines, outline=c, title_color=c)
+    _s04_panel(d, (60, 560, 1860, 980), "Knob demo (Lab)", [
+        "1) run L-SMB           → auto",
+        "2) run L-SMB --discount 22  → suddenly HITL (same lead, new policy pressure)",
+        "3) approve L-ENT       → pending_manager becomes quoted",
+        "4) set-email on L-NOMAIL then re-run → unblocks quote",
+        "",
+        "Say out loud: which business rule fired — discount band, missing data, or manager?",
+    ], outline=ACCENT, title_color=ACCENT)
+    save(img, "07/02-money-gates.png")
+
+
+def s07_agent_vs_workflow():
+    img, d = new_img()
+    center_text(d, (W / 2, 40), "Workflow vs Agent vs Human — pick per step", font(36, True))
+    _s04_panel(d, (60, 120, 640, 900), "Fixed workflow", [
+        "known steps, stable forms",
+        "invoice sync, stage rename",
+        "cheap + auditable",
+        "",
+        "Use when:",
+        "  input schema is closed",
+        "  no judgment / language",
+    ], outline=ACCENT, title_color=ACCENT)
+    _s04_panel(d, (680, 120, 1260, 900), "Agent + tools", [
+        "messy language → structured",
+        "choose tools, explain quote",
+        "draft outreach in Hebrew",
+        "",
+        "Use when:",
+        "  AE request is free-text",
+        "  policy still code-enforced",
+    ], outline=ORANGE, title_color=ORANGE)
+    _s04_panel(d, (1300, 120, 1860, 900), "Human", [
+        "margin & legal risk",
+        "relationship / politics",
+        "exceptions to policy",
+        "",
+        "Use when:",
+        "  money gate / HITL",
+        "  send / sign / commit",
+    ], outline=RED, title_color=RED)
+    save(img, "07/03-workflow-vs-agent.png")
+
+
+def s07_tool_catalog():
+    img, d = new_img()
+    center_text(d, (W / 2, 40), "Revenue-ops tool catalog (Lab 07)", font(38, True))
+    tools = [
+        ("get_lead", "CRM read", ACCENT),
+        ("score_lead", "0–100 rules", GREEN),
+        ("lookup_price", "pricebook only", ORANGE),
+        ("create_quote", "math + route", ACCENT2),
+        ("manager_decide", "HITL write", RED),
+        ("draft_email", "file only", MUTED),
+        ("set_lead_email", "unblock data", GREEN),
+    ]
+    x, y = 80, 140
+    for i, (name, desc, c) in enumerate(tools):
+        col = i % 2
+        row = i // 2
+        x1 = 80 + col * 920
+        y1 = 140 + row * 180
+        rounded(d, (x1, y1, x1 + 880, y1 + 150), CARD2, outline=c, radius=14, width=3)
+        d.text((x1 + 30, y1 + 35), name, font=font(28, True), fill=c)
+        d.text((x1 + 30, y1 + 85), desc, font=font(22), fill=MUTED)
+    center_text(d, (W / 2, 980), "Every money number must come from a tool result — never from model memory.", font(22), TEXT)
+    save(img, "07/04-tool-catalog.png")
+
+
+def s07_roi():
+    img, d = new_img()
+    center_text(d, (W / 2, 40), "What business buyers ask — and what to measure", font(34, True))
+    _s04_panel(d, (60, 120, 920, 520), "Time saved (AE)", [
+        "minutes to first quote",
+        "% quotes with correct price",
+        "handoffs to manager / week",
+        "rework from bad CRM fields",
+    ], outline=GREEN, title_color=GREEN)
+    _s04_panel(d, (1000, 120, 1860, 520), "Risk controlled", [
+        "discount > policy auto-rate",
+        "emails sent without draft review",
+        "invented prices (should be 0)",
+        "PII written outside CRM",
+    ], outline=RED, title_color=RED)
+    _s04_panel(d, (60, 560, 1860, 980), "Story for stakeholders", [
+        "We do not 'replace sales'. We enforce pricebook + discount bands,",
+        "and we draft faster. Manager still owns margin above 10%.",
+        "Missing email blocks the deal path — data quality becomes a product feature.",
+        "",
+        "Capstone hint (session 10): pick ONE funnel step with clear ROI + clear gate.",
+    ], outline=ACCENT, title_color=ACCENT)
+    save(img, "07/05-roi-metrics.png")
+
+
 def main():
     gens = [
         v01_human_agent,
@@ -2208,6 +2375,11 @@ def main():
         s06_thread_vs_user,
         s06_retention,
         s06_lab_flow,
+        s07_hero,
+        s07_gates,
+        s07_agent_vs_workflow,
+        s07_tool_catalog,
+        s07_roi,
     ]
     for g in gens:
         g()
