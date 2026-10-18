@@ -1,2 +1,4 @@
 *
 !.gitignore
+!crm.seed.json
+!pricebook.json

@@ -1,0 +1,5 @@
+{
+  "starter": {"name": "Starter", "list_unit_ils": 99},
+  "pro": {"name": "Pro", "list_unit_ils": 299},
+  "enterprise": {"name": "Enterprise", "list_unit_ils": 799}
+}
