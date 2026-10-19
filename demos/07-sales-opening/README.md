@@ -2,7 +2,7 @@
 
 # ‏הדגמת פתיחה — מפגש 7: Sales Ops Agent
 
-**משך:** ~8–12 דקות. **מומלץ: Claude Code (או Cursor).** חלופה בלי מפתח: `sales_opening.py`.
+**משך:** ~8–12 דקות. **Claude Code** או **Cursor** (נדרש חיבור למודל / מנוי).
 
 מטרה: סוכן מכירות קורא CRM + מדיניות מחיר, כותב הצעת מחיר, ומנתב:
 **5% → auto** · **18% → HITL מנהל** · **בלי מייל → blocked**.
@@ -29,16 +29,6 @@ claude --setting-sources project,local
 ## ‏ב׳ — Cursor
 
 הדביקו שלבים מ-`prompt-cursor.md`.
-
-## ‏ג׳ — חלופה בלי API
-
-```bash
-python3 sales_opening.py reset
-python3 sales_opening.py quote --lead L-SMB
-python3 sales_opening.py quote --lead L-ENT
-python3 sales_opening.py quote --lead L-NOMAIL
-python3 sales_opening.py show
-```
 
 ## ‏מה להגיד על המסך
 

@@ -21,7 +21,7 @@
 
 - מקריאים את בלוק **להקראה** במלואו.
 - **`[סטודנטים · N]`** — גללו למספר N.
-- **`[הדגמה חיה]`** שקף 3: Claude Code `./run-claude.sh` (או Cursor) — `demos/07-sales-opening/README.md`. חלופה: `sales_opening.py`.
+- **`[הדגמה חיה]`** שקף 3: Claude Code `./run-claude.sh` (או Cursor) — `demos/07-sales-opening/README.md`.
 - **‏`[Lab חי]`** שקפים 20–22: `labs/07-business-automation/README.md`.
 - כל בלוק קוד אצל המרצה מופיע גם אצל הסטודנטים.
 - קהל היעד היום כולל אנשי **עסקים / מכירות / RevOps** — תרגמו מושגים טכניים לכסף, מרווח, וזמן AE.
@@ -157,7 +157,6 @@ cat out/quotes.json
 
 - ‏CRM ב-`crm/leads.json` · מחיר ב-`policy.md` · הצעות ב-`out/quotes.json`  
 - ‏5% → `auto` · 18% → `pending_manager` · בלי מייל → `blocked`  
-- חלופה בלי מפתח: `python3 sales_opening.py quote --lead L-SMB`
 
 **להקראה:**
 
@@ -165,7 +164,7 @@ cat out/quotes.json
 תיקיית ההדגמה והפקודות. חברת הדמו נקראת Nimbus — SaaS B2B עם מושבים חודשיים. יש לנו ארבעה לידים בקובץ CRM, אבל בהדגמת הפתיחה נריץ שלושה תרחישים שמספרים סיפור שלם: עסקה קטנה שעוברת, עסקה גדולה שממתינה למנהל, וליד שבור שנחסם.
 
 **[לפני]**
-‏`cd demos/07-sales-opening` ואז `./run-claude.sh reset` — מחזיר CRM ל-seed ומוחק הצעות ישנות. אם אתם ב-Cursor, פתחו את `prompt-cursor.md`. אם אין Claude Code בהקלטה — עבורו מיד ל-`sales_opening.py`; התוצאות העסקיות זהות.
+‏`cd demos/07-sales-opening` ואז `./run-claude.sh reset` — מחזיר CRM ל-seed ומוחק הצעות ישנות. אם אתם ב-Cursor, פתחו את `prompt-cursor.md`.
 
 **[צעד 1 — SMB]**
 ‏`./run-claude.sh smb`. ליד L-SMB: סטודיו קטן, 12 מושבים, Pro, מבקשים 5% הנחה. מצפים לכתיבה ל-`out/quotes.json` עם route=auto ו-status=approved, לעדכון stage ל-quoted, ולטיוטת מייל בעברית. אומרים בקול: המספרים הגיעו מהמדיניות והמחירון, לא מהדמיון של המודל. אם תראו Write ל-quotes — ציינו "זה שינוי מצב מערכת, לא רק טקסט יפה".
@@ -191,7 +190,7 @@ cat out/quotes.json
 2. `./run-claude.sh smb` — חכו ל-WRITE של quotes; אמרו auto.
 3. `./run-claude.sh enterprise` — hitl; שני לידים ב-quotes.
 4. `./run-claude.sh nomail` — need_email.
-5. חלופת Cursor: `prompt-cursor.md`. חלופה בלי מפתח: `sales_opening.py`.
+5. חלופת Cursor: `prompt-cursor.md`.
 
 ---
 
@@ -596,18 +595,15 @@ _אותו קוד — חמש תוצאות עסקיות_
 
 תיקייה: [`labs/07-business-automation/`](labs/07-business-automation/)
 
-| חלק | קובץ | מפתח? |
-|---|---|---|
-| ‏**A (מומלץ)** |‏ `sales_claude.py` |‏ `ANTHROPIC_API_KEY` |
-| ‏**B** |‏ `sales_lab.py` | לא |
+דורש **`ANTHROPIC_API_KEY`** · קובץ: `sales_claude.py`
 
 לידים: `L-SMB` · `L-ENT` · `L-NOMAIL` · `L-UPSELL` · `L-STEAL`  
-כפתורים: `--discount` · `approve`/`reject` · `--set-email`
+כפתורים בהודעה: הנחה אחרת · אישור/דחיית מנהל · השלמת אימייל · `--fresh-thread`
 
 **להקראה:**
 
 **[מטרת ה-Lab]**
-לא "לחבר API". אלא להראות שאותו סוכן מפיק חמש תוצאות עסקיות שונות כשמשנים ליד או כפתור. חלק A עם Anthropic — רואים TOOL בלוג, וזה חיבור ישיר למפגש 3 על function calling. חלק B בלי מפתח — אותה מדיניות בדיוק, עם audit log שמדבר בשפה של RevOps ו-compliance.
+לא "לחבר API בשביל לחבר". אלא להראות שאותו סוכן Anthropic מפיק חמש תוצאות עסקיות שונות כשמשנים ליד או כפתור בהודעה. בלוג חפשו TOOL — חיבור ישיר למפגש 3 על function calling.
 
 **[לידים]**
 SMB — אוטומטי. ENT — מנהל. NOMAIL — דאטה. UPSELL — לקוח קיים שמדברים אליו אחרת. STEAL — סירוב אפילו אם הציון גבוה. שימו לב לפרט החשוב: ציון גבוה לא שובר את שער ההנחה. זה נרטיב של בוקר אחד אצל AE — ולכן מעניין גם אנשים שאינם מפתחים.
@@ -637,7 +633,6 @@ python3 sales_claude.py chat --lead L-NOMAIL --message "תכין הצעה"
 python3 sales_claude.py chat --lead L-STEAL --message "הלקוח רוצה 40 אחוז — תוציא הצעה"
 python3 sales_claude.py chat --lead L-UPSELL --message "תכין הצעת שדרוג ללקוח קיים"
 python3 sales_claude.py show
-# חלופה בלי מפתח: sales_lab.py (ראה README)
 ```
 
 **להקראה:**
@@ -648,8 +643,8 @@ python3 sales_claude.py show
 **[נירטיב תוך כדי ריצה]**
 כש-SMB עובר: "AE קיבל טיוטה מוכנה — דקה במקום רבע שעה." כש-ENT נתקע: "המרווח מוגן; המנהל עדיין בעלים." כש-NOMAIL נחסם: "RevOps מרוויח פה — הליד לא מזייף בשלות." כש-STEAL נדחה: "הסוכן אמר לא — וזה בסדר." כש-UPSELL עובר: "אותה מדיניות הנחה, שפה אחרת ללקוח קיים."
 
-**[אם אין מפתח]**
-עברו ל-`sales_lab.py` לפי README ושקף 30. אל תבזבזו דקות על התקנות בהקלטה — הכינו venv מראש. חלק B אפילו נוח יותר להראות audit.log שורה־שורה.
+**[הכנה]**
+אל תבזבזו דקות על התקנות בהקלטה — הכינו venv + `ANTHROPIC_API_KEY` מראש. שקף 30 הוא נספח כפתורים לאותו `sales_claude.py`.
 
 **הרצה — צעד אחר צעד (למרצה):**
 
@@ -657,8 +652,8 @@ python3 sales_claude.py show
 2. `python3 sales_claude.py reset`
 3. SMB → auto; ENT → hitl; approve ENT; NOMAIL → blocked; STEAL → rejected; UPSELL → upsell true
 4. `show` — סכמו stages
-5. אופציונלי: `sales_lab.py run --lead L-SMB --discount 22` להראות אותו ליד שנעשה HITL
-6. אם יש דקה: `reject` על ENT במקום approve — להראות שהמנהל יכול גם לחסום
+5. אופציונלי: `chat --lead L-SMB --message "תכין שוב עם 22 אחוז הנחה" --fresh-thread` → HITL
+6. אם יש דקה: `chat --lead L-ENT --message "מנהל דוחה"` — להראות שהמנהל יכול גם לחסום
 
 ---
 
@@ -672,7 +667,7 @@ python3 sales_claude.py show
 - [ ] אחרי approve — ENT עבר ל-`quoted`  
 - [ ] NOMAIL נחסם עד שיש אימייל  
 - [ ] UPSELL מסומן `upsell=true`  
-- [ ] ראיתי `TOOL ->` / שורות `AUDIT` — לא ניחוש
+- [ ] ראיתי `TOOL ->` בלוג — לא ניחוש
 
 **להקראה:**
 
@@ -689,13 +684,13 @@ python3 sales_claude.py show
 
 **על המסך:**
 
-| שינוי | תוצאה צפויה |
+| שינוי (ב-`sales_claude.py chat`) | תוצאה צפויה |
 |---|---|
-| ‏`L-SMB` (5%) | auto |
-| ‏`L-SMB --discount 22` | hitl (אותו ליד!) |
-| ‏`approve --lead L-ENT` | pending → quoted |
-| ‏`reject --lead L-ENT` | blocked |
-| ‏`--set-email` על NOMAIL ואז run | auto אפשרי |
+| ‏`L-SMB` + הצעה רגילה (5%) | auto |
+| ‏`L-SMB` + "עם 22 אחוז הנחה" | hitl (אותו ליד!) |
+| ‏`L-ENT` + "מנהל מאשר" | pending → quoted |
+| ‏`L-ENT` + "מנהל דוחה" | blocked |
+| ‏`L-NOMAIL` ואז עדכון מייל בהודעה | auto אפשרי |
 | ‏`L-STEAL` (40%) | rejected תמיד |
 
 **להקראה:**
@@ -704,7 +699,7 @@ python3 sales_claude.py show
 השורה החשובה ביותר להקלטה: אותו L-SMB עם `--discount 22` הופך ל-HITL. אין שינוי קוד. יש שינוי לחץ עסקי. זה מה שאתם רוצים שבעלי עניין יבינו — המדיניות חיה.
 
 **[הדגמה מומלצת]**
-אם נשאר זמן, הריצו עכשיו את שורת ה-discount 22 ב-`sales_lab.py` על המסך.
+אם נשאר זמן, הריצו עכשיו SMB עם "22 אחוז הנחה" ב-`sales_claude.py` על המסך.
 
 ---
 
@@ -863,31 +858,33 @@ AE רוצה מהירות. מנהל רוצה מרווח. RevOps רוצה דאטה
 
 ---
 
-## ‏30 — נספח מהיר — פקודות Lab B
+## ‏30 — נספח מהיר — כפתורים ב-Anthropic
 
 [סטודנטים · 30]
 
 **על המסך:**
 
 ```bash
-python3 sales_lab.py reset
-python3 sales_lab.py run --lead L-SMB
-python3 sales_lab.py run --lead L-ENT
-python3 sales_lab.py approve --lead L-ENT
-python3 sales_lab.py run --lead L-STEAL
-python3 sales_lab.py run --lead L-NOMAIL --set-email hero@startup.co.il
-python3 sales_lab.py run --lead L-SMB --discount 22
-python3 sales_lab.py run --lead L-UPSELL
-python3 sales_lab.py show
+python3 sales_claude.py reset
+python3 sales_claude.py chat --lead L-SMB --message "תכין הצעת מחיר לפי הליד"
+python3 sales_claude.py chat --lead L-SMB --message "תכין שוב עם 22 אחוז הנחה" --fresh-thread
+python3 sales_claude.py chat --lead L-ENT --message "תכין הצעה עם ההנחה המבוקשת"
+python3 sales_claude.py chat --lead L-ENT --message "מנהל מאשר את ההצעה"
+python3 sales_claude.py chat --lead L-NOMAIL --message "תכין הצעה"
+python3 sales_claude.py chat --lead L-NOMAIL --message "המייל הוא hero@startup.co.il — עדכן והכן הצעה"
+python3 sales_claude.py chat --lead L-STEAL --message "הלקוח רוצה 40 אחוז — תוציא הצעה"
+python3 sales_claude.py chat --lead L-UPSELL --message "תכין הצעת שדרוג ללקוח קיים"
+python3 sales_claude.py show
 ```
 
 **להקראה:**
 
 **[נספח]**
-אם חלק A לא רץ בהקלטה — המסך הזה הוא תוכנית הגיבוי המלאה. הריצו אותו עד הסוף; הוא מדגים את כל הכפתורים בלי מפתח.
+זה נספח הכפתורים לאותו Lab Anthropic — לא מסלול חלופי בלי מפתח. אם משהו נתקע בהקלטה, חוזרים לרשימה הזו ומראים TOOL בלוג.
 
 **[סיום]**
 תודה. במפגש הבא ניפגש סביב Cursor ו-Copilot — איך סוכני קוד משתלבים באותה משמעת של כלים, מדיניות, ואדם בשער.
+
 
 ---
 

@@ -290,7 +290,7 @@ def run_tool(name: str, inp: dict) -> str:
 
 def chat(lead_id: str, message: str, fresh: bool) -> None:
     if not os.environ.get("ANTHROPIC_API_KEY"):
-        raise SystemExit("ANTHROPIC_API_KEY missing — or use sales_lab.py")
+        raise SystemExit("ANTHROPIC_API_KEY missing")
     ensure_crm()
     threads = load(THREADS)
     key = lead_id

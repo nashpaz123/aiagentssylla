@@ -7,7 +7,8 @@
 # ‏AI Agents — חומרי הקלטה (סילבוס)
 
 > **פורמט:** הקלטה מראש — **לא** שיעור מול קהל חי.  
-> המרצה מקריא תסריט ומציג את מצגת הסטודנטים; אין אינטראקציה חיה עם תלמידים בזמן הצילום.
+> המרצה מקריא תסריט ומציג את מצגת הסטודנטים; אין אינטראקציה חיה עם תלמידים בזמן הצילום.  
+> **מפגש 7 ואילך:** Labs והדגמות מבוססי מפתח/מודל (Anthropic · Claude Code · Cursor) — לא משקיעים במסלולי fallback דטרמיניסטיים בלי API.
 
 > תיקייה: `/stuff/prj/aiagentssylla/`  
 > מקור סילבוס: `AI Agents ומערכות אוטונומיות - סילבוס.pdf`
@@ -35,7 +36,7 @@
 - **מפגש 4:** Lab גרף LangGraph דטרמיניסטי בלי מפתח LLM (`labs/04-langgraph-basics/`) — State · Conditional edges · לוג צמתים; חזרה על מפגש 3 — מצביע קצר בלבד; מילון ראשי תיבות (MCP · RAG · HITL …) חובה בהקראה.
 - **מפגש 5 (קצר יותר — ~2–2.5 שעות):** נפתח ב**הדגמה חיה** של צוות 3 subagents ב-Claude Code / Cursor (`demos/05-crew-opening/`), ואז CrewAI (Agent · Task · Crew · Process), Guardrails לצוות, ו-Lab (`labs/05-crewai-multi-agent/` — `mini_crew.py` בלי מפתח, `crew_demo.py` עם CrewAI אמיתי).
 - **מפגש 6 (~2–2.5 שעות):** הדגמת פתיחה מומלצת ב-Claude Code/Cursor (`demos/06-memory-opening/`) — Store ב-`out/store.json`, 99 מול 101; Lab עם `memory_claude.py` + `ANTHROPIC_API_KEY` (או `memory_lab.py` בלי מפתח) וכפתורים (`--fresh-thread` / `forget`).
-- **מפגש 7 (~2.5–3.5 שעות):** Agents לאוטומציה עסקית (Sales Ops) — הדגמת Claude Code/Cursor (`demos/07-sales-opening/`) עם SMB/ENT/NOMAIL; Lab (`labs/07-business-automation/`) עם `sales_claude.py` + שערי הנחה, HITL מנהל, upsell, audit (או `sales_lab.py` בלי מפתח).
+- **מפגש 7 (~2.5–3.5 שעות):** Agents לאוטומציה עסקית (Sales Ops) — הדגמת Claude Code/Cursor (`demos/07-sales-opening/`) עם SMB/ENT/NOMAIL; Lab עם `sales_claude.py` + `ANTHROPIC_API_KEY` (שערי הנחה, HITL מנהל, upsell). **בלי מסלול דטרמיניסטי ללא מפתח.**
 
 ## ‏מוכן עכשיו
 

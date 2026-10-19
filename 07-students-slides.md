@@ -9,7 +9,7 @@
 
 > **משך משוער:** ~2.5–3.5 שעות (הדגמת פתיחה + הוראה + Lab עשיר + Design Review).  
 > נפתח במילון עסקי, ואז Sales Ops ב-Claude Code/Cursor — CRM → הצעת מחיר → שער כסף.  
-> Lab עם Anthropic API (או חלופה בלי מפתח) ותרחישי SMB / Enterprise / Upsell / Blocked.  
+> Lab עם `ANTHROPIC_API_KEY` + `sales_claude.py` ותרחישי SMB / Enterprise / Upsell / Blocked.  
 > חזרה קצרה: כלים (3) · צוות (5) · Memory/Store (6).
 
 ---
@@ -91,7 +91,6 @@ cat out/quotes.json
 
 - ‏CRM ב-`crm/leads.json` · מחיר ב-`policy.md` · הצעות ב-`out/quotes.json`  
 - ‏5% → `auto` · 18% → `pending_manager` · בלי מייל → `blocked`  
-- חלופה בלי מפתח: `python3 sales_opening.py quote --lead L-SMB`
 
 ---
 
@@ -300,13 +299,10 @@ _אותו קוד — חמש תוצאות עסקיות_
 
 תיקייה: [`labs/07-business-automation/`](labs/07-business-automation/)
 
-| חלק | קובץ | מפתח? |
-|---|---|---|
-| ‏**A (מומלץ)** |‏ `sales_claude.py` |‏ `ANTHROPIC_API_KEY` |
-| ‏**B** |‏ `sales_lab.py` | לא |
+דורש **`ANTHROPIC_API_KEY`** · קובץ: `sales_claude.py`
 
 לידים: `L-SMB` · `L-ENT` · `L-NOMAIL` · `L-UPSELL` · `L-STEAL`  
-כפתורים: `--discount` · `approve`/`reject` · `--set-email`
+כפתורים בהודעה: הנחה אחרת · אישור/דחיית מנהל · השלמת אימייל · `--fresh-thread`
 
 ---
 
@@ -326,7 +322,6 @@ python3 sales_claude.py chat --lead L-NOMAIL --message "תכין הצעה"
 python3 sales_claude.py chat --lead L-STEAL --message "הלקוח רוצה 40 אחוז — תוציא הצעה"
 python3 sales_claude.py chat --lead L-UPSELL --message "תכין הצעת שדרוג ללקוח קיים"
 python3 sales_claude.py show
-# חלופה בלי מפתח: sales_lab.py (ראה README)
 ```
 
 ---
@@ -337,7 +332,7 @@ python3 sales_claude.py show
 - [ ] אחרי approve — ENT עבר ל-`quoted`  
 - [ ] NOMAIL נחסם עד שיש אימייל  
 - [ ] UPSELL מסומן `upsell=true`  
-- [ ] ראיתי `TOOL ->` / שורות `AUDIT` — לא ניחוש
+- [ ] ראיתי `TOOL ->` בלוג — לא ניחוש
 
 ---
 
@@ -345,13 +340,13 @@ python3 sales_claude.py show
 
 ## ‏22 — הדגמה — כפתורים שמשנים עסקה
 
-| שינוי | תוצאה צפויה |
+| שינוי (ב-`sales_claude.py chat`) | תוצאה צפויה |
 |---|---|
-| ‏`L-SMB` (5%) | auto |
-| ‏`L-SMB --discount 22` | hitl (אותו ליד!) |
-| ‏`approve --lead L-ENT` | pending → quoted |
-| ‏`reject --lead L-ENT` | blocked |
-| ‏`--set-email` על NOMAIL ואז run | auto אפשרי |
+| ‏`L-SMB` + הצעה רגילה (5%) | auto |
+| ‏`L-SMB` + "עם 22 אחוז הנחה" | hitl (אותו ליד!) |
+| ‏`L-ENT` + "מנהל מאשר" | pending → quoted |
+| ‏`L-ENT` + "מנהל דוחה" | blocked |
+| ‏`L-NOMAIL` ואז "המייל הוא … עדכן והכן הצעה" | auto אפשרי |
 | ‏`L-STEAL` (40%) | rejected תמיד |
 
 ---
@@ -433,18 +428,19 @@ python3 sales_claude.py show
 
 ---
 
-## ‏30 — נספח מהיר — פקודות Lab B
+## ‏30 — נספח מהיר — כפתורים ב-Anthropic
 
 ```bash
-python3 sales_lab.py reset
-python3 sales_lab.py run --lead L-SMB
-python3 sales_lab.py run --lead L-ENT
-python3 sales_lab.py approve --lead L-ENT
-python3 sales_lab.py run --lead L-STEAL
-python3 sales_lab.py run --lead L-NOMAIL --set-email hero@startup.co.il
-python3 sales_lab.py run --lead L-SMB --discount 22
-python3 sales_lab.py run --lead L-UPSELL
-python3 sales_lab.py show
+python3 sales_claude.py reset
+python3 sales_claude.py chat --lead L-SMB --message "תכין הצעת מחיר לפי הליד"
+python3 sales_claude.py chat --lead L-SMB --message "תכין שוב עם 22 אחוז הנחה" --fresh-thread
+python3 sales_claude.py chat --lead L-ENT --message "תכין הצעה עם ההנחה המבוקשת"
+python3 sales_claude.py chat --lead L-ENT --message "מנהל מאשר את ההצעה"
+python3 sales_claude.py chat --lead L-NOMAIL --message "תכין הצעה"
+python3 sales_claude.py chat --lead L-NOMAIL --message "המייל הוא hero@startup.co.il — עדכן והכן הצעה"
+python3 sales_claude.py chat --lead L-STEAL --message "הלקוח רוצה 40 אחוז — תוציא הצעה"
+python3 sales_claude.py chat --lead L-UPSELL --message "תכין הצעת שדרוג ללקוח קיים"
+python3 sales_claude.py show
 ```
 
 </div>
