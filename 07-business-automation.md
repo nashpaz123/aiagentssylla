@@ -155,22 +155,30 @@ cd demos/07-sales-opening
 cat out/quotes.json
 ```
 
-- ‏CRM ב-`crm/leads.json` · מחיר ב-`policy.md` · הצעות ב-`out/quotes.json`  
-- ‏5% → `auto` · 18% → `pending_manager` · בלי מייל → `blocked`  
+**מאיפה מגיעים 5% ו-18%?** (לא מהסקריפט — מה-CRM)
+
+| מה | איפה בקובץ | דוגמה |
+|---|---|---|
+| הנחה שמבקשים לליד | `crm/leads.json` → שדה `requested_discount_pct` | ‏`L-SMB`: **5** · `L-ENT`: **18** |
+| ספי אישור (מתי auto/HITL) | `policy.md` → Discount & approval | ‏≤10% auto · ≤25% HITL · >25% blocked |
+| מחיר ליחידה (SKU) | `policy.md` → Pricing | Pro=299 · Enterprise=799 |
+
+לשנות תרחיש: ערכו `requested_discount_pct` ב-`crm/leads.json` (או ב-`crm/leads.seed.json` ואז `./run-claude.sh reset`) — **בלי** לגעת ב-`run-claude.sh`.  
+תוצרים: `out/quotes.json` · טיוטה ב-`out/email_draft.md`.  
 
 **להקראה:**
 
 **[מה על המסך]**
-תיקיית ההדגמה והפקודות. חברת הדמו נקראת Nimbus — SaaS B2B עם מושבים חודשיים. יש לנו ארבעה לידים בקובץ CRM, אבל בהדגמת הפתיחה נריץ שלושה תרחישים שמספרים סיפור שלם: עסקה קטנה שעוברת, עסקה גדולה שממתינה למנהל, וליד שבור שנחסם.
+תיקיית ההדגמה, הפקודות, והטבלה "מאיפה מגיעים 5% ו-18%". חברת הדמו נקראת Nimbus — SaaS B2B עם מושבים חודשיים. לפני שמריצים — פתחו `crm/leads.json` והראו את `requested_discount_pct`: ב-L-SMB זה 5, ב-L-ENT זה 18. אחר כך פתחו `policy.md` והראו שספי האישור (10% / 25%) חיים שם — לא בסקריפט.
 
 **[לפני]**
-‏`cd demos/07-sales-opening` ואז `./run-claude.sh reset` — מחזיר CRM ל-seed ומוחק הצעות ישנות. אם אתם ב-Cursor, פתחו את `prompt-cursor.md`.
+‏`cd demos/07-sales-opening` ואז `./run-claude.sh reset` — מעתיק מ-`crm/leads.seed.json` ל-`crm/leads.json` ומוחק הצעות ישנות. אם שיניתם אחוזים בניסוי קודם ולא עשיתם reset, אתם רצים על CRM מלוכלך. אם אתם ב-Cursor, פתחו את `prompt-cursor.md`.
 
 **[צעד 1 — SMB]**
-‏`./run-claude.sh smb`. ליד L-SMB: סטודיו קטן, 12 מושבים, Pro, מבקשים 5% הנחה. מצפים לכתיבה ל-`out/quotes.json` עם route=auto ו-status=approved, לעדכון stage ל-quoted, ולטיוטת מייל בעברית. אומרים בקול: המספרים הגיעו מהמדיניות והמחירון, לא מהדמיון של המודל. אם תראו Write ל-quotes — ציינו "זה שינוי מצב מערכת, לא רק טקסט יפה".
+‏`./run-claude.sh smb`. הסוכן קורא את L-SMB מה-CRM — כולל `requested_discount_pct: 5` — ומחיל את `policy.md`: 5 ≤ 10 → auto. מצפים ל-`out/quotes.json` עם route=auto, stage=quoted, וטיוטת מייל. אומרים בקול: האחוז בא מהליד; הסף בא מהמדיניות; המודל לא "החליט 5%".
 
 **[צעד 2 — Enterprise]**
-‏`./run-claude.sh enterprise`. בנק דלתא, 400 מושבים, Enterprise, 18% הנחה. אותה מדיניות — חייב HITL. stage צפוי pending_approval. חשוב להראות ש-L-SMB עדיין בקובץ quotes. זה Store עסקי בין תורות; בלי זה כל תור היה מוחק את הקודם והייתם מלמדים אמנזיה.
+‏`./run-claude.sh enterprise`. אותו סוכן, אותו `policy.md`, אבל ב-CRM ל-L-ENT כתוב `requested_discount_pct: 18` — מעל 10 ולכן HITL / pending_manager. אם רוצים להדגים שינוי: עצרו, שנו ב-`leads.json` את 18 ל-8, reset+enterprise — תראו auto. החזירו ל-18 לפני שממשיכים. חשוב: L-SMB נשאר ב-quotes — Store עסקי בין תורות.
 
 **[צעד 3 — בלי מייל]**
 ‏`./run-claude.sh nomail`. ליד בלי אימייל. אין הצעה מאושרת. אסור להמציא כתובת. כאן מדגישים לאנשי מכירות ול-RevOps ביחד: איכות דאטה היא פיצ׳ר מוצר. אם הסוכן "משלים" מייל — קיבלתם ספאם ותלונה, לא אוטומציה.
@@ -182,15 +190,16 @@ cat out/quotes.json
 אל תדלגו על nomail. בלי החסימה, הקהל חושב שהסוכן תמיד "מסדר". אל תשלחו מייל אמיתי. אל תערבו כאן את Lab המלא — שמרו את חמשת הלידים למעבדה.
 
 **[קצב על המסך]**
-בין פקודה לפקודה עצרו על הפלט ועל הקבצים. הראו route=auto ליד pending_manager ליד need_email. אם משהו נכשל ברשת — עברו ל-fallback פייתון בלי להתנצל יותר מדי; הסיפור העסקי חשוב מהכלי.
+בין פקודה לפקודה עצרו על הפלט ועל הקבצים. הראו route=auto ליד pending_manager ליד need_email. אם משהו נכשל ברשת — Cursor עם `prompt-cursor.md`; הסיפור העסקי חשוב מהכלי.
 
 **הרצה — צעד אחר צעד (למרצה, לא מקריאים):**
 
-1. `cd demos/07-sales-opening && ./run-claude.sh reset`
-2. `./run-claude.sh smb` — חכו ל-WRITE של quotes; אמרו auto.
-3. `./run-claude.sh enterprise` — hitl; שני לידים ב-quotes.
-4. `./run-claude.sh nomail` — need_email.
-5. חלופת Cursor: `prompt-cursor.md`.
+1. פתחו `crm/leads.json` — הצביעו על `requested_discount_pct` של L-SMB=5 ו-L-ENT=18; פתחו `policy.md` — ספים 10/25.
+2. `cd demos/07-sales-opening && ./run-claude.sh reset`
+3. `./run-claude.sh smb` — חכו ל-WRITE של quotes; אמרו auto כי 5≤10.
+4. `./run-claude.sh enterprise` — hitl כי 18>10; שני לידים ב-quotes.
+5. `./run-claude.sh nomail` — need_email.
+6. חלופת Cursor: `prompt-cursor.md`.
 
 ---
 
@@ -203,7 +212,7 @@ cat out/quotes.json
 | מה ראינו | מושג עסקי |
 |---|---|
 | מספרים מ-pricebook ולא מהמודל | מקור אמת למחיר |
-| ‏5% מול 18% — אותו סוכן | **שער כסף** (discount gate) |
+| ‏5% / 18% מ-`requested_discount_pct` ב-CRM; ספים מ-`policy.md` | **שער כסף** (discount gate) |
 | בלי מייל — חסימה, לא המצאה | איכות דאטה כחלק מהמוצר |
 | ‏`email_draft.md` בלי "נשלח" | טיוטה ≠ פעולה מסוכנת |
 | ‏L-SMB נשמר כשעובדים על L-ENT | Store/CRM בין תורות (מפגש 6) |

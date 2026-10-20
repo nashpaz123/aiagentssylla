@@ -89,8 +89,16 @@ cd demos/07-sales-opening
 cat out/quotes.json
 ```
 
-- ‏CRM ב-`crm/leads.json` · מחיר ב-`policy.md` · הצעות ב-`out/quotes.json`  
-- ‏5% → `auto` · 18% → `pending_manager` · בלי מייל → `blocked`  
+**מאיפה מגיעים 5% ו-18%?** (לא מהסקריפט — מה-CRM)
+
+| מה | איפה בקובץ | דוגמה |
+|---|---|---|
+| הנחה שמבקשים לליד | `crm/leads.json` → שדה `requested_discount_pct` | ‏`L-SMB`: **5** · `L-ENT`: **18** |
+| ספי אישור (מתי auto/HITL) | `policy.md` → Discount & approval | ‏≤10% auto · ≤25% HITL · >25% blocked |
+| מחיר ליחידה (SKU) | `policy.md` → Pricing | Pro=299 · Enterprise=799 |
+
+לשנות תרחיש: ערכו `requested_discount_pct` ב-`crm/leads.json` (או ב-`crm/leads.seed.json` ואז `./run-claude.sh reset`) — **בלי** לגעת ב-`run-claude.sh`.  
+תוצרים: `out/quotes.json` · טיוטה ב-`out/email_draft.md`.  
 
 ---
 
@@ -99,7 +107,7 @@ cat out/quotes.json
 | מה ראינו | מושג עסקי |
 |---|---|
 | מספרים מ-pricebook ולא מהמודל | מקור אמת למחיר |
-| ‏5% מול 18% — אותו סוכן | **שער כסף** (discount gate) |
+| ‏5% / 18% מ-`requested_discount_pct` ב-CRM; ספים מ-`policy.md` | **שער כסף** (discount gate) |
 | בלי מייל — חסימה, לא המצאה | איכות דאטה כחלק מהמוצר |
 | ‏`email_draft.md` בלי "נשלח" | טיוטה ≠ פעולה מסוכנת |
 | ‏L-SMB נשמר כשעובדים על L-ENT | Store/CRM בין תורות (מפגש 6) |
