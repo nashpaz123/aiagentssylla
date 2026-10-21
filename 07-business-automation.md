@@ -10,6 +10,7 @@
 > **משך מיועד:** ~2.5–3.5 שעות **הקלטה רצופה** (קצת ארוך ממפגש 6 — יותר תרחישים עסקיים ומעבדה עשירה)  
 > **קהל בהקלטה:** אין זמן עבודה לסטודנטים חיים · אין שקט לחשיבה  
 > **מצגת סטודנטים:** [`07-students-slides.md`](07-students-slides.md)  
+> **תדריך מנהלים (High Level):** [`07-exec-briefing.md`](07-exec-briefing.md) — להציג בהקלטה כשפה עסקית / סיכום לבעלי עניין  
 > **הדגמת פתיחה:** [`demos/07-sales-opening/`](demos/07-sales-opening/)  
 > **Lab:** [`labs/07-business-automation/`](labs/07-business-automation/)
 
@@ -21,6 +22,7 @@
 
 - מקריאים את בלוק **להקראה** במלואו.
 - **`[סטודנטים · N]`** — גללו למספר N.
+- **`[תדריך מנהלים]`** — [`07-exec-briefing.md`](07-exec-briefing.md): מומלץ אחרי שקף 1 או 2 (מסר + מילון), ושוב בקצרה לפני ROI (שקף 25). לא מחליף את מצגת הסטודנטים.
 - **`[הדגמה חיה]`** שקף 3: Claude Code `./run-claude.sh` (או Cursor) — `demos/07-sales-opening/README.md`.
 - **‏`[Lab חי]`** שקפים 20–22: `labs/07-business-automation/README.md`.
 - כל בלוק קוד אצל המרצה מופיע גם אצל הסטודנטים.

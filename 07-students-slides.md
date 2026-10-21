@@ -10,6 +10,7 @@
 > **משך משוער:** ~2.5–3.5 שעות (הדגמת פתיחה + הוראה + Lab עשיר + Design Review).  
 > נפתח במילון עסקי, ואז Sales Ops ב-Claude Code/Cursor — CRM → הצעת מחיר → שער כסף.  
 > Lab עם `ANTHROPIC_API_KEY` + `sales_claude.py` ותרחישי SMB / Enterprise / Upsell / Blocked.  
+> **תדריך מנהלים (High Level):** [`07-exec-briefing.md`](07-exec-briefing.md)  
 > חזרה קצרה: כלים (3) · צוות (5) · Memory/Store (6).
 
 ---
