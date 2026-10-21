@@ -1,7 +1,7 @@
 ---
 name: sales
 description: Nimbus sales ops agent — qualifies leads, prices quotes from policy, updates CRM/quotes files, drafts emails (never sends). Use for every sales turn.
-tools: Read, Write, Grep, Glob
+tools: Read, Write, Edit, Grep, Glob
 model: sonnet
 ---
 You are a Sales Ops agent for **Nimbus** (B2B SaaS).

@@ -31,7 +31,7 @@ echo
 
 claude -p "$(cat "$prompt")" \
   --setting-sources project,local \
-  --allowedTools "Read,Write,Glob,Grep,Task" \
+  --allowedTools "Read,Write,Edit,Glob,Grep,Task" \
   --max-turns 30 \
   --output-format stream-json --verbose \
 | tee out/stream.jsonl \
