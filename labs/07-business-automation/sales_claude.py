@@ -34,7 +34,7 @@ QUOTES = DATA / "quotes.json"
 EMAIL = DATA / "email_draft.md"
 THREADS = DATA / "threads.json"
 
-MODEL = os.environ.get("CREW_MODEL", os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-4-5"))
+MODEL = os.environ.get("CREW_MODEL", os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-5-5"))
 if "/" in MODEL:
     MODEL = MODEL.split("/", 1)[1]
 
@@ -145,6 +145,32 @@ def load(path: Path, default=None):
 def save(path: Path, data) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def content_as_dicts(content) -> list | str:
+    """Anthropic returns TextBlock/ToolUseBlock objects — convert for API + JSON threads."""
+    if isinstance(content, str):
+        return content
+    out: list = []
+    for b in content:
+        if isinstance(b, dict):
+            out.append(b)
+        elif hasattr(b, "model_dump"):
+            out.append(b.model_dump(mode="json"))
+        elif getattr(b, "type", None) == "text":
+            out.append({"type": "text", "text": b.text})
+        elif getattr(b, "type", None) == "tool_use":
+            out.append(
+                {
+                    "type": "tool_use",
+                    "id": b.id,
+                    "name": b.name,
+                    "input": b.input,
+                }
+            )
+        else:
+            raise TypeError(f"cannot serialize content block: {type(b)}")
+    return out
 
 
 def ensure_crm() -> None:
@@ -309,8 +335,9 @@ def chat(lead_id: str, message: str, fresh: bool) -> None:
             messages=messages,
         )
         tool_uses = [b for b in resp.content if b.type == "tool_use"]
+        assistant_content = content_as_dicts(resp.content)
         if resp.stop_reason == "tool_use" and tool_uses:
-            messages.append({"role": "assistant", "content": resp.content})
+            messages.append({"role": "assistant", "content": assistant_content})
             results = []
             for tu in tool_uses:
                 out = run_tool(tu.name, tu.input)
@@ -325,7 +352,7 @@ def chat(lead_id: str, message: str, fresh: bool) -> None:
             continue
         text = "".join(b.text for b in resp.content if hasattr(b, "text"))
         print(text)
-        messages.append({"role": "assistant", "content": resp.content})
+        messages.append({"role": "assistant", "content": assistant_content})
         break
 
     threads[key] = messages
