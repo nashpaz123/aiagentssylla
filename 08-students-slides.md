@@ -19,7 +19,6 @@
 _מאיפה המשתמש רואה את הסוכן?_
 
 ## ‏1 — כותרת
-
 > פתיחה — Coding agents + Surfaces
 
 <p align="center">
@@ -34,7 +33,6 @@ _מאיפה המשתמש רואה את הסוכן?_
 ---
 
 ## ‏2 — מילון למפגש
-
 | מונח | הסבר |
 |---|---|
 | ‏**Agent host / מעטפת** | סביבה שמריצה agent: מודל + לולאה + כלים (לא הכלי עצמו) |
@@ -47,13 +45,14 @@ _מאיפה המשתמש רואה את הסוכן?_
 | ‏**Bot token** | סוד של בוט טלגרם — לא בקוד ובלא git |
 | ‏**Chat ID** | יעד השליחה בטלגרם |
 | ‏**notify_telegram** | כלי שכותב הודעה **ושולח** לצ׳אט הפנימי (המרצה/AE) |
-| ‏**Briefing card** | כרטיס HTML עם מספרים + route + צבע |
-| ‏**צ׳אט פנימי** | טלגרם שלכם / AE — כן שולחים; לא מייל אוטומטי ללקוח הסופי |
+| ‏**Briefing card** | כרטיס HTML עם מספרים + route/severity + צבע |
+| ‏**צ׳אט פנימי** | טלגרם שלכם / AE / מנהל מתקנים — כן שולחים |
+| ‏**Nimbus** | דומיין מכירות (הצעות מחיר) — Lab A |
+| ‏**Atlas Facility** | דומיין ניהול מתקנים (קריאות שירות) — Lab B · לא הזמנות לקוח |
 
 ---
 
 ## ‏3 — הדגמת פתיחה — HTML + טיוטת Telegram
-
 תיקייה: `demos/08-surface-opening/` · **Claude Code** (או Cursor · `prompt-cursor.md`)
 
 ```bash
@@ -72,7 +71,6 @@ cp .env.example .env   # חד־פעמי: TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID
 ---
 
 ## ‏4 — מה ראינו — פירוק
-
 | מה ראינו | מושג |
 |---|---|
 | כרטיס בדפדפן | Surface / UI |
@@ -83,12 +81,11 @@ cp .env.example .env   # חד־פעמי: TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID
 ---
 
 ## ‏5 — מה היום (+ חזרה)
-
 | נבנה היום | כבר למדנו |
 |---|---|
 | Cursor מול Claude Code כמעטפות | מפגש 5–7: demos עם Claude Code |
 | HTML + Telegram כמשטחים | מפגש 3: כלים / observations |
-| Lab עם `notify_telegram` (חובה env) | מפגש 7: שערי כסף על אותם מספרים |
+| Lab A Nimbus + Lab B Atlas (Facility) | מפגש 7: שערי כסף על אותם מספרים |
 | כללי סודות לבוט | מפגש 6: לא לשמור סודות ב-Store |
 
 יעד: **~2.5–3.5 שעות**, הרבה הדגמות חיות.
@@ -96,7 +93,6 @@ cp .env.example .env   # חד־פעמי: TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID
 ---
 
 ## ‏6 — שאלת המפגש + תוצרים
-
 **שאלה:** איפה המשתמש רואה את תוצר הסוכן — ואיך מגיעה התראה לנייד?
 
 | תוצר | "עובד" |
@@ -113,7 +109,6 @@ cp .env.example .env   # חד־פעמי: TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID
 _Cursor ו-Claude Code ≠ הכלים; הם מריצים את ה-agent_
 
 ## ‏7 — למה לא Copilot במפגש הזה
-
 הסילבוס מזכיר Copilot — **בהקלטה שלנו:** Cursor + Claude Code כמעטפות בלבד.
 
 | שכבה | מה זה באמת | תפקיד אצלנו |
@@ -128,7 +123,6 @@ _Cursor ו-Claude Code ≠ הכלים; הם מריצים את ה-agent_
 ---
 
 ## ‏8 — Cursor כמעטפת (IDE host)
-
 - אתם פותחים צ׳אט **Agent** — Cursor מריץ את ה-agent  
 - Diff לפני Accept — האדם בשער  
 - Rules (`.cursor/rules`) מגבילים/מכוונים את ה-agent  
@@ -139,7 +133,6 @@ _Cursor ו-Claude Code ≠ הכלים; הם מריצים את ה-agent_
 ---
 
 ## ‏9 — Claude Code כמעטפת (CLI host)
-
 ```bash
 claude -p "$(cat prompt-smb.md)" \
   --setting-sources project,local \
@@ -154,7 +147,6 @@ claude -p "$(cat prompt-smb.md)" \
 ---
 
 ## ‏10 — Coding agent ≠ Runtime agent
-
 שניהם **agents**. ההבדל: באיזו מעטפת הם רצים ומה המטרה.
 
 | | Coding (בתוך Cursor/Claude Code) | Runtime (באפליקציה) |
@@ -172,7 +164,6 @@ claude -p "$(cat prompt-smb.md)" \
 _HTML וטלגרם כערוצי פלט_
 
 ## ‏11 — מה זה Surface ולמה אכפת
-
 טרמינל טוב למפתחים. AE ומנהל רוצים:
 
 - כרטיס ויזואלי (HTML)  
@@ -183,7 +174,6 @@ _HTML וטלגרם כערוצי פלט_
 ---
 
 ## ‏12 — Pipeline: Quote → HTML → TG → Send?
-
 1. `get_quote`  
 2. `render_html_card` → `out/briefing.html`  
 3. `notify_telegram` → כותב `telegram.txt` **ושולח** לצ׳אט הפנימי  
@@ -191,7 +181,6 @@ _HTML וטלגרם כערוצי פלט_
 ---
 
 ## ‏13 — HTML card — עקרונות
-
 - קובץ יחיד · CSS פנימי · `dir="rtl"`  
 - צבע לפי `route` (auto/hitl/blocked)  
 - כותרת + טבלה + פוטר "טיוטה פנימית"  
@@ -200,7 +189,6 @@ _HTML וטלגרם כערוצי פלט_
 ---
 
 ## ‏14 — Telegram כמשטח (עם שליחה)
-
 ![Telegram surface](assets/08/03-telegram-surface.png)
 
 | רכיב | תפקיד |
@@ -214,7 +202,6 @@ _HTML וטלגרם כערוצי פלט_
 ---
 
 ## ‏15 — פנימי כן · לקוח סופי לא
-
 | ערוץ | שולחים? |
 |---|---|
 | טלגרם פנימי (מרצה / AE) | **כן** — זה המוצר של המפגש |
@@ -224,7 +211,6 @@ _HTML וטלגרם כערוצי פלט_
 ---
 
 ## ‏16 — סודות והגדרות
-
 ```bash
 cp .env.example .env
 # ANTHROPIC_API_KEY=...
@@ -238,7 +224,6 @@ cp .env.example .env
 ---
 
 ## ‏17 — Guardrails למשטחים
-
 - [ ] מספרים מכלי/JSON בלבד  
 - [ ] HTML לא מריץ JS חיצוני לא מבוקר בדמו  
 - [ ] שליחה לצ׳אט פנימי עובדת בהקלטה  
@@ -248,7 +233,6 @@ cp .env.example .env
 ---
 
 ## ‏18 — Anti-Patterns
-
 | אנטי־דפוס | למה נשבר |
 |---|---|
 | "הסוכן ידפיס יפה בטרמינל" | המשתמש לא שם |
@@ -260,12 +244,11 @@ cp .env.example .env
 ---
 
 ## ‏19 — Checklist לפני פיילוט Surface
-
 - [ ] יש HTML שנפתח בלי שרת  
 - [ ] יש `.env` עם token + chat id שלכם  
 - [ ] הודעת SMB מגיעה לטלגרם  
 - [ ] יש הפרדת Coding / Runtime  
-- [ ] יש תרחיש SMB מול ENT ויזואלית  
+- [ ] יש תרחיש SMB מול ENT **או** HVAC מול ELEV ויזואלית  
 
 ---
 
@@ -273,20 +256,23 @@ cp .env.example .env
 
 _הרבה הרצות — רואים כרטיס וטלגרם_
 
-## ‏20 — Lab — מטרה
+## ‏20 — Lab — שני דומיינים (גיוון)
+אותו דפוס משטחים · **שני עולמות עסקיים**:
 
-תיקייה: [`labs/08-agent-surfaces/`](labs/08-agent-surfaces/)
+| Lab | דומיין | תיקייה | מזהים |
+|---|---|---|---|
+| **A · Nimbus** | מכירות / הצעות מחיר | [`labs/08-agent-surfaces/`](labs/08-agent-surfaces/) | `L-SMB` · `L-ENT` · `L-UPSELL` |
+| **B · Atlas** | ניהול מתקנים / קריאות שירות | [`labs/08-facility-surfaces/`](labs/08-facility-surfaces/) | `WO-HVAC` · `WO-ELEV` · `WO-ACCESS` |
 
-דורש **`ANTHROPIC_API_KEY`** + **`TELEGRAM_BOT_TOKEN`** + **`TELEGRAM_CHAT_ID`** (הצ׳אט שלכם).
+דורש **`ANTHROPIC_API_KEY`** + **`TELEGRAM_*`** בשניהם.
 
 ![Lab tools](assets/08/05-lab-tools.png)
 
-לידים: `L-SMB` · `L-ENT` · `L-UPSELL`
+מסר: Surface לא "שייך" רק ל-CRM מכירות — אותו pipeline עובד על Work Orders בבניין.
 
 ---
 
-## ‏21 — Lab — מה נריץ
-
+## ‏21 — Lab A (Nimbus) — מה נריץ
 ```bash
 cd labs/08-agent-surfaces
 python3 -m venv .venv && source .venv/bin/activate
@@ -305,8 +291,7 @@ python3 surface_claude.py show
 
 ---
 
-## ‏22 — Lab — Debrief
-
+## ‏22 — Lab A — Debrief
 - [ ] ראיתי כרטיס ירוק ל-SMB וענבר ל-ENT  
 - [ ] הודעות הגיעו לטלגרם האישי  
 - [ ] בלוג: `TOOL -> notify_telegram` עם `sent=true`  
@@ -315,10 +300,49 @@ python3 surface_claude.py show
 
 ---
 
+## ‏23 — Lab B (Atlas) — קריאות שירות
+תיקייה: [`labs/08-facility-surfaces/`](labs/08-facility-surfaces/) · דמו: [`demos/08-facility-opening/`](demos/08-facility-opening/)
+
+**לא הזמנות לקוח** — מיזוג, מעלית, בקרת כניסה.
+
+| מזהה | חומרה | צבע |
+|---|---|---|
+| `WO-HVAC` | `open` | כחול |
+| `WO-ELEV` | `sla_breach` | אדום |
+| `WO-ACCESS` | `blocked` | ענבר |
+
+כלים: `get_work_order` · `render_html_card` · `notify_telegram`
+
+---
+
+## ‏24 — Lab B — מה נריץ
+```bash
+cd labs/08-facility-surfaces
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env   # או העתיקו מ-Lab A
+
+python3 facility_claude.py reset
+python3 facility_claude.py chat --wo WO-HVAC --message "הכן כרטיס ושלח התראה למנהל מתקנים"
+python3 facility_claude.py chat --wo WO-ELEV --message "חריגת SLA — שלח עכשיו"
+python3 facility_claude.py notify --wo WO-ACCESS
+```
+
+דמו קצר (Claude Code): `demos/08-facility-opening/` → `./run-claude.sh hvac|elev` → `./send-telegram.sh`
+
+---
+
+## ‏25 — Lab B — Debrief
+- [ ] אין מחירים / מושבים — זה לא Nimbus  
+- [ ] כרטיס אדום ל-`WO-ELEV` (חריגת SLA)  
+- [ ] טלגרם עם `Atlas Facility`  
+- [ ] אותו דפוס: get → HTML → notify  
+
+---
+
 # ‏חלק ה׳ — הדגמות נוספות וסיכום
 
-## ‏23 — הדגמה — Cursor משפר UI
-
+## ‏26 — הדגמה — Cursor משפר UI
 1. פתחו `out/briefing.html` אחרי Lab  
 2. ב-Cursor: "שפר טיפוגרפיה ומרווחים בלי לשנות מספרים"  
 3. רעננו בדפדפן  
@@ -327,28 +351,26 @@ python3 surface_claude.py show
 
 ---
 
-## ‏24 — הדגמה — כפתורים שמשנים פלט
-
+## ‏27 — הדגמה — כפתורים שמשנים פלט
 | שינוי | תוצאה ויזואלית |
 |---|---|
-| `L-SMB` | ירוק / approved |
-| `L-ENT` | ענבר / pending_manager |
-| `L-UPSELL` | ירוק + תווית upsell |
+| `L-SMB` (Nimbus) | ירוק / approved |
+| `L-ENT` (Nimbus) | ענבר / pending_manager |
+| `WO-HVAC` (Atlas) | כחול / open |
+| `WO-ELEV` (Atlas) | אדום / sla_breach |
 | בלי `.env` | error ברור |
 | עם `.env` | הודעה בטלגרם |
 
 ---
 
-## ‏25 — באג: "נשלח" בלי אישור API
-
+## ‏28 — באג: "נשלח" בלי אישור API
 סימפטום: המודל כותב "שלחתי" אבל אין הודעה בנייד.  
 בדיקה: אין `notify_telegram` עם `sent=true`, או `last_send.json` עם כשל.  
 תיקון: האמת בתוצאת הכלי בלבד — לא בנרטיב המודל.
 
 ---
 
-## ‏26 — Design Review — למי שולחים?
-
+## ‏29 — Design Review — למי שולחים?
 | שאלה | החלטה במפגש |
 |---|---|
 | למי הצ׳אט? | **פנימי** — המרצה / AE (כן שולחים) |
@@ -358,40 +380,36 @@ python3 surface_claude.py show
 
 ---
 
-## ‏27 — ROI קצר למשטחים
-
+## ‏30 — ROI קצר למשטחים
 | למי | ערך |
 |---|---|
-| AE | כרטיס מוכן + התראה בנייד |
-| מנהל | רואה HITL בלי לפתוח CRM |
-| מפתח | אותו סוכן — ערוצים שונים |
+| AE / מנהל מתקנים | כרטיס מוכן + התראה בנייד |
+| מנהל | רואה HITL / חריגת SLA בלי לפתוח מערכת |
+| מפתח | אותו דפוס Surface — דומיינים שונים |
 
 ---
 
-## ‏28 — סיכום
-
+## ‏31 — סיכום
 - Cursor / Claude Code = **מעטפות** שמריצות agents (לא "הכלים")  
 - Surface = HTML / Telegram / UI  
 - Coding agent ≠ Runtime agent  
 - טלגרם פנימי = **שולחים**; לקוח סופי ≠ אוטומטי  
-- Lab: כרטיס + `notify_telegram`  
+- Lab A (Nimbus) + Lab B (Atlas Facility) — אותו Surface, דומיינים שונים  
 - במפגש הבא: **Testing ו-Debugging Agents**
 
 ---
 
-## ‏29 — הכנה למפגש 9
-
+## ‏32 — הכנה למפגש 9
 - חשבו: איך בודקים ש-HTML מכיל את הסכום הנכון?  
 - איך בודקים ש-send לא רץ בלי token?  
 - רשמו 2 בדיקות שבירות שתרצו לראות בלוג  
 
 ---
 
-## ‏30 — תרגיל בית
-
-1. הוסיפו שדה `valid_until` ל-JSON והציגו ב-HTML  
-2. הוסיפו כלי `render_markdown_report` לקובץ `out/report.md`  
+## ‏33 — תרגיל בית
+1. Lab A: הוסיפו שדה `valid_until` ל-JSON והציגו ב-HTML  
+2. Lab B: הוסיפו קריאה `WO-CLEAN` (ניקיון) עם severity=`open`  
 3. תעדו ב-README איך משיגים `TELEGRAM_CHAT_ID`  
-4. בונוס: כפתור CSS ל-HITL שמציג "ממתין למנהל" בגדול  
+4. בונוס: כלי `render_markdown_report` → `out/report.md` באחד הדומיינים  
 
 </div>

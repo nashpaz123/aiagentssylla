@@ -55,3 +55,7 @@ python3 surface_claude.py show
 - [ ] בלי `.env` מלא — היציאה נכשלת עם הודעה ברורה (לא "נשלח" מזויף)
 
 </div>
+
+## ‏גיוון דומיין
+
+אותו דפוס על **קריאות שירות בבניין** (לא מכירות): [`../08-facility-surfaces/`](../08-facility-surfaces/) · דמו [`../../demos/08-facility-opening/`](../../demos/08-facility-opening/).

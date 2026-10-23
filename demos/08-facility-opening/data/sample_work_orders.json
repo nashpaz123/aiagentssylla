@@ -1,0 +1,26 @@
+{
+  "WO-HVAC": {
+    "site": "מגדל אלון · קומה 7",
+    "category": "HVAC",
+    "title": "מיזוג לא מקרר באגף המזרחי",
+    "priority": "medium",
+    "severity": "open",
+    "sla_hours_left": 6,
+    "assignee": "טכנאי-רן",
+    "opened_by": "קבלה · יעל",
+    "asset_id": "AC-7E-02",
+    "notes": "טמפ׳ מדווחת 28°C"
+  },
+  "WO-ELEV": {
+    "site": "חניון תת־קרקעי B2",
+    "category": "elevator",
+    "title": "מעלית שירות תקועה בין קומות",
+    "priority": "critical",
+    "severity": "sla_breach",
+    "sla_hours_left": -2,
+    "assignee": "קבלן-מעלית",
+    "opened_by": "אבטחה · דני",
+    "asset_id": "ELV-B2-SVC",
+    "notes": "אין נוסעים בתוך המעלית"
+  }
+}

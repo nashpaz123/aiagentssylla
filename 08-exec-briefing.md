@@ -70,7 +70,9 @@
 | Lab Anthropic (runtime) | `render_html_card` + `notify_telegram` (חובה env) |
 | Cursor (מעטפת IDE) | Agent משפר עיצוב הכרטיס בלי לשנות מספרים |
 
-לידים לדוגמה: SMB (אוטומטי) · Enterprise (ממתין למנהל) · Upsell (לקוח קיים).
+לידים לדוגמה (Nimbus): SMB · Enterprise · Upsell.
+
+**גיוון דומיין (Atlas Facility):** אותם משטחים על קריאות שירות בבניין (`WO-HVAC` / `WO-ELEV` / `WO-ACCESS`) — בלי הצעות מחיר. מוכיח שהדפוס לא תלוי ב-CRM מכירות.
 
 ---
 
@@ -99,7 +101,9 @@
 |---|---|
 | [`08-students-slides.md`](08-students-slides.md) | מצגת |
 | [`08-cursor-claude-surfaces.md`](08-cursor-claude-surfaces.md) | תסריט מרצה |
-| [`demos/08-surface-opening/`](demos/08-surface-opening/) | דמו פתיחה |
-| [`labs/08-agent-surfaces/`](labs/08-agent-surfaces/) | Lab |
+| [`demos/08-surface-opening/`](demos/08-surface-opening/) | דמו Nimbus (מכירות) |
+| [`demos/08-facility-opening/`](demos/08-facility-opening/) | דמו Atlas (מתקנים) |
+| [`labs/08-agent-surfaces/`](labs/08-agent-surfaces/) | Lab A · הצעות מחיר |
+| [`labs/08-facility-surfaces/`](labs/08-facility-surfaces/) | Lab B · קריאות שירות |
 
 </div>

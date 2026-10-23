@@ -12,7 +12,7 @@
 > **מצגת סטודנטים:** [`08-students-slides.md`](08-students-slides.md)  
 > **תדריך מנהלים:** [`08-exec-briefing.md`](08-exec-briefing.md)  
 > **הדגמת פתיחה:** [`demos/08-surface-opening/`](demos/08-surface-opening/)  
-> **Lab:** [`labs/08-agent-surfaces/`](labs/08-agent-surfaces/)
+> **Lab A:** [`labs/08-agent-surfaces/`](labs/08-agent-surfaces/) · **Lab B:** [`labs/08-facility-surfaces/`](labs/08-facility-surfaces/)
 
 > מספור 1…30. תוויות **[…]** בלהקראה — ניווט למרצה, לא מקריאים. **בלי Copilot.**
 
@@ -81,8 +81,10 @@
 | ‏**Bot token** | סוד של בוט טלגרם — לא בקוד ובלא git |
 | ‏**Chat ID** | יעד השליחה בטלגרם |
 | ‏**notify_telegram** | כלי שכותב הודעה **ושולח** לצ׳אט הפנימי (המרצה/AE) |
-| ‏**Briefing card** | כרטיס HTML עם מספרים + route + צבע |
-| ‏**צ׳אט פנימי** | טלגרם שלכם / AE — כן שולחים; לא מייל אוטומטי ללקוח הסופי |
+| ‏**Briefing card** | כרטיס HTML עם מספרים + route/severity + צבע |
+| ‏**צ׳אט פנימי** | טלגרם שלכם / AE / מנהל מתקנים — כן שולחים |
+| ‏**Nimbus** | דומיין מכירות (הצעות מחיר) — Lab A |
+| ‏**Atlas Facility** | דומיין ניהול מתקנים (קריאות שירות) — Lab B · לא הזמנות לקוח |
 
 **להקראה:**
 
@@ -153,7 +155,7 @@ cp .env.example .env   # חד־פעמי: TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID
 |---|---|
 | Cursor מול Claude Code כמעטפות | מפגש 5–7: demos עם Claude Code |
 | HTML + Telegram כמשטחים | מפגש 3: כלים / observations |
-| Lab עם `notify_telegram` (חובה env) | מפגש 7: שערי כסף על אותם מספרים |
+| Lab A Nimbus + Lab B Atlas (Facility) | מפגש 7: שערי כסף על אותם מספרים |
 | כללי סודות לבוט | מפגש 6: לא לשמור סודות ב-Store |
 
 יעד: **~2.5–3.5 שעות**, הרבה הדגמות חיות.
@@ -480,7 +482,7 @@ cp .env.example .env
 - [ ] יש `.env` עם token + chat id שלכם  
 - [ ] הודעת SMB מגיעה לטלגרם  
 - [ ] יש הפרדת Coding / Runtime  
-- [ ] יש תרחיש SMB מול ENT ויזואלית  
+- [ ] יש תרחיש SMB מול ENT **או** HVAC מול ELEV ויזואלית  
 
 ---
 
@@ -496,29 +498,34 @@ _הרבה הרצות — רואים כרטיס וטלגרם_
 ---
 
 
-## ‏20 — Lab — מטרה
+## ‏20 — Lab — שני דומיינים (גיוון)
 
 [סטודנטים · 20]
 
 **על המסך:**
 
-תיקייה: [`labs/08-agent-surfaces/`](labs/08-agent-surfaces/)
+אותו דפוס משטחים · **שני עולמות עסקיים**:
 
-דורש **`ANTHROPIC_API_KEY`** + **`TELEGRAM_BOT_TOKEN`** + **`TELEGRAM_CHAT_ID`** (הצ׳אט שלכם).
+| Lab | דומיין | תיקייה | מזהים |
+|---|---|---|---|
+| **A · Nimbus** | מכירות / הצעות מחיר | [`labs/08-agent-surfaces/`](labs/08-agent-surfaces/) | `L-SMB` · `L-ENT` · `L-UPSELL` |
+| **B · Atlas** | ניהול מתקנים / קריאות שירות | [`labs/08-facility-surfaces/`](labs/08-facility-surfaces/) | `WO-HVAC` · `WO-ELEV` · `WO-ACCESS` |
+
+דורש **`ANTHROPIC_API_KEY`** + **`TELEGRAM_*`** בשניהם.
 
 ![Lab tools](assets/08/05-lab-tools.png)
 
-לידים: `L-SMB` · `L-ENT` · `L-UPSELL`
+מסר: Surface לא "שייך" רק ל-CRM מכירות — אותו pipeline עובד על Work Orders בבניין.
 
 **להקראה:**
 
-**[Lab מטרה]**
-Anthropic + Telegram env חובה. ההודעה חייבת להגיע לצ׳אט שלכם בהקלטה.
+**[שני דומיינים]**
+Nimbus = מכירות. Atlas = מתקנים. אותו pipeline — get → HTML → notify. אמרו: Surface לא שייך רק ל-CRM.
 
 ---
 
 
-## ‏21 — Lab — מה נריץ
+## ‏21 — Lab A (Nimbus) — מה נריץ
 
 [סטודנטים · 21]
 
@@ -542,13 +549,13 @@ python3 surface_claude.py show
 
 **להקראה:**
 
-**[Lab חי]**
+**[Lab A חי]**
 `.env` מלא. SMB עם שליחה — בדקו נייד. ENT, UPSELL, ואז `notify` בלי LLM.
 
 ---
 
 
-## ‏22 — Lab — Debrief
+## ‏22 — Lab A — Debrief
 
 [סטודנטים · 22]
 
@@ -558,7 +565,80 @@ python3 surface_claude.py show
 - [ ] הודעות הגיעו לטלגרם האישי  
 - [ ] בלוג: `TOOL -> notify_telegram` עם `sent=true`  
 - [ ] בלי `.env` — כישלון ברור, לא "נשלח" מזויף  
-- [ ] Upsell מסומן בכרטיס/הודעה  
+- [ ] Upsell מסומן בכרטיס/הודעה
+
+**להקראה:**
+
+**[Debrief A]**
+עברו על הצ׳קליסט. הדגישו sent=true מהכלי.
+
+---
+
+
+## ‏23 — Lab B (Atlas) — קריאות שירות
+
+[סטודנטים · 23]
+
+**על המסך:**
+
+תיקייה: [`labs/08-facility-surfaces/`](labs/08-facility-surfaces/) · דמו: [`demos/08-facility-opening/`](demos/08-facility-opening/)
+
+**לא הזמנות לקוח** — מיזוג, מעלית, בקרת כניסה.
+
+| מזהה | חומרה | צבע |
+|---|---|---|
+| `WO-HVAC` | `open` | כחול |
+| `WO-ELEV` | `sla_breach` | אדום |
+| `WO-ACCESS` | `blocked` | ענבר |
+
+כלים: `get_work_order` · `render_html_card` · `notify_telegram`
+
+**להקראה:**
+
+**[Lab B Atlas]**
+החליפו הקשר: אין מחירים. קריאות שירות בבניין. חומרה open/sla_breach/blocked.
+
+---
+
+
+## ‏24 — Lab B — מה נריץ
+
+[סטודנטים · 24]
+
+**על המסך:**
+
+```bash
+cd labs/08-facility-surfaces
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env   # או העתיקו מ-Lab A
+
+python3 facility_claude.py reset
+python3 facility_claude.py chat --wo WO-HVAC --message "הכן כרטיס ושלח התראה למנהל מתקנים"
+python3 facility_claude.py chat --wo WO-ELEV --message "חריגת SLA — שלח עכשיו"
+python3 facility_claude.py notify --wo WO-ACCESS
+```
+
+דמו קצר (Claude Code): `demos/08-facility-opening/` → `./run-claude.sh hvac|elev` → `./send-telegram.sh`
+
+**להקראה:**
+
+**[Lab B חי]**
+הרצו WO-HVAC ואז WO-ELEV (אדום). אופציונלי: דמו Claude ב-demos/08-facility-opening.
+
+---
+
+
+## ‏25 — Lab B — Debrief
+
+[סטודנטים · 25]
+
+**על המסך:**
+
+- [ ] אין מחירים / מושבים — זה לא Nimbus  
+- [ ] כרטיס אדום ל-`WO-ELEV` (חריגת SLA)  
+- [ ] טלגרם עם `Atlas Facility`  
+- [ ] אותו דפוס: get → HTML → notify  
 
 ---
 
@@ -566,15 +646,15 @@ python3 surface_claude.py show
 
 **להקראה:**
 
-**[Debrief]**
-ענו אתם על התיבות בקול.
+**[Debrief B]**
+וידאו שאין שדות מכירה. אותו notify_telegram — דומיין אחר.
 
 ---
 
 
-## ‏23 — הדגמה — Cursor משפר UI
+## ‏26 — הדגמה — Cursor משפר UI
 
-[סטודנטים · 23]
+[סטודנטים · 26]
 
 **על המסך:**
 
@@ -586,38 +666,38 @@ python3 surface_claude.py show
 
 **להקראה:**
 
-**[Cursor חי]**
-מעטפת IDE מריצה coding agent שמשפר Surface; ה-runtime מזין מספרים.
-
+**[Cursor UI]**
+שפרו HTML של אחד הדומיינים בלי לגעת במספרים/SLA.
 
 ---
 
 
-## ‏24 — הדגמה — כפתורים שמשנים פלט
+## ‏27 — הדגמה — כפתורים שמשנים פלט
 
-[סטודנטים · 24]
+[סטודנטים · 27]
 
 **על המסך:**
 
 | שינוי | תוצאה ויזואלית |
 |---|---|
-| `L-SMB` | ירוק / approved |
-| `L-ENT` | ענבר / pending_manager |
-| `L-UPSELL` | ירוק + תווית upsell |
+| `L-SMB` (Nimbus) | ירוק / approved |
+| `L-ENT` (Nimbus) | ענבר / pending_manager |
+| `WO-HVAC` (Atlas) | כחול / open |
+| `WO-ELEV` (Atlas) | אדום / sla_breach |
 | בלי `.env` | error ברור |
 | עם `.env` | הודעה בטלגרם |
 
 **להקראה:**
 
 **[כפתורים]**
-טבלה ויזואלית — אותו Lab, תוצאות שונות.
+הראו גם L-* וגם WO-* — אותו עיקרון: קלט שונה → צבע שונה.
 
 ---
 
 
-## ‏25 — באג: "נשלח" בלי אישור API
+## ‏28 — באג: "נשלח" בלי אישור API
 
-[סטודנטים · 25]
+[סטודנטים · 28]
 
 **על המסך:**
 
@@ -627,15 +707,16 @@ python3 surface_claude.py show
 
 **להקראה:**
 
-**[באג]**
-סימפטום / בדיקה / תיקון. האמת בתוצאת הכלי.
+**[סיכום]**
+מעטפה ≠ כלי. Agent ≠ Surface. טלגרם פנימי = שולחים. בלי Copilot.
+**[סיום רמז]** במפגש 9 — Testing.
 
 ---
 
 
-## ‏26 — Design Review — למי שולחים?
+## ‏29 — Design Review — למי שולחים?
 
-[סטודנטים · 26]
+[סטודנטים · 29]
 
 **על המסך:**
 
@@ -648,36 +729,37 @@ python3 surface_claude.py show
 
 **להקראה:**
 
-**[Design Review]**
-אל תשלחו ללקוח הסופי קודם. צ׳אט פנימי + שער.
+**[הכנה ל-9]**
+בדיקות ישברו HTML ו-send — תנו רמז למפגש הבא.
 
 ---
 
 
-## ‏27 — ROI קצר למשטחים
+## ‏30 — ROI קצר למשטחים
 
-[סטודנטים · 27]
+[סטודנטים · 30]
 
 **על המסך:**
 
 | למי | ערך |
 |---|---|
-| AE | כרטיס מוכן + התראה בנייד |
-| מנהל | רואה HITL בלי לפתוח CRM |
-| מפתח | אותו סוכן — ערוצים שונים |
+| AE / מנהל מתקנים | כרטיס מוכן + התראה בנייד |
+| מנהל | רואה HITL / חריגת SLA בלי לפתוח מערכת |
+| מפתח | אותו דפוס Surface — דומיינים שונים |
 
 **להקראה:**
 
-**[ROI]**
-שלושה קהלים — משפט לכל אחד.
-
+**[בית]**
+ארבע משימות קצרות. בונוס ויזואלי ל-HITL.
+**[סיום]**
+תודה. במפגש 9 — Testing ו-Debugging Agents.
 
 ---
 
 
-## ‏28 — סיכום
+## ‏31 — סיכום
 
-[סטודנטים · 28]
+[סטודנטים · 31]
 
 **על המסך:**
 
@@ -685,7 +767,7 @@ python3 surface_claude.py show
 - Surface = HTML / Telegram / UI  
 - Coding agent ≠ Runtime agent  
 - טלגרם פנימי = **שולחים**; לקוח סופי ≠ אוטומטי  
-- Lab: כרטיס + `notify_telegram`  
+- Lab A (Nimbus) + Lab B (Atlas Facility) — אותו Surface, דומיינים שונים  
 - במפגש הבא: **Testing ו-Debugging Agents**
 
 **להקראה:**
@@ -697,9 +779,9 @@ python3 surface_claude.py show
 ---
 
 
-## ‏29 — הכנה למפגש 9
+## ‏32 — הכנה למפגש 9
 
-[סטודנטים · 29]
+[סטודנטים · 32]
 
 **על המסך:**
 
@@ -712,20 +794,19 @@ python3 surface_claude.py show
 **[הכנה ל-9]**
 בדיקות ישברו HTML ו-send — תנו רמז למפגש הבא.
 
-
 ---
 
 
-## ‏30 — תרגיל בית
+## ‏33 — תרגיל בית
 
-[סטודנטים · 30]
+[סטודנטים · 33]
 
 **על המסך:**
 
-1. הוסיפו שדה `valid_until` ל-JSON והציגו ב-HTML  
-2. הוסיפו כלי `render_markdown_report` לקובץ `out/report.md`  
+1. Lab A: הוסיפו שדה `valid_until` ל-JSON והציגו ב-HTML  
+2. Lab B: הוסיפו קריאה `WO-CLEAN` (ניקיון) עם severity=`open`  
 3. תעדו ב-README איך משיגים `TELEGRAM_CHAT_ID`  
-4. בונוס: כפתור CSS ל-HITL שמציג "ממתין למנהל" בגדול  
+4. בונוס: כלי `render_markdown_report` → `out/report.md` באחד הדומיינים  
 
 </div>
 
@@ -735,7 +816,6 @@ python3 surface_claude.py show
 ארבע משימות קצרות. בונוס ויזואלי ל-HITL.
 **[סיום]**
 תודה. במפגש 9 — Testing ו-Debugging Agents.
-
 
 ---
 
