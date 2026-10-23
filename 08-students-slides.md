@@ -42,12 +42,13 @@ _מאיפה המשתמש רואה את הסוכן?_
 | ‏**Claude Code** | מעטפת ב-CLI: `claude -p`, subagents, הרצות מוקלטות לתיקייה |
 | ‏**Coding agent** | ה-agent שרץ *בתוך* Cursor/Claude Code ומשנה קבצים בריפו |
 | ‏**Runtime agent** | Agent באפליקציה שלכם מול API (`surface_claude.py` + Anthropic) |
-| ‏**Tool** | פעולה שה-agent קורא לה (Read/Write, `render_html_card`, `send_telegram`…) |
+| ‏**Tool** | פעולה שה-agent קורא לה (Read/Write, `render_html_card`, `notify_telegram`…) |
 | ‏**Surface** | משטח פלט לאדם: HTML, Telegram, UI — לא טרמינל בלבד |
 | ‏**Bot token** | סוד של בוט טלגרם — לא בקוד ובלא git |
 | ‏**Chat ID** | יעד השליחה בטלגרם |
-| ‏**Draft ≠ Send** | כתיבת `telegram.txt` ≠ `sendMessage` לרשת |
+| ‏**notify_telegram** | כלי שכותב הודעה **ושולח** לצ׳אט הפנימי (המרצה/AE) |
 | ‏**Briefing card** | כרטיס HTML עם מספרים + route + צבע |
+| ‏**צ׳אט פנימי** | טלגרם שלכם / AE — כן שולחים; לא מייל אוטומטי ללקוח הסופי |
 
 ---
 
@@ -57,16 +58,16 @@ _מאיפה המשתמש רואה את הסוכן?_
 
 ```bash
 cd demos/08-surface-opening
+cp .env.example .env   # חד־פעמי: TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID
 ./run-claude.sh reset
-./run-claude.sh smb           # L-SMB → out/briefing.html + telegram.txt
-# פתחו את out/briefing.html בדפדפן
-./run-claude.sh enterprise    # L-ENT → עיצוב hitl
-cat out/telegram.txt
+./run-claude.sh smb
+./send-telegram.sh            # שולח אליכם לטלגרם
+# פתחו out/briefing.html בדפדפן
+./run-claude.sh enterprise && ./send-telegram.sh
 ```
 
 - קלט: `data/sample_quote.json` · מפרט: `surface-spec.md`  
-- פלט יפה למשתמש — לא `print` בלבד  
-- שליחה אמיתית לטלגרם = Lab (עם token)
+- HTML בדפדפן + **הודעה אמיתית** בטלגרם  
 
 ---
 
@@ -76,7 +77,7 @@ cat out/telegram.txt
 |---|---|
 | כרטיס בדפדפן | Surface / UI |
 | SMB ירוק · ENT ענבר | אותו pipeline, מסר לפי route |
-| `telegram.txt` בלי שליחה | Draft ≠ Send |
+| `./send-telegram.sh` אחרי הדמו | שליחה אמיתית לצ׳אט שלכם |
 | Claude Code הרצה agent שכתב קבצים | מעטפת CLI + coding agent |
 
 ---
@@ -87,7 +88,7 @@ cat out/telegram.txt
 |---|---|
 | Cursor מול Claude Code כמעטפות | מפגש 5–7: demos עם Claude Code |
 | HTML + Telegram כמשטחים | מפגש 3: כלים / observations |
-| Lab שולח (אופציונלי) לטלגרם | מפגש 7: Draft ≠ Send למייל |
+| Lab עם `notify_telegram` (חובה env) | מפגש 7: שערי כסף על אותם מספרים |
 | כללי סודות לבוט | מפגש 6: לא לשמור סודות ב-Store |
 
 יעד: **~2.5–3.5 שעות**, הרבה הדגמות חיות.
@@ -96,13 +97,13 @@ cat out/telegram.txt
 
 ## ‏6 — שאלת המפגש + תוצרים
 
-**שאלה:** איפה המשתמש רואה את תוצר הסוכן — ומה אסור שיישלח בלי שער?
+**שאלה:** איפה המשתמש רואה את תוצר הסוכן — ואיך מגיעה התראה לנייד?
 
 | תוצר | "עובד" |
 |---|---|
 | כרטיס HTML | נפתח בדפדפן, מספרים נכונים |
-| טיוטת TG | קובץ לפני שליחה |
-| שליחה (אופציונלי) | רק עם env + בקשה מפורשת |
+| טלגרם | הודעה מגיעה לצ׳אט שלכם |
+| `notify_telegram` / `send-telegram.sh` | `sent=true` בלוג / API |
 | הבחנה מעטפת IDE / מעטפת CLI / runtime | יודעים מתי מה |
 
 ---
@@ -120,7 +121,7 @@ _Cursor ו-Claude Code ≠ הכלים; הם מריצים את ה-agent_
 | Cursor | מעטפת IDE | מריצה Agent שעורכת ריפו / UI |
 | Claude Code | מעטפת CLI | מריצה Agent בהדגמות `claude -p` |
 | Anthropic API | מודל + tool-use | Runtime agent ב-Lab |
-| Tools | Read/Write/`send_telegram`… | הפעולות שה-agent קורא להן |
+| Tools | Read/Write/`notify_telegram`… | הפעולות שה-agent קורא להן |
 
 ![Cursor vs Claude](assets/08/04-cursor-vs-claude.png)
 
@@ -185,8 +186,7 @@ _HTML וטלגרם כערוצי פלט_
 
 1. `get_quote`  
 2. `render_html_card` → `out/briefing.html`  
-3. `render_telegram_message` → `out/telegram.txt`  
-4. `send_telegram` — **רק** אם ביקשו + יש token  
+3. `notify_telegram` → כותב `telegram.txt` **ושולח** לצ׳אט הפנימי  
 
 ---
 
@@ -199,41 +199,41 @@ _HTML וטלגרם כערוצי פלט_
 
 ---
 
-## ‏14 — Telegram כמשטח
+## ‏14 — Telegram כמשטח (עם שליחה)
 
 ![Telegram surface](assets/08/03-telegram-surface.png)
 
 | רכיב | תפקיד |
 |---|---|
-| Bot token | זהות הבוט (סוד) |
-| Chat ID | לאן שולחים |
-| `sendMessage` | Side-effect ברשת |
+| Bot token | זהות הבוט (סוד ב-`.env`) |
+| Chat ID | **הצ׳אט שלכם** — יעד השליחה |
+| `notify_telegram` / `send-telegram.sh` | `sendMessage` אמיתי |
 
-בלי env → הכלי מחזיר שגיאה ברורה — **לא** `sent=true` מזויף.
+בלי env → כישלון ברור. עם env → ההודעה חייבת להגיע לנייד.
 
 ---
 
-## ‏15 — Draft ≠ Send (חוזר ממפגש 7)
+## ‏15 — פנימי כן · לקוח סופי לא
 
-| כלי | רשת? |
+| ערוץ | שולחים? |
 |---|---|
-| `render_telegram_message` | לא |
-| `send_telegram` | כן |
-
-אותו עיקרון כמו טיוטת מייל במפגש 7 — ערוץ אחר.
+| טלגרם פנימי (מרצה / AE) | **כן** — זה המוצר של המפגש |
+| HTML briefing | כן (קובץ / דפדפן) |
+| מייל/הודעה ללקוח הסופי | לא אוטומטית (מפגש 7: Draft ≠ Send למייל) |
 
 ---
 
 ## ‏16 — סודות והגדרות
 
 ```bash
-export ANTHROPIC_API_KEY=sk-ant-...
-export TELEGRAM_BOT_TOKEN=123:ABC...   # אופציונלי
-export TELEGRAM_CHAT_ID=...            # אופציונלי
+cp .env.example .env
+# ANTHROPIC_API_KEY=...
+# TELEGRAM_BOT_TOKEN=...
+# TELEGRAM_CHAT_ID=...   # הצ׳אט האישי שלכם
 ```
 
 - לא בקוד · לא ב-git · לא בצילום מסך  
-- Chat ID: `getUpdates` אחרי הודעה לבוט  
+- Chat ID: שלחו Start לבוט → `getUpdates` → `chat.id`  
 
 ---
 
@@ -241,7 +241,7 @@ export TELEGRAM_CHAT_ID=...            # אופציונלי
 
 - [ ] מספרים מכלי/JSON בלבד  
 - [ ] HTML לא מריץ JS חיצוני לא מבוקר בדמו  
-- [ ] אין שליחה בלי בקשה מפורשת  
+- [ ] שליחה לצ׳אט פנימי עובדת בהקלטה  
 - [ ] אין token בלוגים  
 - [ ] PII — לא לצ׳אט ציבורי  
 
@@ -252,7 +252,7 @@ export TELEGRAM_CHAT_ID=...            # אופציונלי
 | אנטי־דפוס | למה נשבר |
 |---|---|
 | "הסוכן ידפיס יפה בטרמינל" | המשתמש לא שם |
-| שליחה אוטומטית לכל render | ספאם / דליפה |
+| שליחה ללקוח סופי בלי שער | ספאם / דליפה — צ׳אט פנימי כן |
 | Token ב-repo | פריצה |
 | HTML עם מספרים מהפרומפט | מחיר ישן/בדוי |
 | לערבב Copilot כחובה | לא במסלול שלנו |
@@ -261,10 +261,10 @@ export TELEGRAM_CHAT_ID=...            # אופציונלי
 
 ## ‏19 — Checklist לפני פיילוט Surface
 
-- [ ] יש קובץ draft לפני send  
 - [ ] יש HTML שנפתח בלי שרת  
+- [ ] יש `.env` עם token + chat id שלכם  
+- [ ] הודעת SMB מגיעה לטלגרם  
 - [ ] יש הפרדת Coding / Runtime  
-- [ ] יש env מתועד לטלגרם  
 - [ ] יש תרחיש SMB מול ENT ויזואלית  
 
 ---
@@ -277,8 +277,7 @@ _הרבה הרצות — רואים כרטיס וטלגרם_
 
 תיקייה: [`labs/08-agent-surfaces/`](labs/08-agent-surfaces/)
 
-דורש **`ANTHROPIC_API_KEY`**.  
-טלגרם אמיתי: `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID`.
+דורש **`ANTHROPIC_API_KEY`** + **`TELEGRAM_BOT_TOKEN`** + **`TELEGRAM_CHAT_ID`** (הצ׳אט שלכם).
 
 ![Lab tools](assets/08/05-lab-tools.png)
 
@@ -292,19 +291,15 @@ _הרבה הרצות — רואים כרטיס וטלגרם_
 cd labs/08-agent-surfaces
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-export ANTHROPIC_API_KEY=sk-ant-...
+cp .env.example .env   # מלאו ANTHROPIC + TELEGRAM_*
 
 python3 surface_claude.py reset
-python3 surface_claude.py chat --lead L-SMB --message "הכן כרטיס HTML וטיוטת טלגרם להצעה"
-# פתחו out/briefing.html בדפדפן
+python3 surface_claude.py chat --lead L-SMB --message "הכן כרטיס HTML ושלח סיכום לטלגרם שלי"
+# פתחו out/briefing.html — ובדקו את הטלפון
 
-python3 surface_claude.py chat --lead L-ENT --message "הכן כרטיס — הדגש שממתין למנהל"
-python3 surface_claude.py chat --lead L-UPSELL --message "הכן כרטיס וטיוטה ללקוח קיים (upsell)"
-
-# אופציונלי — שליחה:
-# export TELEGRAM_BOT_TOKEN=...
-# export TELEGRAM_CHAT_ID=...
-python3 surface_claude.py chat --lead L-SMB --message "שלח את הסיכום לטלגרם עכשיו"
+python3 surface_claude.py chat --lead L-ENT --message "הכן כרטיס ושלח — ממתין למנהל"
+python3 surface_claude.py chat --lead L-UPSELL --message "הכן כרטיס ושלח ללקוח קיים (upsell)"
+python3 surface_claude.py notify --lead L-SMB   # שליחה חוזרת בלי LLM
 python3 surface_claude.py show
 ```
 
@@ -313,10 +308,10 @@ python3 surface_claude.py show
 ## ‏22 — Lab — Debrief
 
 - [ ] ראיתי כרטיס ירוק ל-SMB וענבר ל-ENT  
-- [ ] `telegram.txt` נוצר לפני שליחה  
-- [ ] בלי token — שגיאה מפורשת, לא הצלחה מזויפת  
-- [ ] עם token — הודעה בנייד + `TOOL -> send_telegram`  
-- [ ] Upsell מסומן בכרטיס/טיוטה  
+- [ ] הודעות הגיעו לטלגרם האישי  
+- [ ] בלוג: `TOOL -> notify_telegram` עם `sent=true`  
+- [ ] בלי `.env` — כישלון ברור, לא "נשלח" מזויף  
+- [ ] Upsell מסומן בכרטיס/הודעה  
 
 ---
 
@@ -339,27 +334,27 @@ python3 surface_claude.py show
 | `L-SMB` | ירוק / approved |
 | `L-ENT` | ענבר / pending_manager |
 | `L-UPSELL` | ירוק + תווית upsell |
-| בקשת send בלי env | error בלוג |
-| בקשת send עם env | הודעה בטלגרם |
+| בלי `.env` | error ברור |
+| עם `.env` | הודעה בטלגרם |
 
 ---
 
-## ‏25 — באג: "נשלח" בלי token
+## ‏25 — באג: "נשלח" בלי אישור API
 
-סימפטום: המודל כותב "שלחתי לטלגרם" אבל אין הודעה.  
-בדיקה: אין `TOOL -> send_telegram` או הכלי החזיר `missing_telegram_env`.  
-תיקון: האמת בתוצאת הכלי בלבד; הפרומפט אוסר להצהיר sent בלי `sent=true`.
+סימפטום: המודל כותב "שלחתי" אבל אין הודעה בנייד.  
+בדיקה: אין `notify_telegram` עם `sent=true`, או `last_send.json` עם כשל.  
+תיקון: האמת בתוצאת הכלי בלבד — לא בנרטיב המודל.
 
 ---
 
-## ‏26 — Design Review — "נשלח כל הצעה לטלגרם של הלקוח"
+## ‏26 — Design Review — למי שולחים?
 
-| שאלה | החלטה |
+| שאלה | החלטה במפגש |
 |---|---|
-| למי הצ׳אט? | פנימי ל-AE/מנהל קודם |
-| מתי send? | אחרי render + אישור |
-| מה בתוכן? | בלי PII מיותר |
-| Audit? | לוג HTTP + lead_id |
+| למי הצ׳אט? | **פנימי** — המרצה / AE (כן שולחים) |
+| ללקוח הסופי? | לא אוטומטית מהבוט הזה |
+| מה בתוכן? | מספרים מה-Quote, בלי PII מיותר |
+| Audit? | `telegram.txt` + `last_send.json` / לוג HTTP |
 
 ---
 
@@ -378,8 +373,8 @@ python3 surface_claude.py show
 - Cursor / Claude Code = **מעטפות** שמריצות agents (לא "הכלים")  
 - Surface = HTML / Telegram / UI  
 - Coding agent ≠ Runtime agent  
-- Draft ≠ Send  
-- Lab: כרטיס + טיוטה + שליחה אופציונלית  
+- טלגרם פנימי = **שולחים**; לקוח סופי ≠ אוטומטי  
+- Lab: כרטיס + `notify_telegram`  
 - במפגש הבא: **Testing ו-Debugging Agents**
 
 ---

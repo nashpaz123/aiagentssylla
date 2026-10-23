@@ -2358,23 +2358,24 @@ def s08_hero():
 
 def s08_pipeline():
     img, d = new_img()
-    center_text(d, (W / 2, 40), "Quote → Surface pipeline", font(40, True))
+    center_text(d, (W / 2, 40), "Quote → Surface pipeline (send required)", font(36, True))
     steps = [
         (80, 200, 400, 380, "Quote\nJSON", ACCENT),
         (460, 200, 780, 380, "Agent\n+ tools", ORANGE),
         (840, 200, 1160, 380, "HTML\ncard", GREEN),
-        (1220, 200, 1540, 380, "TG\ndraft", ACCENT2),
-        (1600, 200, 1860, 380, "Send?\nHITL", RED),
+        (1220, 200, 1540, 380, "notify_\ntelegram", ACCENT2),
+        (1600, 200, 1860, 380, "Your\nphone", GREEN),
     ]
     for x1, y1, x2, y2, label, c in steps:
         rounded(d, (x1, y1, x2, y2), CARD2, outline=c, radius=14, width=3)
         multiline_center(d, ((x1 + x2) / 2, (y1 + y2) / 2), label.split("\n"), font(24, True), c, gap=6)
     for i in range(len(steps) - 1):
         arrow(d, (steps[i][2], 290), (steps[i + 1][0], 290), ACCENT, width=3)
-    _s04_panel(d, (80, 460, 1860, 960), "Draft ≠ Send still applies", [
-        "render_html_card / render_telegram_message = files on disk",
-        "send_telegram = network side-effect — needs token + explicit user ask",
-        "Same policy lesson as session 7 email drafts — different channel",
+    _s04_panel(d, (80, 460, 1860, 960), "Internal Telegram = real send", [
+        "render_html_card → out/briefing.html (browser)",
+        "notify_telegram → writes telegram.txt AND Bot API sendMessage",
+        "Demo: ./send-telegram.sh after Claude writes the file",
+        "Target = YOUR chat (instructor/AE) — not auto-email to end customer",
         "",
         "Lab 08: surface_claude.py  ·  Demo: demos/08-surface-opening/",
     ], outline=GREEN, title_color=GREEN)
@@ -2385,21 +2386,21 @@ def s08_telegram():
     img, d = new_img()
     center_text(d, (W / 2, 40), "Telegram as an agent surface", font(38, True))
     _s04_panel(d, (60, 120, 920, 900), "Why Telegram", [
-        "Push to phone — AE sees it",
+        "Push to YOUR phone — AE sees it",
         "Markdown-ish short cards",
-        "Bot token = clear secret",
-        "Chat ID = destination gate",
+        "Bot token = clear secret (.env)",
+        "Chat ID = your destination",
         "",
         "Good for: alerts, HITL pings,",
         "ops briefings — not long docs",
     ], outline=ACCENT, title_color=ACCENT)
     _s04_panel(d, (1000, 120, 1860, 900), "Safety checklist", [
         "Never commit TELEGRAM_BOT_TOKEN",
-        "Separate draft file vs send tool",
+        "Send to internal chat only",
         "Log sendMessage HTTP status",
         "Don't dump PII to public chats",
         "",
-        "Missing env => tool returns error",
+        "Missing env => hard failure",
         "(do not fake 'sent=true')",
     ], outline=RED, title_color=RED)
     save(img, "08/03-telegram-surface.png")
@@ -2426,8 +2427,8 @@ def s08_cursor_claude():
     ], outline=ORANGE, title_color=ORANGE)
     _s04_panel(d, (60, 560, 1860, 960), "This course: no Copilot track", [
         "Cursor & Claude Code = envelopes that RUN agents (not the tools themselves).",
-        "Tools = Read/Write/Edit… or Lab tools like render_html_card / send_telegram.",
-        "Runtime agent (Lab) needs ANTHROPIC_API_KEY; TELEGRAM_* optional for send.",
+        "Tools = Read/Write/Edit… or Lab tools like render_html_card / notify_telegram.",
+        "Runtime agent needs ANTHROPIC_API_KEY + TELEGRAM_* (real send to your chat).",
     ], outline=GREEN, title_color=GREEN)
     save(img, "08/04-cursor-vs-claude.png")
 
@@ -2438,16 +2439,17 @@ def s08_lab_flow():
     tools = [
         ("get_quote", "CRM/quote facts"),
         ("render_html_card", "out/briefing.html"),
-        ("render_telegram_message", "out/telegram.txt"),
-        ("send_telegram", "Bot API (optional)"),
+        ("notify_telegram", "write + send to your chat"),
+        ("notify CLI", "resend without LLM"),
     ]
     for i, (name, desc) in enumerate(tools):
         x1 = 80 + (i % 2) * 920
         y1 = 140 + (i // 2) * 280
-        rounded(d, (x1, y1, x1 + 880, y1 + 230), CARD2, outline=ACCENT if i < 3 else RED, radius=14, width=3)
-        d.text((x1 + 36, y1 + 60), name, font=font(28, True), fill=ACCENT if i < 3 else RED)
+        c = GREEN if i >= 2 else ACCENT
+        rounded(d, (x1, y1, x1 + 880, y1 + 230), CARD2, outline=c, radius=14, width=3)
+        d.text((x1 + 36, y1 + 60), name, font=font(28, True), fill=c)
         d.text((x1 + 36, y1 + 120), desc, font=font(22), fill=MUTED)
-    center_text(d, (W / 2, 980), "Knobs: L-SMB / L-ENT / L-UPSELL · ask to send only when token is set", font(22), TEXT)
+    center_text(d, (W / 2, 980), "Knobs: L-SMB / L-ENT / L-UPSELL · TELEGRAM_* required in .env", font(22), TEXT)
     save(img, "08/05-lab-tools.png")
 
 

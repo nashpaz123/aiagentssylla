@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
-# הדגמת פתיחה מפגש 8 — Claude Code → HTML card + Telegram text (בלי שליחה).
+# הדגמת פתיחה מפגש 8 — Claude Code → HTML card + Telegram text.
+# אחרי הריצה: ./send-telegram.sh שולח את out/telegram.txt לצ׳אט שלכם.
 # שימוש:
 #   ./run-claude.sh reset
 #   ./run-claude.sh smb           # L-SMB → out/briefing.html + telegram.txt
 #   ./run-claude.sh enterprise    # L-ENT → hitl styling
+#   ./send-telegram.sh            # שליחה אמיתית (דורש .env)
 set -euo pipefail
 cd "$(dirname "$0")"
 mkdir -p out
@@ -36,3 +38,5 @@ echo
 echo "---- out/briefing.html (exists?) ----"
 ls -la out/briefing.html 2>/dev/null || echo "(no html yet)"
 echo "Open: file://$(pwd)/out/briefing.html"
+echo
+echo "Next: ./send-telegram.sh   # sends out/telegram.txt to your Telegram"

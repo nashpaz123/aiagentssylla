@@ -1,16 +1,17 @@
 <div dir="rtl" lang="he">
 
-# ‏Lab 08 — Agent Surfaces (HTML + Telegram)
+# ‏Lab 08 — Agent Surfaces (HTML + Telegram send)
 
-דורש **`ANTHROPIC_API_KEY`**.  
-שליחה אמיתית לטלגרם (אופציונלי): `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID`.
+דורש:
+
+- `ANTHROPIC_API_KEY`
+- `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID` (**שליחה אמיתית לצ׳אט שלך**)
 
 | כלי | מה עושה |
 |---|---|
 | `get_quote` | קורא ליד מ-`data/quotes.json` |
-| `render_html_card` | כרטיס RTL יפה → `out/briefing.html` |
-| `render_telegram_message` | טיוטת הודעה → `out/telegram.txt` (**לא שולח**) |
-| `send_telegram` | Bot API — רק עם env + בקשה מפורשת לשלוח |
+| `render_html_card` | כרטיס RTL → `out/briefing.html` |
+| `notify_telegram` | כותב `out/telegram.txt` **ושולח** לטלגרם עכשיו |
 
 ## ‏התקנה
 
@@ -18,35 +19,39 @@
 cd labs/08-agent-surfaces
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-export ANTHROPIC_API_KEY=sk-ant-...
-# אופציונלי:
-# export TELEGRAM_BOT_TOKEN=123:ABC...
-# export TELEGRAM_CHAT_ID=...
+cp .env.example .env
+# ערכו .env: ANTHROPIC_API_KEY, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
 ```
 
-איך משיגים Chat ID: שלחו הודעה לבוט, ואז  
-`https://api.telegram.org/bot<TOKEN>/getUpdates` — חפשו `chat.id`.
+**איך משיגים Chat ID (הצ׳אט שלך):**
+
+1. צרו בוט ב-@BotFather → העתיקו את ה-token ל-`.env`  
+2. פתחו צ׳אט עם הבוט ולחצו Start / שלחו איזו הודעה  
+3. פתחו בדפדפן: `https://api.telegram.org/bot<TOKEN>/getUpdates`  
+4. מצאו `"chat":{"id": ...}` — זה `TELEGRAM_CHAT_ID`
 
 ## ‏הרצה
 
 ```bash
 python3 surface_claude.py reset
-python3 surface_claude.py chat --lead L-SMB --message "הכן כרטיס HTML וטיוטת טלגרם להצעה"
-# פתחו את out/briefing.html בדפדפן
 
-python3 surface_claude.py chat --lead L-ENT --message "הכן כרטיס — הדגש שממתין למנהל"
-python3 surface_claude.py chat --lead L-UPSELL --message "הכן כרטיס וטיוטה ללקוח קיים (upsell)"
+# Agent מלא (HTML + שליחה לטלגרם):
+python3 surface_claude.py chat --lead L-SMB --message "הכן כרטיס HTML ושלח סיכום לטלגרם שלי"
+# פתחו out/briefing.html בדפדפן — ובדקו את הטלפון
 
-# שליחה אמיתית (רק אם יש token):
-python3 surface_claude.py chat --lead L-SMB --message "שלח את הסיכום לטלגרם עכשיו"
+python3 surface_claude.py chat --lead L-ENT --message "הכן כרטיס ושלח — ממתין למנהל"
+python3 surface_claude.py chat --lead L-UPSELL --message "הכן כרטיס ושלח ללקוח קיים (upsell)"
+
+# בלי LLM — רק HTML + שליחה חוזרת:
+python3 surface_claude.py notify --lead L-SMB
 python3 surface_claude.py show
 ```
 
 ## ‏מה לבדוק
 
-- [ ] HTML נפתח בדפדפן עם צבע לפי route (ירוק auto / ענבר hitl)  
-- [ ] `telegram.txt` קיים **לפני** שליחה  
-- [ ] בלי token — `send_telegram` מחזיר `missing_telegram_env` ולא ממציא הצלחה  
-- [ ] עם token — הודעה מגיעה לצ׳אט; בלוג `TOOL -> send_telegram`
+- [ ] הודעה מגיעה לטלגרם האישי  
+- [ ] HTML נפתח עם צבע לפי route  
+- [ ] בלוג: `TOOL -> notify_telegram` עם `sent=true`  
+- [ ] בלי `.env` מלא — היציאה נכשלת עם הודעה ברורה (לא "נשלח" מזויף)
 
 </div>

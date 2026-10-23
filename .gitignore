@@ -13,3 +13,4 @@ venv/
 # Local secrets (none expected)
 .env
 .env.*
+!.env.example

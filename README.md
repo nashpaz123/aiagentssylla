@@ -37,7 +37,7 @@
 - **מפגש 5 (קצר יותר — ~2–2.5 שעות):** נפתח ב**הדגמה חיה** של צוות 3 subagents ב-Claude Code / Cursor (`demos/05-crew-opening/`), ואז CrewAI (Agent · Task · Crew · Process), Guardrails לצוות, ו-Lab (`labs/05-crewai-multi-agent/` — `mini_crew.py` בלי מפתח, `crew_demo.py` עם CrewAI אמיתי).
 - **מפגש 6 (~2–2.5 שעות):** הדגמת פתיחה מומלצת ב-Claude Code/Cursor (`demos/06-memory-opening/`) — Store ב-`out/store.json`, 99 מול 101; Lab עם `memory_claude.py` + `ANTHROPIC_API_KEY` (או `memory_lab.py` בלי מפתח) וכפתורים (`--fresh-thread` / `forget`).
 - **מפגש 7 (~2.5–3.5 שעות):** Agents לאוטומציה עסקית (Sales Ops) — הדגמת Claude Code/Cursor (`demos/07-sales-opening/`) עם SMB/ENT/NOMAIL; Lab עם `sales_claude.py` + `ANTHROPIC_API_KEY` (שערי הנחה, HITL מנהל, upsell). תדריך מנהלים: [`07-exec-briefing.md`](07-exec-briefing.md). **בלי מסלול דטרמיניסטי ללא מפתח.**
-- **מפגש 8 (~2.5–3.5 שעות):** Cursor + Claude Code (בלי Copilot) + משטחי פלט — הדגמת HTML/Telegram text (`demos/08-surface-opening/`); Lab עם `surface_claude.py` + `ANTHROPIC_API_KEY` ושליחת Telegram אופציונלית (`TELEGRAM_BOT_TOKEN`). תדריך: [`08-exec-briefing.md`](08-exec-briefing.md).
+- **מפגש 8 (~2.5–3.5 שעות):** Cursor + Claude Code (בלי Copilot) + משטחי פלט — הדגמת HTML + שליחת Telegram אמיתית (`demos/08-surface-opening/` + `send-telegram.sh`); Lab עם `surface_claude.py` + `ANTHROPIC_API_KEY` + `TELEGRAM_BOT_TOKEN`/`TELEGRAM_CHAT_ID` (צ׳אט פנימי שלכם). תדריך: [`08-exec-briefing.md`](08-exec-briefing.md).
 
 ## ‏מוכן עכשיו
 
