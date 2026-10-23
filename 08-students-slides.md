@@ -27,7 +27,7 @@ _מאיפה המשתמש רואה את הסוכן?_
 </p>
 
 **‏Cursor · Claude Code · משטחי פלט**  
-סוכן שכותב קוד — וסוכן שמוציא כרטיס HTML / הודעת טלגרם
+מעטפות שמריצות agents — ו-runtime שמוציא כרטיס HTML / הודעת טלגרם
 
 ![Coding agents + surfaces](assets/08/01-coding-agents-surfaces.png)
 
@@ -37,11 +37,13 @@ _מאיפה המשתמש רואה את הסוכן?_
 
 | מונח | הסבר |
 |---|---|
-| ‏**Coding agent** | סוכן שמשנה קבצים בריפו (Cursor / Claude Code) |
-| ‏**Runtime agent** | סוכן שרץ מול API בזמן שימוש (`surface_claude.py`) |
+| ‏**Agent host / מעטפת** | סביבה שמריצה agent: מודל + לולאה + כלים (לא הכלי עצמו) |
+| ‏**Cursor** | מעטפת ב-IDE: מריצה Agent עם diff, rules, MCP — אתם מאשרים שינויים |
+| ‏**Claude Code** | מעטפת ב-CLI: `claude -p`, subagents, הרצות מוקלטות לתיקייה |
+| ‏**Coding agent** | ה-agent שרץ *בתוך* Cursor/Claude Code ומשנה קבצים בריפו |
+| ‏**Runtime agent** | Agent באפליקציה שלכם מול API (`surface_claude.py` + Anthropic) |
+| ‏**Tool** | פעולה שה-agent קורא לה (Read/Write, `render_html_card`, `send_telegram`…) |
 | ‏**Surface** | משטח פלט לאדם: HTML, Telegram, UI — לא טרמינל בלבד |
-| ‏**Cursor** | סוכן בתוך ה-IDE: diff, rules, agents |
-| ‏**Claude Code** | סוכן ב-CLI: `claude -p`, subagents, הדגמות מוקלטות |
 | ‏**Bot token** | סוד של בוט טלגרם — לא בקוד ובלא git |
 | ‏**Chat ID** | יעד השליחה בטלגרם |
 | ‏**Draft ≠ Send** | כתיבת `telegram.txt` ≠ `sendMessage` לרשת |
@@ -75,7 +77,7 @@ cat out/telegram.txt
 | כרטיס בדפדפן | Surface / UI |
 | SMB ירוק · ENT ענבר | אותו pipeline, מסר לפי route |
 | `telegram.txt` בלי שליחה | Draft ≠ Send |
-| Claude Code כתב קבצים | Coding agent על תיקיית דמו |
+| Claude Code הרצה agent שכתב קבצים | מעטפת CLI + coding agent |
 
 ---
 
@@ -83,7 +85,7 @@ cat out/telegram.txt
 
 | נבנה היום | כבר למדנו |
 |---|---|
-| Cursor מול Claude Code | מפגש 5–7: demos עם Claude Code |
+| Cursor מול Claude Code כמעטפות | מפגש 5–7: demos עם Claude Code |
 | HTML + Telegram כמשטחים | מפגש 3: כלים / observations |
 | Lab שולח (אופציונלי) לטלגרם | מפגש 7: Draft ≠ Send למייל |
 | כללי סודות לבוט | מפגש 6: לא לשמור סודות ב-Store |
@@ -101,40 +103,41 @@ cat out/telegram.txt
 | כרטיס HTML | נפתח בדפדפן, מספרים נכונים |
 | טיוטת TG | קובץ לפני שליחה |
 | שליחה (אופציונלי) | רק עם env + בקשה מפורשת |
-| הבחנה Cursor/Claude | יודעים מתי מה |
+| הבחנה מעטפת IDE / מעטפת CLI / runtime | יודעים מתי מה |
 
 ---
 
-# ‏חלק ב׳ — Coding agents
+# ‏חלק ב׳ — מעטפות שמריצות Agents
 
-_Cursor ו-Claude Code — בלי Copilot_
+_Cursor ו-Claude Code ≠ הכלים; הם מריצים את ה-agent_
 
 ## ‏7 — למה לא Copilot במפגש הזה
 
-הסילבוס מזכיר Copilot — **בהקלטה שלנו:** Cursor + Claude בלבד.
+הסילבוס מזכיר Copilot — **בהקלטה שלנו:** Cursor + Claude Code כמעטפות בלבד.
 
-| כלי | תפקיד אצלנו |
-|---|---|
-| Cursor | עריכת ריפו, UI, rules |
-| Claude Code | הדגמות CLI חוזרות |
-| Anthropic API | Lab runtime |
+| שכבה | מה זה באמת | תפקיד אצלנו |
+|---|---|---|
+| Cursor | מעטפת IDE | מריצה Agent שעורכת ריפו / UI |
+| Claude Code | מעטפת CLI | מריצה Agent בהדגמות `claude -p` |
+| Anthropic API | מודל + tool-use | Runtime agent ב-Lab |
+| Tools | Read/Write/`send_telegram`… | הפעולות שה-agent קורא להן |
 
 ![Cursor vs Claude](assets/08/04-cursor-vs-claude.png)
 
 ---
 
-## ‏8 — Cursor כסוכן פיתוח
+## ‏8 — Cursor כמעטפת (IDE host)
 
-- צ׳אט Agent על תיקייה / קבצים  
-- Diff לפני Accept  
-- Rules (`.cursor/rules`) לסטנדרט פרויקט  
+- אתם פותחים צ׳אט **Agent** — Cursor מריץ את ה-agent  
+- Diff לפני Accept — האדם בשער  
+- Rules (`.cursor/rules`) מגבילים/מכוונים את ה-agent  
 - מתאים לשיפור CSS/HTML של הכרטיס  
 
 הדגמה קצרה: פתחו `prompt-cursor.md` ב-Cursor ושפרו מרווחים ב-`briefing.html` **בלי** לשנות מספרים.
 
 ---
 
-## ‏9 — Claude Code כסוכן הדגמה
+## ‏9 — Claude Code כמעטפת (CLI host)
 
 ```bash
 claude -p "$(cat prompt-smb.md)" \
@@ -142,18 +145,22 @@ claude -p "$(cat prompt-smb.md)" \
   --allowedTools "Read,Write,Edit,Glob,Grep,Task"
 ```
 
+- `claude` = מעטפת; ה-agent בפנים משתמש ב-Tools ברשימה  
 - `run-claude.sh` = חזרתיות להקלטה  
-- subagent `surface` ב-`.claude/agents/`  
-- stream-json + filter — רואים Write בזמן אמת  
+- subagent `surface` ב-`.claude/agents/` — עדיין בתוך אותה מעטפת  
+- stream-json + filter — רואים קריאות כלי (Write) בזמן אמת  
 
 ---
 
 ## ‏10 — Coding agent ≠ Runtime agent
 
-| | Coding | Runtime |
+שניהם **agents**. ההבדל: באיזו מעטפת הם רצים ומה המטרה.
+
+| | Coding (בתוך Cursor/Claude Code) | Runtime (באפליקציה) |
 |---|---|---|
+| מעטפת | IDE / CLI | הקוד שלכם + Anthropic |
 | מתי | פיתוח / דמו בניה | שימוש אצל AE |
-| כלים | קבצי ריפו | `get_quote` · `render_*` · `send_*` |
+| Tools | קבצי ריפו (Read/Write/…) | `get_quote` · `render_*` · `send_*` |
 | סודות | לא בקומיט | env בזמן ריצה |
 | דוגמה | `demos/08-…` | `labs/08-…/surface_claude.py` |
 
@@ -321,7 +328,7 @@ python3 surface_claude.py show
 2. ב-Cursor: "שפר טיפוגרפיה ומרווחים בלי לשנות מספרים"  
 3. רעננו בדפדפן  
 
-מסר: Coding agent משפר Surface; Runtime agent מזין נתונים.
+מסר: מעטפת Cursor מריצה coding agent שמשפר Surface; ה-runtime agent מזין נתונים.
 
 ---
 
@@ -368,9 +375,9 @@ python3 surface_claude.py show
 
 ## ‏28 — סיכום
 
-- Cursor + Claude Code (בלי Copilot)  
+- Cursor / Claude Code = **מעטפות** שמריצות agents (לא "הכלים")  
 - Surface = HTML / Telegram / UI  
-- Coding ≠ Runtime  
+- Coding agent ≠ Runtime agent  
 - Draft ≠ Send  
 - Lab: כרטיס + טיוטה + שליחה אופציונלית  
 - במפגש הבא: **Testing ו-Debugging Agents**

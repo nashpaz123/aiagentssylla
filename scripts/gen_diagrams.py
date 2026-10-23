@@ -2323,32 +2323,32 @@ def s07_roi():
 
 def s08_hero():
     img, d = new_img()
-    center_text(d, (W / 2, 40), "Coding agents + output surfaces", font(38, True))
-    center_text(d, (W / 2, 84), "Cursor / Claude Code build · Anthropic runtime · HTML & Telegram for humans", font(22), MUTED)
+    center_text(d, (W / 2, 40), "Hosts run agents · agents use tools · surfaces show output", font(32, True))
+    center_text(d, (W / 2, 84), "Cursor / Claude Code = envelopes  ·  agent = loop inside  ·  HTML & Telegram for humans", font(20), MUTED)
     cols = [
-        ((60, 140, 640, 900), "Cursor", ACCENT, [
-            "IDE agent: edit repo",
-            "rules · agents · MCP",
-            "prompt packs for UI",
+        ((60, 140, 640, 900), "Cursor (host)", ACCENT, [
+            "IDE envelope / host",
+            "runs an Agent chat",
+            "diff · rules · MCP",
             "",
-            "Best for: writing the",
-            "surface code itself",
+            "Not 'the tool' —",
+            "it hosts the agent",
         ]),
-        ((680, 140, 1260, 900), "Claude Code", ORANGE, [
-            "CLI / terminal agent",
-            "subagents + tools",
-            "demo scripts (-p)",
+        ((680, 140, 1260, 900), "Claude Code (host)", ORANGE, [
+            "CLI envelope / host",
+            "claude -p + subagents",
+            "agent calls Tools",
             "",
-            "Best for: live demos",
-            "and folder-scoped work",
+            "Not 'the tool' —",
+            "it hosts the agent",
         ]),
         ((1300, 140, 1860, 900), "Surfaces", GREEN, [
             "HTML card (browser)",
             "Telegram message",
             "not terminal dump",
             "",
-            "Best for: AE / manager",
-            "who will not read logs",
+            "What AE / manager",
+            "actually sees",
         ]),
     ]
     for box, title, c, lines in cols:
@@ -2407,23 +2407,27 @@ def s08_telegram():
 
 def s08_cursor_claude():
     img, d = new_img()
-    center_text(d, (W / 2, 40), "Cursor vs Claude Code — pick for the job", font(34, True))
-    _s04_panel(d, (60, 120, 920, 520), "Use Cursor when…", [
+    center_text(d, (W / 2, 40), "Two hosts, same idea — pick the envelope", font(34, True))
+    _s04_panel(d, (60, 120, 920, 520), "Cursor host when…", [
         "editing many files in a repo",
         "you want IDE review + diff",
         "rules in .cursor/ apply",
         "pairing on UI CSS/layout",
+        "",
+        "Host runs the coding agent",
     ], outline=ACCENT, title_color=ACCENT)
-    _s04_panel(d, (1000, 120, 1860, 520), "Use Claude Code when…", [
+    _s04_panel(d, (1000, 120, 1860, 520), "Claude Code host when…", [
         "recording a terminal demo",
         "folder-scoped agent + subagents",
         "scripted claude -p runs",
         "CI-like repeatable prompts",
+        "",
+        "Host runs the coding agent",
     ], outline=ORANGE, title_color=ORANGE)
     _s04_panel(d, (60, 560, 1860, 960), "This course: no Copilot track", [
-        "Session 8 examples use Cursor + Claude Code + Anthropic API only.",
-        "Runtime agent (Lab) still needs ANTHROPIC_API_KEY.",
-        "Optional TELEGRAM_* for the send path — HTML works without it.",
+        "Cursor & Claude Code = envelopes that RUN agents (not the tools themselves).",
+        "Tools = Read/Write/Edit… or Lab tools like render_html_card / send_telegram.",
+        "Runtime agent (Lab) needs ANTHROPIC_API_KEY; TELEGRAM_* optional for send.",
     ], outline=GREEN, title_color=GREEN)
     save(img, "08/04-cursor-vs-claude.png")
 

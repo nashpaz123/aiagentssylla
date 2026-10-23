@@ -19,7 +19,7 @@
 
 אנחנו מחברים:
 
-1. **Coding agents** (Cursor / Claude Code) — בונים ומתקנים את המערכת  
+1. **מעטפות** (Cursor / Claude Code) — מריצות coding agents שבונים ומתקנים  
 2. **Runtime agent** (Anthropic + כלים) — רץ בזמן אמת על ליד/הצעה  
 3. **Surfaces** — כרטיס HTML בדפדפן · הודעת Telegram לנייד  
 
@@ -32,10 +32,11 @@
 
 | מונח | משמעות |
 |---|---|
-| Cursor | סוכן ב-IDE — עורך קוד ו-UI |
-| Claude Code | סוכן בטרמינל — הדגמות חוזרות |
+| Cursor / Claude Code | **מעטפות** שמריצות agents — לא הכלים עצמם |
+| Coding agent | ה-agent שבתוך המעטפת ומשנה קבצים |
+| Tool | פעולה שה-agent קורא לה (Write, send_telegram…) |
 | Surface | משטח פלט לאדם (HTML / Telegram) |
-| Draft ≠ Send | טיוקת הודעה לקובץ ≠ שליחה לרשת |
+| Draft ≠ Send | טיוטת הודעה לקובץ ≠ שליחה לרשת |
 | Bot token / Chat ID | סוד הבוט ויעד השליחה — לא בגיט |
 
 ---
@@ -64,9 +65,9 @@
 
 | שלב | מה קורה |
 |---|---|
-| דמו Claude Code | Quote → `briefing.html` + `telegram.txt` |
-| Lab Anthropic | אותו דבר בכלים: `render_*` ואז `send_telegram` אופציונלי |
-| Cursor | שיפור עיצוב הכרטיס בלי לשנות מספרים |
+| דמו Claude Code (מעטפת CLI) | Agent כותב `briefing.html` + `telegram.txt` |
+| Lab Anthropic (runtime) | כלים: `render_*` ואז `send_telegram` אופציונלי |
+| Cursor (מעטפת IDE) | Agent משפר עיצוב הכרטיס בלי לשנות מספרים |
 
 לידים לדוגמה: SMB (אוטומטי) · Enterprise (ממתין למנהל) · Upsell (לקוח קיים).
 
