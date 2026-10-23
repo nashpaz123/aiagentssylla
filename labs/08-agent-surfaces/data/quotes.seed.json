@@ -1,0 +1,41 @@
+{
+  "L-SMB": {
+    "company": "פיקסל סטודיו",
+    "sku": "pro",
+    "seats": 12,
+    "list_unit": 299,
+    "discount_pct": 5,
+    "monthly_total": 3408.6,
+    "route": "auto",
+    "status": "approved",
+    "owner": "AE-Dana",
+    "email": "maya@pixelstudio.co.il",
+    "upsell": false
+  },
+  "L-ENT": {
+    "company": "בנק דלתא",
+    "sku": "enterprise",
+    "seats": 400,
+    "list_unit": 799,
+    "discount_pct": 18,
+    "monthly_total": 262072.0,
+    "route": "hitl",
+    "status": "pending_manager",
+    "owner": "AE-Noa",
+    "email": "procurement@delta-bank.example",
+    "upsell": false
+  },
+  "L-UPSELL": {
+    "company": "חברת גמא",
+    "sku": "pro",
+    "seats": 60,
+    "list_unit": 299,
+    "discount_pct": 8,
+    "monthly_total": 16504.8,
+    "route": "auto",
+    "status": "approved",
+    "owner": "CSM-Avi",
+    "email": "it@gamma.co.il",
+    "upsell": true
+  }
+}

@@ -2319,6 +2319,134 @@ def s07_roi():
     save(img, "07/05-roi-metrics.png")
 
 
+# ---------- Session 08 ----------
+
+def s08_hero():
+    img, d = new_img()
+    center_text(d, (W / 2, 40), "Coding agents + output surfaces", font(38, True))
+    center_text(d, (W / 2, 84), "Cursor / Claude Code build · Anthropic runtime · HTML & Telegram for humans", font(22), MUTED)
+    cols = [
+        ((60, 140, 640, 900), "Cursor", ACCENT, [
+            "IDE agent: edit repo",
+            "rules · agents · MCP",
+            "prompt packs for UI",
+            "",
+            "Best for: writing the",
+            "surface code itself",
+        ]),
+        ((680, 140, 1260, 900), "Claude Code", ORANGE, [
+            "CLI / terminal agent",
+            "subagents + tools",
+            "demo scripts (-p)",
+            "",
+            "Best for: live demos",
+            "and folder-scoped work",
+        ]),
+        ((1300, 140, 1860, 900), "Surfaces", GREEN, [
+            "HTML card (browser)",
+            "Telegram message",
+            "not terminal dump",
+            "",
+            "Best for: AE / manager",
+            "who will not read logs",
+        ]),
+    ]
+    for box, title, c, lines in cols:
+        _s04_panel(d, box, title, lines, outline=c, title_color=c)
+    save(img, "08/01-coding-agents-surfaces.png")
+
+
+def s08_pipeline():
+    img, d = new_img()
+    center_text(d, (W / 2, 40), "Quote → Surface pipeline", font(40, True))
+    steps = [
+        (80, 200, 400, 380, "Quote\nJSON", ACCENT),
+        (460, 200, 780, 380, "Agent\n+ tools", ORANGE),
+        (840, 200, 1160, 380, "HTML\ncard", GREEN),
+        (1220, 200, 1540, 380, "TG\ndraft", ACCENT2),
+        (1600, 200, 1860, 380, "Send?\nHITL", RED),
+    ]
+    for x1, y1, x2, y2, label, c in steps:
+        rounded(d, (x1, y1, x2, y2), CARD2, outline=c, radius=14, width=3)
+        multiline_center(d, ((x1 + x2) / 2, (y1 + y2) / 2), label.split("\n"), font(24, True), c, gap=6)
+    for i in range(len(steps) - 1):
+        arrow(d, (steps[i][2], 290), (steps[i + 1][0], 290), ACCENT, width=3)
+    _s04_panel(d, (80, 460, 1860, 960), "Draft ≠ Send still applies", [
+        "render_html_card / render_telegram_message = files on disk",
+        "send_telegram = network side-effect — needs token + explicit user ask",
+        "Same policy lesson as session 7 email drafts — different channel",
+        "",
+        "Lab 08: surface_claude.py  ·  Demo: demos/08-surface-opening/",
+    ], outline=GREEN, title_color=GREEN)
+    save(img, "08/02-quote-to-surface.png")
+
+
+def s08_telegram():
+    img, d = new_img()
+    center_text(d, (W / 2, 40), "Telegram as an agent surface", font(38, True))
+    _s04_panel(d, (60, 120, 920, 900), "Why Telegram", [
+        "Push to phone — AE sees it",
+        "Markdown-ish short cards",
+        "Bot token = clear secret",
+        "Chat ID = destination gate",
+        "",
+        "Good for: alerts, HITL pings,",
+        "ops briefings — not long docs",
+    ], outline=ACCENT, title_color=ACCENT)
+    _s04_panel(d, (1000, 120, 1860, 900), "Safety checklist", [
+        "Never commit TELEGRAM_BOT_TOKEN",
+        "Separate draft file vs send tool",
+        "Log sendMessage HTTP status",
+        "Don't dump PII to public chats",
+        "",
+        "Missing env => tool returns error",
+        "(do not fake 'sent=true')",
+    ], outline=RED, title_color=RED)
+    save(img, "08/03-telegram-surface.png")
+
+
+def s08_cursor_claude():
+    img, d = new_img()
+    center_text(d, (W / 2, 40), "Cursor vs Claude Code — pick for the job", font(34, True))
+    _s04_panel(d, (60, 120, 920, 520), "Use Cursor when…", [
+        "editing many files in a repo",
+        "you want IDE review + diff",
+        "rules in .cursor/ apply",
+        "pairing on UI CSS/layout",
+    ], outline=ACCENT, title_color=ACCENT)
+    _s04_panel(d, (1000, 120, 1860, 520), "Use Claude Code when…", [
+        "recording a terminal demo",
+        "folder-scoped agent + subagents",
+        "scripted claude -p runs",
+        "CI-like repeatable prompts",
+    ], outline=ORANGE, title_color=ORANGE)
+    _s04_panel(d, (60, 560, 1860, 960), "This course: no Copilot track", [
+        "Session 8 examples use Cursor + Claude Code + Anthropic API only.",
+        "Runtime agent (Lab) still needs ANTHROPIC_API_KEY.",
+        "Optional TELEGRAM_* for the send path — HTML works without it.",
+    ], outline=GREEN, title_color=GREEN)
+    save(img, "08/04-cursor-vs-claude.png")
+
+
+def s08_lab_flow():
+    img, d = new_img()
+    center_text(d, (W / 2, 40), "Lab 08 — surface_claude.py tools", font(36, True))
+    tools = [
+        ("get_quote", "CRM/quote facts"),
+        ("render_html_card", "out/briefing.html"),
+        ("render_telegram_message", "out/telegram.txt"),
+        ("send_telegram", "Bot API (optional)"),
+    ]
+    for i, (name, desc) in enumerate(tools):
+        x1 = 80 + (i % 2) * 920
+        y1 = 140 + (i // 2) * 280
+        rounded(d, (x1, y1, x1 + 880, y1 + 230), CARD2, outline=ACCENT if i < 3 else RED, radius=14, width=3)
+        d.text((x1 + 36, y1 + 60), name, font=font(28, True), fill=ACCENT if i < 3 else RED)
+        d.text((x1 + 36, y1 + 120), desc, font=font(22), fill=MUTED)
+    center_text(d, (W / 2, 980), "Knobs: L-SMB / L-ENT / L-UPSELL · ask to send only when token is set", font(22), TEXT)
+    save(img, "08/05-lab-tools.png")
+
+
 def main():
     gens = [
         v01_human_agent,
@@ -2380,6 +2508,11 @@ def main():
         s07_agent_vs_workflow,
         s07_tool_catalog,
         s07_roi,
+        s08_hero,
+        s08_pipeline,
+        s08_telegram,
+        s08_cursor_claude,
+        s08_lab_flow,
     ]
     for g in gens:
         g()

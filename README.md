@@ -37,6 +37,7 @@
 - **מפגש 5 (קצר יותר — ~2–2.5 שעות):** נפתח ב**הדגמה חיה** של צוות 3 subagents ב-Claude Code / Cursor (`demos/05-crew-opening/`), ואז CrewAI (Agent · Task · Crew · Process), Guardrails לצוות, ו-Lab (`labs/05-crewai-multi-agent/` — `mini_crew.py` בלי מפתח, `crew_demo.py` עם CrewAI אמיתי).
 - **מפגש 6 (~2–2.5 שעות):** הדגמת פתיחה מומלצת ב-Claude Code/Cursor (`demos/06-memory-opening/`) — Store ב-`out/store.json`, 99 מול 101; Lab עם `memory_claude.py` + `ANTHROPIC_API_KEY` (או `memory_lab.py` בלי מפתח) וכפתורים (`--fresh-thread` / `forget`).
 - **מפגש 7 (~2.5–3.5 שעות):** Agents לאוטומציה עסקית (Sales Ops) — הדגמת Claude Code/Cursor (`demos/07-sales-opening/`) עם SMB/ENT/NOMAIL; Lab עם `sales_claude.py` + `ANTHROPIC_API_KEY` (שערי הנחה, HITL מנהל, upsell). תדריך מנהלים: [`07-exec-briefing.md`](07-exec-briefing.md). **בלי מסלול דטרמיניסטי ללא מפתח.**
+- **מפגש 8 (~2.5–3.5 שעות):** Cursor + Claude Code (בלי Copilot) + משטחי פלט — הדגמת HTML/Telegram text (`demos/08-surface-opening/`); Lab עם `surface_claude.py` + `ANTHROPIC_API_KEY` ושליחת Telegram אופציונלית (`TELEGRAM_BOT_TOKEN`). תדריך: [`08-exec-briefing.md`](08-exec-briefing.md).
 
 ## ‏מוכן עכשיו
 
@@ -49,6 +50,7 @@
 | 5 CrewAI & Multi-Agent | [`05-crewai-multi-agent.md`](05-crewai-multi-agent.md) | [`05-students-slides.md`](05-students-slides.md) | `assets/05/` · `demos/05-crew-opening/` |
 | 6 Memory & State | [`06-memory-and-state.md`](06-memory-and-state.md) | [`06-students-slides.md`](06-students-slides.md) | `assets/06/` · `demos/06-memory-opening/` |
 | 7 Business automation | [`07-business-automation.md`](07-business-automation.md) · תדריך מנהלים: [`07-exec-briefing.md`](07-exec-briefing.md) | [`07-students-slides.md`](07-students-slides.md) | `assets/07/` · `demos/07-sales-opening/` |
+| 8 Cursor · Claude · Surfaces | [`08-cursor-claude-surfaces.md`](08-cursor-claude-surfaces.md) · תדריך: [`08-exec-briefing.md`](08-exec-briefing.md) | [`08-students-slides.md`](08-students-slides.md) | `assets/08/` · `demos/08-surface-opening/` |
 
 ## ‏חידוש דיאגרמות וצילומי מסך
 
@@ -61,6 +63,6 @@ python3 scripts/gen_mock_uis.py   # צילומי מסך להדגמות (CRM/K8s/
 
 ## ‏מפגשים הבאים (מהסילבוס)
 
-8 Cursor · 9 Testing · 10 Capstone
+9 Testing · 10 Capstone
 
 </div>
