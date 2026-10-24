@@ -5,411 +5,381 @@
 </p>
 
 # ‏מפגש 8 — מצגת סטודנטים
-## ‏Cursor · Claude Code · משטחי פלט (UI / Telegram)
+## ‏סודות Cursor · Claude Code · Cloud · MCP
 
-> **משך משוער:** ~2.5–3.5 שעות (מילון + הדגמות חיות + Lab + Surfaces).  
-> בלי Copilot — רק **Cursor** ו-**Claude Code** + Lab עם `ANTHROPIC_API_KEY`.  
-> דגש: פלט **יפה** למשתמש (HTML בדפדפן · הודעת Telegram) — לא רק לוג בטרמינל.  
+> **משך משוער:** ~2.5–3.5 שעות.  
+> דגש: מה **לא** רואים במסך הראשון — ניהול קונטקסט, MCP (כולל Apify), קיצורי דרך, Chat מול Projects, Cloud Agents.  
+> Lab קצר בסוף: משטח HTML + טלגרם (יישום, לא חזרה על מפגש 7).  
 > תדריך מנהלים: [`08-exec-briefing.md`](08-exec-briefing.md)
 
 ---
 
-# ‏חלק א׳ — פתיחה והדגמה
+# ‏חלק א׳ — מה מסתתר מאחורי המסך
 
-_מאיפה המשתמש רואה את הסוכן?_
+_לא עוד "מה זה agent" — אלא איך שולטים במעטפת_
 
 ## ‏1 — כותרת
-> פתיחה — Coding agents + Surfaces
+
+> פתיחה — Power features שמשנים את העבודה
 
 <p align="center">
   <img src="assets/sprint-tech-academy-logo.png" alt="SPRINT Tech Academy" width="360" />
 </p>
 
-**‏Cursor · Claude Code · משטחי פלט**  
-מעטפות שמריצות agents — ו-runtime שמוציא כרטיס HTML / הודעת טלגרם
+**‏Cursor · Claude Code · Cloud · MCP**  
+הכלים שאתם כבר משתמשים בהם — עם הידיות הלא־גלויות
 
-![Coding agents + surfaces](assets/08/01-coding-agents-surfaces.png)
+![Context stack](assets/08/01-context-stack.png)
 
 ---
 
 ## ‏2 — מילון למפגש
+
 | מונח | הסבר |
 |---|---|
-| ‏**Agent host / מעטפת** | סביבה שמריצה agent: מודל + לולאה + כלים (לא הכלי עצמו) |
-| ‏**Cursor** | מעטפת ב-IDE: מריצה Agent עם diff, rules, MCP — אתם מאשרים שינויים |
-| ‏**Claude Code** | מעטפת ב-CLI: `claude -p`, subagents, הרצות מוקלטות לתיקייה |
-| ‏**Coding agent** | ה-agent שרץ *בתוך* Cursor/Claude Code ומשנה קבצים בריפו |
-| ‏**Runtime agent** | Agent באפליקציה שלכם מול API (`surface_claude.py` + Anthropic) |
-| ‏**Tool** | פעולה שה-agent קורא לה (Read/Write, `render_html_card`, `notify_telegram`…) |
-| ‏**Surface** | משטח פלט לאדם: HTML, Telegram, UI — לא טרמינל בלבד |
-| ‏**Bot token** | סוד של בוט טלגרם — לא בקוד ובלא git |
-| ‏**Chat ID** | יעד השליחה בטלגרם |
-| ‏**notify_telegram** | כלי שכותב הודעה **ושולח** לצ׳אט הפנימי (המרצה/AE) |
-| ‏**Briefing card** | כרטיס HTML עם מספרים + route/severity + צבע |
-| ‏**צ׳אט פנימי** | טלגרם שלכם / AE / מנהל מתקנים — כן שולחים |
-| ‏**Nimbus** | דומיין מכירות (הצעות מחיר) — Lab A |
-| ‏**Atlas Facility** | דומיין ניהול מתקנים (קריאות שירות) — Lab B · לא הזמנות לקוח |
+| ‏**Context window** | כל מה שהמודל "רואה" בשיחה: הוראות, קבצים, כלים, תשובות |
+| ‏**CLAUDE.md** | זיכרון פרויקט שאתם כותבים — נטען בכל סשן Claude Code |
+| ‏**Auto memory** | הערות ש-Claude כותב לעצמו אחרי תיקונים שלכם |
+| ‏**/compact · /context** | פקודות לניהול מילוי החלון (סיכום / בדיקה) |
+| ‏**MCP** | פרוטוקול לחיבור כלים חיצוניים (Apify, DB, Slack…) |
+| ‏**Apify** | ספריית Actors לגרידה/אוטומציה — מתחבר כ-MCP/plugin |
+| ‏**Agent Chat** | שיחה מקומית/רגילה — משימה אחת, סגרו לפטופ = נעצר |
+| ‏**Cloud Agent** | Agent על VM בענן — ממשיך בלי הלפטופ, מקביל |
+| ‏**Project (Cursor)** | עבודה ארוכה עם **coordinator** + קונטקסט משותף + מנויים |
+| ‏**Rules / Skills** | הוראות קבועות (`.cursor/rules`, skills, `/`) |
 
 ---
 
-## ‏3 — הדגמת פתיחה — HTML + טיוטת Telegram
-תיקייה: `demos/08-surface-opening/` · **Claude Code** (או Cursor · `prompt-cursor.md`)
+## ‏3 — הדגמת פתיחה — "מה ממלא את הקונטקסט?"
 
-```bash
-cd demos/08-surface-opening
-cp .env.example .env   # חד־פעמי: TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID
-./run-claude.sh reset
-./run-claude.sh smb
-./send-telegram.sh            # שולח אליכם לטלגרם
-# פתחו out/briefing.html בדפדפן
-./run-claude.sh enterprise && ./send-telegram.sh
+**ב-Claude Code** (בתיקיית הדמו):
+
+```text
+/context
 ```
 
-- קלט: `data/sample_quote.json` · מפרט: `surface-spec.md`  
-- HTML בדפדפן + **הודעה אמיתית** בטלגרם  
+רואים: `CLAUDE.md` · זיכרון · שמות כלי MCP · skills — **לפני** שהקלדתם משימה.
+
+**ב-Cursor:** פתחו Agent Chat והצביעו על Rules / MCP ב-Customize — אותו רעיון: הקונטקסט לא ריק.
+
+מסר: רוב "הקסם" הוא **מה שנטען אוטומטית**, לא רק הפרומפט שלכם.
 
 ---
 
-## ‏4 — מה ראינו — פירוק
-| מה ראינו | מושג |
+## ‏4 — מה היום (בלי חזרה על מפגשים קודמים)
+
+| נגלה היום | למה זה חדש |
 |---|---|
-| כרטיס בדפדפן | Surface / UI |
-| SMB ירוק · ENT ענבר | אותו pipeline, מסר לפי route |
-| `./send-telegram.sh` אחרי הדמו | שליחה אמיתית לצ׳אט שלכם |
-| Claude Code הרצה agent שכתב קבצים | מעטפת CLI + coding agent |
+| ניהול קונטקסט אמיתי | לא "יש זיכרון" — אלא `/context` / compact / rules |
+| MCP + Apify | כלים מבחוץ, לא רק Read/Write בריפו |
+| Chat · Cloud · Project | שלוש רמות עוצמה שונות |
+| קיצורי דרך ו-`/` | עבודה מהירה כמו מקצוענים |
+| Lab משטחים (קצר) | יישום: HTML + טלגרם — לא שיעור Sales Ops מחדש |
 
 ---
 
-## ‏5 — מה היום (+ חזרה)
-| נבנה היום | כבר למדנו |
-|---|---|
-| Cursor מול Claude Code כמעטפות | מפגש 5–7: demos עם Claude Code |
-| HTML + Telegram כמשטחים | מפגש 3: כלים / observations |
-| Lab A Nimbus + Lab B Atlas (Facility) | מפגש 7: שערי כסף על אותם מספרים |
-| כללי סודות לבוט | מפגש 6: לא לשמור סודות ב-Store |
+## ‏5 — שאלת המפגש
 
-יעד: **~2.5–3.5 שעות**, הרבה הדגמות חיות.
-
----
-
-## ‏6 — שאלת המפגש + תוצרים
-**שאלה:** איפה המשתמש רואה את תוצר הסוכן — ואיך מגיעה התראה לנייד?
+**שאלה:** מתי Chat מספיק, מתי Cloud, ומתי Project — ואיך מוסיפים כלי כמו Apify בלי לכתוב SDK?
 
 | תוצר | "עובד" |
 |---|---|
-| כרטיס HTML | נפתח בדפדפן, מספרים נכונים |
-| טלגרם | הודעה מגיעה לצ׳אט שלכם |
-| `notify_telegram` / `send-telegram.sh` | `sent=true` בלוג / API |
-| הבחנה מעטפת IDE / מעטפת CLI / runtime | יודעים מתי מה |
+| `/context` מובן | יודעים מה תופס טוקנים |
+| MCP מחובר | כלי חיצוני מופיע ב-Available Tools |
+| הבחנת Chat / Cloud / Project | בחירה נכונה לתרחיש |
+| Lab | כרטיס + הודעת טלגרם אמיתית |
 
 ---
 
-# ‏חלק ב׳ — מעטפות שמריצות Agents
+# ‏חלק ב׳ — ניהול קונטקסט (הסוד מס׳ 1)
 
-_Cursor ו-Claude Code ≠ הכלים; הם מריצים את ה-agent_
+_החלון מתמלא — גם כשאתם לא שמים לב_
 
-## ‏7 — למה לא Copilot במפגש הזה
-הסילבוס מזכיר Copilot — **בהקלטה שלנו:** Cursor + Claude Code כמעטפות בלבד.
+## ‏6 — מה נכנס לחלון לפני שאתם מקלידים
 
-| שכבה | מה זה באמת | תפקיד אצלנו |
+![Context stack](assets/08/01-context-stack.png)
+
+| שכבה | דוגמה |
+|---|---|
+| הוראות פרויקט | `CLAUDE.md` · `.cursor/rules` · AGENTS.md |
+| זיכרון | Auto memory (Claude) |
+| קטלוג כלים | שמות MCP / skills (לא התוכן המלא עדיין) |
+| אחר כך | קריאות קבצים, תשובות, תוצאות כלים |
+
+---
+
+## ‏7 — CLAUDE.md · Rules · Auto memory
+
+| מנגנון | מי כותב | למה |
 |---|---|---|
-| Cursor | מעטפת IDE | מריצה Agent שעורכת ריפו / UI |
-| Claude Code | מעטפת CLI | מריצה Agent בהדגמות `claude -p` |
-| Anthropic API | מודל + tool-use | Runtime agent ב-Lab |
-| Tools | Read/Write/`notify_telegram`… | הפעולות שה-agent קורא להן |
+| `CLAUDE.md` | אתם | סטנדרטים, איך מריצים, מה אסור |
+| `.claude/rules/` / `.cursor/rules` | אתם | כללים לפי נתיב/נושא |
+| Auto memory | Claude | לומד מתיקונים שלכם |
 
-![Cursor vs Claude](assets/08/04-cursor-vs-claude.png)
+טיפ: קצר ומדויק > מסמך ארוך שהמודל מתעלם ממנו.
 
----
-
-## ‏8 — Cursor כמעטפת (IDE host)
-- אתם פותחים צ׳אט **Agent** — Cursor מריץ את ה-agent  
-- Diff לפני Accept — האדם בשער  
-- Rules (`.cursor/rules`) מגבילים/מכוונים את ה-agent  
-- מתאים לשיפור CSS/HTML של הכרטיס  
-
-הדגמה קצרה: פתחו `prompt-cursor.md` ב-Cursor ושפרו מרווחים ב-`briefing.html` **בלי** לשנות מספרים.
-
----
-
-## ‏9 — Claude Code כמעטפת (CLI host)
 ```bash
-claude -p "$(cat prompt-smb.md)" \
-  --setting-sources project,local \
-  --allowedTools "Read,Write,Edit,Glob,Grep,Task"
+# Claude Code — התחלה בריפו חדש
+/init
+/memory
 ```
 
-- `claude` = מעטפת; ה-agent בפנים משתמש ב-Tools ברשימה  
-- `run-claude.sh` = חזרתיות להקלטה  
-- subagent `surface` ב-`.claude/agents/` — עדיין בתוך אותה מעטפת  
-- stream-json + filter — רואים קריאות כלי (Write) בזמן אמת  
-
 ---
 
-## ‏10 — Coding agent ≠ Runtime agent
-שניהם **agents**. ההבדל: באיזו מעטפת הם רצים ומה המטרה.
+## ‏8 — פקודות קונטקסט ב-Claude Code
 
-| | Coding (בתוך Cursor/Claude Code) | Runtime (באפליקציה) |
-|---|---|---|
-| מעטפת | IDE / CLI | הקוד שלכם + Anthropic |
-| מתי | פיתוח / דמו בניה | שימוש אצל AE |
-| Tools | קבצי ריפו (Read/Write/…) | `get_quote` · `render_*` · `send_*` |
-| סודות | לא בקומיט | env בזמן ריצה |
-| דוגמה | `demos/08-…` | `labs/08-…/surface_claude.py` |
-
----
-
-# ‏חלק ג׳ — Surfaces
-
-_HTML וטלגרם כערוצי פלט_
-
-## ‏11 — מה זה Surface ולמה אכפת
-טרמינל טוב למפתחים. AE ומנהל רוצים:
-
-- כרטיס ויזואלי (HTML)  
-- דחיפה לנייד (Telegram)  
-
-![Quote to surface](assets/08/02-quote-to-surface.png)
-
----
-
-## ‏12 — Pipeline: Quote → HTML → TG → Send?
-1. `get_quote`  
-2. `render_html_card` → `out/briefing.html`  
-3. `notify_telegram` → כותב `telegram.txt` **ושולח** לצ׳אט הפנימי  
-
----
-
-## ‏13 — HTML card — עקרונות
-- קובץ יחיד · CSS פנימי · `dir="rtl"`  
-- צבע לפי `route` (auto/hitl/blocked)  
-- כותרת + טבלה + פוטר "טיוטה פנימית"  
-- מספרים **רק** מה-JSON  
-
----
-
-## ‏14 — Telegram כמשטח (עם שליחה)
-![Telegram surface](assets/08/03-telegram-surface.png)
-
-| רכיב | תפקיד |
+| פקודה | מתי |
 |---|---|
-| Bot token | זהות הבוט (סוד ב-`.env`) |
-| Chat ID | **הצ׳אט שלכם** — יעד השליחה |
-| `notify_telegram` / `send-telegram.sh` | `sendMessage` אמיתי |
-
-בלי env → כישלון ברור. עם env → ההודעה חייבת להגיע לנייד.
-
----
-
-## ‏15 — פנימי כן · לקוח סופי לא
-| ערוץ | שולחים? |
-|---|---|
-| טלגרם פנימי (מרצה / AE) | **כן** — זה המוצר של המפגש |
-| HTML briefing | כן (קובץ / דפדפן) |
-| מייל/הודעה ללקוח הסופי | לא אוטומטית (מפגש 7: Draft ≠ Send למייל) |
+| `/context` | "למה זה איטי / יקר / מבולבל?" |
+| `/compact` | השיחה ארוכה — סיכום מובנה, ממשיכים |
+| `/clear` | משימה חדשה, בלי לגרור היסטוריה |
+| `/btw` | שאלה בצד — **בלי** לזהם את הקונטקסט הראשי |
+| Subagent / Task | מחקר כבד בחלון **נפרד** — חזרה רק סיכום |
 
 ---
 
-## ‏16 — סודות והגדרות
-```bash
-cp .env.example .env
-# ANTHROPIC_API_KEY=...
-# TELEGRAM_BOT_TOKEN=...
-# TELEGRAM_CHAT_ID=...   # הצ׳אט האישי שלכם
+## ‏9 — קונטקסט ב-Cursor (בלי להציף)
+
+- `@file` / `@folder` — בחירה מכוונת, לא "תקרא הכל"  
+- Rules בפרויקט — חוזרים בכל Agent  
+- Notepads / Docs — הקשר יציב למשימות חוזרות  
+- שיחה ארוכה מדי → Chat חדש + הפניה לכללים, לא עוד 40 הודעות  
+
+---
+
+## ‏10 — Subagents = קונטקסט נפרד
+
+כש-Claude/Cursor מריצים subagent:
+
+- הקבצים הגדולים נקראים **אצלו**  
+- אליכם חוזר סיכום קצר  
+- החלון הראשי נשאר פנוי למשימה  
+
+זה הטריק: לא "עוד מודל" — אלא **בידוד קונטקסט**.
+
+---
+
+# ‏חלק ג׳ — כלים חיצוניים (MCP · Apify)
+
+_הסוכן יוצא מהריפו_
+
+## ‏11 — MCP במשפט אחד
+
+![MCP bus](assets/08/03-mcp-tools.png)
+
+**MCP** = אוטובוס כלים. Cursor ו-Claude Code מתחברים לשרתים שמציעים Tools / Resources / Prompts.
+
+בלי MCP: רק קבצים וטרמינל מקומי.  
+עם MCP: Apify, דאטהבייס, ברואוזר, Slack…
+
+---
+
+## ‏12 — חיבור Apify (דוגמה חיה)
+
+**Claude Code:**
+
+```text
+/plugin install apify
+/mcp          # Enable + Authenticate ל-plugin:apify:apify
 ```
 
-- לא בקוד · לא ב-git · לא בצילום מסך  
-- Chat ID: שלחו Start לבוט → `getUpdates` → `chat.id`  
+**Cursor:** Customize → MCP → הוסיפו שרת (או מ-Marketplace) · אשרו OAuth אם נדרש.
+
+פרומפט ראשון (בלי להריץ Actor יקר):
+
+> מצא Actor טוב ל-Google Maps ב-Apify. הצג input, מחיר, ופורמט פלט — **אל תריץ עדיין**.
 
 ---
 
-## ‏17 — Guardrails למשטחים
-- [ ] מספרים מכלי/JSON בלבד  
-- [ ] HTML לא מריץ JS חיצוני לא מבוקר בדמו  
-- [ ] שליחה לצ׳אט פנימי עובדת בהקלטה  
-- [ ] אין token בלוגים  
-- [ ] PII — לא לצ׳אט ציבורי  
+## ‏13 — כללים לכלי חיצוני
+
+- [ ] אימות (OAuth/token) נפרד מקומי מול Cloud  
+- [ ] אישור כלי לפני side-effect (גרידה / כתיבה)  
+- [ ] לא לשים מפתחות ב-chat history / screenshots  
+- [ ] Cloud Agents: MCP נפרד — צריך לחבר גם שם  
 
 ---
 
-## ‏18 — Anti-Patterns
-| אנטי־דפוס | למה נשבר |
+## ‏14 — הדגמה קצרה — כלי אחד שעובד
+
+1. חברו Apify **או** MCP אחר שכבר יש לכם  
+2. בקשו פעולת **קריאה בלבד**  
+3. הראו בלוג/UI ששם הכלי הופיע  
+4. כבו את השרת — ודאו שהסוכן מדווח שאין כלי (לא ממציא הצלחה)
+
+---
+
+# ‏חלק ד׳ — Chat · Cloud Agents · Projects
+
+_שלוש רמות — לא אותו כפתור_
+
+## ‏15 — Agent Chat (ברירת מחדל)
+
+| מתאים | לא מתאים |
 |---|---|
-| "הסוכן ידפיס יפה בטרמינל" | המשתמש לא שם |
-| שליחה ללקוח סופי בלי שער | ספאם / דליפה — צ׳אט פנימי כן |
-| Token ב-repo | פריצה |
-| HTML עם מספרים מהפרומפט | מחיר ישן/בדוי |
-| לערבב Copilot כחובה | לא במסלול שלנו |
+| תיקון קובץ / הסבר / PR קטן | מיגרציה של שבועיים |
+| אתם ליד המקלדת | לפטופ סגור, CI בלילה |
+| קונטקסט קצר | עשרות משימות מקבילות |
 
 ---
 
-## ‏19 — Checklist לפני פיילוט Surface
-- [ ] יש HTML שנפתח בלי שרת  
-- [ ] יש `.env` עם token + chat id שלכם  
-- [ ] הודעת SMB מגיעה לטלגרם  
-- [ ] יש הפרדת Coding / Runtime  
-- [ ] יש תרחיש SMB מול ENT **או** HVAC מול ELEV ויזואלית  
+## ‏16 — Cloud Agents
+
+![Chat vs Cloud vs Project](assets/08/02-chat-cloud-project.png)
+
+- רצים על **VM בענן** (ריפו, deps, סודות, רשת)  
+- אפשר רבים במקביל — הלפטופ לא חייב להיות פתוח  
+- יכולים לבנות, לבדוק, לפתוח PR, להשתמש ב-MCP  
+- Multi-repo: פרונט + בקאנד באותה משימה  
+
+מתי: "תתקן CI ותפתח PR בזמן שאני בישיבה".
 
 ---
 
-# ‏חלק ד׳ — Lab
+## ‏17 — Projects ב-Cursor
 
-_הרבה הרצות — רואים כרטיס וטלגרם_
+Project ≠ עוד Chat.
 
-## ‏20 — Lab — שני דומיינים (גיוון)
-אותו דפוס משטחים · **שני עולמות עסקיים**:
+| רעיון | משמעות |
+|---|---|
+| Coordinator | מתכנן ומפצל — **לא** כותב את כל הקוד בעצמו |
+| Agents פנימיים | מבצעים; אפשר להיכנס לכל אחד |
+| Shared context | קבצים/לקחים שגדלים לאורך שבועות |
+| Subscriptions | Slack / לוח זמנים / PRs — בלי שתפתחו צ׳אט |
 
-| Lab | דומיין | תיקייה | מזהים |
-|---|---|---|---|
-| **A · Nimbus** | מכירות / הצעות מחיר | [`labs/08-agent-surfaces/`](labs/08-agent-surfaces/) | `L-SMB` · `L-ENT` · `L-UPSELL` |
-| **B · Atlas** | ניהול מתקנים / קריאות שירות | [`labs/08-facility-surfaces/`](labs/08-facility-surfaces/) | `WO-HVAC` · `WO-ELEV` · `WO-ACCESS` |
+זמין בתוכניות עם Cloud Agents (לא Free/Plus).
 
-דורש **`ANTHROPIC_API_KEY`** + **`TELEGRAM_*`** בשניהם.
+---
+
+## ‏18 — מתי מה? (טבלת החלטה)
+
+| תרחיש | בחירה |
+|---|---|
+| באג בקבץ אחד | **Chat** |
+| PR + טסטים בזמן שאתם בחוץ | **Cloud Agent** |
+| פיצ׳ר גדול / מיגרציה / ניטור חוזר | **Project** |
+| גרידה חד־פעמית מ-Apify | Chat/Cloud + **MCP** |
+| אותה הנחיה לכל הסטודנטים בקורס | Rules / `CLAUDE.md` |
+
+---
+
+## ‏19 — קיצורי דרך שחוסכים שיעור שלם
+
+**Claude Code — הקלידו `/`:**
+
+| | |
+|---|---|
+| `/plan` | תכנון לפני שינוי גדול |
+| `/model` · `/effort` | מודל ועומק חשיבה |
+| `/diff` · `/code-review` | לפני שיפולינג |
+| `/permissions` | שערי אישור |
+| `/resume` · `/rewind` | חזרה בזמן |
+
+**Cursor:** Command Palette · פתיחת Agents Window · קיצורי Accept/Reject ל-diff · מעבר מהיר ל-MCP ב-Customize.
+
+![Shortcuts](assets/08/04-shortcuts-map.png)
+
+---
+
+# ‏חלק ה׳ — Lab קצר (יישום, לא חזרה)
+
+_אותם רעיונות → פלט למשתמש_
+
+## ‏20 — למה בכלל Lab היום?
+
+אחרי הכוח של המעטפת — מוודאים שיודעים **להוציא פלט**:
+
+- כרטיס HTML בדפדפן  
+- הודעת Telegram אמיתית לצ׳אט שלכם  
+
+בחרו **מסלול אחד** בהקלטה (A או B). השני לשיעורי בית.
+
+| מסלול | דומיין | תיקייה |
+|---|---|---|
+| A · Nimbus | הצעת מחיר | [`labs/08-agent-surfaces/`](labs/08-agent-surfaces/) |
+| B · Atlas | קריאת שירות בבניין | [`labs/08-facility-surfaces/`](labs/08-facility-surfaces/) |
 
 ![Lab tools](assets/08/05-lab-tools.png)
 
-מסר: Surface לא "שייך" רק ל-CRM מכירות — אותו pipeline עובד על Work Orders בבניין.
-
 ---
 
-## ‏21 — Lab A (Nimbus) — מה נריץ
+## ‏21 — Lab — הרצה (דוגמה A)
+
 ```bash
 cd labs/08-agent-surfaces
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env   # מלאו ANTHROPIC + TELEGRAM_*
+cp .env.example .env   # ANTHROPIC + TELEGRAM_*
 
 python3 surface_claude.py reset
-python3 surface_claude.py chat --lead L-SMB --message "הכן כרטיס HTML ושלח סיכום לטלגרם שלי"
-# פתחו out/briefing.html — ובדקו את הטלפון
-
-python3 surface_claude.py chat --lead L-ENT --message "הכן כרטיס ושלח — ממתין למנהל"
-python3 surface_claude.py chat --lead L-UPSELL --message "הכן כרטיס ושלח ללקוח קיים (upsell)"
-python3 surface_claude.py notify --lead L-SMB   # שליחה חוזרת בלי LLM
-python3 surface_claude.py show
+python3 surface_claude.py chat --lead L-SMB --message "הכן כרטיס ושלח לטלגרם שלי"
 ```
 
----
+מסלול B: `facility_claude.py --wo WO-ELEV` ב-[`labs/08-facility-surfaces/`](labs/08-facility-surfaces/).
 
-## ‏22 — Lab A — Debrief
-- [ ] ראיתי כרטיס ירוק ל-SMB וענבר ל-ENT  
-- [ ] הודעות הגיעו לטלגרם האישי  
-- [ ] בלוג: `TOOL -> notify_telegram` עם `sent=true`  
-- [ ] בלי `.env` — כישלון ברור, לא "נשלח" מזויף  
-- [ ] Upsell מסומן בכרטיס/הודעה  
+דמו Claude כתיבת קבצים: `demos/08-surface-opening/` או `demos/08-facility-opening/` + `./send-telegram.sh`.
 
 ---
 
-## ‏23 — Lab B (Atlas) — קריאות שירות
-תיקייה: [`labs/08-facility-surfaces/`](labs/08-facility-surfaces/) · דמו: [`demos/08-facility-opening/`](demos/08-facility-opening/)
+## ‏22 — Lab — Debrief
 
-**לא הזמנות לקוח** — מיזוג, מעלית, בקרת כניסה.
-
-| מזהה | חומרה | צבע |
-|---|---|---|
-| `WO-HVAC` | `open` | כחול |
-| `WO-ELEV` | `sla_breach` | אדום |
-| `WO-ACCESS` | `blocked` | ענבר |
-
-כלים: `get_work_order` · `render_html_card` · `notify_telegram`
+- [ ] `/context` או Rules הוזכרו לפני ה-Lab (קונטקסט ≠ רק JSON)  
+- [ ] הודעה הגיעה לטלגרם (`sent=true`)  
+- [ ] HTML נפתח עם צבע לפי route/severity  
+- [ ] יודעים להגיד אם המשימה הזו הייתה Chat / Cloud / Project  
 
 ---
 
-## ‏24 — Lab B — מה נריץ
-```bash
-cd labs/08-facility-surfaces
-python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env   # או העתיקו מ-Lab A
+## ‏23 — חיבור למפגש: MCP + משטח
 
-python3 facility_claude.py reset
-python3 facility_claude.py chat --wo WO-HVAC --message "הכן כרטיס ושלח התראה למנהל מתקנים"
-python3 facility_claude.py chat --wo WO-ELEV --message "חריגת SLA — שלח עכשיו"
-python3 facility_claude.py notify --wo WO-ACCESS
-```
+רעיון בונוס (אם יש זמן):
 
-דמו קצר (Claude Code): `demos/08-facility-opening/` → `./run-claude.sh hvac|elev` → `./send-telegram.sh`
+1. Agent ב-Cursor עם MCP (למשל Apify קריאה בלבד)  
+2. תוצאה → כתיבה ל-JSON קטן  
+3. Lab/`notify` שולח סיכום לטלגרם  
+
+מסר: **כלי חיצוני → קונטקסט → Surface**.
 
 ---
 
-## ‏25 — Lab B — Debrief
-- [ ] אין מחירים / מושבים — זה לא Nimbus  
-- [ ] כרטיס אדום ל-`WO-ELEV` (חריגת SLA)  
-- [ ] טלגרם עם `Atlas Facility`  
-- [ ] אותו דפוס: get → HTML → notify  
+# ‏חלק ו׳ — סיכום
 
----
+## ‏24 — Anti-Patterns (של מעטפות, לא של Sales)
 
-# ‏חלק ה׳ — הדגמות נוספות וסיכום
-
-## ‏26 — הדגמה — Cursor משפר UI
-1. פתחו `out/briefing.html` אחרי Lab  
-2. ב-Cursor: "שפר טיפוגרפיה ומרווחים בלי לשנות מספרים"  
-3. רעננו בדפדפן  
-
-מסר: מעטפת Cursor מריצה coding agent שמשפר Surface; ה-runtime agent מזין נתונים.
-
----
-
-## ‏27 — הדגמה — כפתורים שמשנים פלט
-| שינוי | תוצאה ויזואלית |
+| אנטי־דפוס | למה נשבר |
 |---|---|
-| `L-SMB` (Nimbus) | ירוק / approved |
-| `L-ENT` (Nimbus) | ענבר / pending_manager |
-| `WO-HVAC` (Atlas) | כחול / open |
-| `WO-ELEV` (Atlas) | אדום / sla_breach |
-| בלי `.env` | error ברור |
-| עם `.env` | הודעה בטלגרם |
+| שיחה אינסופית בלי `/compact` | קונטקסט מלא → טעויות + עלות |
+| Project למשימת קובץ אחד | יקר ומסורבל |
+| MCP בלי אימות ב-Cloud | "עובד אצלי" ≠ עובד בסוכן ענן |
+| להאמין ל"שלחתי" בלי תוצאת כלי | נרטיב ≠ API |
+| להעתיק מפתחות לצ׳אט | דליפה |
 
 ---
 
-## ‏28 — באג: "נשלח" בלי אישור API
-סימפטום: המודל כותב "שלחתי" אבל אין הודעה בנייד.  
-בדיקה: אין `notify_telegram` עם `sent=true`, או `last_send.json` עם כשל.  
-תיקון: האמת בתוצאת הכלי בלבד — לא בנרטיב המודל.
+## ‏25 — סיכום
 
----
-
-## ‏29 — Design Review — למי שולחים?
-| שאלה | החלטה במפגש |
-|---|---|
-| למי הצ׳אט? | **פנימי** — המרצה / AE (כן שולחים) |
-| ללקוח הסופי? | לא אוטומטית מהבוט הזה |
-| מה בתוכן? | מספרים מה-Quote, בלי PII מיותר |
-| Audit? | `telegram.txt` + `last_send.json` / לוג HTTP |
-
----
-
-## ‏30 — ROI קצר למשטחים
-| למי | ערך |
-|---|---|
-| AE / מנהל מתקנים | כרטיס מוכן + התראה בנייד |
-| מנהל | רואה HITL / חריגת SLA בלי לפתוח מערכת |
-| מפתח | אותו דפוס Surface — דומיינים שונים |
-
----
-
-## ‏31 — סיכום
-- Cursor / Claude Code = **מעטפות** שמריצות agents (לא "הכלים")  
-- Surface = HTML / Telegram / UI  
-- Coding agent ≠ Runtime agent  
-- טלגרם פנימי = **שולחים**; לקוח סופי ≠ אוטומטי  
-- Lab A (Nimbus) + Lab B (Atlas Facility) — אותו Surface, דומיינים שונים  
+- קונטקסט מנוהל — לא "קורה מעצמו"  
+- MCP (Apify וחברים) = ידיים מחוץ לריפו  
+- Chat ≠ Cloud ≠ Project  
+- `/` ו-Rules חוסכים שעות  
+- Lab: פלט אנושי (HTML + טלגרם)  
 - במפגש הבא: **Testing ו-Debugging Agents**
 
 ---
 
-## ‏32 — הכנה למפגש 9
-- חשבו: איך בודקים ש-HTML מכיל את הסכום הנכון?  
-- איך בודקים ש-send לא רץ בלי token?  
-- רשמו 2 בדיקות שבירות שתרצו לראות בלוג  
+## ‏26 — הכנה למפגש 9
+
+- איך בודקים ש-MCP באמת נקרא (לוג כלי)?  
+- איך בודקים ש-send לטלגרם לא רץ בלי token?  
+- רשמו 2 בדיקות שבירות לקונטקסט מלא מדי  
 
 ---
 
-## ‏33 — תרגיל בית
-1. Lab A: הוסיפו שדה `valid_until` ל-JSON והציגו ב-HTML  
-2. Lab B: הוסיפו קריאה `WO-CLEAN` (ניקיון) עם severity=`open`  
-3. תעדו ב-README איך משיגים `TELEGRAM_CHAT_ID`  
-4. בונוס: כלי `render_markdown_report` → `out/report.md` באחד הדומיינים  
+## ‏27 — תרגיל בית
+
+1. הריצו `/context` (או הצגה מקבילה ב-Cursor) וצלמו/רשמו מה תופס הכי הרבה  
+2. חברו MCP אחד (Apify מומלץ) ובצעו שאילתת קריאה בלבד  
+3. כתבו ב-5 שורות: מתי הייתם בוחרים Project ולא Chat  
+4. Lab: השלימו את המסלול שלא הרצתם בכיתה (A או B) · או הוסיפו `WO-CLEAN` / `valid_until`  
 
 </div>

@@ -5,26 +5,24 @@
 </p>
 
 # ‏מפגש 8 — תדריך מנהלים (High Level)
-## ‏Cursor · Claude · משטחי פלט (UI / Telegram)
+## ‏סודות Cursor · Claude · Cloud · MCP
 
-> **למי:** מנהלי מוצר, מכירות, RevOps — ומרצה שצריך שפה עסקית בהקלטה.  
-> **בלי Copilot:** במסלול שלנו רק Cursor + Claude Code + Anthropic.  
-> מצגת מלאה: [`08-students-slides.md`](08-students-slides.md)
+> **למי:** מנהלי מוצר / הנדסה שרוצים להבין למה "סתם צ׳אט" לא מספיק לפיצ׳ר גדול.  
+> מצגת: [`08-students-slides.md`](08-students-slides.md)
 
 ---
 
 ## ‏1 — המסר המרכזי
 
-סוכן שלא מוציא פלט **למשתמש** נשאר כלי למפתחים.
+אחרי שבנו agents — הצוות צריך **לשלוט במעטפת**:
 
-אנחנו מחברים:
-
-1. **מעטפות** (Cursor / Claude Code) — מריצות coding agents שבונים ומתקנים  
-2. **Runtime agent** (Anthropic + כלים) — רץ בזמן אמת על ליד/הצעה  
-3. **Surfaces** — כרטיס HTML בדפדפן · הודעת Telegram לנייד  
+1. **קונטקסט** — מה נטען אוטומטית, מתי `/compact`, מתי Chat חדש  
+2. **MCP** — כלים חיצוניים (למשל Apify) בלי SDK ידני  
+3. **Chat · Cloud · Project** — שלוש רמות עלות/עוצמה  
+4. **Surface קצר** — HTML + טלגרם כהוכחת פלט למשתמש  
 
 **משפט להנהלה:**  
-אותה עסקה שרצה במפגש 7 — היום AE רואה אותה ככרטיס יפה ומקבל התראה בטלגרם, בלי לקרוא לוג.
+אותו מפתח עם Project + MCP מסיים מיגרציה בזמן שצ׳אט רגיל נתקע אחרי יומיים של הקשר שבור.
 
 ---
 
@@ -32,66 +30,39 @@
 
 | מונח | משמעות |
 |---|---|
-| Cursor / Claude Code | **מעטפות** שמריצות agents — לא הכלים עצמם |
-| Coding agent | ה-agent שבתוך המעטפת ומשנה קבצים |
-| Tool | פעולה שה-agent קורא לה (Write, `notify_telegram`…) |
-| Surface | משטח פלט לאדם (HTML / Telegram) |
-| notify_telegram | כותב הודעה **ושולח** לצ׳אט הפנימי (שלכם) |
-| Bot token / Chat ID | סוד הבוט + הצ׳אט שלכם — ב-`.env`, לא בגיט |
+| Context window | כל מה שהמודל רואה בשיחה |
+| MCP | חיבור כלים חיצוניים (Apify וכו׳) |
+| Cloud Agent | Agent על VM בענן — ממשיך בלי לפטופ |
+| Project | Coordinator + קונטקסט משותף + מנויים |
+| CLAUDE.md / Rules | הוראות קבועות לפרויקט |
 
 ---
 
-## ‏3 — למה HTML וטלגרם?
+## ‏3 — מה שונה ממפגש 7
 
-| ערוץ | למי מתאים |
-|---|---|
-| טרמינל | מפתחים בהקלטה / דיבוג |
-| HTML card | AE / מנהל — פתיחה בדפדפן, צבע לפי מסלול |
-| Telegram | דחיפה לנייד — "יש הצעה ממתינה" |
+מפגש 7 = אוטומציה עסקית ושערי כסף.  
+מפגש 8 = **מיומנות מעטפת** (Cursor/Claude) שמאיצה כל מה שנבנה אחרי.
 
-שערי כסף ממפגש 7 נשארים: auto ירוק · HITL ענבר · חסימה אדומה — **גם בכרטיס**.
+ה-Lab בסוף קצר בכוונה — יישום פלט, לא קורס Sales מחדש.
 
 ---
 
-## ‏4 — טלגרם פנימי = שולחים
+## ‏4 — סיכונים בפיילוט
 
-1. הסוכן בונה כרטיס HTML **ושולח** סיכום לטלגרם שלכם (צ׳אט פנימי)  
-2. דמו: `./send-telegram.sh` אחרי Claude · Lab: כלי `notify_telegram`  
-3. בלי `TELEGRAM_*` ב-`.env` — כישלון ברור, לא "נשלח" מזויף  
-4. ללקוח הסופי (מייל וכו׳) — עדיין עם שער ממפגש 7; כאן היעד הוא **אתם**
-
----
-
-## ‏5 — מה רואים בשיעור (מעשי)
-
-| שלב | מה קורה |
-|---|---|
-| דמו Claude Code (מעטפת CLI) | Agent כותב HTML + טקסט → `./send-telegram.sh` שולח אליכם |
-| Lab Anthropic (runtime) | `render_html_card` + `notify_telegram` (חובה env) |
-| Cursor (מעטפת IDE) | Agent משפר עיצוב הכרטיס בלי לשנות מספרים |
-
-לידים לדוגמה (Nimbus): SMB · Enterprise · Upsell.
-
-**גיוון דומיין (Atlas Facility):** אותם משטחים על קריאות שירות בבניין (`WO-HVAC` / `WO-ELEV` / `WO-ACCESS`) — בלי הצעות מחיר. מוכיח שהדפוס לא תלוי ב-CRM מכירות.
+- Project על משימות קטנות → עלות מיותרת  
+- MCP בלי אימות ב-Cloud → "עובד אצלי בלבד"  
+- קונטקסט מלא בלי compact → איכות יורדת  
+- סודות/טוקנים בצ׳אט או בצילום מסך  
 
 ---
 
-## ‏6 — סיכונים שצריך לסגור בפיילוט
-
-- Token של טלגרם בריפו / בצילום מסך  
-- שליחה ללקוח סופי בלי שער (המפגש = צ׳אט פנימי בלבד)  
-- הצהרת "נשלח" בלי `sent=true` מה-API  
-- מספרים מהמודל במקום מהמערכת  
-
----
-
-## ‏7 — ROI למשטחים
+## ‏5 — ROI
 
 | בעל עניין | ערך |
 |---|---|
-| AE | כרטיס מוכן + התראה אמיתית בנייד |
-| מנהל מכירות | רואה HITL בלי לפתוח CRM |
-| RevOps / אבטחה | יעד פנימי מבוקר + לוג שליחה |
+| מפתח | פחות העתקה של הקשר; כלים מוכנים |
+| מנהל צוות | Cloud/Project לעבודה מקבילית |
+| אבטחה | MCP מאושר + הפרדת סודות |
 
 ---
 
@@ -101,9 +72,7 @@
 |---|---|
 | [`08-students-slides.md`](08-students-slides.md) | מצגת |
 | [`08-cursor-claude-surfaces.md`](08-cursor-claude-surfaces.md) | תסריט מרצה |
-| [`demos/08-surface-opening/`](demos/08-surface-opening/) | דמו Nimbus (מכירות) |
-| [`demos/08-facility-opening/`](demos/08-facility-opening/) | דמו Atlas (מתקנים) |
-| [`labs/08-agent-surfaces/`](labs/08-agent-surfaces/) | Lab A · הצעות מחיר |
-| [`labs/08-facility-surfaces/`](labs/08-facility-surfaces/) | Lab B · קריאות שירות |
+| [`demos/08-surface-opening/`](demos/08-surface-opening/) · [`demos/08-facility-opening/`](demos/08-facility-opening/) | דמו משטחים |
+| [`labs/08-agent-surfaces/`](labs/08-agent-surfaces/) · [`labs/08-facility-surfaces/`](labs/08-facility-surfaces/) | Lab |
 
 </div>

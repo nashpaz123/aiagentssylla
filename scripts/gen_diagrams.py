@@ -2320,137 +2320,184 @@ def s07_roi():
 
 
 # ---------- Session 08 ----------
+# Light palette for session 08 (change of pace from dark decks)
+
+S08_BG = (245, 247, 250)
+S08_CARD = (255, 255, 255)
+S08_CARD2 = (236, 240, 246)
+S08_TEXT = (24, 28, 36)
+S08_MUTED = (90, 100, 120)
+S08_LINE = (180, 190, 205)
+S08_ACCENT = (37, 99, 180)
+S08_ACCENT2 = (88, 80, 200)
+S08_GREEN = (22, 140, 90)
+S08_ORANGE = (200, 110, 30)
+S08_RED = (190, 50, 50)
+
+
+def s08_new_img():
+    img = Image.new("RGB", (W, H), S08_BG)
+    return img, ImageDraw.Draw(img)
+
+
+def s08_center(d, xy, text, fnt, fill=S08_TEXT):
+    center_text(d, xy, text, fnt, fill)
+
+
+def s08_panel(d, box, title, lines, outline=S08_LINE, title_color=S08_TEXT):
+    rounded(d, box, S08_CARD, outline=outline, radius=14, width=2)
+    x1, y1, x2, y2 = box
+    s08_center(d, ((x1 + x2) / 2, y1 + 28), title, font(22, True), title_color)
+    f = font(20)
+    ty = y1 + 58
+    for line in lines:
+        d.text((x1 + 18, ty), line, font=f, fill=S08_MUTED)
+        ty += 28
+
 
 def s08_hero():
-    img, d = new_img()
-    center_text(d, (W / 2, 40), "Hosts run agents · agents use tools · surfaces show output", font(32, True))
-    center_text(d, (W / 2, 84), "Cursor / Claude Code = envelopes  ·  agent = loop inside  ·  HTML & Telegram for humans", font(20), MUTED)
-    cols = [
-        ((60, 140, 640, 900), "Cursor (host)", ACCENT, [
-            "IDE envelope / host",
-            "runs an Agent chat",
-            "diff · rules · MCP",
-            "",
-            "Not 'the tool' —",
-            "it hosts the agent",
-        ]),
-        ((680, 140, 1260, 900), "Claude Code (host)", ORANGE, [
-            "CLI envelope / host",
-            "claude -p + subagents",
-            "agent calls Tools",
-            "",
-            "Not 'the tool' —",
-            "it hosts the agent",
-        ]),
-        ((1300, 140, 1860, 900), "Surfaces", GREEN, [
-            "HTML card (browser)",
-            "Telegram message",
-            "not terminal dump",
-            "",
-            "What AE / manager",
-            "actually sees",
-        ]),
+    """01 — What fills context before you type."""
+    img, d = s08_new_img()
+    s08_center(d, (W / 2, 42), "Context fills before you type", font(40, True))
+    s08_center(d, (W / 2, 88), "CLAUDE.md · Rules · Auto memory · MCP catalog · then your prompt", font(22), S08_MUTED)
+    layers = [
+        (100, 160, 1820, 300, "CLAUDE.md / .cursor/rules / AGENTS.md", S08_ACCENT),
+        (100, 320, 1820, 460, "Auto memory + skill descriptions", S08_ACCENT2),
+        (100, 480, 1820, 620, "MCP tool names (Apify, DB, …)", S08_ORANGE),
+        (100, 640, 1820, 780, "Your message + @files / reads", S08_GREEN),
+        (100, 800, 1820, 940, "Tool results · assistant replies  →  /context · /compact", S08_RED),
     ]
-    for box, title, c, lines in cols:
-        _s04_panel(d, box, title, lines, outline=c, title_color=c)
+    for x1, y1, x2, y2, label, c in layers:
+        rounded(d, (x1, y1, x2, y2), S08_CARD, outline=c, radius=12, width=3)
+        s08_center(d, ((x1 + x2) / 2, (y1 + y2) / 2), label, font(26, True), c)
+    save(img, "08/01-context-stack.png")
+    # keep old filename alias for any leftover refs
     save(img, "08/01-coding-agents-surfaces.png")
 
 
 def s08_pipeline():
-    img, d = new_img()
-    center_text(d, (W / 2, 40), "Quote → Surface pipeline (send required)", font(36, True))
-    steps = [
-        (80, 200, 400, 380, "Quote\nJSON", ACCENT),
-        (460, 200, 780, 380, "Agent\n+ tools", ORANGE),
-        (840, 200, 1160, 380, "HTML\ncard", GREEN),
-        (1220, 200, 1540, 380, "notify_\ntelegram", ACCENT2),
-        (1600, 200, 1860, 380, "Your\nphone", GREEN),
+    """02 — Chat vs Cloud vs Project."""
+    img, d = s08_new_img()
+    s08_center(d, (W / 2, 40), "Chat · Cloud Agent · Project — pick the altitude", font(34, True))
+    cols = [
+        ((60, 120, 620, 920), "Agent Chat", S08_ACCENT, [
+            "Local / focused",
+            "You stay at keyboard",
+            "One task, short context",
+            "",
+            "Bugfix · explain",
+            "small PR",
+            "",
+            "Laptop closed = stop",
+        ]),
+        ((660, 120, 1220, 920), "Cloud Agent", S08_ORANGE, [
+            "VM in the cloud",
+            "Build · test · open PR",
+            "MCP + multi-repo",
+            "",
+            "Parallel agents",
+            "CI while in a meeting",
+            "",
+            "Laptop can be closed",
+        ]),
+        ((1260, 120, 1860, 920), "Project", S08_GREEN, [
+            "Coordinator agent",
+            "Delegates workers",
+            "Shared context grows",
+            "",
+            "Subscriptions:",
+            "Slack · schedule · PRs",
+            "",
+            "Weeks-long work",
+        ]),
     ]
-    for x1, y1, x2, y2, label, c in steps:
-        rounded(d, (x1, y1, x2, y2), CARD2, outline=c, radius=14, width=3)
-        multiline_center(d, ((x1 + x2) / 2, (y1 + y2) / 2), label.split("\n"), font(24, True), c, gap=6)
-    for i in range(len(steps) - 1):
-        arrow(d, (steps[i][2], 290), (steps[i + 1][0], 290), ACCENT, width=3)
-    _s04_panel(d, (80, 460, 1860, 960), "Internal Telegram = real send", [
-        "render_html_card → out/briefing.html (browser)",
-        "notify_telegram → writes telegram.txt AND Bot API sendMessage",
-        "Demo: ./send-telegram.sh after Claude writes the file",
-        "Target = YOUR chat (instructor/AE) — not auto-email to end customer",
-        "",
-        "Lab 08: surface_claude.py  ·  Demo: demos/08-surface-opening/",
-    ], outline=GREEN, title_color=GREEN)
+    for box, title, c, lines in cols:
+        s08_panel(d, box, title, lines, outline=c, title_color=c)
+    save(img, "08/02-chat-cloud-project.png")
     save(img, "08/02-quote-to-surface.png")
 
 
 def s08_telegram():
-    img, d = new_img()
-    center_text(d, (W / 2, 40), "Telegram as an agent surface", font(38, True))
-    _s04_panel(d, (60, 120, 920, 900), "Why Telegram", [
-        "Push to YOUR phone — AE sees it",
-        "Markdown-ish short cards",
-        "Bot token = clear secret (.env)",
-        "Chat ID = your destination",
+    """03 — MCP tool bus (reuse slot)."""
+    img, d = s08_new_img()
+    s08_center(d, (W / 2, 40), "MCP — external tools on a bus", font(38, True))
+    s08_panel(d, (60, 120, 700, 900), "Hosts", [
+        "Cursor Agent",
+        "Claude Code",
+        "Cloud Agents",
         "",
-        "Good for: alerts, HITL pings,",
-        "ops briefings — not long docs",
-    ], outline=ACCENT, title_color=ACCENT)
-    _s04_panel(d, (1000, 120, 1860, 900), "Safety checklist", [
-        "Never commit TELEGRAM_BOT_TOKEN",
-        "Send to internal chat only",
-        "Log sendMessage HTTP status",
-        "Don't dump PII to public chats",
+        "Same protocol,",
+        "separate auth on cloud",
+    ], outline=S08_ACCENT, title_color=S08_ACCENT)
+    # center bus
+    rounded(d, (760, 380, 1160, 640), S08_CARD2, outline=S08_ACCENT2, radius=20, width=3)
+    s08_center(d, (960, 510), "MCP", font(36, True), S08_ACCENT2)
+    s08_panel(d, (1220, 120, 1860, 900), "Servers / plugins", [
+        "Apify (Actors / scrape)",
+        "DB · Slack · browser",
+        "Custom HTTP / stdio",
         "",
-        "Missing env => hard failure",
-        "(do not fake 'sent=true')",
-    ], outline=RED, title_color=RED)
+        "Install → Enable",
+        "→ Authenticate",
+        "→ read-only first",
+    ], outline=S08_ORANGE, title_color=S08_ORANGE)
+    arrow(d, (700, 510), (760, 510), S08_ACCENT, width=4)
+    arrow(d, (1160, 510), (1220, 510), S08_ORANGE, width=4)
+    save(img, "08/03-mcp-tools.png")
     save(img, "08/03-telegram-surface.png")
 
 
 def s08_cursor_claude():
-    img, d = new_img()
-    center_text(d, (W / 2, 40), "Two hosts, same idea — pick the envelope", font(34, True))
-    _s04_panel(d, (60, 120, 920, 520), "Cursor host when…", [
-        "editing many files in a repo",
-        "you want IDE review + diff",
-        "rules in .cursor/ apply",
-        "pairing on UI CSS/layout",
+    """04 — Shortcuts map."""
+    img, d = s08_new_img()
+    s08_center(d, (W / 2, 40), "Slash commands & levers worth memorizing", font(34, True))
+    s08_panel(d, (60, 120, 960, 960), "Claude Code  /", [
+        "/context  — what's filling the window",
+        "/compact  — summarize & continue",
+        "/clear    — new task, keep memory",
+        "/btw      — side Q, no pollution",
+        "/plan     — plan before big edit",
+        "/mcp      — enable tools (Apify…)",
+        "/plugin   — install Apify etc.",
+        "/diff · /code-review",
+        "/resume · /rewind",
+    ], outline=S08_ORANGE, title_color=S08_ORANGE)
+    s08_panel(d, (1000, 120, 1860, 960), "Cursor", [
+        "Agents Window · Projects nav",
+        "Customize → MCP / Rules",
+        "@file · @folder (aimed context)",
+        "Cloud Agent for parallel / away",
+        "Project = coordinator + shared ctx",
+        "Accept / Reject diffs",
+        "Command Palette shortcuts",
         "",
-        "Host runs the coding agent",
-    ], outline=ACCENT, title_color=ACCENT)
-    _s04_panel(d, (1000, 120, 1860, 520), "Claude Code host when…", [
-        "recording a terminal demo",
-        "folder-scoped agent + subagents",
-        "scripted claude -p runs",
-        "CI-like repeatable prompts",
-        "",
-        "Host runs the coding agent",
-    ], outline=ORANGE, title_color=ORANGE)
-    _s04_panel(d, (60, 560, 1860, 960), "This course: no Copilot track", [
-        "Cursor & Claude Code = envelopes that RUN agents (not the tools themselves).",
-        "Tools = Read/Write/Edit… or Lab tools like render_html_card / notify_telegram.",
-        "Runtime agent needs ANTHROPIC_API_KEY + TELEGRAM_* (real send to your chat).",
-    ], outline=GREEN, title_color=GREEN)
+        "Tip: small fix → Chat",
+        "big multi-week → Project",
+    ], outline=S08_ACCENT, title_color=S08_ACCENT)
+    save(img, "08/04-shortcuts-map.png")
     save(img, "08/04-cursor-vs-claude.png")
 
 
 def s08_lab_flow():
-    img, d = new_img()
-    center_text(d, (W / 2, 40), "Lab 08 — surface_claude.py tools", font(36, True))
+    """05 — Lab still exists as short application."""
+    img, d = s08_new_img()
+    s08_center(d, (W / 2, 40), "Short Lab — surface after the power features", font(34, True))
     tools = [
-        ("get_quote", "CRM/quote facts"),
-        ("render_html_card", "out/briefing.html"),
-        ("notify_telegram", "write + send to your chat"),
-        ("notify CLI", "resend without LLM"),
+        ("get_*", "quote or work order"),
+        ("render_html_card", "browser card"),
+        ("notify_telegram", "real send to you"),
+        ("pick A or B", "Nimbus · Atlas"),
     ]
     for i, (name, desc) in enumerate(tools):
         x1 = 80 + (i % 2) * 920
         y1 = 140 + (i // 2) * 280
-        c = GREEN if i >= 2 else ACCENT
-        rounded(d, (x1, y1, x1 + 880, y1 + 230), CARD2, outline=c, radius=14, width=3)
+        c = S08_GREEN if i >= 2 else S08_ACCENT
+        rounded(d, (x1, y1, x1 + 880, y1 + 230), S08_CARD, outline=c, radius=14, width=3)
         d.text((x1 + 36, y1 + 60), name, font=font(28, True), fill=c)
-        d.text((x1 + 36, y1 + 120), desc, font=font(22), fill=MUTED)
-    center_text(d, (W / 2, 980), "Knobs: L-SMB / L-ENT / L-UPSELL · TELEGRAM_* required in .env", font(22), TEXT)
+        d.text((x1 + 36, y1 + 120), desc, font=font(22), fill=S08_MUTED)
+    s08_center(d, (W / 2, 980), "Same pattern · different domain · Telegram send required", font(22), S08_TEXT)
     save(img, "08/05-lab-tools.png")
+
 
 
 def main():
