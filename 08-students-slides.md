@@ -7,8 +7,7 @@
 # ‏מפגש 8 — מצגת סטודנטים
 ## ‏סודות Cursor · Claude Code · Cloud · MCP
 
-> **משך משוער:** ~2.5–3.5 שעות.  
-> דגש: מה **לא** רואים במסך הראשון — ניהול קונטקסט, MCP (כולל Apify), קיצורי דרך, Chat מול Projects, Cloud Agents.  
+> ניהול קונטקסט, MCP (כולל Apify), קיצורי דרך, Chat מול Projects, Cloud Agents.  
 > Lab קצר בסוף: משטח HTML + טלגרם (יישום, לא חזרה על מפגש 7).  
 > תדריך מנהלים: [`08-exec-briefing.md`](08-exec-briefing.md)
 
