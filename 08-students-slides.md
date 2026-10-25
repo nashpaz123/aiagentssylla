@@ -26,7 +26,7 @@ _לא עוד "מה זה agent" — אלא איך שולטים במעטפת_
 </p>
 
 **‏Cursor · Claude Code · Cloud · MCP**  
-הכלים שאתם כבר משתמשים בהם — עם הידיות הלא־גלויות
+הכלים שאתם כבר משתמשים בהם — 
 
 ![Context stack](assets/08/01-context-stack.png)
 
