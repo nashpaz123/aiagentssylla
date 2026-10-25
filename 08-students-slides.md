@@ -7,8 +7,7 @@
 # ‏מפגש 8 — מצגת סטודנטים
 ## ‏סודות Cursor · Claude Code · Cloud · MCP
 
-> **משך משוער:** ~2.5–3.5 שעות.  
-> דגש: קונטקסט, Rules מול Skills, גודל חלון, MCP, Chat·Cloud·Projects, טריקים.  
+> דגש: קונטקסט, Rules מול Skills, גודל חלון, MCP, Chat·Cloud·Projects.  
 > Lab קצר בסוף: HTML + טלגרם.  
 > תדריך מנהלים: [`08-exec-briefing.md`](08-exec-briefing.md) · תסריט מרצה מורחב: [`08-cursor-claude-surfaces.md`](08-cursor-claude-surfaces.md)
 
@@ -133,7 +132,7 @@
 | מודלים שדורשים Max | מופיעים בתיעוד המודלים | נדלקים אוטומטית כשבוחרים אותם |
 | Claude Code | `/model` + חץ effort; לא "סליידר חלון" נפרד תמיד | גודל החלון בא עם המודל |
 
-**טריקים:**
+**מה יוצא לנו מזה:**
 
 1. חלון גדול יותר ≠ איכות טובה יותר — יותר רעש + יותר עלות.  
 2. לפני Max Mode: `/compact`, Chat חדש, `@` ממוקד, subagent.  
