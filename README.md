@@ -37,7 +37,7 @@
 - **מפגש 5 (קצר יותר — ~2–2.5 שעות):** נפתח ב**הדגמה חיה** של צוות 3 subagents ב-Claude Code / Cursor (`demos/05-crew-opening/`), ואז CrewAI (Agent · Task · Crew · Process), Guardrails לצוות, ו-Lab (`labs/05-crewai-multi-agent/` — `mini_crew.py` בלי מפתח, `crew_demo.py` עם CrewAI אמיתי).
 - **מפגש 6 (~2–2.5 שעות):** הדגמת פתיחה מומלצת ב-Claude Code/Cursor (`demos/06-memory-opening/`) — Store ב-`out/store.json`, 99 מול 101; Lab עם `memory_claude.py` + `ANTHROPIC_API_KEY` (או `memory_lab.py` בלי מפתח) וכפתורים (`--fresh-thread` / `forget`).
 - **מפגש 7 (~2.5–3.5 שעות):** Agents לאוטומציה עסקית (Sales Ops) — הדגמת Claude Code/Cursor (`demos/07-sales-opening/`) עם SMB/ENT/NOMAIL; Lab עם `sales_claude.py` + `ANTHROPIC_API_KEY` (שערי הנחה, HITL מנהל, upsell). תדריך מנהלים: [`07-exec-briefing.md`](07-exec-briefing.md). **בלי מסלול דטרמיניסטי ללא מפתח.**
-- **מפגש 8 (~2.5–3.5 שעות):** סודות Cursor/Claude — ניהול קונטקסט, MCP (Apify), Chat·Cloud·Projects, קיצורי דרך; Lab קצר למשטחים (`labs/08-agent-surfaces/` / `labs/08-facility-surfaces/`). תדריך: [`08-exec-briefing.md`](08-exec-briefing.md).
+- **מפגש 8 (~2.5–3.5 שעות):** סודות Cursor/Claude — קונטקסט, Rules≠Skills, גודל חלון/Max Mode, MCP (Apify), Chat·Cloud·Projects; Lab קצר למשטחים (`labs/08-agent-surfaces/` / `labs/08-facility-surfaces/`). תדריך: [`08-exec-briefing.md`](08-exec-briefing.md).
 
 ## ‏מוכן עכשיו
 

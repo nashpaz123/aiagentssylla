@@ -7,15 +7,14 @@
 # ‏מפגש 8 — מצגת סטודנטים
 ## ‏סודות Cursor · Claude Code · Cloud · MCP
 
-> ניהול קונטקסט, MCP (כולל Apify), קיצורי דרך, Chat מול Projects, Cloud Agents.  
-> Lab קצר בסוף: משטח HTML + טלגרם (יישום, לא חזרה על מפגש 7).  
-> תדריך מנהלים: [`08-exec-briefing.md`](08-exec-briefing.md)
+> **משך משוער:** ~2.5–3.5 שעות.  
+> דגש: קונטקסט, Rules מול Skills, גודל חלון, MCP, Chat·Cloud·Projects, טריקים.  
+> Lab קצר בסוף: HTML + טלגרם.  
+> תדריך מנהלים: [`08-exec-briefing.md`](08-exec-briefing.md) · תסריט מרצה מורחב: [`08-cursor-claude-surfaces.md`](08-cursor-claude-surfaces.md)
 
 ---
 
 # ‏חלק א׳ — מה מסתתר מאחורי המסך
-
-_לא עוד "מה זה agent" — אלא איך שולטים במעטפת_
 
 ## ‏1 — כותרת
 
@@ -26,7 +25,7 @@ _לא עוד "מה זה agent" — אלא איך שולטים במעטפת_
 </p>
 
 **‏Cursor · Claude Code · Cloud · MCP**  
-הכלים שאתם כבר משתמשים בהם — 
+הידיות הלא־גלויות: קונטקסט, Rules/Skills, Max Mode, MCP, Projects
 
 ![Context stack](assets/08/01-context-stack.png)
 
@@ -36,349 +35,311 @@ _לא עוד "מה זה agent" — אלא איך שולטים במעטפת_
 
 | מונח | הסבר |
 |---|---|
-| ‏**Context window** | כל מה שהמודל "רואה" בשיחה: הוראות, קבצים, כלים, תשובות |
-| ‏**CLAUDE.md** | זיכרון פרויקט שאתם כותבים — נטען בכל סשן Claude Code |
-| ‏**Auto memory** | הערות ש-Claude כותב לעצמו אחרי תיקונים שלכם |
-| ‏**/compact · /context** | פקודות לניהול מילוי החלון (סיכום / בדיקה) |
-| ‏**MCP** | פרוטוקול לחיבור כלים חיצוניים (Apify, DB, Slack…) |
-| ‏**Apify** | ספריית Actors לגרידה/אוטומציה — מתחבר כ-MCP/plugin |
-| ‏**Agent Chat** | שיחה מקומית/רגילה — משימה אחת, סגרו לפטופ = נעצר |
-| ‏**Cloud Agent** | Agent על VM בענן — ממשיך בלי הלפטופ, מקביל |
-| ‏**Project (Cursor)** | עבודה ארוכה עם **coordinator** + קונטקסט משותף + מנויים |
-| ‏**Rules / Skills** | הוראות קבועות (`.cursor/rules`, skills, `/`) |
+| ‏**Context window** | כל מה שהמודל רואה בבקשה אחת (הוראות+קבצים+כלים+היסטוריה) |
+| ‏**Max Mode** | (תוכניות legacy request-based) מרחיב חלון מעבר לברירת מחדל — יקר יותר |
+| ‏**Rules** | הוראות **תמיד־דולקות** — נטענות בכל שיחה |
+| ‏**Skills** | ידע/workflow **לפי דרישה** — נטען רק כשרלוונטי |
+| ‏**CLAUDE.md** | זיכרון פרויקט ב-Claude Code (אתם כותבים) |
+| ‏**Auto memory** | הערות ש-Claude כותב לעצמו |
+| ‏**MCP** | אוטובוס כלים חיצוניים (Apify, DB…) |
+| ‏**Cloud Agent** | Agent על VM בענן |
+| ‏**Project** | Coordinator + קונטקסט משותף + מנויים |
+| ‏**Effort / Thinking** | עומק חשיבה של המודל (לא אותו דבר כמו גודל חלון) |
 
 ---
 
-## ‏3 — הדגמת פתיחה — "מה ממלא את הקונטקסט?"
-
-**ב-Claude Code** (בתיקיית הדמו):
+## ‏3 — הדגמת פתיחה — `/context`
 
 ```text
 /context
 ```
 
-רואים: `CLAUDE.md` · זיכרון · שמות כלי MCP · skills — **לפני** שהקלדתם משימה.
-
-**ב-Cursor:** פתחו Agent Chat והצביעו על Rules / MCP ב-Customize — אותו רעיון: הקונטקסט לא ריק.
-
-מסר: רוב "הקסם" הוא **מה שנטען אוטומטית**, לא רק הפרומפט שלכם.
+רואים מה כבר בחלון **לפני** הפרומפט. ב-Cursor: Rules + MCP ב-Customize + בורר מודל (חלון / Max).
 
 ---
 
-## ‏4 — מה היום (בלי חזרה על מפגשים קודמים)
+## ‏4 — מה היום
 
-| נגלה היום | למה זה חדש |
+| נגלה | עומק |
 |---|---|
-| ניהול קונטקסט אמיתי | לא "יש זיכרון" — אלא `/context` / compact / rules |
-| MCP + Apify | כלים מבחוץ, לא רק Read/Write בריפו |
-| Chat · Cloud · Project | שלוש רמות עוצמה שונות |
-| קיצורי דרך ו-`/` | עבודה מהירה כמו מקצוענים |
-| Lab משטחים (קצר) | יישום: HTML + טלגרם — לא שיעור Sales Ops מחדש |
+| שכבות קונטקסט | מה עולה כסף בלי ששמתם לב |
+| Rules ≠ Skills | מתי מה — וטעויות נפוצות |
+| גודל חלון | מודל · Max Mode · למה "יותר" ≠ תמיד טוב |
+| MCP + Apify | כלים מבחוץ |
+| Chat · Cloud · Project | שלוש רמות |
+| Lab קצר | פלט HTML/טלגרם |
 
 ---
 
 ## ‏5 — שאלת המפגש
 
-**שאלה:** מתי Chat מספיק, מתי Cloud, ומתי Project — ואיך מוסיפים כלי כמו Apify בלי לכתוב SDK?
-
-| תוצר | "עובד" |
-|---|---|
-| `/context` מובן | יודעים מה תופס טוקנים |
-| MCP מחובר | כלי חיצוני מופיע ב-Available Tools |
-| הבחנת Chat / Cloud / Project | בחירה נכונה לתרחיש |
-| Lab | כרטיס + הודעת טלגרם אמיתית |
+**מתי** מגדילים חלון / **מתי** Skills במקום Rules / **מתי** Project במקום Chat — ואיך מוסיפים Apify בלי SDK?
 
 ---
 
-# ‏חלק ב׳ — ניהול קונטקסט (הסוד מס׳ 1)
-
-_החלון מתמלא — גם כשאתם לא שמים לב_
+# ‏חלק ב׳ — קונטקסט לעומק
 
 ## ‏6 — מה נכנס לחלון לפני שאתם מקלידים
 
 ![Context stack](assets/08/01-context-stack.png)
 
-| שכבה | דוגמה |
-|---|---|
-| הוראות פרויקט | `CLAUDE.md` · `.cursor/rules` · AGENTS.md |
-| זיכרון | Auto memory (Claude) |
-| קטלוג כלים | שמות MCP / skills (לא התוכן המלא עדיין) |
-| אחר כך | קריאות קבצים, תשובות, תוצאות כלים |
+| שכבה | דוגמה | עלות קונטקסט |
+|---|---|---|
+| הוראות | `CLAUDE.md` · Rules · AGENTS.md | **תמיד** |
+| זיכרון | Auto memory | כמעט תמיד |
+| קטלוג | שמות MCP / תיאורי Skills | קטן יחסית |
+| עבודה | `@file` · קריאות · תוצאות כלים | גדל מהר |
+| ניהול | `/compact` · Chat חדש · subagent | מחזיר מקום |
 
 ---
 
 ## ‏7 — CLAUDE.md · Rules · Auto memory
 
-| מנגנון | מי כותב | למה |
+| מנגנון | מי כותב | נטען מתי |
 |---|---|---|
-| `CLAUDE.md` | אתם | סטנדרטים, איך מריצים, מה אסור |
-| `.claude/rules/` / `.cursor/rules` | אתם | כללים לפי נתיב/נושא |
-| Auto memory | Claude | לומד מתיקונים שלכם |
+| `CLAUDE.md` | אתם | כל סשן Claude Code |
+| `.cursor/rules` / `.claude/rules` | אתם | לפי סוג הכלל (תמיד / glob) |
+| Auto memory | Claude | כל סשן (מוגבל בגודל) |
 
-טיפ: קצר ומדויק > מסמך ארוך שהמודל מתעלם ממנו.
-
-```bash
-# Claude Code — התחלה בריפו חדש
+```text
 /init
 /memory
 ```
 
+טיפ: הצביעו לקבצי דוגמה בריפו — אל תעתיקו style guide שלם לכלל.
+
 ---
 
-## ‏8 — פקודות קונטקסט ב-Claude Code
+## ‏8 — Rules מול Skills (ההבדל הקריטי)
+
+| | **Rules** | **Skills** |
+|---|---|---|
+| מתי נטען | כל שיחה רלוונטית | רק כשהסוכן (או אתם ב-`/`) מפעילים |
+| מטרה | מוסכמות תמיד־דולקות | Workflow מומחה / תבנית |
+| מחיר קונטקסט | משלמים **תמיד** | משלמים בעיקר בהפעלה |
+| דוגמה | "Vitest לא Jest" · נתיב API | `/deploy-staging` · `/pr` |
+| איפה | `.cursor/rules/` · User/Team Rules | `SKILL.md` · `/skill-name` |
+
+**כלל אצבע:** אם אתם חוזרים על אותה טעות בכל צ׳אט → Rule. אם זה תהליך של 5–10 שלבים מדי פעם → Skill.
+
+---
+
+## ‏9 — איך משנים את גודל ה-Context Window
+
+| דרך | איפה | מה קורה |
+|---|---|---|
+| בחירת **מודל** | בורר מודל ב-Cursor / `/model` ב-Claude | לכל מודל יש default (למשל ~200k) ולחלק max עד ~1M |
+| **Max Mode** | Toggle בבורר מודל (בעיקר תוכניות legacy request-based) | מרחיב מעבר לברירת מחדל; תעריף API + ~20% ב-legacy |
+| מודלים שדורשים Max | מופיעים בתיעוד המודלים | נדלקים אוטומטית כשבוחרים אותם |
+| Claude Code | `/model` + חץ effort; לא "סליידר חלון" נפרד תמיד | גודל החלון בא עם המודל |
+
+**טריקים:**
+
+1. חלון גדול יותר ≠ איכות טובה יותר — יותר רעש + יותר עלות.  
+2. לפני Max Mode: `/compact`, Chat חדש, `@` ממוקד, subagent.  
+3. Effort/Thinking = **עומק חשיבה**, לא אותו כפתור כמו גודל חלון.  
+4. ב-Claude: `ultrathink` בתוך פרומפט = חשיבה עמוקה לסיבוב אחד בלי לשנות effort קבוע.
+
+---
+
+## ‏10 — פקודות קונטקסט ב-Claude Code
 
 | פקודה | מתי |
 |---|---|
-| `/context` | "למה זה איטי / יקר / מבולבל?" |
-| `/compact` | השיחה ארוכה — סיכום מובנה, ממשיכים |
-| `/clear` | משימה חדשה, בלי לגרור היסטוריה |
-| `/btw` | שאלה בצד — **בלי** לזהם את הקונטקסט הראשי |
-| Subagent / Task | מחקר כבד בחלון **נפרד** — חזרה רק סיכום |
+| `/context` | לראות מה תופס טוקנים |
+| `/compact` | סיכום והמשך באותו סשן |
+| `/clear` | משימה חדשה, זיכרון פרויקט נשאר |
+| `/btw` | שאלה בצד — בלי לזהם היסטוריה |
+| `/model` · `/effort` | מודל ועומק |
+| Subagent / Task | מחקר בחלון נפרד |
 
 ---
 
-## ‏9 — קונטקסט ב-Cursor (בלי להציף)
+## ‏11 — קונטקסט ב-Cursor (בלי להציף)
 
-- `@file` / `@folder` — בחירה מכוונת, לא "תקרא הכל"  
-- Rules בפרויקט — חוזרים בכל Agent  
-- Notepads / Docs — הקשר יציב למשימות חוזרות  
-- שיחה ארוכה מדי → Chat חדש + הפניה לכללים, לא עוד 40 הודעות  
-
----
-
-## ‏10 — Subagents = קונטקסט נפרד
-
-כש-Claude/Cursor מריצים subagent:
-
-- הקבצים הגדולים נקראים **אצלו**  
-- אליכם חוזר סיכום קצר  
-- החלון הראשי נשאר פנוי למשימה  
-
-זה הטריק: לא "עוד מודל" — אלא **בידוד קונטקסט**.
+- `@file` / `@folder` / `@symbol` — ממוקד  
+- Rules קצרים + מצביעים לדוגמאות  
+- Skills ל-`/pr`, `/review`, deploy  
+- שיחה ארוכה → Chat חדש + Rule, לא עוד 40 הודעות  
+- `.cursorignore` — מה לא לסרוק (כמו gitignore לסוכן)
 
 ---
 
-# ‏חלק ג׳ — כלים חיצוניים (MCP · Apify)
+## ‏12 — Subagents = בידוד קונטקסט
 
-_הסוכן יוצא מהריפו_
+הקבצים הגדולים נקראים אצל ה-subagent; אליכם חוזר סיכום.  
+זה לא "עוד מודל בשביל הכיף" — זה **הגנה על החלון הראשי**.
 
-## ‏11 — MCP במשפט אחד
+---
+
+## ‏13 — טריקים נוספים (רשימת מקצוענים)
+
+| טריק | למה |
+|---|---|
+| Hooks (PreToolUse) | חסימה קשיחה — Rules הן המלצה, Hook יכול לאסור |
+| Plan mode / `/plan` | תכנון לפני עריכה גדולה |
+| Skill עם `context: fork` | הרצת skill בקונטקסט מופרד |
+| CLI ככלי (`gh`, `kubectl`) | בלי MCP — Rule שמפנה ל-CLI |
+| Cloud MCP auth נפרד | "מחובר אצלי" ≠ מחובר ל-Cloud Agent |
+| Notepads / Docs | הקשר יציב בלי להדביק בכל פרומפט |
+| `/permissions` | שערי אישור לפני הרס |
+
+---
+
+# ‏חלק ג׳ — MCP · Apify
+
+## ‏14 — MCP במשפט אחד
 
 ![MCP bus](assets/08/03-mcp-tools.png)
 
-**MCP** = אוטובוס כלים. Cursor ו-Claude Code מתחברים לשרתים שמציעים Tools / Resources / Prompts.
-
-בלי MCP: רק קבצים וטרמינל מקומי.  
-עם MCP: Apify, דאטהבייס, ברואוזר, Slack…
+אוטובוס כלים: Tools / Resources / Prompts. Hosts: Cursor · Claude Code · Cloud Agents.
 
 ---
 
-## ‏12 — חיבור Apify (דוגמה חיה)
-
-**Claude Code:**
+## ‏15 — חיבור Apify
 
 ```text
 /plugin install apify
-/mcp          # Enable + Authenticate ל-plugin:apify:apify
+/mcp    # Enable + Authenticate
 ```
 
-**Cursor:** Customize → MCP → הוסיפו שרת (או מ-Marketplace) · אשרו OAuth אם נדרש.
-
-פרומפט ראשון (בלי להריץ Actor יקר):
-
-> מצא Actor טוב ל-Google Maps ב-Apify. הצג input, מחיר, ופורמט פלט — **אל תריץ עדיין**.
+Cursor: Customize → MCP. פרומפט ראשון: חיפוש Actor **בלי** הרצה.
 
 ---
 
-## ‏13 — כללים לכלי חיצוני
+## ‏16 — כללים לכלי חיצוני
 
-- [ ] אימות (OAuth/token) נפרד מקומי מול Cloud  
-- [ ] אישור כלי לפני side-effect (גרידה / כתיבה)  
-- [ ] לא לשים מפתחות ב-chat history / screenshots  
-- [ ] Cloud Agents: MCP נפרד — צריך לחבר גם שם  
-
----
-
-## ‏14 — הדגמה קצרה — כלי אחד שעובד
-
-1. חברו Apify **או** MCP אחר שכבר יש לכם  
-2. בקשו פעולת **קריאה בלבד**  
-3. הראו בלוג/UI ששם הכלי הופיע  
-4. כבו את השרת — ודאו שהסוכן מדווח שאין כלי (לא ממציא הצלחה)
+- [ ] OAuth/token נפרד ל-Cloud  
+- [ ] אישור לפני side-effect  
+- [ ] אין מפתחות בצ׳אט/מסך  
+- [ ] קריאה בלבד לפני כתיבה/גרידה  
 
 ---
 
-# ‏חלק ד׳ — Chat · Cloud Agents · Projects
+## ‏17 — הדגמה — כלי אחד
 
-_שלוש רמות — לא אותו כפתור_
-
-## ‏15 — Agent Chat (ברירת מחדל)
-
-| מתאים | לא מתאים |
-|---|---|
-| תיקון קובץ / הסבר / PR קטן | מיגרציה של שבועיים |
-| אתם ליד המקלדת | לפטופ סגור, CI בלילה |
-| קונטקסט קצר | עשרות משימות מקבילות |
+חברו → קריאה בלבד → ראו שם כלי בלוג → כבו שרת → ודאו כשל גלוי.
 
 ---
 
-## ‏16 — Cloud Agents
+# ‏חלק ד׳ — Chat · Cloud · Projects
+
+## ‏18 — Agent Chat
+
+מתאים: באג/PR קטן ליד המקלדת. לא: מיגרציה של שבועיים / לפטופ סגור.
+
+---
+
+## ‏19 — Cloud Agents
 
 ![Chat vs Cloud vs Project](assets/08/02-chat-cloud-project.png)
 
-- רצים על **VM בענן** (ריפו, deps, סודות, רשת)  
-- אפשר רבים במקביל — הלפטופ לא חייב להיות פתוח  
-- יכולים לבנות, לבדוק, לפתוח PR, להשתמש ב-MCP  
-- Multi-repo: פרונט + בקאנד באותה משימה  
-
-מתי: "תתקן CI ותפתח PR בזמן שאני בישיבה".
+VM בענן · מקבילי · MCP · multi-repo · לפטופ יכול להיות סגור.
 
 ---
 
-## ‏17 — Projects ב-Cursor
+## ‏20 — Projects
 
-Project ≠ עוד Chat.
-
-| רעיון | משמעות |
-|---|---|
-| Coordinator | מתכנן ומפצל — **לא** כותב את כל הקוד בעצמו |
-| Agents פנימיים | מבצעים; אפשר להיכנס לכל אחד |
-| Shared context | קבצים/לקחים שגדלים לאורך שבועות |
-| Subscriptions | Slack / לוח זמנים / PRs — בלי שתפתחו צ׳אט |
-
-זמין בתוכניות עם Cloud Agents (לא Free/Plus).
+Coordinator מתכנן ומפצל · Shared context גדל · Subscriptions (Slack/CI/לוח זמנים).  
+לא לכל משימת קובץ אחד.
 
 ---
 
-## ‏18 — מתי מה? (טבלת החלטה)
+## ‏21 — מתי מה?
 
 | תרחיש | בחירה |
 |---|---|
-| באג בקבץ אחד | **Chat** |
-| PR + טסטים בזמן שאתם בחוץ | **Cloud Agent** |
-| פיצ׳ר גדול / מיגרציה / ניטור חוזר | **Project** |
-| גרידה חד־פעמית מ-Apify | Chat/Cloud + **MCP** |
-| אותה הנחיה לכל הסטודנטים בקורס | Rules / `CLAUDE.md` |
+| באג בקובץ | Chat |
+| PR+טסטים בישיבה | Cloud |
+| פיצ׳ר/מיגרציה/ניטור | Project |
+| גרידה חד־פעמית | Chat/Cloud + MCP |
+| מוסכמת צוות תמיד | Rule |
+| תהליך `/deploy` | Skill |
 
 ---
 
-## ‏19 — קיצורי דרך שחוסכים שיעור שלם
-
-**Claude Code — הקלידו `/`:**
-
-| | |
-|---|---|
-| `/plan` | תכנון לפני שינוי גדול |
-| `/model` · `/effort` | מודל ועומק חשיבה |
-| `/diff` · `/code-review` | לפני שיפולינג |
-| `/permissions` | שערי אישור |
-| `/resume` · `/rewind` | חזרה בזמן |
-
-**Cursor:** Command Palette · פתיחת Agents Window · קיצורי Accept/Reject ל-diff · מעבר מהיר ל-MCP ב-Customize.
+## ‏22 — קיצורי דרך
 
 ![Shortcuts](assets/08/04-shortcuts-map.png)
 
+Claude: `/context` `/compact` `/plan` `/mcp` `/diff` `/resume` `/rewind`  
+Cursor: Agents Window · Projects · MCP · Accept/Reject · Palette
+
 ---
 
-# ‏חלק ה׳ — Lab קצר (יישום, לא חזרה)
+# ‏חלק ה׳ — Lab קצר
 
-_אותם רעיונות → פלט למשתמש_
+## ‏23 — למה Lab היום?
 
-## ‏20 — למה בכלל Lab היום?
+יישום פלט אחרי הכוח של המעטפת. בחרו A או B בהקלטה.
 
-אחרי הכוח של המעטפת — מוודאים שיודעים **להוציא פלט**:
-
-- כרטיס HTML בדפדפן  
-- הודעת Telegram אמיתית לצ׳אט שלכם  
-
-בחרו **מסלול אחד** בהקלטה (A או B). השני לשיעורי בית.
-
-| מסלול | דומיין | תיקייה |
+| | דומיין | תיקייה |
 |---|---|---|
-| A · Nimbus | הצעת מחיר | [`labs/08-agent-surfaces/`](labs/08-agent-surfaces/) |
-| B · Atlas | קריאת שירות בבניין | [`labs/08-facility-surfaces/`](labs/08-facility-surfaces/) |
+| A | הצעת מחיר | `labs/08-agent-surfaces/` |
+| B | קריאת שירות | `labs/08-facility-surfaces/` |
 
 ![Lab tools](assets/08/05-lab-tools.png)
 
 ---
 
-## ‏21 — Lab — הרצה (דוגמה A)
+## ‏24 — Lab — הרצה
 
 ```bash
-cd labs/08-agent-surfaces
-python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env   # ANTHROPIC + TELEGRAM_*
-
-python3 surface_claude.py reset
-python3 surface_claude.py chat --lead L-SMB --message "הכן כרטיס ושלח לטלגרם שלי"
+cd labs/08-agent-surfaces   # או 08-facility-surfaces
+cp .env.example .env
+python3 surface_claude.py chat --lead L-SMB --message "הכן כרטיס ושלח לטלגרם"
+# B: facility_claude.py chat --wo WO-ELEV --message "..."
 ```
 
-מסלול B: `facility_claude.py --wo WO-ELEV` ב-[`labs/08-facility-surfaces/`](labs/08-facility-surfaces/).
+---
 
-דמו Claude כתיבת קבצים: `demos/08-surface-opening/` או `demos/08-facility-opening/` + `./send-telegram.sh`.
+## ‏25 — Lab — Debrief
+
+- [ ] יודעים Rules≠Skills וחלון≠effort  
+- [ ] `sent=true` בטלגרם  
+- [ ] יודעים אם המשימה הזו Chat/Cloud/Project  
 
 ---
 
-## ‏22 — Lab — Debrief
+## ‏26 — בונוס: MCP → Surface
 
-- [ ] `/context` או Rules הוזכרו לפני ה-Lab (קונטקסט ≠ רק JSON)  
-- [ ] הודעה הגיעה לטלגרם (`sent=true`)  
-- [ ] HTML נפתח עם צבע לפי route/severity  
-- [ ] יודעים להגיד אם המשימה הזו הייתה Chat / Cloud / Project  
-
----
-
-## ‏23 — חיבור למפגש: MCP + משטח
-
-רעיון בונוס (אם יש זמן):
-
-1. Agent ב-Cursor עם MCP (למשל Apify קריאה בלבד)  
-2. תוצאה → כתיבה ל-JSON קטן  
-3. Lab/`notify` שולח סיכום לטלגרם  
-
-מסר: **כלי חיצוני → קונטקסט → Surface**.
+MCP קריאה → JSON → `notify_telegram`.
 
 ---
 
 # ‏חלק ו׳ — סיכום
 
-## ‏24 — Anti-Patterns (של מעטפות, לא של Sales)
+## ‏27 — Anti-Patterns
 
-| אנטי־דפוס | למה נשבר |
+| אנטי־דפוס | למה |
 |---|---|
-| שיחה אינסופית בלי `/compact` | קונטקסט מלא → טעויות + עלות |
-| Project למשימת קובץ אחד | יקר ומסורבל |
-| MCP בלי אימות ב-Cloud | "עובד אצלי" ≠ עובד בסוכן ענן |
-| להאמין ל"שלחתי" בלי תוצאת כלי | נרטיב ≠ API |
-| להעתיק מפתחות לצ׳אט | דליפה |
+| Rule של 2,000 שורות | אוכל חלון + מתעלמים |
+| Skill לכל פסיק | אף אחד לא מפעיל |
+| Max Mode כברירת מחדל | עלות בלי תועלת |
+| Project לקובץ אחד | יקר |
+| MCP רק מקומי | Cloud נכשל בשקט |
+| "שלחתי" בלי תוצאת כלי | נרטיב |
 
 ---
 
-## ‏25 — סיכום
+## ‏28 — סיכום
 
-- קונטקסט מנוהל — לא "קורה מעצמו"  
-- MCP (Apify וחברים) = ידיים מחוץ לריפו  
-- Chat ≠ Cloud ≠ Project  
-- `/` ו-Rules חוסכים שעות  
-- Lab: פלט אנושי (HTML + טלגרם)  
-- במפגש הבא: **Testing ו-Debugging Agents**
+קונטקסט מנוהל · Rules≠Skills · חלון לפי מודל/Max · MCP · Chat≠Cloud≠Project · Lab פלט · מפגש 9: Testing
 
 ---
 
-## ‏26 — הכנה למפגש 9
+## ‏29 — הכנה למפגש 9
 
-- איך בודקים ש-MCP באמת נקרא (לוג כלי)?  
-- איך בודקים ש-send לטלגרם לא רץ בלי token?  
-- רשמו 2 בדיקות שבירות לקונטקסט מלא מדי  
+איך בודקים MCP נקרא? send בלי token? קונטקסט מלא מדי?
 
 ---
 
-## ‏27 — תרגיל בית
+## ‏30 — תרגיל בית
 
-1. הריצו `/context` (או הצגה מקבילה ב-Cursor) וצלמו/רשמו מה תופס הכי הרבה  
-2. חברו MCP אחד (Apify מומלץ) ובצעו שאילתת קריאה בלבד  
-3. כתבו ב-5 שורות: מתי הייתם בוחרים Project ולא Chat  
-4. Lab: השלימו את המסלול שלא הרצתם בכיתה (A או B) · או הוסיפו `WO-CLEAN` / `valid_until`  
+1. `/context` — רשמו את 3 התופסים הגדולים  
+2. כתבו Rule אחד קצר + Skill אחד (`/…`)  
+3. נסו (או תעדו) שינוי מודל / Max Mode — מה השתנה בחלון/עלות  
+4. MCP קריאה בלבד (Apify מומלץ)  
+5. Lab: המסלול שלא הרצתם בכיתה  
 
 </div>
