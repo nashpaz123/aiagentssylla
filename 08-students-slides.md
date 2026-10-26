@@ -24,7 +24,7 @@
 </p>
 
 **‏Cursor · Claude Code · Cloud · MCP**  
-הידיות הלא־גלויות: קונטקסט, Rules/Skills, Max Mode, MCP, Projects
+ה־handles הלא־גלויות: קונטקסט, Rules/Skills, Max Mode, MCP, Projects
 
 ![Context stack](assets/08/01-context-stack.png)
 
