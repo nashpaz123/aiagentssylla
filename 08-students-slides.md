@@ -48,13 +48,28 @@
 
 ---
 
-## ‏3 — הדגמת פתיחה — `/context`
+## ‏3 — הדגמת פתיחה — <code dir="ltr">/context</code>
 
-```text
-/context
+תיקייה: <code dir="ltr">demos/08-context-opening/</code> (יש בה `CLAUDE.md` מוכן).
+
+**שלב א׳ — Claude Code**
+
+```bash
+cd demos/08-context-opening
+claude
 ```
 
-רואים מה כבר בחלון **לפני** הפרומפט. ב-Cursor: Rules + MCP ב-Customize + בורר מודל (חלון / Max).
+בתוך הסשן הקלידו בדיוק (לוכסן בהתחלה):
+
+<pre dir="ltr"><code>/context</code></pre>
+
+רואים מה כבר בחלון **לפני** פרומפט משימה: `CLAUDE.md`, memory, כלים/skills.
+
+**שלב ב׳ — Cursor (אותה תיקייה)**
+
+1. Open Folder → <code dir="ltr">demos/08-context-opening</code>  
+2. Agent Chat → Customize → Rules / MCP  
+3. בורר מודל: בדקו מה כתוב ליד המודל (חלון / Max)
 
 ---
 
@@ -101,10 +116,9 @@
 | `.cursor/rules` / `.claude/rules` | אתם | לפי סוג הכלל (תמיד / glob) |
 | Auto memory | Claude | כל סשן (מוגבל בגודל) |
 
-```text
-/init
+<pre dir="ltr"><code>/init
 /memory
-```
+</code></pre>
 
 טיפ: הצביעו לקבצי דוגמה בריפו — אל תעתיקו style guide שלם לכלל.
 
@@ -240,10 +254,11 @@
 
 ## ‏16 — חיבור Apify
 
-```text
-/plugin install apify
-/mcp    # Enable + Authenticate
-```
+<pre dir="ltr"><code>/plugin install apify
+/mcp
+</code></pre>
+
+אחר כך ב־<code dir="ltr">/mcp</code>: Enable + Authenticate ל־<code dir="ltr">plugin:apify:apify</code>.
 
 ‏Cursor: Customize → MCP. פרומפט ראשון: חיפוש Actor **בלי** הרצה.
 
@@ -327,10 +342,17 @@ Cursor: Agents Window · Projects · MCP · Accept/Reject · Palette
 ## ‏25 — Lab — הרצה
 
 ```bash
-cd labs/08-agent-surfaces   # או 08-facility-surfaces
-cp .env.example .env
-python3 surface_claude.py chat --lead L-SMB --message "הכן כרטיס ושלח לטלגרם"
-# B: facility_claude.py chat --wo WO-ELEV --message "..."
+cd labs/08-agent-surfaces
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env   # ANTHROPIC + TELEGRAM_*
+
+python3 surface_claude.py reset
+python3 surface_claude.py chat --lead L-SMB --message "הכן כרטיס HTML ושלח סיכום לטלגרם שלי"
+# פתחו out/briefing.html · בדקו טלפון · חפשו sent=true
+
+# מסלול B:
+# cd labs/08-facility-surfaces && python3 facility_claude.py chat --wo WO-ELEV --message "שלח עכשיו"
 ```
 
 ---

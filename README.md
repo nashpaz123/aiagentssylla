@@ -50,7 +50,7 @@
 | 5 CrewAI & Multi-Agent | [`05-crewai-multi-agent.md`](05-crewai-multi-agent.md) | [`05-students-slides.md`](05-students-slides.md) | `assets/05/` · `demos/05-crew-opening/` |
 | 6 Memory & State | [`06-memory-and-state.md`](06-memory-and-state.md) | [`06-students-slides.md`](06-students-slides.md) | `assets/06/` · `demos/06-memory-opening/` |
 | 7 Business automation | [`07-business-automation.md`](07-business-automation.md) · תדריך מנהלים: [`07-exec-briefing.md`](07-exec-briefing.md) | [`07-students-slides.md`](07-students-slides.md) | `assets/07/` · `demos/07-sales-opening/` |
-| 8 Cursor · Claude · Power features | [`08-cursor-claude-surfaces.md`](08-cursor-claude-surfaces.md) · תדריך: [`08-exec-briefing.md`](08-exec-briefing.md) | [`08-students-slides.md`](08-students-slides.md) | `assets/08/` · demos/labs 08 |
+| 8 Cursor · Claude · Power features | [`08-cursor-claude-surfaces.md`](08-cursor-claude-surfaces.md) · תדריך: [`08-exec-briefing.md`](08-exec-briefing.md) | [`08-students-slides.md`](08-students-slides.md) | `assets/08/` · demos/08-context-opening · demos/labs 08 |
 
 ## ‏חידוש דיאגרמות וצילומי מסך
 

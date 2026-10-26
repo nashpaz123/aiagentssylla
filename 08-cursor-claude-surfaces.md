@@ -11,7 +11,12 @@
 > **Labs:** [`labs/08-agent-surfaces/`](labs/08-agent-surfaces/) · [`labs/08-facility-surfaces/`](labs/08-facility-surfaces/)  
 > דיאגרמות בהירות: `assets/08/`
 
-**הכנת הקלטה:** `/context` · בורר מודל · שיחה ארוכה מוכנה ל-`/compact` חי · `.env` לטלגרם.
+**הכנת הקלטה (צ׳קליסט מדויק):**
+1. שכפלו/פתחו את הריפו `aiagentssylla`  
+2. ודאו שקיימת התיקייה <code dir="ltr">demos/08-context-opening/</code> (עם `CLAUDE.md`)  
+3. התקינו Claude Code ב-PATH (`claude --version`)  
+4. ל-Lab: העתיקו `.env` ב-<code dir="ltr">labs/08-agent-surfaces/</code> או Facility עם `ANTHROPIC_API_KEY` + `TELEGRAM_*`  
+5. אופציונלי Apify: חשבון מוכן מראש  
 
 ---
 
@@ -80,30 +85,64 @@
 
 ---
 
-## ‏3 — הדגמת פתיחה — `/context`
+## ‏3 — הדגמת פתיחה — <code dir="ltr">/context</code>
 
 [סטודנטים · 3]
 
 **על המסך:**
 
-```text
-/context
+תיקייה: <code dir="ltr">demos/08-context-opening/</code>
+
+```bash
+cd demos/08-context-opening
+claude
 ```
 
-רואים מה כבר בחלון **לפני** הפרומפט. ב-Cursor: Rules + MCP ב-Customize + בורר מודל (חלון / Max).
+בתוך Claude Code:
 
-**להקראה:**
+<pre dir="ltr"><code>/context</code></pre>
+
+אחר כך Cursor על **אותה** תיקייה: Customize → Rules / MCP · בורר מודל (חלון / Max).
+
+**להקראה / תסריט ביצוע (לא לדלג על נתיבים):**
 
 **[דמו חי — 5–7 דקות]**
 
-הכינו מראש תיקייה עם `CLAUDE.md` קצר (או הריצו `/init` בריפו הדמו).
+### לפני השיעור (חד־פעמי)
+1. פתחו טרמינל בשורש הריפו `aiagentssylla` (איפה שיש את התיקיות `demos/` ו-`labs/`).  
+2. ודאו: <code dir="ltr">ls demos/08-context-opening/CLAUDE.md</code> — הקובץ קיים.  
+3. אם חסר: משכו מ-`main` או צרו לפי README בתיקייה.
 
-1. פתחו Claude Code, הקלידו `/context` **לפני** כל משימה.
-2. הצביעו: הוראות פרויקט, זיכרון, רשימת כלים/skills — כבר בפנים.
-3. עברו ל-Cursor: Customize → Rules / MCP. בבורר מודל הראו אם מופיע Max / גודל חלון.
-4. אמרו: "רוב התלונות 'הסוכן שכח' מתחילות מכאן — החלון מלא בזבל או חסר Rules."
+### חלק א׳ — Claude Code (מסך מלא / שיתוף טרמינל)
+1. הריצו בדיוק:
 
-אם אין רשת יציבה: צילום מסך מוכן של `/context`.
+```bash
+cd demos/08-context-opening
+pwd    # חייב להסתיים ב-.../demos/08-context-opening
+claude
+```
+
+2. אחרי שנפתח הסשן האינטראקטיבי — **בלי** לכתוב קודם משימה ארוכה — הקלידו בשורה החדשה בדיוק את הפקודה הבאה (לוכסן בהתחלה, לא `context/`):
+
+<pre dir="ltr"><code>/context</code></pre>
+
+3. על המסך הצביעו בקול על השורות שמופיעות, למשל:
+   - טעינת `CLAUDE.md` מהתיקייה הזו  
+   - Auto memory (אם יש)  
+   - שמות MCP / skills (אם מחוברים במכונה)  
+4. אמרו: "זה מה שכבר בחלון **לפני** שהקלדנו 'תתקן באג'."
+
+### חלק ב׳ — Cursor (אותה תיקייה)
+1. ב-Cursor: **File → Open Folder…** ובחרו את  
+   <code dir="ltr">…/aiagentssylla/demos/08-context-opening</code>  
+   (לא את שורש הריפו — במכוון תיקיית הדמו).  
+2. פתחו **Agent** Chat.  
+3. סרגל צד / Customize → **Rules** ו-**MCP** — הראו מה מחובר.  
+4. פתחו את **בורר המודל** בראש הצ׳אט — הצביעו על גודל חלון / Max Mode אם מופיע.  
+5. משפט סיכום לכיתה: "רוב התלונות 'הסוכן שכח' מתחילות מכאן — חלון מלא בזבל או חסר Rules."
+
+### אם אין רשת / Claude Code לא עובד
+פתחו צילום מסך מוכן של פלט <code dir="ltr">/context</code> מתוך `demos/08-context-opening`, ועדיין עברו על חלק ב׳ ב-Cursor.
 
 ---
 
@@ -197,10 +236,9 @@
 | `.cursor/rules` / `.claude/rules` | אתם | לפי סוג הכלל (תמיד / glob) |
 | Auto memory | Claude | כל סשן (מוגבל בגודל) |
 
-```text
-/init
+<pre dir="ltr"><code>/init
 /memory
-```
+</code></pre>
 
 טיפ: הצביעו לקבצי דוגמה בריפו — אל תעתיקו style guide שלם לכלל.
 
@@ -334,7 +372,11 @@
 
 **[פקודות קונטקסט — 5 דקות]**
 
-הדגימו לפחות שלוש בלייב אם אפשר: `/context`, `/compact` (על שיחה ארוכה מוכנה), `/btw` ("מה השעה בטוקיו?" כדוגמה) והראו שההיסטוריה הראשית לא מתנפחת.
+הדגימו מתוך <code dir="ltr">demos/08-context-opening</code>:
+```bash
+cd demos/08-context-opening && claude
+```
+אחר כך <code dir="ltr">/context</code>, שיחה קצרה, ואז <code dir="ltr">/compact</code> (על שיחה ארוכה מוכנה), `/btw` ("מה השעה בטוקיו?" כדוגמה) והראו שההיסטוריה הראשית לא מתנפחת.
 
 `/clear` מול `/compact`: clear = דף חדש; compact = ממשיכים עם סיכום. זיכרון פרויקט (`CLAUDE.md` / auto memory) לא נמחק ב-clear.
 
@@ -528,24 +570,45 @@
 
 **על המסך:**
 
-```text
-/plugin install apify
-/mcp    # Enable + Authenticate
-```
+<pre dir="ltr"><code>/plugin install apify
+/mcp
+</code></pre>
+
+אחר כך ב־<code dir="ltr">/mcp</code>: Enable + Authenticate ל־<code dir="ltr">plugin:apify:apify</code>.
 
 ‏Cursor: Customize → MCP. פרומפט ראשון: חיפוש Actor **בלי** הרצה.
 
 **להקראה:**
 
-**[Apify — 6–8 דקות]**
+**[Apify — 6–8 דקות · צעדים מדויקים]**
 
-אם אפשר לייב: `/plugin install apify` → `/mcp` → Enable → Authenticate.
+### אופציה A — Claude Code (מומלץ אם יש חשבון Apify)
+1. בטרמינל (אפשר מתוך <code dir="ltr">demos/08-context-opening</code> או שורש הריפו):
 
-פרומפט בטוח לכיתה: חיפוש Actor + מחיר + סכמת קלט — **בלי Run**.
+```bash
+claude
+```
 
-אם אין חשבון: עברו על המסמך / מסך Marketplace והסבירו את אותם שלבים.
+2. הקלידו בדיוק:
 
-טריק: אחרי החיבור, שאלו את הסוכן "אילו כלי Apify זמינים לך עכשיו?" — מוודאים שהקטלוג באמת נטען.
+<pre dir="ltr"><code>/plugin install apify</code></pre>
+
+3. אשרו התקנה (Install for you). אם צריך: <pre dir="ltr"><code>/reload-plugins</code></pre>  
+4. הקלידו: <pre dir="ltr"><code>/mcp</code></pre>  
+5. מצאו ברשימה את <code dir="ltr">plugin:apify:apify</code> → **Enable** → **Authenticate** (דפדפן OAuth).  
+6. פרומפט בטוח (העתיקו):
+
+> מצא Actor טוב ב-Apify ל-Google Maps places. הצג input, מחיר, ופורמט פלט. **אל תריץ את ה-Actor.**
+
+### אופציה B — Cursor
+1. Open Folder = הריפו או תיקיית הדמו.  
+2. Customize → **MCP** → הוסיפו/הפעילו Apify מה-Marketplace.  
+3. אותו פרומפט כמו למעלה ב-Agent Chat.
+
+### בלי חשבון Apify
+אל תאלתרו התקנה — פתחו את הדוקס: `https://docs.apify.com/integrations/claude-code-cli` והסבירו את אותם שלבים על המסך.
+
+טריק אחרי חיבור: "אילו כלי Apify זמינים לך עכשיו?"
 
 ---
 
@@ -749,11 +812,40 @@ python3 surface_claude.py chat --lead L-SMB --message "הכן כרטיס ושל�
 
 **להקראה:**
 
-**[Lab חי — 10–15 דקות]**
+**[Lab חי — 10–15 דקות · מסלול A מדויק]**
 
-`.env` מוכן מראש. הרצו SMB או WO-ELEV. פתחו HTML + בדקו טלפון.
+בחירת הקלטה: **A = Nimbus** (ברירת מחדל). B בסוף אם יש זמן.
 
-בזמן ההמתנה למודל: חזרו על השאלה — האם המשימה הזו הייתה צריכה להיות Cloud? (בדרך כלל לא — Chat מספיק.)
+### הכנה (לפני / בתחילת הבלוק)
+```bash
+cd labs/08-agent-surfaces
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env
+# ערכו .env: ANTHROPIC_API_KEY=...  TELEGRAM_BOT_TOKEN=...  TELEGRAM_CHAT_ID=...
+```
+
+### הרצה
+```bash
+python3 surface_claude.py reset
+python3 surface_claude.py chat --lead L-SMB --message "הכן כרטיס HTML ושלח סיכום לטלגרם שלי"
+```
+
+### מה לפתוח אחרי ההרצה
+1. דפדפן: <code dir="ltr">file://$(pwd)/out/briefing.html</code> (או לחצו על הנתיב שהסקריפט מדפיס).  
+2. טלפון — הודעה מ-Nimbus.  
+3. בטרמינל חפשו: <code dir="ltr">TOOL -> notify_telegram</code> ו-`sent=true`.
+
+### מסלול B (אם בוחרים Facility במקום)
+```bash
+cd labs/08-facility-surfaces
+# אותו .venv/.env כמו למעלה (או cp מ-Lab A)
+python3 facility_claude.py reset
+python3 facility_claude.py chat --wo WO-ELEV --message "חריגת SLA — שלח התראה עכשיו"
+# HTML: out/work_order.html
+```
+
+בזמן ההמתנה למודל שאלו: "האם זה Chat / Cloud / Project?" — התשובה הנכונה לרוב: **Chat**.
 
 ---
 
