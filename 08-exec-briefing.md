@@ -1,4 +1,4 @@
-<div dir="rtl" lang="he">
+<div dir="rtl" lang="he" style="direction: rtl; text-align: right; unicode-bidi: embed;">
 
 <p align="center">
   <img src="assets/sprint-tech-academy-logo.png" alt="SPRINT Tech Academy" width="420" />
@@ -17,10 +17,10 @@
 אחרי שבנו agents — הצוות צריך **לשלוט במעטפת**:
 
 1. **קונטקסט** — שכבות, `/compact`, ומתי מגדילים חלון (מודל / Max Mode)  
-2. **Rules ≠ Skills** — תמיד־דולק מול workflow לפי דרישה  
-3. **MCP** — כלים חיצוניים (Apify) בלי SDK ידני  
-4. **Chat · Cloud · Project** — שלוש רמות עלות/עוצמה  
-5. **Surface קצר** — HTML + טלגרם כהוכחת פלט  
+2. ‏**Rules ≠ Skills** — תמיד־דולק מול workflow לפי דרישה  
+3. ‏**MCP** — כלים חיצוניים (Apify) בלי SDK ידני  
+4. ‏**Chat · Cloud · Project** — שלוש רמות עלות/עוצמה  
+5. ‏**Surface קצר** — HTML + טלגרם כהוכחת פלט  
 
 **משפט להנהלה:**  
 אותו מפתח עם Project + MCP מסיים מיגרציה בזמן שצ׳אט רגיל נתקע אחרי יומיים של הקשר שבור.
@@ -33,10 +33,10 @@
 |---|---|
 | Context window | כל מה שהמודל רואה בשיחה |
 | MCP | חיבור כלים חיצוניים (Apify וכו׳) |
-| Cloud Agent | Agent על VM בענן — ממשיך בלי לפטופ |
-| Project | Coordinator + קונטקסט משותף + מנויים |
+| Cloud Agent | ‏Agent על VM בענן — ממשיך בלי לפטופ |
+| Project | ‏Coordinator + קונטקסט משותף + מנויים |
 | CLAUDE.md / Rules | הוראות **תמיד־דולקות** (עולות בכל שיחה) |
-| Skills | Workflow לפי דרישה — חוסך קונטקסט |
+| Skills | ‏Workflow לפי דרישה — חוסך קונטקסט |
 | Context / Max Mode | גודל חלון לפי מודל; Max מייקר ב-legacy |
 | Compact | היסטוריה → סיכום; קבצי דיסק נטענים מחדש |
 
@@ -53,8 +53,8 @@
 
 ## ‏4 — סיכונים בפיילוט
 
-- Project על משימות קטנות → עלות מיותרת  
-- MCP בלי אימות ב-Cloud → "עובד אצלי בלבד"  
+- ‏Project על משימות קטנות → עלות מיותרת  
+- ‏MCP בלי אימות ב-Cloud → "עובד אצלי בלבד"  
 - קונטקסט מלא בלי compact → איכות יורדת  
 - סודות/טוקנים בצ׳אט או בצילום מסך  
 
@@ -65,8 +65,8 @@
 | בעל עניין | ערך |
 |---|---|
 | מפתח | פחות העתקה של הקשר; כלים מוכנים |
-| מנהל צוות | Cloud/Project לעבודה מקבילית |
-| אבטחה | MCP מאושר + הפרדת סודות |
+| מנהל צוות | ‏Cloud/Project לעבודה מקבילית |
+| אבטחה | ‏MCP מאושר + הפרדת סודות |
 
 ---
 

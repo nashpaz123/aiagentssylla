@@ -1,11 +1,11 @@
-<div dir="rtl" lang="he">
+<div dir="rtl" lang="he" style="text-align: right; unicode-bidi: plaintext;">
 
 # ‏Lab 08 — Agent Surfaces (HTML + Telegram send)
 
 דורש:
 
 - `ANTHROPIC_API_KEY`
-- `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID` (**שליחה אמיתית לצ׳אט שלך**)
+- ‏`TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID` (**שליחה אמיתית לצ׳אט שלך**)
 
 | כלי | מה עושה |
 |---|---|
@@ -49,10 +49,10 @@ python3 surface_claude.py show
 
 ## ‏מה לבדוק
 
-- [ ] הודעה מגיעה לטלגרם האישי  
-- [ ] HTML נפתח עם צבע לפי route  
-- [ ] בלוג: `TOOL -> notify_telegram` עם `sent=true`  
-- [ ] בלי `.env` מלא — היציאה נכשלת עם הודעה ברורה (לא "נשלח" מזויף)
+- ‏[ ] הודעה מגיעה לטלגרם האישי  
+- ‏[ ] HTML נפתח עם צבע לפי route  
+- ‏[ ] בלוג: `TOOL -> notify_telegram` עם `sent=true`  
+- ‏[ ] בלי `.env` מלא — היציאה נכשלת עם הודעה ברורה (לא "נשלח" מזויף)
 
 </div>
 

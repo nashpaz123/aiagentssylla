@@ -1,4 +1,4 @@
-<div dir="rtl" lang="he">
+<div dir="rtl" lang="he" style="text-align: right; unicode-bidi: plaintext;">
 
 # ‏Lab 08B — Facility Surfaces (Atlas · קריאות שירות)
 
@@ -16,9 +16,9 @@
 
 | מזהה | חומרה | תרחיש |
 |---|---|---|
-| `WO-HVAC` | `open` (כחול) | מיזוג באגף |
-| `WO-ELEV` | `sla_breach` (אדום) | מעלית בחניון — חריגת SLA |
-| `WO-ACCESS` | `blocked` (ענבר) | קורא תגיות ממתין לספק |
+| `WO-HVAC` | ‏`open` (כחול) | מיזוג באגף |
+| `WO-ELEV` | ‏`sla_breach` (אדום) | מעלית בחניון — חריגת SLA |
+| `WO-ACCESS` | ‏`blocked` (ענבר) | קורא תגיות ממתין לספק |
 
 ## ‏התקנה
 
@@ -45,10 +45,10 @@ python3 facility_claude.py show
 
 ## ‏מה לבדוק
 
-- [ ] הצבע בכרטיס תואם חומרה (כחול / אדום / ענבר)  
-- [ ] אין מחירים / מושבים / הנחות — זה לא Nimbus  
-- [ ] הודעה מגיעה לטלגרם עם `Atlas Facility`  
-- [ ] `TOOL -> get_work_order` ואז `notify_telegram` עם `sent=true`
+- ‏[ ] הצבע בכרטיס תואם חומרה (כחול / אדום / ענבר)  
+- ‏[ ] אין מחירים / מושבים / הנחות — זה לא Nimbus  
+- ‏[ ] הודעה מגיעה לטלגרם עם `Atlas Facility`  
+- ‏[ ] `TOOL -> get_work_order` ואז `notify_telegram` עם `sent=true`
 
 השוואה ל-Lab המכירות: [`../08-agent-surfaces/`](../08-agent-surfaces/)
 
