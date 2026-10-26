@@ -9,7 +9,7 @@
 
 > דגש: קונטקסט, Rules מול Skills, גודל חלון, MCP, Chat·Cloud·Projects.  
 > Lab קצר בסוף: HTML + טלגרם.  
-> תדריך מנהלים: [`08-exec-briefing.md`](08-exec-briefing.md) · תסריט מרצה מורחב: [`08-cursor-claude-surfaces.md`](08-cursor-claude-surfaces.md)
+> תדריך מנהלים: [`08-exec-briefing.md`](08-exec-briefing.md) 
 
 ---
 
