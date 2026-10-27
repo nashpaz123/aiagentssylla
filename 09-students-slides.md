@@ -101,13 +101,41 @@ python3 surface_claude.py chat --lead L-SMB --message "שלח לטלגרם של�
 |---|---|
 | ‏**LLM** | מודל שעונה בשפה טבעית |
 | ‏**Token** | יחידת טקסט למודל (לא תמיד מילה שלמה) |
-| ‏**Ollama** | מריץ מודלים על המחשב שלכם |
+| ‏**Ollama** | מריץ מודלים על המחשב שלכם (פורט <code dir="ltr">11434</code>) |
 | ‏**OpenRouter** | שער לכמה מודלים בענן (כולל מסלול חינמי ל-lab) |
 | ‏**OpenAI-compatible** | אותו SDK — מחליפים URL / key / model |
+| ‏**API key** | מפתח שמזהה אתכם מול השירות (חובה ב-OpenRouter; ב-Ollama מקומי לא נבדק) |
 
 ---
 
-## ‏10 — מבנה הודעה
+## ‏10 — אילו קבצים לפתוח ולהבין
+
+תיקייה: <code dir="ltr">labs/09-llm-api/</code>
+
+| קובץ | למה מסתכלים |
+|---|---|
+| ‏<code dir="ltr">chat_llm.py</code> | כל הלוגיקה: טעינת `.env`, בחירת backend, בניית `messages`, קריאת API |
+| ‏<code dir="ltr">.env.example</code> | תבנית משתנים — מה להעתיק ל-`.env` |
+| ‏<code dir="ltr">.env</code> | הסודות שלכם (לא בגיט) — מפתח OpenRouter + שמות מודלים |
+| ‏<code dir="ltr">requirements.txt</code> | תלויות: `openai`, `httpx` |
+| ‏<code dir="ltr">README.md</code> | מדריך הרצה + דיבוג |
+
+**בתוך `chat_llm.py` — פונקציות חשובות:**
+
+| חלק בקוד | מה עושה |
+|---|---|
+| ‏`load_dotenv` | קורא שורות `KEY=value` מ-`.env` ל-`os.environ` (רק אם עדיין לא הוגדר ב-export) |
+| ‏`client_for("ollama")` | בונה `OpenAI(base_url=localhost:11434/v1, …)` + שם מודל מקומי |
+| ‏`client_for("openrouter")` | דורש `OPENROUTER_API_KEY`, מצביע ל-`https://openrouter.ai/api/v1` |
+| ‏`main` | מפרסר `--backend` / `--message` / `--system` / `--debug` ושולח `chat.completions.create` |
+
+אין כאן JSON נתונים נפרד (בניגוד ל-Lab 08) — ה"חוזה" הוא רשימת הודעות בזיכרון + משתני סביבה.
+
+---
+
+## ‏11 — מבנה הודעה (JSON בזיכרון)
+
+זה מה שנשלח ל-API (לא קובץ בדיסק):
 
 ```json
 [
@@ -116,50 +144,118 @@ python3 surface_claude.py chat --lead L-SMB --message "שלח לטלגרם של�
 ]
 ```
 
-`system` אופציונלי · `user` = השאלה · `assistant` = תשובות קודמות (זיכרון שיחה).
+| ‏`role` | משמעות |
+|---|---|
+| ‏`system` | הוראות התנהגות (אופציונלי) — אצלנו דרך <code dir="ltr">--system</code> |
+| ‏`user` | מה שאתם שואלים — <code dir="ltr">--message</code> |
+| ‏`assistant` | תשובות קודמות (לשיחה רב־סיבובית; לא חובה ב-lab הבסיסי) |
 
 ---
 
-## ‏11 — שלושת המשתנים
+## ‏12 — שלושת המשתנים (+ שמות אצלנו)
 
-| משתנה | Ollama | OpenRouter |
+במאמרים/דוגמאות כלליות מופיע לפעמים `LLM_API_KEY` / `LLM_BASE_URL` / `MODEL`.  
+**ב-Lab שלנו השמות מפורשים לפי backend:**
+
+| רעיון כללי | Ollama (ב-`.env`) | OpenRouter (ב-`.env`) |
 |---|---|---|
-| ‏`base_url` | <code dir="ltr">http://localhost:11434/v1</code> | <code dir="ltr">https://openrouter.ai/api/v1</code> |
-| ‏`api_key` | כל מחרוזת (לא נבדק) | מפתח מ-OpenRouter |
-| ‏`model` | למשל <code dir="ltr">qwen3.5:4b</code> | למשל <code dir="ltr">openai/gpt-4.1-nano</code> |
+| כתובת | `OLLAMA_BASE_URL` | `OPENROUTER_BASE_URL` |
+| מפתח | לא חובה (אפשר כל מחרוזת) | **`OPENROUTER_API_KEY`** ← זה ה-API key |
+| מודל | `OLLAMA_MODEL` | `OPENROUTER_MODEL` |
+
+ערכי ברירת מחדל — ראו <code dir="ltr">.env.example</code>.
 
 ---
 
-## ‏12 — התקנות קצרות
+## ‏13 — איך מייצרים API key ל-OpenRouter
 
-- ‏Python 3 + `pip install openai httpx`  
-- ‏[Ollama](https://ollama.com/) רץ ברקע  
-- חשבון + API key ב-[OpenRouter](https://openrouter.ai/)  
+Ollama מקומי **לא** דורש מפתח אמיתי. לענן:
+
+1. היכנסו ל-<code dir="ltr">https://openrouter.ai</code> והירשמו (אימייל).  
+2. לחצו **Keys** / **Create API Key** (לעיתים דרך "Get API Key" במסך הבית).  
+3. תנו שם למפתח; אפשר credit limit לפי מה שהממשק מציע (ל-lab מספיק מפתח חינמי/מודל חינמי).  
+4. **העתיקו את המפתח מיד** (בדרך כלל מתחיל ב-`sk-or-v1-…`) — לא תוכלו לראות שוב את המלא.  
+5. שימו ב-`.env`:
 
 ```bash
-ollama pull qwen3.5:4b
+OPENROUTER_API_KEY=sk-or-v1-...
 ```
+
+או בטרמינל:
+
+```bash
+export OPENROUTER_API_KEY='sk-or-v1-...'
+```
+
+אל תשימו מפתח בגיט / בצילום מסך בהקלטה.
 
 ---
 
-## ‏13 — Lab — הרצה
+## ‏14 — התקנות — פקודה־פקודה
 
-תיקייה: [`labs/09-llm-api/`](labs/09-llm-api/)
+**Python + ספריות (חד־פעמי בתיקיית ה-Lab):**
 
 ```bash
 cd labs/09-llm-api
-python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env
-
-python3 chat_llm.py --backend ollama --message "Hi — who are you? One sentence."
-# מלאו OPENROUTER_API_KEY ב-.env ואז:
-python3 chat_llm.py --backend openrouter --message "Hi — who are you? One sentence."
+python3 -m venv .venv          # סביבה מבודדת
+source .venv/bin/activate        # Linux/macOS; ב-Windows: .venv\Scripts\activate
+pip install -r requirements.txt  # מתקין openai + httpx
+cp .env.example .env             # יוצרים קובץ סודות מקומי
 ```
+
+**Ollama:**
+
+1. התקינו מ-<code dir="ltr">https://ollama.com</code> והפעילו את האפליקציה.  
+2. משכו מודל קל (לוקח מקום בדיסק):
+
+```bash
+ollama pull qwen3.5:4b   # מוריד את המשקולות למחשב
+ollama list                # מוודאים שהמודל מופיע
+curl -s http://localhost:11434   # אמור להחזיר משהו בסגנון Ollama is running
+```
+
+3. אופציונלי — צ׳אט CLI לוודא שהמודל חי:
+
+```bash
+ollama run qwen3.5:4b
+# כתבו Hi ואז /bye ליציאה
+```
+
+**OpenRouter:** צרו מפתח (שקף 13) ומלאו ב-`.env`.
 
 ---
 
-## ‏14 — מה קורה בקוד (בקצרה)
+## ‏15 — Lab — הרצה מפורטת
+
+```bash
+cd labs/09-llm-api
+source .venv/bin/activate
+
+# --- מסלול A: מקומי ---
+python3 chat_llm.py --backend ollama \
+  --message "Hi — who are you? One sentence."
+# מדפיס: backend=ollama model=… ואז תשובת המודל
+
+# עם system role:
+python3 chat_llm.py --backend ollama \
+  --system "Answer only in Hebrew." \
+  --message "What is an API?"
+
+# --- מסלול B: ענן (אחרי OPENROUTER_API_KEY ב-.env) ---
+python3 chat_llm.py --backend openrouter \
+  --message "Hi — who are you? One sentence."
+```
+
+| ארגומנט | מה עושה |
+|---|---|
+| ‏`--backend ollama\|openrouter` | בוחר לאן מתחברים (`client_for`) |
+| ‏`--message "..."` | תוכן הודעת `user` |
+| ‏`--system "..."` | מוסיף הודעת `system` לפני ה-user |
+| ‏`--debug` | מדפיס base_url, model, האם יש key, usage, שגיאות מלאות |
+
+---
+
+## ‏16 — מה קורה בקוד (לעקוב ב-`chat_llm.py`)
 
 ```python
 from openai import OpenAI
@@ -168,43 +264,48 @@ resp = client.chat.completions.create(model=..., messages=[...])
 print(resp.choices[0].message.content)
 ```
 
-ספריית `openai` בונה את ה-HTTP · אתם רק בוחרים לאן להתחבר.
+| שורה | משמעות |
+|---|---|
+| ‏`OpenAI(...)` | פותח "קו" לשרת ה-API (לא OpenAI בלבד — גם Ollama/OpenRouter) |
+| ‏`chat.completions.create` | שולח את ה-`messages` וממתין לתשובה |
+| ‏`choices[0].message.content` | הטקסט של התשובה הראשונה |
+
+בקוד המלא: `load_dotenv(ROOT / ".env")` רץ לפני הכול; `--debug` מדפיס את החיבור לפני/אחרי הקריאה.
 
 ---
 
-## ‏15 — Debug לפרויקט (Ollama · OpenRouter)
-
-אותו כלל זהב — עכשיו על ה-API שלכם.
+## ‏17 — Debug לפרויקט (Ollama · OpenRouter)
 
 | כשל | בדיקה מדויקת |
 |---|---|
 | ‏Connection refused | Ollama רץ? <code dir="ltr">curl -s http://localhost:11434</code> |
-| ‏model not found | <code dir="ltr">ollama pull qwen3.5:4b</code> · שם המודל ב-`.env` |
-| ‏401 / missing key | `OPENROUTER_API_KEY` ב-`.env` או `export` |
-| ‏תשובה ריקה / Exception | הריצו עם <code dir="ltr">--debug</code> · קראו את הודעת השגיאה המלאה |
-| ‏עובד ב-Ollama נכשל ב-OpenRouter | בדקו שרק `backend` + 3 משתנים השתנו — לא קוד אחר |
+| ‏model not found | <code dir="ltr">ollama pull qwen3.5:4b</code> · השוו ל-`OLLAMA_MODEL` ב-`.env` |
+| ‏401 / missing key | פתחו `.env` · ודאו `OPENROUTER_API_KEY=sk-or-v1-…` בלי רווחים/מרכאות שבורות |
+| ‏תשובה ריקה / Exception | <code dir="ltr">--debug</code> · קראו `API ERROR` / traceback |
+| ‏עובד ב-Ollama נכשל ב-OpenRouter | רק `--backend` + משתני `.env` — לא קוד אחר |
 
 ```bash
-cd labs/09-llm-api
 python3 chat_llm.py --backend ollama --debug --message "ping"
 python3 chat_llm.py --backend openrouter --debug --message "ping"
 ```
 
 ---
 
-## ‏16 — סיכום
+## ‏18 — סיכום
 
 - דיבוג Agents: תוצאת כלי > סיפור המודל  
-- פרויקט: צ׳אט UI ≠ API · Ollama + OpenRouter  
+- פרויקט: צ׳אט UI ≠ API · קבצים ב-`labs/09-llm-api/`  
+- מפתח ענן: `OPENROUTER_API_KEY` מ-openrouter.ai  
 - דיבוג פרויקט: curl / pull / key / `--debug`  
 
 ---
 
-## ‏17 — תרגיל בית
+## ‏19 — תרגיל בית
 
 1. הריצו Ollama + OpenRouter עם אותו `--message` והשוו מהירות/סגנון  
 2. הוסיפו `--system "Answer only in Hebrew"`  
-3. כבו Ollama בכוונה / מחקו מפתח OpenRouter — ודאו ש-`--debug` מציג כשל ברור  
-4. (בונוס) Lab 08: כבו token ובדקו כשל גלוי בלוג  
+3. כבו Ollama / מחקו מפתח — ודאו ש-`--debug` מציג כשל ברור  
+4. קראו ב-`chat_llm.py` את `client_for` והסבירו בקול מה משתנה בין backends  
+5. (בונוס) Lab 08: כבו token ובדקו כשל גלוי בלוג  
 
 </div>
