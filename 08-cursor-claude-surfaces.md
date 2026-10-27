@@ -916,7 +916,7 @@ python3 facility_claude.py chat --wo WO-ELEV --message "חריגת SLA — של�
 
 **על המסך:**
 
-קונטקסט מנוהל · Rules≠Skills · חלון לפי מודל/Max · MCP · Chat≠Cloud≠Project · Lab פלט · מפגש 9: Testing
+קונטקסט מנוהל · Rules≠Skills · חלון לפי מודל/Max · MCP · Chat≠Cloud≠Project · Lab פלט · מפגש 9: Debugging & Project
 
 **להקראה:**
 

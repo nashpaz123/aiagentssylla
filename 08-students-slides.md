@@ -389,7 +389,7 @@ python3 surface_claude.py chat --lead L-SMB --message "הכן כרטיס HTML ו
 
 ## ‏29 — סיכום
 
-קונטקסט מנוהל · Rules≠Skills · חלון לפי מודל/Max · MCP · Chat≠Cloud≠Project · Lab פלט · מפגש 9: Testing
+קונטקסט מנוהל · Rules≠Skills · חלון לפי מודל/Max · MCP · Chat≠Cloud≠Project · Lab פלט · מפגש 9: Debugging & Project
 
 ---
 

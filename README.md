@@ -38,6 +38,7 @@
 - **מפגש 6 (~2–2.5 שעות):** הדגמת פתיחה מומלצת ב-Claude Code/Cursor (`demos/06-memory-opening/`) — Store ב-`out/store.json`, 99 מול 101; Lab עם `memory_claude.py` + `ANTHROPIC_API_KEY` (או `memory_lab.py` בלי מפתח) וכפתורים (`--fresh-thread` / `forget`).
 - **מפגש 7 (~2.5–3.5 שעות):** Agents לאוטומציה עסקית (Sales Ops) — הדגמת Claude Code/Cursor (`demos/07-sales-opening/`) עם SMB/ENT/NOMAIL; Lab עם `sales_claude.py` + `ANTHROPIC_API_KEY` (שערי הנחה, HITL מנהל, upsell). תדריך מנהלים: [`07-exec-briefing.md`](07-exec-briefing.md). **בלי מסלול דטרמיניסטי ללא מפתח.**
 - **מפגש 8 (~2.5–3.5 שעות):** סודות Cursor/Claude — קונטקסט, Rules≠Skills, גודל חלון/Max Mode, MCP (Apify), Chat·Cloud·Projects; Lab קצר למשטחים (`labs/08-agent-surfaces/` / `labs/08-facility-surfaces/`). תדריך: [`08-exec-briefing.md`](08-exec-briefing.md).
+- **מפגש 9 (~1.5–2 שעות, סיום מקוצר):** Debugging & Project — דיבוג Agents (Claude/Lab 08) + פרויקט Python API מול Ollama ו-OpenRouter (`labs/09-llm-api/`). מחליף את הצמד Testing+Capstone בפורמט אחד קצר.
 
 ## ‏מוכן עכשיו
 
@@ -51,6 +52,7 @@
 | 6 Memory & State | [`06-memory-and-state.md`](06-memory-and-state.md) | [`06-students-slides.md`](06-students-slides.md) | `assets/06/` · `demos/06-memory-opening/` |
 | 7 Business automation | [`07-business-automation.md`](07-business-automation.md) · תדריך מנהלים: [`07-exec-briefing.md`](07-exec-briefing.md) | [`07-students-slides.md`](07-students-slides.md) | `assets/07/` · `demos/07-sales-opening/` |
 | 8 Cursor · Claude · Power features | [`08-cursor-claude-surfaces.md`](08-cursor-claude-surfaces.md) · תדריך: [`08-exec-briefing.md`](08-exec-briefing.md) | [`08-students-slides.md`](08-students-slides.md) | `assets/08/` · demos/08-context-opening · demos/labs 08 |
+| 9 Debugging & Project | [`09-debugging-and-project.md`](09-debugging-and-project.md) | [`09-students-slides.md`](09-students-slides.md) | `labs/09-llm-api/` |
 
 ## ‏חידוש דיאגרמות וצילומי מסך
 
@@ -63,6 +65,6 @@ python3 scripts/gen_mock_uis.py   # צילומי מסך להדגמות (CRM/K8s/
 
 ## ‏מפגשים הבאים (מהסילבוס)
 
-9 Testing · 10 Capstone
+~~9 Testing · 10 Capstone~~ → מאוחדים ל-**מפגש 9: Debugging & Project**
 
 </div>
