@@ -78,14 +78,24 @@ python3 surface_claude.py chat --lead L-SMB --message "שלח לטלגרם של�
 
 # ‏חלק ב׳ — Project: LLM דרך Python API
 
-## ‏7 — צ׳אט ≠ API
+## ‏7 — מטרת הפרויקט
+
+עד עכשיו דיברנו עם מודלים בעיקר דרך צ׳אט (Cursor, Claude Code, ממשקי Web). בפרויקט הזה יורדים קומה למטה: איך **קוד Python** מדבר עם LLM — בלי UI — כמו שקורה באפליקציות ובשירותים אמיתיים.
+
+המטרה פשוטה ומעשית: להריץ את **אותה** קריאת API פעם מול מודל מקומי (Ollama על המחשב שלכם) ופעם מול שירות ענן (OpenRouter), ולהבין שרוב הכלים מדברים בפורמט **OpenAI-compatible**. מחליפים בעיקר כתובת, מפתח ושם מודל — לא כותבים ספרייה חדשה לכל ספק.
+
+בסוף תוכלו להדביק סקריפט קצר, לקבל תשובה מהמודל, ולדבג כשלים נפוצים (שירות כבוי, מודל חסר, מפתח שגוי). זה הבסיס לכל agent/runtime שקורא למודל מאחורי הקלעים.
+
+---
+
+## ‏8 — צ׳אט ≠ API
 
 הצ׳אט הוא UI. מאחורי הקלעים רצה **קריאת API**.  
 היום: אותה קריאה מ-Python — מקומית (Ollama) ובענן (OpenRouter).
 
 ---
 
-## ‏8 — מונחים לפרויקט
+## ‏9 — מונחים לפרויקט
 
 | מונח | בקצרה |
 |---|---|
@@ -97,7 +107,7 @@ python3 surface_claude.py chat --lead L-SMB --message "שלח לטלגרם של�
 
 ---
 
-## ‏9 — מבנה הודעה
+## ‏10 — מבנה הודעה
 
 ```json
 [
@@ -110,7 +120,7 @@ python3 surface_claude.py chat --lead L-SMB --message "שלח לטלגרם של�
 
 ---
 
-## ‏10 — שלושת המשתנים
+## ‏11 — שלושת המשתנים
 
 | משתנה | Ollama | OpenRouter |
 |---|---|---|
@@ -120,7 +130,7 @@ python3 surface_claude.py chat --lead L-SMB --message "שלח לטלגרם של�
 
 ---
 
-## ‏11 — התקנות קצרות
+## ‏12 — התקנות קצרות
 
 - ‏Python 3 + `pip install openai httpx`  
 - ‏[Ollama](https://ollama.com/) רץ ברקע  
@@ -132,7 +142,7 @@ ollama pull qwen3.5:4b
 
 ---
 
-## ‏12 — Lab — הרצה
+## ‏13 — Lab — הרצה
 
 תיקייה: [`labs/09-llm-api/`](labs/09-llm-api/)
 
@@ -149,7 +159,7 @@ python3 chat_llm.py --backend openrouter --message "Hi — who are you? One sent
 
 ---
 
-## ‏13 — מה קורה בקוד (בקצרה)
+## ‏14 — מה קורה בקוד (בקצרה)
 
 ```python
 from openai import OpenAI
@@ -162,7 +172,7 @@ print(resp.choices[0].message.content)
 
 ---
 
-## ‏14 — Debug לפרויקט (Ollama · OpenRouter)
+## ‏15 — Debug לפרויקט (Ollama · OpenRouter)
 
 אותו כלל זהב — עכשיו על ה-API שלכם.
 
@@ -182,7 +192,7 @@ python3 chat_llm.py --backend openrouter --debug --message "ping"
 
 ---
 
-## ‏15 — סיכום
+## ‏16 — סיכום
 
 - דיבוג Agents: תוצאת כלי > סיפור המודל  
 - פרויקט: צ׳אט UI ≠ API · Ollama + OpenRouter  
@@ -190,7 +200,7 @@ python3 chat_llm.py --backend openrouter --debug --message "ping"
 
 ---
 
-## ‏16 — תרגיל בית
+## ‏17 — תרגיל בית
 
 1. הריצו Ollama + OpenRouter עם אותו `--message` והשוו מהירות/סגנון  
 2. הוסיפו `--system "Answer only in Hebrew"`  
