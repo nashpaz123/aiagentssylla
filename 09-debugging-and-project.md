@@ -7,11 +7,11 @@
 # ‏מפגש 9 — תסריט מרצה
 ## ‏Debugging & Project
 
-> מצגת: [`09-students-slides.md`](09-students-slides.md) (~15 שקפים)  
-> Lab דיבוג: [`labs/08-agent-surfaces/`](labs/08-agent-surfaces/) · Lab פרויקט: [`labs/09-llm-api/`](labs/09-llm-api/)  
-> **טון:** קצר, פקודות מדויקות, בלי חזרות.
+> מצגת: [`09-students-slides.md`](09-students-slides.md) (~16 שקפים)  
+> Lab דיבוג Agents: [`labs/08-agent-surfaces/`](labs/08-agent-surfaces/) · Lab פרויקט: [`labs/09-llm-api/`](labs/09-llm-api/)  
+> **טון:** קצר, פקודות מדויקות.
 
-**הכנה:** `.env` ל-Lab 08 (טלגרם) · Ollama מותקן · מפתח OpenRouter ב-Lab 09.
+**הכנה:** `.env` ל-Lab 08 · Ollama · מפתח OpenRouter ב-Lab 09.
 
 ---
 
@@ -295,40 +295,78 @@ print(resp.choices[0].message.content)
 
 ---
 
-## ‏14 — סיכום
+## ‏14 — Debug לפרויקט (Ollama · OpenRouter)
 
 [סטודנטים · 14]
 
 **על המסך:**
 
-- דיבוג: תוצאת כלי > סיפור המודל  
-- פרויקט: צ׳אט UI ≠ API  
-- Ollama מקומי · OpenRouter ענן · אותו Python  
-- מפגש הסיום המשולב — Testing + Capstone בפורמט קצר
+אותו כלל זהב — עכשיו על ה-API שלכם.
+
+| כשל | בדיקה מדויקת |
+|---|---|
+| ‏Connection refused | Ollama רץ? <code dir="ltr">curl -s http://localhost:11434</code> |
+| ‏model not found | <code dir="ltr">ollama pull qwen3.5:4b</code> · שם המודל ב-`.env` |
+| ‏401 / missing key | `OPENROUTER_API_KEY` ב-`.env` או `export` |
+| ‏תשובה ריקה / Exception | הריצו עם <code dir="ltr">--debug</code> · קראו את הודעת השגיאה המלאה |
+| ‏עובד ב-Ollama נכשל ב-OpenRouter | בדקו שרק `backend` + 3 משתנים השתנו — לא קוד אחר |
+
+```bash
+cd labs/09-llm-api
+python3 chat_llm.py --backend ollama --debug --message "ping"
+python3 chat_llm.py --backend openrouter --debug --message "ping"
+```
 
 **להקראה:**
 
-**[סיכום]**
-דיבוג + API. סיום הקורס בפורמט מקוצר.
+**[Debug פרויקט — 5–7 דקות]**
+הראו כשל בכוונה ואז תיקון:
+
+1. Ollama כבוי:
+```bash
+curl -s http://localhost:11434 || echo "Ollama down"
+python3 chat_llm.py --backend ollama --debug --message ping
+```
+2. הדליקו Ollama / `ollama pull` לפי השגיאה.  
+3. OpenRouter בלי מפתח — צפו ב-`CONFIG ERROR` / 401 עם `--debug`.  
+4. אמרו: "אותו כלל כמו Lab 08 — האמת בהודעת השגיאה, לא בנרטיב."
 
 ---
 
-## ‏15 — תרגיל בית
+## ‏15 — סיכום
 
 [סטודנטים · 15]
 
 **על המסך:**
 
+- דיבוג Agents: תוצאת כלי > סיפור המודל  
+- פרויקט: צ׳אט UI ≠ API · Ollama + OpenRouter  
+- דיבוג פרויקט: curl / pull / key / `--debug`
+
+**להקראה:**
+
+**[סיכום]**
+דיבוג Agents + דיבוג API + פרויקט. סיום מקוצר.
+
+---
+
+## ‏16 — תרגיל בית
+
+[סטודנטים · 16]
+
+**על המסך:**
+
 1. הריצו Ollama + OpenRouter עם אותו `--message` והשוו מהירות/סגנון  
 2. הוסיפו `--system "Answer only in Hebrew"`  
-3. (בונוס) חזרו ל-Lab 08: כבו token במכוון ובדקו שהכשל גלוי בלוג  
+3. כבו Ollama בכוונה / מחקו מפתח OpenRouter — ודאו ש-`--debug` מציג כשל ברור  
+4. (בונוס) Lab 08: כבו token ובדקו כשל גלוי בלוג  
 
 </div>
 
 **להקראה:**
 
 **[בית]**
-הקריאו שלוש נקודות.
+הקריאו ארבע נקודות. הדגישו פריט 3 (debug מכוון).
 
 ---
 

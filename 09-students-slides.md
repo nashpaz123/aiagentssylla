@@ -162,19 +162,39 @@ print(resp.choices[0].message.content)
 
 ---
 
-## ‏14 — סיכום
+## ‏14 — Debug לפרויקט (Ollama · OpenRouter)
 
-- דיבוג: תוצאת כלי > סיפור המודל  
-- פרויקט: צ׳אט UI ≠ API  
-- Ollama מקומי · OpenRouter ענן · אותו Python  
-- מפגש הסיום המשולב — Testing + Capstone בפורמט קצר  
+אותו כלל זהב — עכשיו על ה-API שלכם.
+
+| כשל | בדיקה מדויקת |
+|---|---|
+| ‏Connection refused | Ollama רץ? <code dir="ltr">curl -s http://localhost:11434</code> |
+| ‏model not found | <code dir="ltr">ollama pull qwen3.5:4b</code> · שם המודל ב-`.env` |
+| ‏401 / missing key | `OPENROUTER_API_KEY` ב-`.env` או `export` |
+| ‏תשובה ריקה / Exception | הריצו עם <code dir="ltr">--debug</code> · קראו את הודעת השגיאה המלאה |
+| ‏עובד ב-Ollama נכשל ב-OpenRouter | בדקו שרק `backend` + 3 משתנים השתנו — לא קוד אחר |
+
+```bash
+cd labs/09-llm-api
+python3 chat_llm.py --backend ollama --debug --message "ping"
+python3 chat_llm.py --backend openrouter --debug --message "ping"
+```
 
 ---
 
-## ‏15 — תרגיל בית
+## ‏15 — סיכום
+
+- דיבוג Agents: תוצאת כלי > סיפור המודל  
+- פרויקט: צ׳אט UI ≠ API · Ollama + OpenRouter  
+- דיבוג פרויקט: curl / pull / key / `--debug`  
+
+---
+
+## ‏16 — תרגיל בית
 
 1. הריצו Ollama + OpenRouter עם אותו `--message` והשוו מהירות/סגנון  
 2. הוסיפו `--system "Answer only in Hebrew"`  
-3. (בונוס) חזרו ל-Lab 08: כבו token במכוון ובדקו שהכשל גלוי בלוג  
+3. כבו Ollama בכוונה / מחקו מפתח OpenRouter — ודאו ש-`--debug` מציג כשל ברור  
+4. (בונוס) Lab 08: כבו token ובדקו כשל גלוי בלוג  
 
 </div>

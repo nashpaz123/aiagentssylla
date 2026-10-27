@@ -38,10 +38,20 @@ python3 chat_llm.py --backend ollama --message "Hi — who are you? One sentence
 python3 chat_llm.py --backend openrouter --message "Hi — who are you? One sentence."
 ```
 
+## ‏דיבוג לפרויקט
+
+| כשל | מה להריץ |
+|---|---|
+| Ollama לא עונה | <code dir="ltr">curl -s http://localhost:11434</code> · פתחו את אפליקציית Ollama |
+| מודל חסר | <code dir="ltr">ollama pull qwen3.5:4b</code> |
+| OpenRouter 401 | בדקו `OPENROUTER_API_KEY` ב-`.env` / `export` |
+| שגיאת API כללית | <code dir="ltr">python3 chat_llm.py --backend ollama --debug --message ping</code> |
+
 ## ‏מה לבדוק
 
 - ‏[ ] Ollama עונה מקומית  
 - ‏[ ] OpenRouter עונה בענן (בדרך כלל מהר יותר)  
 - ‏[ ] הבנתם שרק 3 משתנים מחליפים backend  
+- ‏[ ] `--debug` מציג base_url / model / שגיאה ברורה בכשל  
 
 </div>
