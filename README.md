@@ -12,7 +12,7 @@
 
 > תיקייה: `/stuff/prj/aiagentssylla/`  
 > מקור סילבוס: `AI Agents ומערכות אוטונומיות - סילבוס.pdf`  
-> **תסריטי מרצה** (הקראה מלאה) חיים ב-repo נפרד ופרטי: [`nashpaz123/aiagentssylla-lecturer`](https://github.com/nashpaz123/aiagentssylla-lecturer).
+> **תסריטי מרצה** (הקראה מלאה) חיים ב-repo נפרד: [`nashpaz123/aiagentssylla-lecturer`](https://github.com/nashpaz123/aiagentssylla-lecturer).
 
 ## ‏מבנה לכל מפגש
 
