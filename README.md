@@ -4,31 +4,29 @@
   <img src="assets/sprint-tech-academy-logo.png" alt="SPRINT Tech Academy" width="420" />
 </p>
 
-# ‏AI Agents — חומרי הקלטה (סילבוס)
+# ‏AI Agents — חומרי סטודנטים (סילבוס)
 
 > **פורמט:** הקלטה מראש — **לא** שיעור מול קהל חי.  
-> המרצה מקריא תסריט ומציג את מצגת הסטודנטים; אין אינטראקציה חיה עם תלמידים בזמן הצילום.  
+> על המסך: מצגת הסטודנטים; Labs והדגמות בתיקיות המתאימות.  
 > **מפגש 7 ואילך:** Labs והדגמות מבוססי מפתח/מודל (Anthropic · Claude Code · Cursor) — לא משקיעים במסלולי fallback דטרמיניסטיים בלי API.
 
 > תיקייה: `/stuff/prj/aiagentssylla/`  
-> מקור סילבוס: `AI Agents ומערכות אוטונומיות - סילבוס.pdf`
+> מקור סילבוס: `AI Agents ומערכות אוטונומיות - סילבוס.pdf`  
+> **תסריטי מרצה** (הקראה מלאה) חיים ב-repo נפרד ופרטי: [`nashpaz123/aiagentssylla-lecturer`](https://github.com/nashpaz123/aiagentssylla-lecturer).
 
 ## ‏מבנה לכל מפגש
 
 | קובץ | קהל | תוכן |
 |---|---|---|
-| `NN-….md` | **מרצה** | תסריט מלא להקראה, סימוני מצלמה, הדגמות, נספחים |
 | `NN-students-slides.md` | **סטודנטים** | מצגת קצרה + הנחיות תרגילים |
-| `assets/NN/` | שניהם | דיאגרמות וצילומי־הדגמה (PNG) |
+| `assets/NN/` | סטודנטים + הקלטה | דיאגרמות וצילומי־הדגמה (PNG) |
+| `demos/` · `labs/` | תרגול / הדגמה | קוד להרצה |
 
-### ‏סנכרון להקלטה (חובה בכל מפגש)
+### ‏סנכרון להקלטה
 
 - **מצגת הסטודנטים = עמוד השדרה** על המסך בהקלטה (מספור `1…N` בלבד).
-- מצגת המרצה עוקבת **אחד־לאחד**: לכל מספר סטודנטים בלוק `## N — …` עם `[סטודנטים · N]` ואותה כותרת.
-- מותר לנפח את תסריט ההקראה תחת כל בלוק; **אסור** סעיפי תוכן מרצה באמצע בלי מספר סטודנטים תואם.
-- **החל ממפגש 2:** כל בלוק קוד / פסאודוקוד במצגת המרצה חייב להופיע גם במצגת הסטודנטים (באותו מספר).
-- **יעד משך לכל מפגש (ממפגש 2 והלאה):** **יותר משעתיים**, יעד **~2.5–3 שעות הקלטה רצופה**.  
-  התסריט חייב להיות **צפוף להקראה** — פירוט מלא על כל דוגמה, בלי קיצורי דרך.
+- תסריט המרצה (ב-repo הפרטי) עוקב **אחד־לאחד** אחרי מספרי השקפים כאן.
+- **יעד משך לכל מפגש (ממפגש 2 והלאה):** **יותר משעתיים**, יעד **~2.5–3 שעות הקלטה רצופה**.
 - **הקלטה ≠ כיתה חיה:** אין שקט לחשיבה, אין איסוף תשובות מקהל, אין זמן פתרון עצמאי לסטודנטים.  
   תרגילים = **הדגמת מרצה** עם פתרון מלא בקול (או Lab שהמרצה מריץ).
 - **מפגש 2:** Lab חי read-only (`labs/02-aws-agent-loop/`, פרופיל `nashpazformatan`) + הדגמות פתרון מורחבות; חזרה על מפגש 1 — מצביע קצר בלבד.
@@ -42,17 +40,17 @@
 
 ## ‏מוכן עכשיו
 
-| מפגש | מרצה | סטודנטים | נכסים |
-|---|---|---|---|
-| 1 מבוא ל-Agents | [`01-introduction-to-ai-agents.md`](01-introduction-to-ai-agents.md) | [`01-students-slides.md`](01-students-slides.md) | `assets/01/` |
-| 2 Planning & Execution | [`02-agent-planning-and-execution.md`](02-agent-planning-and-execution.md) | [`02-students-slides.md`](02-students-slides.md) | `assets/02/` |
-| 3 Tool Use & Function Calling | [`03-tool-use-and-function-calling.md`](03-tool-use-and-function-calling.md) | [`03-students-slides.md`](03-students-slides.md) | `assets/03/` |
-| 4 LangGraph | [`04-langgraph-for-agents.md`](04-langgraph-for-agents.md) | [`04-students-slides.md`](04-students-slides.md) | `assets/04/` |
-| 5 CrewAI & Multi-Agent | [`05-crewai-multi-agent.md`](05-crewai-multi-agent.md) | [`05-students-slides.md`](05-students-slides.md) | `assets/05/` · `demos/05-crew-opening/` |
-| 6 Memory & State | [`06-memory-and-state.md`](06-memory-and-state.md) | [`06-students-slides.md`](06-students-slides.md) | `assets/06/` · `demos/06-memory-opening/` |
-| 7 Business automation | [`07-business-automation.md`](07-business-automation.md) · תדריך מנהלים: [`07-exec-briefing.md`](07-exec-briefing.md) | [`07-students-slides.md`](07-students-slides.md) | `assets/07/` · `demos/07-sales-opening/` |
-| 8 Cursor · Claude · Power features | [`08-cursor-claude-surfaces.md`](08-cursor-claude-surfaces.md) · תדריך: [`08-exec-briefing.md`](08-exec-briefing.md) | [`08-students-slides.md`](08-students-slides.md) | `assets/08/` · demos/08-context-opening · demos/labs 08 |
-| 9 Debugging & Project | [`09-debugging-and-project.md`](09-debugging-and-project.md) | [`09-students-slides.md`](09-students-slides.md) | `labs/09-llm-api/` |
+| מפגש | סטודנטים | נכסים |
+|---|---|---|
+| 1 מבוא ל-Agents | [`01-students-slides.md`](01-students-slides.md) | `assets/01/` |
+| 2 Planning & Execution | [`02-students-slides.md`](02-students-slides.md) | `assets/02/` |
+| 3 Tool Use & Function Calling | [`03-students-slides.md`](03-students-slides.md) | `assets/03/` |
+| 4 LangGraph | [`04-students-slides.md`](04-students-slides.md) | `assets/04/` |
+| 5 CrewAI & Multi-Agent | [`05-students-slides.md`](05-students-slides.md) | `assets/05/` · `demos/05-crew-opening/` |
+| 6 Memory & State | [`06-students-slides.md`](06-students-slides.md) | `assets/06/` · `demos/06-memory-opening/` |
+| 7 Business automation | [`07-students-slides.md`](07-students-slides.md) · תדריך: [`07-exec-briefing.md`](07-exec-briefing.md) | `assets/07/` · `demos/07-sales-opening/` |
+| 8 Cursor · Claude · Power features | [`08-students-slides.md`](08-students-slides.md) · תדריך: [`08-exec-briefing.md`](08-exec-briefing.md) | `assets/08/` · demos/labs 08 |
+| 9 Debugging & Project | [`09-students-slides.md`](09-students-slides.md) | `labs/09-llm-api/` |
 
 ## ‏חידוש דיאגרמות וצילומי מסך
 
